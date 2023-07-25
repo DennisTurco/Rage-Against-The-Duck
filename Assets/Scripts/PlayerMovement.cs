@@ -1,45 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    #region Gameplay properties
-
-    // player keyboard input
-    private Vector2 moveDirection;
-    // player speed
+    [SerializeField] private Vector2 moveDirection;
     [SerializeField] public float speed = 200;
-
-    #endregion
-
-    #region Component references
-
-    private Rigidbody2D rb;
-
-    #endregion
-
-    #region Initialisation methods
-
-    // Initialises this component
-    // (NB: Is called automatically before the first frame update)
-    void Start()
-    {
-        // Get component references
-        rb = GetComponent<Rigidbody2D>();
-    }
-
-    #endregion
-
-    #region Gameplay methods
+    [SerializeField] public Rigidbody2D rb;
 
     // Is called automatically every graphics frame
     void Update()
     {
         ProcessInputs();
-
-        // NB: Here, you might want to set the player's animation,
-        // e.g. idle or walking
 
         // Swap the player sprite scale to face the movement direction
         SwapSprite();
@@ -103,13 +76,10 @@ public class PlayerMovement : MonoBehaviour
         Move();
     }
 
+
     private void Move()
     {
-        rb.velocity = new Vector2(
-           moveDirection.x * speed * Time.fixedDeltaTime,
-           moveDirection.y * speed * Time.fixedDeltaTime
-       );
+        rb.MovePosition(rb.position + moveDirection * speed * Time.fixedDeltaTime);
     }
 
-    #endregion
 }
