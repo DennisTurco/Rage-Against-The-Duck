@@ -499,9 +499,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b368b61acebdc8d4b94127bb77a59b19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveDirection: {x: 0, y: 0}
-  speed: 5
-  rb: {fileID: 1256453591}
+  speed: 3
+  collectedText: {fileID: 0}
 --- !u!212 &1256453589
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -677,9 +676,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 839f80d167a1c094482f9bd770288c79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firePosition: {fileID: 1838644283}
-  projectile: {fileID: 3281302208205954006, guid: ec95652038c0dd64aa804a6ff7c92131, type: 3}
-  fireRate: 0
+  firePoint: {fileID: 1838644283}
+  bulletPrefab: {fileID: 3281302208205954006, guid: ec95652038c0dd64aa804a6ff7c92131, type: 3}
+  fireRate: 1.5
 --- !u!1 &1278389531
 GameObject:
   m_ObjectHideFlags: 0

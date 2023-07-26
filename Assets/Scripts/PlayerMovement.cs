@@ -1,18 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private Vector2 moveDirection;
-    [SerializeField] public float speed = 200;
-    [SerializeField] public Rigidbody2D rb;
+    private Vector2 moveDirection;
+    public float speed;
+    private Rigidbody2D rb;
+    public Text collectedText;
+    public static int collectedAmount = 0;
+
+    // Aggiungi una variabile per tenere traccia della direzione del giocatore
+    private Vector2 shootingDirection;
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
 
     // Is called automatically every graphics frame
     void Update()
     {
         ProcessInputs();
+
+        //CollectItem();
 
         // Swap the player sprite scale to face the movement direction
         SwapSprite();
@@ -28,6 +38,11 @@ public class PlayerMovement : MonoBehaviour
         moveDirection.Normalize();
     }
 
+    private void CollectItem()
+    {
+        collectedText.text = "Item collected " + collectedAmount;
+    }
+
 
     // Swap the player sprite scale to face the movement direction
     void SwapSprite()
@@ -35,37 +50,33 @@ public class PlayerMovement : MonoBehaviour
         // Right
         if (moveDirection.x > 0)
         {
-            transform.localScale = new Vector3(
+            transform.localScale = new Vector2(
                 Mathf.Abs(transform.localScale.x),
-                transform.localScale.y,
-                transform.localScale.z
+                transform.localScale.y
             );
         }
         // Left
         else if (moveDirection.x < 0)
         {
-            transform.localScale = new Vector3(
+            transform.localScale = new Vector2(
                 -1 * Mathf.Abs(transform.localScale.x),
-                transform.localScale.y,
-                transform.localScale.z
+                transform.localScale.y
             );
         }
         // Up
         else if (moveDirection.y > 0)
         {
-            transform.localScale = new Vector3(
-                Mathf.Abs(transform.localScale.y),
-                transform.localScale.y,
-                transform.localScale.z
+            transform.localScale = new Vector2(
+                transform.localScale.x,
+                Mathf.Abs(transform.localScale.y)
             );
         }
         // Down
         else if (moveDirection.y < 0)
         {
-            transform.localScale = new Vector3(
-                -1 * Mathf.Abs(transform.localScale.y),
-                transform.localScale.y,
-                transform.localScale.z
+            transform.localScale = new Vector2(
+                transform.localScale.x,
+                -1 * Mathf.Abs(transform.localScale.y)
             );
         }
     }
@@ -75,7 +86,6 @@ public class PlayerMovement : MonoBehaviour
     {
         Move();
     }
-
 
     private void Move()
     {

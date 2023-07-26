@@ -6,26 +6,34 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-
     public float speed;
     public float lifeTime;
     public float distance;
     public float damage;
 
-    private Rigidbody2D rb;
+    //private Rigidbody2D rb;
 
-    public GameObject destroyEffect;
+    //public GameObject destroyEffect;
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        Destroy(gameObject, lifeTime);
+        StartCoroutine(DeathDelay());
     }
 
     private void Update()
     {
-        //transform.Translate(speed * Time.deltaTime * transform.right);
         transform.position += transform.right * Time.deltaTime * speed;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        
+    }
+
+    IEnumerator DeathDelay()
+    {
+        yield return new WaitForSeconds(lifeTime);
+        Destroy(gameObject);
     }
 
 }
