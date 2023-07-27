@@ -74,9 +74,13 @@ public class PlayerMovement : MonoBehaviour
         // Down
         else if (moveDirection.y < 0)
         {
-            transform.localScale = new Vector2(
+            /*transform.localScale = new Vector2(
                 transform.localScale.x,
                 -1 * Mathf.Abs(transform.localScale.y)
+            );*/
+            transform.localScale = new Vector2(
+                transform.localScale.x,
+                Mathf.Abs(transform.localScale.y)
             );
         }
     }
