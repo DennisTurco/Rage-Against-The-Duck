@@ -7,9 +7,15 @@ public class PlayerShooting : MonoBehaviour
     public Transform firePoint;
     public GameObject bulletPrefab;
     public float fireRate;
+    private float nextFire;
 
     // Aggiungi una variabile per tenere traccia della direzione del giocatore
     private Vector2 shootingDirection;
+
+    void Start()
+    {
+        nextFire = fireRate;
+    }
 
     void Update()
     {
@@ -22,14 +28,14 @@ public class PlayerShooting : MonoBehaviour
         {
             shootingDirection = new Vector2(shootHorizontal, shootVertical).normalized;
         }
-
-        if (Input.GetMouseButtonDown(0) && fireRate <= 0)
+        if (Input.GetMouseButtonDown(0) && nextFire <= 0)
         {
             Shoot();
+            nextFire = fireRate;
         }
 
-        if (fireRate > 0)
-            fireRate -= Time.deltaTime;
+        if (nextFire > 0)
+            nextFire -= Time.deltaTime;
     }
 
     void Shoot()
