@@ -9,9 +9,6 @@ public class PlayerMovement : MonoBehaviour
     public Text collectedText;
     public static int collectedAmount = 0;
 
-    // Aggiungi una variabile per tenere traccia della direzione del giocatore
-    private Vector2 shootingDirection;
-
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
