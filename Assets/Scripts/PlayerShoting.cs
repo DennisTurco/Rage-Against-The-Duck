@@ -28,7 +28,7 @@ public class PlayerShooting : MonoBehaviour
         {
             shootingDirection = new Vector2(shootHorizontal, shootVertical).normalized;
         }
-        if (Input.GetMouseButtonDown(0) && nextFire <= 0)
+        if (Input.GetButtonDown("Fire1") && nextFire <= 0)
         {
             Shoot();
             nextFire = fireRate;
