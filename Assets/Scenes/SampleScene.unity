@@ -5215,6 +5215,7 @@ GameObject:
   - component: {fileID: 831066442}
   - component: {fileID: 831066443}
   - component: {fileID: 831066444}
+  - component: {fileID: 831066445}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -5282,7 +5283,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 831066439}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.0621688, y: -1.1715597, z: -0.052285615}
+  m_LocalPosition: {x: -5.46, y: -0.65, z: -0.052285615}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5382,6 +5383,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &831066445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 831066439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 686c3881d7c48894eb2e716901b85a93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1256453587}
+  bulletPrefab: {fileID: 3281302208205954006, guid: ec95652038c0dd64aa804a6ff7c92131, type: 3}
+  speed: 2
 --- !u!1 &835001144
 GameObject:
   m_ObjectHideFlags: 0
