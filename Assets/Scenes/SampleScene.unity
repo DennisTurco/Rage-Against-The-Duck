@@ -5298,7 +5298,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 831066439}
-  m_BodyType: 2
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -5397,7 +5397,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1256453587}
   bulletPrefab: {fileID: 3281302208205954006, guid: ec95652038c0dd64aa804a6ff7c92131, type: 3}
-  speed: 2
+  speed: 4
+  bulletSpeed: 1.5
+  distance: 2
 --- !u!1 &835001144
 GameObject:
   m_ObjectHideFlags: 0
