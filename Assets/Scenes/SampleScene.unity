@@ -10048,6 +10048,7 @@ GameObject:
   - component: {fileID: 831066443}
   - component: {fileID: 831066444}
   - component: {fileID: 831066445}
+  - component: {fileID: 831066446}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -10156,7 +10157,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 831066439}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -10232,8 +10233,23 @@ MonoBehaviour:
   speed: 2
   bulletSpeed: 1.5
   distance: 2
+  fireRate: 3.5
   maxHealth: 3
   health: 0
+--- !u!114 &831066446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 831066439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be26faf32a7bf1a4d95cf8c187df47a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flickerColor: {r: 1, g: 1, b: 1, a: 1}
+  flickerDuration: 0.2
 --- !u!1 &835001144
 GameObject:
   m_ObjectHideFlags: 0
@@ -13097,6 +13113,7 @@ GameObject:
   - component: {fileID: 1256453589}
   - component: {fileID: 1256453588}
   - component: {fileID: 1256453594}
+  - component: {fileID: 1256453596}
   - component: {fileID: 1256453592}
   - component: {fileID: 1256453591}
   - component: {fileID: 1256453593}
@@ -13321,6 +13338,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1256453596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256453587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be26faf32a7bf1a4d95cf8c187df47a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flickerColor: {r: 1, g: 1, b: 1, a: 1}
+  flickerDuration: 0.2
 --- !u!1 &1278336125
 GameObject:
   m_ObjectHideFlags: 0

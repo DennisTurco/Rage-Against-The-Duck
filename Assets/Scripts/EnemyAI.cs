@@ -17,6 +17,10 @@ public class EnemyAI : MonoBehaviour
     private bool got = false;
     private bool end = false;
 
+    //fire rate
+    public float fireRate;
+    private float nextFire;
+
     //health
     public float maxHealth;
     public float health;
@@ -27,6 +31,9 @@ public class EnemyAI : MonoBehaviour
 
         // initialize heath
         health = maxHealth;
+
+        // istantiate fire rate
+        nextFire = fireRate;
     }
 
     void Update() {
@@ -54,7 +61,12 @@ public class EnemyAI : MonoBehaviour
                 p3 = new Vector2(pos1.x + dist * d.x, pos1.y + dist * d.y);
                 //Debug.Log("p3: " + p3);
 
-                shoot();
+                Debug.Log(nextFire);
+                if (nextFire <= 0)
+                {
+                    shoot();
+                    nextFire = fireRate;
+                }
             }
 
             wait = false;
@@ -63,6 +75,9 @@ public class EnemyAI : MonoBehaviour
         }
 
         move();
+
+        if (nextFire > 0)
+            nextFire -= Time.deltaTime;
     }
 
     IEnumerator timer() {
@@ -101,7 +116,6 @@ public class EnemyAI : MonoBehaviour
 
     public void TakeDamage(float damageAmount)
     {
-
         health -= damageAmount;
         Debug.Log("ENEMY HEALTH: " + health);
         if (health <= 0)
