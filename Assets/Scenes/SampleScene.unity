@@ -10050,7 +10050,7 @@ GameObject:
   - component: {fileID: 831066445}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10229,9 +10229,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1256453587}
   bulletPrefab: {fileID: 3281302208205954006, guid: ec95652038c0dd64aa804a6ff7c92131, type: 3}
-  speed: 4
+  speed: 2
   bulletSpeed: 1.5
   distance: 2
+  maxHealth: 3
+  health: 0
 --- !u!1 &835001144
 GameObject:
   m_ObjectHideFlags: 0
@@ -13101,7 +13103,7 @@ GameObject:
   - component: {fileID: 1256453595}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

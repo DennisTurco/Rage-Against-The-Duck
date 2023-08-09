@@ -40,19 +40,4 @@ public class HeathBar : MonoBehaviour
             }
         }
     }
-
-    public void TakeDamage()
-    {
-        numOfHearts--;
-
-        if(numOfHearts <= 0)
-        {
-            Die();
-        }
-    }
-
-    private void Die()
-    {
-        PlayerMovement.Destroy(gameObject);
-    }
 }

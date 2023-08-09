@@ -17,8 +17,16 @@ public class EnemyAI : MonoBehaviour
     private bool got = false;
     private bool end = false;
 
+    //health
+    public float maxHealth;
+    public float health;
+    
+
     void Start() {
         rb = GetComponent<Rigidbody2D>();
+
+        // initialize heath
+        health = maxHealth;
     }
 
     void Update() {
@@ -37,7 +45,7 @@ public class EnemyAI : MonoBehaviour
             //Debug.Log("Pos1: " + pos1);
 
             float len = Mathf.Sqrt(Mathf.Pow(pos1.x - pos0.x, 2.0f) + Mathf.Pow(pos1.y - pos0.y, 2.0f));
-            Debug.Log("len: " + len);
+            //Debug.Log("len: " + len);
 
             if(len > 0.0) {
                 Vector2 d = new Vector2((pos1.x - pos0.x) / len, (pos1.y - pos0.y) / len);
@@ -55,7 +63,6 @@ public class EnemyAI : MonoBehaviour
         }
 
         move();
-
     }
 
     IEnumerator timer() {
@@ -83,12 +90,29 @@ public class EnemyAI : MonoBehaviour
         Vector2 direction = player.transform.position - transform.position;
         direction.Normalize();
         float dist = Mathf.Abs(Mathf.Sqrt(Mathf.Pow( player.transform.position.x - transform.position.x, 2.0f) + Mathf.Pow(player.transform.position.y - transform.position.y, 2.0f)) - distance);
-        Debug.Log(dist);
+        //Debug.Log(dist);
         if(dist > distance + err) {
             rb.MovePosition(rb.position + direction * speed * Time.fixedDeltaTime);
         }
         else if(dist < distance - err) {
             rb.MovePosition(rb.position - direction * speed * Time.fixedDeltaTime);
         }
+    }
+
+    public void TakeDamage(float damageAmount)
+    {
+
+        health -= damageAmount;
+        Debug.Log("ENEMY HEALTH: " + health);
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        //TODO: GetComponent<LootBag>().InstantiateLootSpawn(transform.position);
+        Destroy(gameObject);
     }
 }
