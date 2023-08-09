@@ -65,7 +65,7 @@ public class Projectile : MonoBehaviour
     private void DestroyProjectile()
     {
         // Instantiate the impact effect if it's assigned
-        if (destroyEffect != null) Instantiate(destroyEffect, transform.position, transform.rotation);
+        if (destroyEffect != null) Instantiate(destroyEffect, transform.position, Quaternion.identity);
 
         // Destroy the bullet GameObject
         Destroy(gameObject);
