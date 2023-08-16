@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b7ce51f790cf9841877b6e9072e8f03, type: 3}
-  m_Name: ball2
+  m_Name: bomb
   m_EditorClassIdentifier: 
-  lootSprite: {fileID: 21300000, guid: 9ad6eafae2ec7954493c79f06d84b790, type: 3}
-  lootName: ball2
-  dropChance: 90
+  lootSprite: {fileID: -837971404, guid: 9cc56fb924378344684c842681ba23b8, type: 3}
+  lootName: bomb
+  dropChance: 50

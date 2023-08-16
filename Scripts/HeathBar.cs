@@ -5,15 +5,12 @@ using UnityEngine.UI;
 
 public class HeathBar : MonoBehaviour
 {
-    [SerializeField] private int health = 100;
-    [SerializeField] private int numOfHearts;
+    [SerializeField] public int health = 100;
+    [SerializeField] public int numOfHearts;
 
-    [SerializeField] private Image[] hearts;
-    [SerializeField] private Sprite fullHeart;
-    [SerializeField] private Sprite halfHeart;
-    [SerializeField] private Sprite emptyHeart;
-
-    [SerializeField] private FlickerEffect flashEffect;
+    [SerializeField] public Image[] hearts;
+    [SerializeField] public Sprite fullHeart;
+    [SerializeField] public Sprite emptyHeart;
 
     void Update()
     {
@@ -28,7 +25,7 @@ public class HeathBar : MonoBehaviour
             if (i < health) 
             {
                 hearts[i].sprite = fullHeart;
-            } else
+            } else 
             {
                 hearts[i].sprite = emptyHeart;
             }
@@ -42,23 +39,5 @@ public class HeathBar : MonoBehaviour
                 hearts[i].enabled = false;
             }
         }
-    }
-
-    public void TakeDamage()
-    {
-        health--;
-
-        // flicker effect
-        flashEffect.Flash();
-
-        if (health <= 0)
-        {
-            Die();
-        }
-    }
-
-    private void Die()
-    {
-        PlayerMovement.Destroy(gameObject);
     }
 }
