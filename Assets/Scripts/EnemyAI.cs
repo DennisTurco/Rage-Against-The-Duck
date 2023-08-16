@@ -24,7 +24,9 @@ public class EnemyAI : MonoBehaviour
     //health
     public float maxHealth;
     public float health;
-    
+
+    [SerializeField] private FlickerEffect flashEffect;
+
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();
@@ -118,6 +120,10 @@ public class EnemyAI : MonoBehaviour
     {
         health -= damageAmount;
         Debug.Log("ENEMY HEALTH: " + health);
+
+        // flicker effect
+        flashEffect.Flash();
+
         if (health <= 0)
         {
             Die();

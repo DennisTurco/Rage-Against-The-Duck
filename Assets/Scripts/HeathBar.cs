@@ -12,6 +12,8 @@ public class HeathBar : MonoBehaviour
     [SerializeField] public Sprite fullHeart;
     [SerializeField] public Sprite emptyHeart;
 
+    [SerializeField] private FlickerEffect flashEffect;
+
     void Update()
     {
         if (health > numOfHearts) 
@@ -45,7 +47,10 @@ public class HeathBar : MonoBehaviour
     {
         numOfHearts--;
 
-        if(numOfHearts <= 0)
+        // flicker effect
+        flashEffect.Flash();
+
+        if (numOfHearts <= 0)
         {
             Die();
         }

@@ -92,5 +92,4 @@ public class PlayerMovement : MonoBehaviour
     {
         rb.MovePosition(rb.position + moveDirection * speed * Time.fixedDeltaTime);
     }
-
 }

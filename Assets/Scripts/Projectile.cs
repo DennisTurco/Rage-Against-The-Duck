@@ -11,7 +11,7 @@ public class Projectile : MonoBehaviour
     public float distance;
     public float damage;
 
-    public GameObject destroyEffect;
+    [SerializeField] private GameObject destroyEffect;
 
     private void Start()
     {
