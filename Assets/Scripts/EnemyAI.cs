@@ -132,7 +132,7 @@ public class EnemyAI : MonoBehaviour
 
     private void Die()
     {
-        //TODO: GetComponent<LootBag>().InstantiateLootSpawn(transform.position);
+        GetComponent<LootBag>().InstantiateLootSpawn(transform.position);
         Destroy(gameObject);
     }
 }

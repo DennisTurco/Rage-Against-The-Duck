@@ -10125,6 +10125,7 @@ GameObject:
   - component: {fileID: 831066444}
   - component: {fileID: 831066445}
   - component: {fileID: 831066446}
+  - component: {fileID: 831066447}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -10233,7 +10234,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 831066439}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -10327,6 +10328,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flashMaterial: {fileID: 2100000, guid: d5b2dc7a030c787498765a2c302db770, type: 2}
   duration: 0.125
+--- !u!114 &831066447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 831066439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b60906ded31282b429919c12d1270b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  droppedItemPrefab: {fileID: 2047354416297464723, guid: 81ba164704b601c4faa3a65651e4a388, type: 3}
+  lootList:
+  - {fileID: 11400000, guid: 0cb584cf82a4ab042ad914c004f1ea93, type: 2}
+  - {fileID: 11400000, guid: a898c3daee7f4c44baf5fff04fbc5987, type: 2}
 --- !u!1 &858905450
 GameObject:
   m_ObjectHideFlags: 0
