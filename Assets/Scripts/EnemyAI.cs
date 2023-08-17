@@ -63,7 +63,6 @@ public class EnemyAI : MonoBehaviour
                 p3 = new Vector2(pos1.x + dist * d.x, pos1.y + dist * d.y);
                 //Debug.Log("p3: " + p3);
 
-                Debug.Log(nextFire);
                 if (nextFire <= 0)
                 {
                     shoot();
