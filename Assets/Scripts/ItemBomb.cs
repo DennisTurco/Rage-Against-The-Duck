@@ -1,14 +1,12 @@
 using System;
 using UnityEngine;
 
-public class ItemBomb : MonoBehaviour, ICollectible
+public class ItemBomb : MonoBehaviour
 {
     public static event Action OnBombCollected;
 
-    public void Collect()
+    public void CollectItemBomb()
     {
-        Debug.Log("Bomb Collected");
-        Destroy(gameObject);
         OnBombCollected?.Invoke();
     }
 }

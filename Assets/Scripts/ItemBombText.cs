@@ -10,12 +10,12 @@ public class ItemBombText : MonoBehaviour
 
     private void OnEnable()
     {
-        ItemCoin.OnCoinCollected += IncrementBombCount;
+        ItemBomb.OnBombCollected += IncrementBombCount;
     }
 
     private void OnDisable()
     {
-        ItemCoin.OnCoinCollected -= IncrementBombCount;
+        ItemBomb.OnBombCollected -= IncrementBombCount;
     }
 
     private void IncrementBombCount()

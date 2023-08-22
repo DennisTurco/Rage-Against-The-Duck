@@ -1,25 +1,24 @@
 using System;
+using TMPro;
 using UnityEngine;
 
-public class ItemCoin : MonoBehaviour, ICollectible
+public class ItemCoin : MonoBehaviour
 {
     public static event Action OnCoinCollected;
-    private Rigidbody2D rb;
 
+    private Rigidbody2D rb;
     private bool hasTarget;
     private Vector3 targetPosition;
     [SerializeField] private float moveSpeed = 5f;
 
+    public void CollectItemCoin()
+    {
+        OnCoinCollected?.Invoke();
+    }
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-    }
-
-    public void Collect()
-    {
-        Debug.Log("Coin Collected");
-        Destroy(gameObject);
-        OnCoinCollected?.Invoke();
     }
 
     private void FixedUpdate()

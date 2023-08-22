@@ -11,12 +11,9 @@ public class LootSpawn : ScriptableObject // ScriptableObject allows to work in 
     [SerializeField] public string lootName;
     [SerializeField] public int dropChance;
 
-    [SerializeField] private GameObject gameObject;
-
     public LootSpawn(string lootName, int dropChance)
     {
         this.lootName = lootName;
         this.dropChance = dropChance;
-        this.gameObject = gameObject.GetComponent<GameObject>();
     }
 }
