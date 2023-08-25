@@ -4,21 +4,19 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
-    public GameObject player;
-    public GameObject bulletPrefab;
-    public float speed;
-    public float bulletSpeed;
-    public float distance;
+    [SerializeField] private GameObject player;
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private float speed;
+    [SerializeField] private float bulletSpeed;
+    [SerializeField] private float distance;
     private float err = 0.1f;
     private Rigidbody2D rb;
-    private float shootTime = 0.5f;
-    private float moveTime = 1.0f;
     private Vector2 pos0, pos1, p3;
+    private Vector3 movePoint;
     private bool shootWait = false;
     private bool shootEnd = false;
     private bool moveWait = false;
     private bool moveEnd = false;
-    private int moveIdx = 10;
     private bool got = false;
 
     void Start() {
@@ -33,7 +31,8 @@ public class EnemyAI : MonoBehaviour
         }
 
         if(shootWait == false) {
-            StartCoroutine(shootTimer(shootTime));
+            float ranTime = Random.Range(0.1f, 2.0f);
+            StartCoroutine(shootTimer(ranTime));
         }
 
         if(shootEnd == true) {
@@ -62,19 +61,17 @@ public class EnemyAI : MonoBehaviour
         }
 
         if(moveWait == false) {
-            StartCoroutine(moveTimer(moveTime));
+            float ranTime = Random.Range(1.0f, 4.0f);
+            StartCoroutine(moveTimer(ranTime));
         }
 
         if(moveEnd == true) {
-            move();
-            --moveIdx;
-        }
-
-        if(moveIdx == 0) {
-            moveIdx = 10;
+            movePoint = player.transform.position;
             moveWait = false;
             moveEnd = false;
         }
+
+        move();
     }
 
     IEnumerator shootTimer(float time) {
@@ -106,9 +103,9 @@ public class EnemyAI : MonoBehaviour
     }
 
     void move() {
-        Vector2 direction = player.transform.position - transform.position;
+        Vector2 direction = movePoint - transform.position;
         direction.Normalize();
-        float dist = Mathf.Abs(Mathf.Sqrt(Mathf.Pow( player.transform.position.x - transform.position.x, 2.0f) + Mathf.Pow(player.transform.position.y - transform.position.y, 2.0f)) - distance);
+        float dist = Mathf.Abs(Mathf.Sqrt(Mathf.Pow( movePoint.x - transform.position.x, 2.0f) + Mathf.Pow(movePoint.y - transform.position.y, 2.0f)) - distance);
         Debug.Log(dist);
         if(dist > distance + err) {
             rb.MovePosition(rb.position + direction * speed * Time.fixedDeltaTime);
