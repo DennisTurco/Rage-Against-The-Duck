@@ -19,8 +19,25 @@ public class EnemyAI : MonoBehaviour
     private bool moveEnd = false;
     private bool got = false;
 
+    //fire rate
+    public float fireRate;
+    private float nextFire;
+
+    //health
+    public float maxHealth;
+    public float health;
+
+    [SerializeField] private FlickerEffect flashEffect;
+
+
     void Start() {
         rb = GetComponent<Rigidbody2D>();
+
+        // initialize heath
+        health = maxHealth;
+
+        // istantiate fire rate
+        nextFire = fireRate;
     }
 
     void Update() {
@@ -40,7 +57,7 @@ public class EnemyAI : MonoBehaviour
             //Debug.Log("Pos1: " + pos1);
 
             float len = Mathf.Sqrt(Mathf.Pow(pos1.x - pos0.x, 2.0f) + Mathf.Pow(pos1.y - pos0.y, 2.0f));
-            Debug.Log("len: " + len);
+            //Debug.Log("len: " + len);
 
             if(len > 0.0) {
                 Vector2 d = new Vector2((pos1.x - pos0.x) / len, (pos1.y - pos0.y) / len);
@@ -48,6 +65,7 @@ public class EnemyAI : MonoBehaviour
                 float dist = Vector2.Distance(pos0, pos1) + bulletSpeed;
                 p3 = new Vector2(pos1.x + dist * d.x, pos1.y + dist * d.y);
                 //Debug.Log("p3: " + p3);
+
             }
             else {
                 p3 = new Vector2(player.transform.position.x, player.transform.position.y);
@@ -105,6 +123,7 @@ public class EnemyAI : MonoBehaviour
     void move() {
         Vector2 direction = movePoint - transform.position;
         direction.Normalize();
+
         float dist = Mathf.Abs(Mathf.Sqrt(Mathf.Pow( movePoint.x - transform.position.x, 2.0f) + Mathf.Pow(movePoint.y - transform.position.y, 2.0f)) - distance);
         Debug.Log(dist);
         if(dist > distance + err) {
@@ -113,5 +132,25 @@ public class EnemyAI : MonoBehaviour
         else if(dist < distance - err) {
             rb.MovePosition(rb.position - direction * speed * Time.fixedDeltaTime);
         }
+    }
+
+    public void TakeDamage(float damageAmount)
+    {
+        health -= damageAmount;
+        Debug.Log("ENEMY HEALTH: " + health);
+
+        // flicker effect
+        flashEffect.Flash();
+
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        GetComponent<LootBag>().InstantiateLootSpawn(transform.position);
+        Destroy(gameObject);
     }
 }
