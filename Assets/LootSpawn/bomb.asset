@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lootSprite: {fileID: -837971404, guid: 9cc56fb924378344684c842681ba23b8, type: 3}
   lootName: bomb
-  dropChance: 50
+  dropChance: 10

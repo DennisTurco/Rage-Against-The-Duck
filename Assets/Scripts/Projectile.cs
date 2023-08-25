@@ -3,6 +3,7 @@ using System.Transactions;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.VisualScripting;
 
 public class Projectile : MonoBehaviour
 {
@@ -40,20 +41,6 @@ public class Projectile : MonoBehaviour
         }
 
         DestroyProjectile();
-    }
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player")) {
-            Debug.Log("ENTRATO");
-            DestroyProjectile();
-        }
-
-        if (other.CompareTag("Enemy"))
-        {
-            Debug.Log("ENTRATO");
-            DestroyProjectile();
-        }
     }
 
     IEnumerator DeathDelay()

@@ -65,7 +65,6 @@ public class EnemyAI : MonoBehaviour
                 float dist = Vector2.Distance(pos0, pos1) + bulletSpeed;
                 p3 = new Vector2(pos1.x + dist * d.x, pos1.y + dist * d.y);
                 //Debug.Log("p3: " + p3);
-
             }
             else {
                 p3 = new Vector2(player.transform.position.x, player.transform.position.y);
@@ -110,6 +109,7 @@ public class EnemyAI : MonoBehaviour
         //Debug.Log("SP: " + shootPoint);
         // Istanzia la munizione nella posizione del firePoint e nella direzione di sparo
         GameObject newBullet = Instantiate(bulletPrefab, new Vector3(shootPoint.x, shootPoint.y, 0.0f), Quaternion.identity);
+        newBullet.name = "EnemyBullet";
 
 
         // Calcola l'angolo di rotazione della munizione basato sulla direzione di sparo

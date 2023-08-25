@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 // CreateAssetMenu allows to create new LootSpawn object into unity editor: right click -> LootSpawn
