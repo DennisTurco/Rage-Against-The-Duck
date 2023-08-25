@@ -17,9 +17,18 @@ public class GameManager : MonoBehaviour
     // resources
     public FloatingTextManager floatingTextManager;
 
+    // states
+    public bool GameisOver;
+
     private void Awake()
     {
         Instance = this;
+    }
+
+    private void Start()
+    {
+        Time.timeScale = 1f;
+        GameisOver = false;
     }
     
     // floating text on pick up items
@@ -32,11 +41,15 @@ public class GameManager : MonoBehaviour
     // Save state
     public void SaveState() { }
     public void LoadState(LoadSceneMode mode) { }
-}
 
-
-// game state
-public enum GameState
-{
-
+    //Gameover panel
+    public void GameOver()
+    {
+        UIManager _ui = GetComponent<UIManager>();
+        if (_ui != null)
+        { 
+            _ui.ToggleDeathPanel();
+        }
+        GameisOver = true;
+    }
 }

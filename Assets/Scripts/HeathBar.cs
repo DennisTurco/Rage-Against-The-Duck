@@ -53,12 +53,14 @@ public class HeathBar : MonoBehaviour
 
         if (health <= 0)
         {
-            Die();
+            PlayerDied();
         }
     }
 
-    private void Die()
+    private void PlayerDied()
     {
-        PlayerMovement.Destroy(gameObject);
+        hearts[0].sprite = emptyHeart; //TODO: find another way
+        GameManager.Instance.GameOver();
+        gameObject.SetActive(false);
     }
 }
