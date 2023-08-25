@@ -19,7 +19,7 @@ public class Items : MonoBehaviour, ICollectible
     public void Collect()
     {
         Debug.Log("Item collected: " + ItemName);
-        //GameManager.instance.ShowText("+" + 1 + " " + ItemName, 25, Color.yellow, transform.position, Vector3.up * 50, 3.0f);
+        GameManager.Instance.ShowFloatingText("+" + 1 + " " + ItemName, 25, Color.yellow, transform.position, Vector3.up * 100, 1.5f);
 
         // collected a coin
         if (ItemName.Equals("coin")) itemCoin.CollectItemCoin();

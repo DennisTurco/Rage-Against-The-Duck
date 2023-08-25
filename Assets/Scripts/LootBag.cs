@@ -16,7 +16,6 @@ public class LootBag : MonoBehaviour
             if (random <= item.dropChance)
             {
                 possibleLoot.Add(item);
-                
             }
         }
 

@@ -12,13 +12,13 @@ public class FloatingTextManager : MonoBehaviour
     public void Show(string message, int fontSize, Color color, Vector3 position, Vector3 motion, float duration)
     {
         FloatingText floatingText = GetFloatingText();
-
-        floatingText.txt.text = message;
-        floatingText.txt.fontSize = fontSize;
-        floatingText.txt.color = color;
+        
         floatingText.go.transform.position = Camera.main.WorldToScreenPoint(position);  // transfer world space to screen space so we can use it in the UI
         floatingText.motion = motion;
         floatingText.duration = duration;
+        floatingText.txt.text = message;
+        floatingText.txt.fontSize = fontSize;
+        floatingText.txt.color = color;
 
         floatingText.Show();
     }

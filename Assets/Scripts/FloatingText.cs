@@ -15,7 +15,6 @@ public class FloatingText
         active = true;
         lastShown = Time.time;
         go.SetActive(active);
-    
     }
 
     public void Hide()
