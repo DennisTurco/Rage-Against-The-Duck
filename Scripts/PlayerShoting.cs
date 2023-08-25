@@ -42,7 +42,6 @@ public class PlayerShooting : MonoBehaviour
     {
         // Istanzia la munizione nella posizione del firePoint e nella direzione di sparo
         GameObject newBullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
-        newBullet.name = "PlayerBullet";
 
         // Calcola l'angolo di rotazione della munizione basato sulla direzione di sparo
         float angle = Mathf.Atan2(shootingDirection.y, shootingDirection.x) * Mathf.Rad2Deg;

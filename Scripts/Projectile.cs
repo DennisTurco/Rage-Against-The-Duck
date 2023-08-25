@@ -3,7 +3,6 @@ using System.Transactions;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.VisualScripting;
 
 public class Projectile : MonoBehaviour
 {
@@ -12,7 +11,7 @@ public class Projectile : MonoBehaviour
     public float distance;
     public float damage;
 
-    [SerializeField] private GameObject destroyEffect;
+    public GameObject destroyEffect;
 
     private void Start()
     {
@@ -26,20 +25,6 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // Enemies to take damage
-        if (collision.gameObject.TryGetComponent<EnemyAI>(out EnemyAI enemyComponent))
-        {
-            Debug.Log(damage);
-            enemyComponent.TakeDamage(damage);
-        }
-
-        // Player to take damage
-        if (collision.gameObject.TryGetComponent<HeathBar>(out HeathBar barComponent))
-        {
-            Debug.Log(1);
-            barComponent.TakeDamage();
-        }
-
         DestroyProjectile();
     }
 
@@ -52,7 +37,7 @@ public class Projectile : MonoBehaviour
     private void DestroyProjectile()
     {
         // Instantiate the impact effect if it's assigned
-        if (destroyEffect != null) Instantiate(destroyEffect, transform.position, Quaternion.identity);
+        if (destroyEffect != null) Instantiate(destroyEffect, transform.position, transform.rotation);
 
         // Destroy the bullet GameObject
         Destroy(gameObject);
