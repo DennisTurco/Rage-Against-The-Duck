@@ -33,7 +33,7 @@ public class PauseMenu : MonoBehaviour
         IsPaused = false;
     }
 
-    void Pause()
+    public void Pause()
     {
         pMenu.SetActive(true);
         Time.timeScale = 0f;

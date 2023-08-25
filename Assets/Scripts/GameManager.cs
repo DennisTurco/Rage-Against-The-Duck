@@ -32,6 +32,15 @@ public class GameManager : MonoBehaviour
     // Save state
     public void SaveState() { }
     public void LoadState(LoadSceneMode mode) { }
+
+    //Gameover panel
+    public void GameOver()
+    {
+        UIManager _ui = GetComponent<UIManager>();
+        if (_ui != null) { 
+        _ui.ToggleDeathPanel();
+        }
+    }
 }
 
 
