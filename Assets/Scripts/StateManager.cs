@@ -12,7 +12,7 @@ public class StateManager : MonoBehaviour
     }
 
 
-    //Change the scene to a known one
+    //Change the scene by name
     public void ChangeSceneByName(string name)
     {
         if (name != null) {

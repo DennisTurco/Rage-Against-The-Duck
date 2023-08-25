@@ -59,6 +59,7 @@ public class HeathBar : MonoBehaviour
 
     private void PlayerDied()
     {
+        hearts[0].sprite = emptyHeart; //TODO: find another way
         GameManager.Instance.GameOver();
         gameObject.SetActive(false);
     }

@@ -11300,8 +11300,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coins: 0
-  bombs: 0
+  bombs: 1
   floatingTextManager: {fileID: 535773377}
+  GameisOver: 0
 --- !u!4 &804327434
 Transform:
   m_ObjectHideFlags: 0
