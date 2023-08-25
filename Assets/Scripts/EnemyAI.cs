@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
-    public GameObject player;
-    public GameObject bulletPrefab;
-    public float speed;
-    public float bulletSpeed;
-    public float distance;
+    [SerializeField] private GameObject player;
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private float speed;
+    [SerializeField] private float bulletSpeed;
+    [SerializeField] private float distance;
     private float err = 0.1f;
     private Rigidbody2D rb;
-    private float time = 0.5f;
     private Vector2 pos0, pos1, p3;
-    private bool wait = false;
+    private Vector3 movePoint;
+    private bool shootWait = false;
+    private bool shootEnd = false;
+    private bool moveWait = false;
+    private bool moveEnd = false;
     private bool got = false;
-    private bool end = false;
 
     //fire rate
     public float fireRate;
@@ -45,11 +47,12 @@ public class EnemyAI : MonoBehaviour
             got = true;
         }
 
-        if(wait == false) {
-            StartCoroutine(timer());
+        if(shootWait == false) {
+            float ranTime = Random.Range(0.1f, 2.0f);
+            StartCoroutine(shootTimer(ranTime));
         }
 
-        if(end == true) {
+        if(shootEnd == true) {
             pos1 = new Vector2(player.transform.position.x, player.transform.position.y);
             //Debug.Log("Pos1: " + pos1);
 
@@ -62,38 +65,52 @@ public class EnemyAI : MonoBehaviour
                 float dist = Vector2.Distance(pos0, pos1) + bulletSpeed;
                 p3 = new Vector2(pos1.x + dist * d.x, pos1.y + dist * d.y);
                 //Debug.Log("p3: " + p3);
-
-                if (nextFire <= 0)
-                {
-                    shoot();
-                    nextFire = fireRate;
-                }
+            }
+            else {
+                p3 = new Vector2(player.transform.position.x, player.transform.position.y);
             }
 
-            wait = false;
+            shoot();
+
+            shootWait = false;
             got = false;
-            end = false;
+            shootEnd = false;
+        }
+
+        if(moveWait == false) {
+            float ranTime = Random.Range(1.0f, 4.0f);
+            StartCoroutine(moveTimer(ranTime));
+        }
+
+        if(moveEnd == true) {
+            movePoint = player.transform.position;
+            moveWait = false;
+            moveEnd = false;
         }
 
         move();
-
-        if (nextFire > 0)
-            nextFire -= Time.deltaTime;
     }
 
-    IEnumerator timer() {
-        wait = true;
+    IEnumerator shootTimer(float time) {
+        shootWait = true;
         yield return new WaitForSeconds(time);
-        end = true;
+        shootEnd = true;
+    }
+
+    IEnumerator moveTimer(float time) {
+        moveWait = true;
+        yield return new WaitForSeconds(time);
+        moveEnd = true;
     }
 
     void shoot()
     {
-        Vector2 shootPoint = Vector2.MoveTowards(transform.position, p3, 0.3f);
+        Vector2 shootPoint = Vector2.MoveTowards(transform.position, p3, 0.8f);
         //Debug.Log("SP: " + shootPoint);
         // Istanzia la munizione nella posizione del firePoint e nella direzione di sparo
         GameObject newBullet = Instantiate(bulletPrefab, new Vector3(shootPoint.x, shootPoint.y, 0.0f), Quaternion.identity);
         newBullet.name = "EnemyBullet";
+
 
         // Calcola l'angolo di rotazione della munizione basato sulla direzione di sparo
         Vector2 direction = p3 - shootPoint;
@@ -104,10 +121,11 @@ public class EnemyAI : MonoBehaviour
     }
 
     void move() {
-        Vector2 direction = player.transform.position - transform.position;
+        Vector2 direction = movePoint - transform.position;
         direction.Normalize();
-        float dist = Mathf.Abs(Mathf.Sqrt(Mathf.Pow( player.transform.position.x - transform.position.x, 2.0f) + Mathf.Pow(player.transform.position.y - transform.position.y, 2.0f)) - distance);
-        //Debug.Log(dist);
+
+        float dist = Mathf.Abs(Mathf.Sqrt(Mathf.Pow( movePoint.x - transform.position.x, 2.0f) + Mathf.Pow(movePoint.y - transform.position.y, 2.0f)) - distance);
+        Debug.Log(dist);
         if(dist > distance + err) {
             rb.MovePosition(rb.position + direction * speed * Time.fixedDeltaTime);
         }
