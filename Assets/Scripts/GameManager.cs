@@ -1,8 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Search;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,16 +11,23 @@ public class GameManager : MonoBehaviour
 
     // resources
     public FloatingTextManager floatingTextManager;
+    public CameraShake cameraShake;
 
     private void Awake()
     {
         Instance = this;
     }
-    
+
     // floating text on pick up items
     public void ShowFloatingText(string message, int fontSize, Color color, Vector3 position, Vector3 motion, float duration)
     {
         floatingTextManager.Show(message, fontSize, color, position, motion, duration);
+    }
+
+    // shake camera
+    public void ShakeCamera(float duration, float magnitude)
+    {
+        cameraShake.StartShake(duration, magnitude);
     }
 
 
