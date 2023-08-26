@@ -1,13 +1,10 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
     private Vector2 moveDirection;
-    public float speed;
+    [SerializeField] private float speed;
     private Rigidbody2D rb;
-    public Text collectedText;
-    public static int collectedAmount = 0;
 
     private void Start()
     {
@@ -18,8 +15,6 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         ProcessInputs();
-
-        //CollectItem();
 
         // Swap the player sprite scale to face the movement direction
         SwapSprite();
@@ -33,11 +28,6 @@ public class PlayerMovement : MonoBehaviour
 
         // with normalized in any direction the speed will be the same
         moveDirection.Normalize();
-    }
-
-    private void CollectItem()
-    {
-        collectedText.text = "Item collected " + collectedAmount;
     }
 
 
@@ -71,10 +61,6 @@ public class PlayerMovement : MonoBehaviour
         // Down
         else if (moveDirection.y < 0)
         {
-            /*transform.localScale = new Vector2(
-                transform.localScale.x,
-                -1 * Mathf.Abs(transform.localScale.y)
-            );*/
             transform.localScale = new Vector2(
                 transform.localScale.x,
                 Mathf.Abs(transform.localScale.y)

@@ -1,5 +1,4 @@
 using System;
-using TMPro;
 using UnityEngine;
 
 public class ItemCoin : MonoBehaviour
@@ -14,6 +13,7 @@ public class ItemCoin : MonoBehaviour
     public void CollectItemCoin()
     {
         OnCoinCollected?.Invoke();
+        GameManager.Instance.coins++;
     }
 
     private void Awake()

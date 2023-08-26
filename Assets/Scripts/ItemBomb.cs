@@ -8,5 +8,6 @@ public class ItemBomb : MonoBehaviour
     public void CollectItemBomb()
     {
         OnBombCollected?.Invoke();
+        GameManager.Instance.bombs++;
     }
 }
