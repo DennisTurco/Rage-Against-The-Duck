@@ -8,12 +8,14 @@ public class Items : MonoBehaviour, ICollectible
 
     private ItemCoin itemCoin;
     private ItemBomb itemBomb;
+    private ItemHeart itemHeart;
 
     private void Start()
     {
         ItemName = this.name;
         if (ItemName.Equals("coin")) itemCoin = gameObject.AddComponent<ItemCoin>();
         else if (ItemName.Equals("bomb")) itemBomb = gameObject.AddComponent<ItemBomb>();
+        else if (ItemName.Equals("heart")) itemHeart = gameObject.AddComponent<ItemHeart>();
     }
 
     public void Collect()
@@ -26,6 +28,9 @@ public class Items : MonoBehaviour, ICollectible
 
         // collected a bomb
         else if (ItemName.Equals("bomb")) itemBomb.CollectItemBomb();
+
+        // collected a heart
+        else if (ItemName.Equals("heart")) itemHeart.CollectItemHeart();
 
         else throw new ArgumentException("Item doesn't exist");
 

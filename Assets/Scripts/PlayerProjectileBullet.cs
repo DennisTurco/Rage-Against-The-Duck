@@ -29,7 +29,7 @@ public class PlayerProjectileBullet : MonoBehaviour
         }
 
         // Player to take damage
-        if (collision.gameObject.TryGetComponent<HeathBar>(out HeathBar barComponent))
+        if (collision.gameObject.TryGetComponent<HealthBar>(out HealthBar barComponent))
         {
             Debug.Log(1);
             barComponent.TakeDamage();

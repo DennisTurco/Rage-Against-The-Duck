@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     // resources
     public FloatingTextManager floatingTextManager;
     public CameraShake cameraShake;
+    private HealthBar healthBar;
 
     // states
     public bool GameisOver;
@@ -37,6 +38,18 @@ public class GameManager : MonoBehaviour
     public void ShakeCamera(float duration, float magnitude)
     {
         cameraShake.StartShake(duration, magnitude);
+    }
+
+
+    public void SetHearthBarComponent(HealthBar healthBar)
+    {
+        this.healthBar = healthBar;
+    }
+
+    // add new heart
+    public void AddHeart()
+    {
+        healthBar.AddHeart();
     }
 
 
