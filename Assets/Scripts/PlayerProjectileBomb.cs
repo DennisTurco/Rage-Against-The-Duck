@@ -15,11 +15,6 @@ public class PlayerProjectileBomb : MonoBehaviour
         StartCoroutine(DeathDelay());
     }
 
-    private void Update()
-    {
-        transform.position += transform.right * Time.deltaTime * speed;
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // Enemies to take damage
