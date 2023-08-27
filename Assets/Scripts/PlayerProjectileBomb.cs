@@ -7,6 +7,7 @@ public class PlayerProjectileBomb : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float lifeTime;
     [SerializeField] private float damage;
+    [SerializeField] private float rangeDamage;
 
     [SerializeField] private GameObject destroyEffect;
 
@@ -17,17 +18,43 @@ public class PlayerProjectileBomb : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // Enemies to take damage
-        if (collision.gameObject.TryGetComponent<EnemyAI>(out EnemyAI enemyComponent))
+        if (collision.gameObject.TryGetComponent<PlayerProjectileBullet>(out PlayerProjectileBullet projectile))
         {
-            Debug.Log(damage);
-            enemyComponent.TakeDamage(damage);
+            StartExplosion();
         }
     }
 
     IEnumerator DeathDelay()
     {
         yield return new WaitForSeconds(lifeTime);
+        StartExplosion();
+    }
+
+    private void StartExplosion()
+    {
+        if (rangeDamage > 0)
+        {
+            var hitColliders = Physics2D.OverlapCircleAll(transform.position, rangeDamage);
+            foreach (var hitCollider in hitColliders)
+            {
+                var enemy = hitCollider.GetComponent<EnemyAI>();
+                var player = hitCollider.GetComponent<HealthBar>();
+                if (enemy)
+                {
+                    var closestPoint = hitCollider.ClosestPoint(transform.position);
+                    var distance = Vector3.Distance(closestPoint, transform.position);
+
+                    var damagePercent = Mathf.InverseLerp(rangeDamage, 0, distance);
+                    enemy.TakeDamage(damagePercent * damage);
+                    Debug.Log("Bomb damage: " + damagePercent * damage);
+                }
+                else if (player)
+                {
+                    player.TakeDamage();
+                }
+            }
+        }
+
         DestroyBomb();
     }
 

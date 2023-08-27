@@ -248,7 +248,8 @@ MonoBehaviour:
   speed: 2
   lifeTime: 2
   damage: 3
-  destroyEffect: {fileID: 0}
+  rangeDamage: 2.5
+  destroyEffect: {fileID: 3281302208205954006, guid: a7b920b0d7a9f6447b6ac5863523e539, type: 3}
 --- !u!50 &2055370656728276329
 Rigidbody2D:
   serializedVersion: 4
