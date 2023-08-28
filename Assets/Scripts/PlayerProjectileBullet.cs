@@ -24,14 +24,12 @@ public class PlayerProjectileBullet : MonoBehaviour
         // Enemies to take damage
         if (collision.gameObject.TryGetComponent<EnemyAI>(out EnemyAI enemyComponent))
         {
-            Debug.Log(damage);
             enemyComponent.TakeDamage(damage);
         }
 
         // Player to take damage
         if (collision.gameObject.TryGetComponent<HealthBar>(out HealthBar barComponent))
         {
-            Debug.Log(1);
             barComponent.TakeDamage();
         }
 

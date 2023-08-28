@@ -19,6 +19,6 @@ public class ItemBombText : MonoBehaviour
     private void IncrementBombCount()
     {
         bombCount++;
-        bombText.text = $"Bombs: {bombCount}";
+        bombText.text = $"x {bombCount}";
     }
 }
