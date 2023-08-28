@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class PlayerProjectileBullet : MonoBehaviour
+public class EnemyProjectileBullet : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private float lifeTime;
@@ -12,11 +12,10 @@ public class PlayerProjectileBullet : MonoBehaviour
     private void Start()
     {
         StartCoroutine(DeathDelay());
-		GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        foreach(GameObject player in players) {
-			Debug.Log(player);
-        	Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-        }
+		GameObject[] enemys = GameObject.FindGameObjectsWithTag("Enemy");     
+		foreach(GameObject enemy in enemys) {
+			Physics2D.IgnoreCollision(enemy.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+		}
     }
 
     private void Update()
@@ -26,14 +25,14 @@ public class PlayerProjectileBullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // Enemies to take damage
-        if (collision.gameObject.TryGetComponent<EnemyAI>(out EnemyAI playerComponent))
+        // Player to take damage
+        if (collision.gameObject.TryGetComponent<HeathBar>(out HeathBar barComponent))
         {
-            Debug.Log(damage);
-            playerComponent.TakeDamage(damage);
+            Debug.Log(1);
+            barComponent.TakeDamage();
         }
 
-        DestroyProjectile();
+        	DestroyProjectile();
     }
 
     IEnumerator DeathDelay()

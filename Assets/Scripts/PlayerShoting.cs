@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
 {
-    [SerializeField] private Transform firePoint;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private GameObject bombPrefab;
     [SerializeField] private float fireRate;
@@ -45,8 +44,8 @@ public class PlayerShooting : MonoBehaviour
 
     private void Shoot()
     {
-        // Instantiate ammunition in firePoint position and firing direction
-        GameObject newBullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+        // Istanzia la munizione nella posizione del player e nella direzione di sparo
+        GameObject newBullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
         newBullet.name = "PlayerBullet";
 
         // Calculate the angle of rotation of the ammunition based on the firing direction
@@ -55,8 +54,8 @@ public class PlayerShooting : MonoBehaviour
     }
     private void ThrowBomb()
     {
-        // Instantiate ammunition in firePoint position and firing direction
-        GameObject newBomb = Instantiate(bombPrefab, firePoint.position, Quaternion.identity);
+        // Istanzia la munizione nella posizione del player e nella direzione di sparo
+        GameObject newBomb = Instantiate(bombPrefab, transform.position, Quaternion.identity);
         newBomb.name = "PlayerBomb";
 
         GameManager.Instance.bombs--;
