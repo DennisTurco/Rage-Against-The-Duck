@@ -4,18 +4,36 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
+	[Header("Script settings")]
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject bulletPrefab;
+	[SerializeField] private FlickerEffect flashEffect;
+
+	[Header("Enemy settings")]
+	[Tooltip("Player object")]
     [SerializeField] private float speed;
     [SerializeField] private float bulletSpeed;
+	[Tooltip("Distance from player")]
     [SerializeField] private float distance;
+	[SerializeField] public float maxHealth;
+    [SerializeField] public float health;
+
+	[Header("Shooting settings")]
+	[Tooltip("min time between shots")]
 	[SerializeField] private float shootTimeMin;
+	[Tooltip("max time between shots")]
 	[SerializeField] private float shootTimeMax;
-	[SerializeField] private float moveTimeMin;
+	[Tooltip("min time between player tracking")]
+	[SerializeField] private float trackTimeMin;
+	[Tooltip("max time between player tracking")]
+	[SerializeField] private float trackTimeMax;
+
+	[Header("Movement settings")]
+	[Tooltip("min time between move")]
+   	[SerializeField] private float moveTimeMin;
+	[Tooltip("max time between move")]
 	[SerializeField] private float moveTimeMax;
-	[SerializeField] private float fireMin;
-	[SerializeField] private float fireMax;
-    [SerializeField] private FlickerEffect flashEffect;
+    
     private float err = 0.1f;
     private Rigidbody2D rb;
     private Vector2 pos0, pos1, p3;
@@ -27,10 +45,6 @@ public class EnemyAI : MonoBehaviour
     private bool moveWait = false;
     private bool moveEnd = false;
     private bool got = false;
-
-    //health
-    public float maxHealth;
-    public float health;
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();
@@ -52,7 +66,7 @@ public class EnemyAI : MonoBehaviour
         }
 
         if(!fireWait) {
-            float ranTime = Random.Range(fireMin, fireMax);
+            float ranTime = Random.Range(trackTimeMin, trackTimeMax);
             StartCoroutine(fireTimer(ranTime));
         }
 
