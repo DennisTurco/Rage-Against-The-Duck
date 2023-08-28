@@ -9,52 +9,56 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float bulletSpeed;
     [SerializeField] private float distance;
+	[SerializeField] private float shootTimeMin;
+	[SerializeField] private float shootTimeMax;
+	[SerializeField] private float moveTimeMin;
+	[SerializeField] private float moveTimeMax;
+	[SerializeField] private float fireMin;
+	[SerializeField] private float fireMax;
+    [SerializeField] private FlickerEffect flashEffect;
     private float err = 0.1f;
     private Rigidbody2D rb;
     private Vector2 pos0, pos1, p3;
     private Vector3 movePoint;
-    private bool shootWait = false;
-    private bool shootEnd = false;
+	private bool fireWait = false;
+    private bool fireEnd = false;
+	private bool shootWait = false;
+	private bool shootEnd = false;
     private bool moveWait = false;
     private bool moveEnd = false;
     private bool got = false;
 
-    //fire rate
-    public float fireRate;
-    private float nextFire;
-
     //health
     public float maxHealth;
     public float health;
-
-    [SerializeField] private FlickerEffect flashEffect;
-
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();
 
         // initialize heath
         health = maxHealth;
-
-        // istantiate fire rate
-        nextFire = fireRate;
     }
 
     void Update() {
-        if(got == false) {
+		if(!shootWait) {
+			float ranTime = Random.Range(shootTimeMin, shootTimeMax);
+            StartCoroutine(shootTimer(ranTime));
+		}
+
+        if(shootEnd && !got) {
             pos0 = new Vector2(player.transform.position.x, player.transform.position.y);
-            //Debug.Log("Pos0: " + pos0);
+            Debug.Log("Pos0: " + pos0);
             got = true;
         }
 
-        if(shootWait == false) {
-            float ranTime = Random.Range(0.1f, 2.0f);
-            StartCoroutine(shootTimer(ranTime));
+        if(!fireWait) {
+            float ranTime = Random.Range(fireMin, fireMax);
+            StartCoroutine(fireTimer(ranTime));
         }
 
-        if(shootEnd == true) {
+        if(shootEnd && fireEnd) {
             pos1 = new Vector2(player.transform.position.x, player.transform.position.y);
-            //Debug.Log("Pos1: " + pos1);
+            Debug.Log("Pos1: " + pos1);
 
             float len = Mathf.Sqrt(Mathf.Pow(pos1.x - pos0.x, 2.0f) + Mathf.Pow(pos1.y - pos0.y, 2.0f));
             //Debug.Log("len: " + len);
@@ -71,14 +75,16 @@ public class EnemyAI : MonoBehaviour
             }
 
             shoot();
-
-            shootWait = false;
+			
+			shootWait = false;
+			shootEnd = false;
+            fireWait = false;
             got = false;
-            shootEnd = false;
+            fireEnd = false;
         }
 
-        if(moveWait == false) {
-            float ranTime = Random.Range(1.0f, 4.0f);
+        if(!moveWait) {
+            float ranTime = Random.Range(moveTimeMin, moveTimeMax);
             StartCoroutine(moveTimer(ranTime));
         }
 
@@ -91,6 +97,12 @@ public class EnemyAI : MonoBehaviour
         move();
     }
 
+    IEnumerator fireTimer(float time) {
+        fireWait = true;
+        yield return new WaitForSeconds(time);
+        fireEnd = true;
+
+    }
     IEnumerator shootTimer(float time) {
         shootWait = true;
         yield return new WaitForSeconds(time);
@@ -125,7 +137,7 @@ public class EnemyAI : MonoBehaviour
         direction.Normalize();
 
         float dist = Mathf.Abs(Mathf.Sqrt(Mathf.Pow( movePoint.x - transform.position.x, 2.0f) + Mathf.Pow(movePoint.y - transform.position.y, 2.0f)) - distance);
-        Debug.Log(dist);
+        // Debug.Log(dist);
         if(dist > distance + err) {
             rb.MovePosition(rb.position + direction * speed * Time.fixedDeltaTime);
         }
@@ -137,7 +149,7 @@ public class EnemyAI : MonoBehaviour
     public void TakeDamage(float damageAmount)
     {
         health -= damageAmount;
-        Debug.Log("ENEMY HEALTH: " + health);
+        // Debug.Log("ENEMY HEALTH: " + health);
 
         // flicker effect
         flashEffect.Flash();
