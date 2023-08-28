@@ -38,7 +38,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.028, y: 0.087}
+  m_AnchoredPosition: {x: 0.96934325, y: 3.9606683}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!96 &-4134913857356163506
@@ -248,7 +248,8 @@ MonoBehaviour:
   speed: 2
   lifeTime: 2
   damage: 3
-  destroyEffect: {fileID: 0}
+  rangeDamage: 2.5
+  destroyEffect: {fileID: 3281302208205954006, guid: a7b920b0d7a9f6447b6ac5863523e539, type: 3}
 --- !u!50 &2055370656728276329
 Rigidbody2D:
   serializedVersion: 4

@@ -149,7 +149,7 @@ public class EnemyAI : MonoBehaviour
         direction.Normalize();
 
         float dist = Mathf.Abs(Mathf.Sqrt(Mathf.Pow( movePoint.x - transform.position.x, 2.0f) + Mathf.Pow(movePoint.y - transform.position.y, 2.0f)) - distance);
-        // Debug.Log(dist);
+
         if(dist > distance + err) {
             rb.MovePosition(rb.position + direction * speed * Time.fixedDeltaTime);
         }
