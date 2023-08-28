@@ -131,15 +131,13 @@ public class EnemyAI : MonoBehaviour
 
     void shoot()
     {
-        Vector2 shootPoint = Vector2.MoveTowards(transform.position, p3, 0.8f);
-        //Debug.Log("SP: " + shootPoint);
         // Istanzia la munizione nella posizione del firePoint e nella direzione di sparo
-        GameObject newBullet = Instantiate(bulletPrefab, new Vector3(shootPoint.x, shootPoint.y, 0.0f), Quaternion.identity);
+        GameObject newBullet = Instantiate(bulletPrefab, new Vector3(transform.position.x, transform.position.y, 0.0f), Quaternion.identity);
         newBullet.name = "EnemyBullet";
 
 
         // Calcola l'angolo di rotazione della munizione basato sulla direzione di sparo
-        Vector2 direction = p3 - shootPoint;
+        Vector2 direction = p3 - new Vector2(transform.position.x, transform.position.y);
         direction.Normalize();
         float angle =  Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         //Debug.Log(angle);
