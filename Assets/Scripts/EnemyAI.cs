@@ -4,57 +4,75 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
+	[Header("Script settings")]
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject bulletPrefab;
+	[SerializeField] private FlickerEffect flashEffect;
+
+	[Header("Enemy settings")]
+	[Tooltip("Player object")]
     [SerializeField] private float speed;
     [SerializeField] private float bulletSpeed;
+	[Tooltip("Distance from player")]
     [SerializeField] private float distance;
+	[SerializeField] public float maxHealth;
+    [SerializeField] public float health;
+
+	[Header("Shooting settings")]
+	[Tooltip("min time between shots")]
+	[SerializeField] private float shootTimeMin;
+	[Tooltip("max time between shots")]
+	[SerializeField] private float shootTimeMax;
+	[Tooltip("min time between player tracking")]
+	[SerializeField] private float trackTimeMin;
+	[Tooltip("max time between player tracking")]
+	[SerializeField] private float trackTimeMax;
+
+	[Header("Movement settings")]
+	[Tooltip("min time between move")]
+   	[SerializeField] private float moveTimeMin;
+	[Tooltip("max time between move")]
+	[SerializeField] private float moveTimeMax;
+    
     private float err = 0.1f;
     private Rigidbody2D rb;
     private Vector2 pos0, pos1, p3;
     private Vector3 movePoint;
-    private bool shootWait = false;
-    private bool shootEnd = false;
+	private bool fireWait = false;
+    private bool fireEnd = false;
+	private bool shootWait = false;
+	private bool shootEnd = false;
     private bool moveWait = false;
     private bool moveEnd = false;
     private bool got = false;
-
-    //fire rate
-    public float fireRate;
-    private float nextFire;
-
-    //health
-    public float maxHealth;
-    public float health;
-
-    [SerializeField] private FlickerEffect flashEffect;
-
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();
 
         // initialize heath
         health = maxHealth;
-
-        // istantiate fire rate
-        nextFire = fireRate;
     }
 
     void Update() {
-        if(got == false) {
+		if(!shootWait) {
+			float ranTime = Random.Range(shootTimeMin, shootTimeMax);
+            StartCoroutine(shootTimer(ranTime));
+		}
+
+        if(shootEnd && !got) {
             pos0 = new Vector2(player.transform.position.x, player.transform.position.y);
-            //Debug.Log("Pos0: " + pos0);
+            Debug.Log("Pos0: " + pos0);
             got = true;
         }
 
-        if(shootWait == false) {
-            float ranTime = Random.Range(0.1f, 2.0f);
-            StartCoroutine(shootTimer(ranTime));
+        if(!fireWait) {
+            float ranTime = Random.Range(trackTimeMin, trackTimeMax);
+            StartCoroutine(fireTimer(ranTime));
         }
 
-        if(shootEnd == true) {
+        if(shootEnd && fireEnd) {
             pos1 = new Vector2(player.transform.position.x, player.transform.position.y);
-            //Debug.Log("Pos1: " + pos1);
+            Debug.Log("Pos1: " + pos1);
 
             float len = Mathf.Sqrt(Mathf.Pow(pos1.x - pos0.x, 2.0f) + Mathf.Pow(pos1.y - pos0.y, 2.0f));
             //Debug.Log("len: " + len);
@@ -71,14 +89,16 @@ public class EnemyAI : MonoBehaviour
             }
 
             shoot();
-
-            shootWait = false;
+			
+			shootWait = false;
+			shootEnd = false;
+            fireWait = false;
             got = false;
-            shootEnd = false;
+            fireEnd = false;
         }
 
-        if(moveWait == false) {
-            float ranTime = Random.Range(1.0f, 4.0f);
+        if(!moveWait) {
+            float ranTime = Random.Range(moveTimeMin, moveTimeMax);
             StartCoroutine(moveTimer(ranTime));
         }
 
@@ -91,6 +111,12 @@ public class EnemyAI : MonoBehaviour
         move();
     }
 
+    IEnumerator fireTimer(float time) {
+        fireWait = true;
+        yield return new WaitForSeconds(time);
+        fireEnd = true;
+
+    }
     IEnumerator shootTimer(float time) {
         shootWait = true;
         yield return new WaitForSeconds(time);
@@ -105,15 +131,13 @@ public class EnemyAI : MonoBehaviour
 
     void shoot()
     {
-        Vector2 shootPoint = Vector2.MoveTowards(transform.position, p3, 0.8f);
-        //Debug.Log("SP: " + shootPoint);
         // Istanzia la munizione nella posizione del firePoint e nella direzione di sparo
-        GameObject newBullet = Instantiate(bulletPrefab, new Vector3(shootPoint.x, shootPoint.y, 0.0f), Quaternion.identity);
+        GameObject newBullet = Instantiate(bulletPrefab, new Vector3(transform.position.x, transform.position.y, 0.0f), Quaternion.identity);
         newBullet.name = "EnemyBullet";
 
 
         // Calcola l'angolo di rotazione della munizione basato sulla direzione di sparo
-        Vector2 direction = p3 - shootPoint;
+        Vector2 direction = p3 - new Vector2(transform.position.x, transform.position.y);
         direction.Normalize();
         float angle =  Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         //Debug.Log(angle);
@@ -125,7 +149,7 @@ public class EnemyAI : MonoBehaviour
         direction.Normalize();
 
         float dist = Mathf.Abs(Mathf.Sqrt(Mathf.Pow( movePoint.x - transform.position.x, 2.0f) + Mathf.Pow(movePoint.y - transform.position.y, 2.0f)) - distance);
-        //Debug.Log(dist);
+
         if(dist > distance + err) {
             rb.MovePosition(rb.position + direction * speed * Time.fixedDeltaTime);
         }
@@ -137,7 +161,7 @@ public class EnemyAI : MonoBehaviour
     public void TakeDamage(float damageAmount)
     {
         health -= damageAmount;
-        Debug.Log("ENEMY HEALTH: " + health);
+        // Debug.Log("ENEMY HEALTH: " + health);
 
         // flicker effect
         flashEffect.Flash();
