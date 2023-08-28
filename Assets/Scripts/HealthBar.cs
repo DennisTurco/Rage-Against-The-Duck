@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HeathBar : MonoBehaviour
+public class HealthBar : MonoBehaviour
 {
     [SerializeField] private int health = 100;
     [SerializeField] private int numOfHearts;
@@ -15,7 +15,12 @@ public class HeathBar : MonoBehaviour
 
     [SerializeField] private FlickerEffect flashEffect;
 
-    void Update()
+    private void Start()
+    {
+        GameManager.Instance.SetHearthBarComponent(this);
+    }
+
+    private void Update()
     {
         if (health > numOfHearts) 
         {
@@ -42,6 +47,16 @@ public class HeathBar : MonoBehaviour
                 hearts[i].enabled = false;
             }
         }
+    }
+
+    public void AddHeart()
+    {
+        if (health == numOfHearts)
+        {
+            numOfHearts++;
+            health = numOfHearts;
+        }
+        else health++;
     }
 
     public void TakeDamage()

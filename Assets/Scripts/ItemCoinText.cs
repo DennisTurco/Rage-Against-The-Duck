@@ -19,6 +19,6 @@ public class ItemCoinText : MonoBehaviour
     private void IncrementCoinCount()
     {
         coinCount++;
-        coinText.text = $"Coins: {coinCount}";
+        coinText.text = $"x {coinCount}";
     }
 }

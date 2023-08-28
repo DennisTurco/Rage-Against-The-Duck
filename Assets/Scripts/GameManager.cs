@@ -6,12 +6,13 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     // inventory
-    public int coins;
-    public int bombs;
+    [SerializeField] public int coins;
+    [SerializeField] public int bombs;
 
     // resources
-    public FloatingTextManager floatingTextManager;
-    public CameraShake cameraShake;
+    [SerializeField] private FloatingTextManager floatingTextManager;
+    [SerializeField] private CameraShake cameraShake;
+    private HealthBar healthBar;
 
     // states
     public bool GameisOver;
@@ -39,10 +40,22 @@ public class GameManager : MonoBehaviour
         cameraShake.StartShake(duration, magnitude);
     }
 
+    public void SetHearthBarComponent(HealthBar healthBar)
+    {
+        this.healthBar = healthBar;
+    }
+
+    // add new heart
+    public void AddHeart()
+    {
+        healthBar.AddHeart();
+    }
+
 
     // Save state
     public void SaveState() { }
     public void LoadState(LoadSceneMode mode) { }
+
 
     //Gameover panel
     public void GameOver()

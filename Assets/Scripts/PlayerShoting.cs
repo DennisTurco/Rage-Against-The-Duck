@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
@@ -8,7 +9,7 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField] private float fireRate;
     private float nextFire;
 
-    // Aggiungi una variabile per tenere traccia della direzione del giocatore
+    // variable to keep track of player direction
     private Vector2 shootingDirection;
 
     void Start()
@@ -18,16 +19,16 @@ public class PlayerShooting : MonoBehaviour
 
     void Update()
     {
-        // Ottieni l'input per sparo orizzontale e verticale (assumi che le frecce siano usate per il movimento)
+        // input for horizontal and vertical shot
         float shootHorizontal = Input.GetAxisRaw("Horizontal");
         float shootVertical = Input.GetAxisRaw("Vertical");
 
-        // Aggiorna la direzione di sparo solo se c'è input
+        // Update the firing direction only if there is input
         if (Mathf.Abs(shootHorizontal) > 0.1f || Mathf.Abs(shootVertical) > 0.1f)
         {
             shootingDirection = new Vector2(shootHorizontal, shootVertical).normalized;
         }
-        if (Input.GetButtonDown("Fire1") && nextFire <= 0)
+        if (Input.GetMouseButton(0) && nextFire <= 0)
         {
             Shoot();
             nextFire = fireRate;
@@ -44,23 +45,19 @@ public class PlayerShooting : MonoBehaviour
 
     private void Shoot()
     {
-        // Istanzia la munizione nella posizione del firePoint e nella direzione di sparo
+        // Instantiate ammunition in firePoint position and firing direction
         GameObject newBullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
         newBullet.name = "PlayerBullet";
 
-        // Calcola l'angolo di rotazione della munizione basato sulla direzione di sparo
+        // Calculate the angle of rotation of the ammunition based on the firing direction
         float angle = Mathf.Atan2(shootingDirection.y, shootingDirection.x) * Mathf.Rad2Deg;
         newBullet.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
     private void ThrowBomb()
     {
-        // Istanzia la munizione nella posizione del firePoint e nella direzione di sparo
+        // Instantiate ammunition in firePoint position and firing direction
         GameObject newBomb = Instantiate(bombPrefab, firePoint.position, Quaternion.identity);
         newBomb.name = "PlayerBomb";
-
-        // Calcola l'angolo di rotazione della munizione basato sulla direzione di sparo
-        float angle = Mathf.Atan2(shootingDirection.y, shootingDirection.x) * Mathf.Rad2Deg;
-        newBomb.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
         GameManager.Instance.bombs--;
     }
