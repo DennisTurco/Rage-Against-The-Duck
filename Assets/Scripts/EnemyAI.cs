@@ -15,8 +15,10 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private float bulletSpeed;
 	[Tooltip("Distance from player")]
     [SerializeField] private float distance;
-	[SerializeField] public float maxHealth;
-    [SerializeField] public float health;
+    [Tooltip("Health")]
+    [SerializeField] private FloatingHealthBar healthBar;
+    [SerializeField] private float maxHealth;
+    [SerializeField] private float health;
 
 	[Header("Shooting settings")]
 	[Tooltip("min time between shots")]
@@ -46,11 +48,17 @@ public class EnemyAI : MonoBehaviour
     private bool moveEnd = false;
     private bool got = false;
 
+    private void Awake()
+    {
+        healthBar = GetComponentInChildren<FloatingHealthBar>();
+    }
+
     void Start() {
         rb = GetComponent<Rigidbody2D>();
 
         // initialize heath
         health = maxHealth;
+        healthBar.UpdateHeathBar(health, maxHealth);
     }
 
     void Update() {
@@ -162,6 +170,8 @@ public class EnemyAI : MonoBehaviour
     {
         health -= damageAmount;
         // Debug.Log("ENEMY HEALTH: " + health);
+
+        healthBar.UpdateHeathBar(health, maxHealth);
 
         // flicker effect
         flashEffect.Flash();
