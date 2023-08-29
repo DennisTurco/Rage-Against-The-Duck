@@ -61,7 +61,7 @@ public class EnemyAI : MonoBehaviour
 
         if(shootEnd && !got) {
             pos0 = new Vector2(player.transform.position.x, player.transform.position.y);
-            Debug.Log("Pos0: " + pos0);
+            //Debug.Log("Pos0: " + pos0);
             got = true;
         }
 
@@ -72,7 +72,7 @@ public class EnemyAI : MonoBehaviour
 
         if(shootEnd && fireEnd) {
             pos1 = new Vector2(player.transform.position.x, player.transform.position.y);
-            Debug.Log("Pos1: " + pos1);
+            //Debug.Log("Pos1: " + pos1);
 
             float len = Mathf.Sqrt(Mathf.Pow(pos1.x - pos0.x, 2.0f) + Mathf.Pow(pos1.y - pos0.y, 2.0f));
             //Debug.Log("len: " + len);
