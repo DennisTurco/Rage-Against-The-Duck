@@ -5,7 +5,8 @@ using UnityEngine;
 public class FlickerEffect : MonoBehaviour
 {
     [Tooltip("Material to switch to during the flash.")]
-    [SerializeField] private Material flashMaterial;
+    [SerializeField] private Material whiteFlashMaterial;
+    [SerializeField] private Material redFlashMaterial;
 
     [Tooltip("Duration of the flash.")]
     [SerializeField] private float duration;
@@ -31,7 +32,17 @@ public class FlickerEffect : MonoBehaviour
         originalMaterial = spriteRenderer.material;
     }
 
-    public void Flash()
+    public void WhiteFlash()
+    {
+        Flash(whiteFlashMaterial);
+    }
+
+    public void RedFlash()
+    {
+        Flash(redFlashMaterial);
+    }
+
+    private void Flash(Material flashMaterial)
     { 
         // If the flashRoutine is not null, then it is currently running.
         if (flashRoutine != null)
@@ -42,10 +53,10 @@ public class FlickerEffect : MonoBehaviour
         }
 
         // Start the Coroutine, and store the reference for it.
-        flashRoutine = StartCoroutine(FlashRoutine());
+        flashRoutine = StartCoroutine(FlashRoutine(flashMaterial));
     }
 
-    private IEnumerator FlashRoutine()
+    private IEnumerator FlashRoutine(Material flashMaterial)
     {
         // Swap to the flashMaterial.
         spriteRenderer.material = flashMaterial;

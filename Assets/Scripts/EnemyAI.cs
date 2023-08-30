@@ -8,8 +8,10 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject bulletPrefab;
 	[SerializeField] private FlickerEffect flashEffect;
+    [SerializeField] private GameObject deathBloodEffect;
+    [SerializeField] private GameObject deathEffect;
 
-	[Header("Enemy settings")]
+    [Header("Enemy settings")]
 	[Tooltip("Player object")]
     [SerializeField] private float speed;
     [SerializeField] private float bulletSpeed;
@@ -174,7 +176,7 @@ public class EnemyAI : MonoBehaviour
         healthBar.UpdateHeathBar(health, maxHealth);
 
         // flicker effect
-        flashEffect.Flash();
+        flashEffect.RedFlash();
 
         if (health <= 0)
         {
@@ -185,6 +187,11 @@ public class EnemyAI : MonoBehaviour
     private void Die()
     {
         GetComponent<LootBag>().InstantiateLootSpawn(transform.position);
+
+        // Instantiate the death effect if it's assigned
+        if (deathEffect != null) Instantiate(deathEffect, transform.position, Quaternion.identity);
+        if (deathBloodEffect != null) Instantiate(deathBloodEffect, transform.position, Quaternion.identity);
+
         Destroy(gameObject);
     }
 }
