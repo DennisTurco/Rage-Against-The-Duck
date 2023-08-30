@@ -11,6 +11,13 @@ public class PlayerProjectileBullet : MonoBehaviour
 
     [SerializeField] private GameObject destroyEffect;
 
+    private void Awake()
+    {
+        GameManager.Instance.SetAttackDamage(damageMin, damageMax);
+        GameManager.Instance.SetAttackSpeed(speed);
+        GameManager.Instance.SetAttackRange(lifeTimeMin, lifeTimeMax);
+    }
+
     private void Start()
     {
         StartCoroutine(DeathDelay());

@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        GameManager.Instance.SetMovementsSpeed(speed);
     }
 
     // Is called automatically every graphics frame
