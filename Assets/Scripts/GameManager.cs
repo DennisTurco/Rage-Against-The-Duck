@@ -6,15 +6,30 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     // inventory
+    [Header("Inventory")]
     [SerializeField] public int coins;
     [SerializeField] public int bombs;
 
     // resources
+    [Header("Resources")]
     [SerializeField] private FloatingTextManager floatingTextManager;
     [SerializeField] private CameraShake cameraShake;
     private HealthBar healthBar;
 
+    // stats
+    [Header("Player Stats")]
+    [SerializeField] private float AttackDamageMin;
+    [SerializeField] private float AttackDamageMax;
+    [SerializeField] private float AttackSpeedMin;
+    [SerializeField] private float AttackSpeedMax;
+    [SerializeField] private float AttackRangeMin;
+    [SerializeField] private float AttackRangeMax;
+    [SerializeField] private float AttackRate;
+    [SerializeField] private float MovementSpeed;
+    [SerializeField] private float Luck;
+
     // states
+    [Header("States")]
     public bool GameisOver;
 
     private void Awake()
