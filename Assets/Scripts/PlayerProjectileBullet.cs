@@ -4,8 +4,10 @@ using UnityEngine;
 public class PlayerProjectileBullet : MonoBehaviour
 {
     [SerializeField] private float speed;
-    [SerializeField] private float lifeTime;
-    [SerializeField] private float damage;
+    [SerializeField] private float lifeTimeMin;
+    [SerializeField] private float lifeTimeMax;
+    [SerializeField] private float damageMin;
+    [SerializeField] private float damageMax;
 
     [SerializeField] private GameObject destroyEffect;
 
@@ -29,6 +31,7 @@ public class PlayerProjectileBullet : MonoBehaviour
         // Enemies to take damage
         if (collision.gameObject.TryGetComponent<EnemyAI>(out EnemyAI playerComponent))
         {
+            float damage = Random.Range(damageMin, damageMax);
             Debug.Log(damage);
             playerComponent.TakeDamage(damage);
         }
@@ -38,6 +41,7 @@ public class PlayerProjectileBullet : MonoBehaviour
 
     IEnumerator DeathDelay()
     {
+        float lifeTime = Random.Range(lifeTimeMin, lifeTimeMax);
         yield return new WaitForSeconds(lifeTime);
         DestroyProjectile();
     }

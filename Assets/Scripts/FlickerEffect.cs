@@ -1,5 +1,5 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FlickerEffect : MonoBehaviour
@@ -32,7 +32,7 @@ public class FlickerEffect : MonoBehaviour
     }
 
     public void Flash()
-    {
+    { 
         // If the flashRoutine is not null, then it is currently running.
         if (flashRoutine != null)
         {
