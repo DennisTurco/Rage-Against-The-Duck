@@ -60,7 +60,7 @@ public class EnemyAI : MonoBehaviour
 
         // initialize heath
         health = maxHealth;
-        healthBar.UpdateHeathBar(health, maxHealth);
+        healthBar.UpdateHealthBar(health, maxHealth);
     }
 
     void Update() {
@@ -173,7 +173,7 @@ public class EnemyAI : MonoBehaviour
         health -= damageAmount;
         // Debug.Log("ENEMY HEALTH: " + health);
 
-        healthBar.UpdateHeathBar(health, maxHealth);
+        healthBar.UpdateHealthBar(health, maxHealth);
 
         // flicker effect
         flashEffect.RedFlash();

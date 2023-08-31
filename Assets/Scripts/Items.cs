@@ -29,7 +29,7 @@ public class Items : MonoBehaviour, ICollectible
         // collected a bomb
         else if (ItemName.Equals("bomb")) itemBomb.CollectItemBomb();
 
-        // collected a heart
+        // collected a heart //TODO: block collecting if health bar is full
         else if (ItemName.Equals("heart")) itemHeart.CollectItemHeart();
 
         else throw new ArgumentException("Item doesn't exist");
