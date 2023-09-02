@@ -454,6 +454,8 @@ MonoBehaviour:
   player: {fileID: 0}
   bulletPrefab: {fileID: 3281302208205954006, guid: 743fbc3adfed54d42a8a605617b7559b, type: 3}
   flashEffect: {fileID: 6241828811823403851}
+  deathBloodEffect: {fileID: 3281302208205954006, guid: 86cade2636d3b9b4fa2002275f8d48b0, type: 3}
+  deathEffect: {fileID: 3281302208205954006, guid: 632a5953d8946274ebe763830b110bdc, type: 3}
   speed: 2
   bulletSpeed: 1.5
   distance: 2

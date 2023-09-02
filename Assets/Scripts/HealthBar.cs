@@ -64,7 +64,7 @@ public class HealthBar : MonoBehaviour
         health--;
 
         // flicker effect
-        flashEffect.Flash();
+        flashEffect.WhiteFlash();
 
         if (health <= 0)
         {

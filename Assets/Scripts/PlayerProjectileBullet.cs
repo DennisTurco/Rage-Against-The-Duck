@@ -11,13 +11,25 @@ public class PlayerProjectileBullet : MonoBehaviour
 
     [SerializeField] private GameObject destroyEffect;
 
+    private void Awake()
+    {
+        GameManager.Instance.SetAttackDamage(damageMin, damageMax);
+        GameManager.Instance.SetAttackSpeed(speed);
+        GameManager.Instance.SetAttackRange(lifeTimeMin, lifeTimeMax);
+    }
+
     private void Start()
     {
         StartCoroutine(DeathDelay());
 		GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         foreach(GameObject player in players) {
-			Debug.Log(player);
         	Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        }
+
+        GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
+        foreach (GameObject bullet in bullets)
+        {
+            Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         }
     }
 

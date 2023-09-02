@@ -13,6 +13,8 @@ public class PlayerShooting : MonoBehaviour
 
     void Start()
     {
+        GameManager.Instance.SetAttackRate(fireRate);
+
         nextFire = fireRate;
     }
 

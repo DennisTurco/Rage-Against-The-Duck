@@ -11,7 +11,6 @@ public class StateManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-
     //Change the scene by name
     public void ChangeSceneByName(string name)
     {

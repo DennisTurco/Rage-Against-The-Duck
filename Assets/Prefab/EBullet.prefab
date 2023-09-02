@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1207145543060865785}
   m_Layer: 5
   m_Name: EBullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -136,7 +136,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.53333336, g: 1, b: 0.04705883, a: 0.49019608}
+      key0: {r: 0.9647059, g: 0.4862745, b: 0.4862745, a: 0.49019608}
       key1: {r: 1, g: 1, b: 1, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -218,7 +218,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 100
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.6659303, g: 1, b: 0, a: 1}
+  m_Color: {r: 0.9622642, g: 0.48567107, b: 0.48567107, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -315,4 +315,4 @@ MonoBehaviour:
   speed: 3
   lifeTime: 3
   damage: 1
-  destroyEffect: {fileID: 3281302208205954006, guid: 5c74474c0e4984c4bb5a469f7ace5070, type: 3}
+  destroyEffect: {fileID: 3281302208205954006, guid: 67791e61c55010b438b4c3ad617ac828, type: 3}

@@ -43,9 +43,9 @@ public class LootBag : MonoBehaviour
             // set custom name to prefab
             lootGameObject.name = droppedItem.lootName;
 
-            //float dropForce = 300f;
-            //Vector2 dropDirection = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
-            //lootGameObject.GetComponent<Rigidbody2D>().AddForce(dropDirection * dropForce, ForceMode2D.Impulse);
+            /*float dropVelocity = 300f;
+            Vector2 dropDirection = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
+            lootGameObject.GetComponent<Rigidbody2D>().AddForce(dropDirection * dropVelocity, ForceMode2D.Impulse);*/
         }
     }
 

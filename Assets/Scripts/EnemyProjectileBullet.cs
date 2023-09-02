@@ -16,6 +16,12 @@ public class EnemyProjectileBullet : MonoBehaviour
 		foreach(GameObject enemy in enemys) {
 			Physics2D.IgnoreCollision(enemy.GetComponent<Collider2D>(), GetComponent<Collider2D>());
 		}
+
+        GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
+        foreach (GameObject bullet in bullets)
+        {
+            Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        }
     }
 
     private void Update()
