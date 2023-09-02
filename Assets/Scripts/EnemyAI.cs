@@ -5,17 +5,16 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour
 {
 	[Header("Script settings")]
-    [SerializeField] private GameObject player;
     [SerializeField] private GameObject bulletPrefab;
 	[SerializeField] private FlickerEffect flashEffect;
     [SerializeField] private GameObject deathBloodEffect;
     [SerializeField] private GameObject deathEffect;
 
-    [Header("Enemy settings")]
-	[Tooltip("Player object")]
+	[Header("Enemy settings")]
+	[Tooltip("target object")]
     [SerializeField] private float speed;
     [SerializeField] private float bulletSpeed;
-	[Tooltip("Distance from player")]
+	[Tooltip("Distance from target")]
     [SerializeField] private float distance;
     [Tooltip("Health")]
     [SerializeField] private FloatingHealthBar healthBar;
@@ -23,13 +22,17 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private float health;
 
 	[Header("Shooting settings")]
+	[Tooltip("min time between target change")]
+	[SerializeField] private float targetTimeMin;
+	[Tooltip("max time between target change")]
+	[SerializeField] private float targetTimeMax;
 	[Tooltip("min time between shots")]
 	[SerializeField] private float shootTimeMin;
 	[Tooltip("max time between shots")]
 	[SerializeField] private float shootTimeMax;
-	[Tooltip("min time between player tracking")]
+	[Tooltip("min time between target tracking")]
 	[SerializeField] private float trackTimeMin;
-	[Tooltip("max time between player tracking")]
+	[Tooltip("max time between target tracking")]
 	[SerializeField] private float trackTimeMax;
 
 	[Header("Movement settings")]
@@ -38,10 +41,13 @@ public class EnemyAI : MonoBehaviour
 	[Tooltip("max time between move")]
 	[SerializeField] private float moveTimeMax;
     
+    private GameObject target;
     private float err = 0.1f;
     private Rigidbody2D rb;
     private Vector2 pos0, pos1, p3;
     private Vector3 movePoint;
+    private bool targetWait = false;
+    private bool targetEnd = false;
 	private bool fireWait = false;
     private bool fireEnd = false;
 	private bool shootWait = false;
@@ -61,16 +67,34 @@ public class EnemyAI : MonoBehaviour
         // initialize heath
         health = maxHealth;
         healthBar.UpdateHealthBar(health, maxHealth);
+        
+        getNearTarget();
     }
 
     void Update() {
+
+        // ######## Find target section ########
+        if(!targetWait)  
+        {
+            float ranTime = Random.Range(targetTimeMin, targetTimeMax);
+            StartCoroutine(targetTimer(ranTime));
+        }
+
+        if(targetEnd)
+        {
+            getNearTarget();
+            targetWait = false;
+            targetEnd = false;
+        }
+        // ######## Shooting section ########
+
 		if(!shootWait) {
 			float ranTime = Random.Range(shootTimeMin, shootTimeMax);
             StartCoroutine(shootTimer(ranTime));
 		}
 
         if(shootEnd && !got) {
-            pos0 = new Vector2(player.transform.position.x, player.transform.position.y);
+            pos0 = new Vector2(target.transform.position.x, target.transform.position.y);
             //Debug.Log("Pos0: " + pos0);
             got = true;
         }
@@ -81,7 +105,8 @@ public class EnemyAI : MonoBehaviour
         }
 
         if(shootEnd && fireEnd) {
-            pos1 = new Vector2(player.transform.position.x, player.transform.position.y);
+            pos1 = new Vector2(target.transform.position.x, target.transform.position.y);
+
             //Debug.Log("Pos1: " + pos1);
 
             float len = Mathf.Sqrt(Mathf.Pow(pos1.x - pos0.x, 2.0f) + Mathf.Pow(pos1.y - pos0.y, 2.0f));
@@ -95,7 +120,7 @@ public class EnemyAI : MonoBehaviour
                 //Debug.Log("p3: " + p3);
             }
             else {
-                p3 = new Vector2(player.transform.position.x, player.transform.position.y);
+                p3 = new Vector2(target.transform.position.x, target.transform.position.y);
             }
 
             shoot();
@@ -107,13 +132,15 @@ public class EnemyAI : MonoBehaviour
             fireEnd = false;
         }
 
+        // ######## Moving section ########
+
         if(!moveWait) {
             float ranTime = Random.Range(moveTimeMin, moveTimeMax);
             StartCoroutine(moveTimer(ranTime));
         }
 
         if(moveEnd == true) {
-            movePoint = player.transform.position;
+            movePoint = target.transform.position;
             moveWait = false;
             moveEnd = false;
         }
@@ -121,12 +148,18 @@ public class EnemyAI : MonoBehaviour
         move();
     }
 
+    IEnumerator targetTimer(float time) {
+        targetWait = true;
+        yield return new WaitForSeconds(time);
+        targetEnd = true;
+    }
+    
     IEnumerator fireTimer(float time) {
         fireWait = true;
         yield return new WaitForSeconds(time);
         fireEnd = true;
-
     }
+
     IEnumerator shootTimer(float time) {
         shootWait = true;
         yield return new WaitForSeconds(time);
@@ -166,6 +199,20 @@ public class EnemyAI : MonoBehaviour
         else if(dist < distance - err) {
             rb.MovePosition(rb.position - direction * speed * Time.fixedDeltaTime);
         }
+    }
+
+    void getNearTarget()
+    {
+        float minDistance = 1000; 
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach(GameObject player in players) {
+            float newDistance = Vector3.Distance(transform.position, player.transform.position);
+            if(minDistance > newDistance)
+            {
+                minDistance = newDistance;   
+                target = player;
+            }
+        }   
     }
 
     public void TakeDamage(float damageAmount)
