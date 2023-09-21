@@ -268,9 +268,10 @@ GameObject:
   - component: {fileID: 7008040626429641762}
   - component: {fileID: 7285587706889356476}
   - component: {fileID: 4929914018072377804}
-  - component: {fileID: 4163801064345520926}
   - component: {fileID: 6241828811823403851}
   - component: {fileID: 1115717451322555964}
+  - component: {fileID: -4098895451582125093}
+  - component: {fileID: 3494615659638210743}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Enemy
@@ -439,35 +440,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &4163801064345520926
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6930945798686416454}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 686c3881d7c48894eb2e716901b85a93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  bulletPrefab: {fileID: 3281302208205954006, guid: 743fbc3adfed54d42a8a605617b7559b, type: 3}
-  flashEffect: {fileID: 6241828811823403851}
-  deathBloodEffect: {fileID: 3281302208205954006, guid: 86cade2636d3b9b4fa2002275f8d48b0, type: 3}
-  deathEffect: {fileID: 3281302208205954006, guid: 632a5953d8946274ebe763830b110bdc, type: 3}
-  speed: 2
-  bulletSpeed: 1.5
-  distance: 2
-  healthBar: {fileID: 0}
-  maxHealth: 2
-  health: 0
-  shootTimeMin: 2
-  shootTimeMax: 4
-  trackTimeMin: 2
-  trackTimeMax: 4
-  moveTimeMin: 2
-  moveTimeMax: 4
 --- !u!114 &6241828811823403851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -480,7 +452,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be26faf32a7bf1a4d95cf8c187df47a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flashMaterial: {fileID: 2100000, guid: d5b2dc7a030c787498765a2c302db770, type: 2}
+  whiteFlashMaterial: {fileID: 2100000, guid: abf334ba09f0698459291f5cdf6ac8f3, type: 2}
+  redFlashMaterial: {fileID: 2100000, guid: d5b2dc7a030c787498765a2c302db770, type: 2}
   duration: 0.125
 --- !u!114 &1115717451322555964
 MonoBehaviour:
@@ -499,6 +472,50 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0cb584cf82a4ab042ad914c004f1ea93, type: 2}
   - {fileID: 11400000, guid: a898c3daee7f4c44baf5fff04fbc5987, type: 2}
   - {fileID: 11400000, guid: fd90a7dfe1ffad14c9895b35589023ed, type: 2}
+--- !u!114 &-4098895451582125093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6930945798686416454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18678d415ae62754f8e788d0f08bc443, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 11400000, guid: 074b2fe239115e048980d0a87829673c, type: 2}
+  flickerEffect: {fileID: 6241828811823403851}
+  shootingType: 0
+  shootingTypeFunctions: {fileID: 3494615659638210743}
+  target: {fileID: 0}
+  err: 0.1
+  rb: {fileID: 0}
+  pos0: {x: 0, y: 0}
+  pos1: {x: 0, y: 0}
+  p3: {x: 0, y: 0}
+  movePoint: {x: 0, y: 0, z: 0}
+  targetWait: 0
+  targetEnd: 0
+  fireWait: 0
+  fireEnd: 0
+  shootWait: 0
+  shootEnd: 0
+  moveWait: 0
+  moveEnd: 0
+  got: 0
+--- !u!114 &3494615659638210743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6930945798686416454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2fc897a0c543174d81b7e142f867de2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7285269275629796739
 GameObject:
   m_ObjectHideFlags: 0

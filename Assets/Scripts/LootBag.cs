@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class LootBag : MonoBehaviour
 {
-    public GameObject droppedItemPrefab;
-    public List<LootSpawn> lootList = new List<LootSpawn>();
+    [SerializeField] private GameObject droppedItemPrefab;
+    [SerializeField] private List<LootSpawn> lootList = new List<LootSpawn>();
 
     private List<LootSpawn> GetDroppedItem()
     {
