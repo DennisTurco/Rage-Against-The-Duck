@@ -8,7 +8,6 @@ public class EnemyGeneric : ScriptableObject // ScriptableObject allows to work 
     [SerializeField] public Sprite entitySprite;
     [SerializeField] public GameObject bulletPrefab;
     //[SerializeField] public FlickerEffect flashEffect;
-    [SerializeField] public GameObject deathBloodEffect;
     [SerializeField] public GameObject deathEffect;
 
     [Header("Enemy settings")]
@@ -48,11 +47,10 @@ public class EnemyGeneric : ScriptableObject // ScriptableObject allows to work 
     [Tooltip("Notes")]
     [SerializeField] public string notes;
 
-    public EnemyGeneric(Sprite entitySprite, GameObject bulletPrefab, GameObject deathBloodEffect, GameObject deathEffect, float speed, float bulletSpeed, float distance, FloatingHealthBar healthBar, float maxHealth, float health, bool canShoot, ShootingType shootingType, float targetTimeMin, float targetTimeMax, float shootTimeMin, float shootTimeMax, float trackTimeMin, float trackTimeMax, float moveTimeMin, float moveTimeMax, string notes)
+    public EnemyGeneric(Sprite entitySprite, GameObject bulletPrefab, GameObject deathEffect, float speed, float bulletSpeed, float distance, FloatingHealthBar healthBar, float maxHealth, float health, bool canShoot, ShootingType shootingType, float targetTimeMin, float targetTimeMax, float shootTimeMin, float shootTimeMax, float trackTimeMin, float trackTimeMax, float moveTimeMin, float moveTimeMax, string notes)
     {
         this.entitySprite = entitySprite;
         this.bulletPrefab = bulletPrefab;
-        this.deathBloodEffect = deathBloodEffect;
         this.deathEffect = deathEffect;
         this.speed = speed;
         this.bulletSpeed = bulletSpeed;

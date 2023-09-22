@@ -20,12 +20,12 @@ public class EnemyAI : MonoBehaviour
     private ShootingType shootingType;
     private float targetTimeMin;
     private float targetTimeMax;
-    public float shootTimeMin;
-    public float shootTimeMax;
-    public float trackTimeMin;
-    public float trackTimeMax;
-    public float moveTimeMin;
-    public float moveTimeMax;
+    private float shootTimeMin;
+    private float shootTimeMax;
+    private float trackTimeMin;
+    private float trackTimeMax;
+    private float moveTimeMin;
+    private float moveTimeMax;
 
     private GameObject target;
     private float err = 0.1f;
@@ -269,7 +269,7 @@ public class EnemyAI : MonoBehaviour
 
         // Instantiate the death effect if it's assigned
         if (enemy.deathEffect != null) Instantiate(enemy.deathEffect, transform.position, Quaternion.identity);
-        if (enemy.deathBloodEffect != null) Instantiate(enemy.deathBloodEffect, transform.position, Quaternion.identity);
+        GetComponent<SpawnBlood>().InstantiateBloodObject(transform.position);
 
         Destroy(gameObject);
     }

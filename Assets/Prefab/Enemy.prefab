@@ -270,6 +270,7 @@ GameObject:
   - component: {fileID: 4929914018072377804}
   - component: {fileID: 6241828811823403851}
   - component: {fileID: 1115717451322555964}
+  - component: {fileID: 1685731593959563385}
   - component: {fileID: -4098895451582125093}
   - component: {fileID: 3494615659638210743}
   m_Layer: 7
@@ -472,6 +473,25 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0cb584cf82a4ab042ad914c004f1ea93, type: 2}
   - {fileID: 11400000, guid: a898c3daee7f4c44baf5fff04fbc5987, type: 2}
   - {fileID: 11400000, guid: fd90a7dfe1ffad14c9895b35589023ed, type: 2}
+--- !u!114 &1685731593959563385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6930945798686416454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed7c103e62a6ec24da2108376632926a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  droppedItemPrefab: {fileID: 401736280713094273, guid: d1e7691dc0790b649b3c954165253b7d, type: 3}
+  bloodList:
+  - {fileID: 21300000, guid: ca29d65db7507a04ab0b00301d9a6588, type: 3}
+  - {fileID: 21300000, guid: 23069e4251226a540a0a7665d04906dc, type: 3}
+  - {fileID: 21300000, guid: 4f782a584b7910d4b82cffe60d09e48f, type: 3}
+  - {fileID: 21300000, guid: e1deb25261161954e972d3925d483c7e, type: 3}
+  - {fileID: 21300000, guid: d49c473ab9d29b445b7bba1071d04931, type: 3}
 --- !u!114 &-4098895451582125093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -486,24 +506,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: 074b2fe239115e048980d0a87829673c, type: 2}
   flickerEffect: {fileID: 6241828811823403851}
-  shootingType: 0
   shootingTypeFunctions: {fileID: 3494615659638210743}
-  target: {fileID: 0}
-  err: 0.1
-  rb: {fileID: 0}
-  pos0: {x: 0, y: 0}
-  pos1: {x: 0, y: 0}
-  p3: {x: 0, y: 0}
-  movePoint: {x: 0, y: 0, z: 0}
-  targetWait: 0
-  targetEnd: 0
-  fireWait: 0
-  fireEnd: 0
-  shootWait: 0
-  shootEnd: 0
-  moveWait: 0
-  moveEnd: 0
-  got: 0
 --- !u!114 &3494615659638210743
 MonoBehaviour:
   m_ObjectHideFlags: 0
