@@ -11914,6 +11914,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coins: 0
   bombs: 10
+  minions: 0
   floatingTextManager: {fileID: 535773377}
   textStatMovementSpeed: {fileID: 1860111808}
   textStatAttackDamage: {fileID: 1250965186}
@@ -19401,7 +19402,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0cb584cf82a4ab042ad914c004f1ea93, type: 2}
   - {fileID: 11400000, guid: 0cb584cf82a4ab042ad914c004f1ea93, type: 2}
   - {fileID: 11400000, guid: 0cb584cf82a4ab042ad914c004f1ea93, type: 2}
-  - {fileID: 11400000, guid: a898c3daee7f4c44baf5fff04fbc5987, type: 2}
+  - {fileID: 11400000, guid: 2f1e3e5918a4ee448bff70eac3e3d67b, type: 2}
 --- !u!1 &1103309091
 GameObject:
   m_ObjectHideFlags: 0
@@ -21029,6 +21030,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 3281302208205954006, guid: ec95652038c0dd64aa804a6ff7c92131, type: 3}
   bombPrefab: {fileID: 9105111704107428658, guid: cbca4ba9f8fecd545a0cbe6cc7c1ad51, type: 3}
+  minionPrefab: {fileID: 6930945798686416454, guid: ad7e6c7032660824caa04c2f8521f4fc, type: 3}
   fireRate: 1
 --- !u!95 &1256453595
 Animator:
