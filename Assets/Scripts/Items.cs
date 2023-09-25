@@ -9,6 +9,7 @@ public class Items : MonoBehaviour, ICollectible
     private ItemCoin itemCoin;
     private ItemBomb itemBomb;
     private ItemHeart itemHeart;
+    private ItemMinion itemMinion;
 
     private void Start()
     {
@@ -16,6 +17,7 @@ public class Items : MonoBehaviour, ICollectible
         if (ItemName.Equals("coin")) itemCoin = gameObject.AddComponent<ItemCoin>();
         else if (ItemName.Equals("bomb")) itemBomb = gameObject.AddComponent<ItemBomb>();
         else if (ItemName.Equals("heart")) itemHeart = gameObject.AddComponent<ItemHeart>();
+        else if (ItemName.Equals("minion")) itemMinion = gameObject.AddComponent<ItemMinion>();
     }
 
     public void Collect()
@@ -31,6 +33,9 @@ public class Items : MonoBehaviour, ICollectible
 
         // collected a heart //TODO: block collecting if health bar is full
         else if (ItemName.Equals("heart")) itemHeart.CollectItemHeart();
+
+        // collected a minion
+        else if (ItemName.Equals("minion")) itemMinion.CollectItemMinion();
 
         else throw new ArgumentException("Item doesn't exist");
 
