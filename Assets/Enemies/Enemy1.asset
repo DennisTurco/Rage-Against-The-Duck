@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af945e918403fd84b8a69ef3566dfc49, type: 3}
   m_Name: Enemy1
   m_EditorClassIdentifier: 
-  entitySprite: {fileID: 0}
+  entitySprite: {fileID: 1133855312, guid: 9cc56fb924378344684c842681ba23b8, type: 3}
   bulletPrefab: {fileID: 3281302208205954006, guid: 743fbc3adfed54d42a8a605617b7559b, type: 3}
-  deathBloodEffect: {fileID: 3281302208205954006, guid: 86cade2636d3b9b4fa2002275f8d48b0, type: 3}
   deathEffect: {fileID: 3281302208205954006, guid: 632a5953d8946274ebe763830b110bdc, type: 3}
   speed: 2
   bulletSpeed: 1.5

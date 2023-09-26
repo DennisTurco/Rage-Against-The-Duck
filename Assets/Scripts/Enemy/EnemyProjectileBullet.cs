@@ -37,8 +37,7 @@ public class EnemyProjectileBullet : MonoBehaviour
             Debug.Log(1);
             barComponent.TakeDamage();
         }
-
-        	DestroyProjectile();
+        DestroyProjectile();
     }
 
     IEnumerator DeathDelay()

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ChestController : MonoBehaviour
@@ -21,6 +19,5 @@ public class ChestController : MonoBehaviour
             GetComponent<LootBag>().InstantiateLootSpawn(new Vector3(transform.position.x, transform.position.y - 1, 0));
             chestOpened = true;
         }
-
     }
 }

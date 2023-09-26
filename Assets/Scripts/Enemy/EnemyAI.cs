@@ -20,12 +20,12 @@ public class EnemyAI : MonoBehaviour
     private ShootingType shootingType;
     private float targetTimeMin;
     private float targetTimeMax;
-    public float shootTimeMin;
-    public float shootTimeMax;
-    public float trackTimeMin;
-    public float trackTimeMax;
-    public float moveTimeMin;
-    public float moveTimeMax;
+    private float shootTimeMin;
+    private float shootTimeMax;
+    private float trackTimeMin;
+    private float trackTimeMax;
+    private float moveTimeMin;
+    private float moveTimeMax;
 
     private GameObject target;
     private float err = 0.1f;
@@ -84,7 +84,6 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
-
         // ######## Find target section ########
         if (!targetWait)
         {
@@ -98,8 +97,8 @@ public class EnemyAI : MonoBehaviour
             targetWait = false;
             targetEnd = false;
         }
-        // ######## Shooting section ########
 
+        // ######## Shooting section ########
         if (canShoot)
         {
             if (!shootWait)
@@ -124,7 +123,6 @@ public class EnemyAI : MonoBehaviour
             if (shootEnd && fireEnd)
             {
                 pos1 = new Vector2(target.transform.position.x, target.transform.position.y);
-
                 //Debug.Log("Pos1: " + pos1);
 
                 float len = Mathf.Sqrt(Mathf.Pow(pos1.x - pos0.x, 2.0f) + Mathf.Pow(pos1.y - pos0.y, 2.0f));
@@ -269,7 +267,7 @@ public class EnemyAI : MonoBehaviour
 
         // Instantiate the death effect if it's assigned
         if (enemy.deathEffect != null) Instantiate(enemy.deathEffect, transform.position, Quaternion.identity);
-        if (enemy.deathBloodEffect != null) Instantiate(enemy.deathBloodEffect, transform.position, Quaternion.identity);
+        GetComponent<SpawnBlood>().InstantiateBloodObject(transform.position);
 
         Destroy(gameObject);
     }

@@ -1,19 +1,19 @@
 using System.Collections;
-using Unity.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
     [Header("Enemy Spawn Settings")]
     [SerializeField] private float spawnRate;
-    [SerializeField] private GameObject[] enemyPrefabs;
+    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private List<EnemyGeneric> enemies;
     [SerializeField] private bool canSpawn = true;
 
     [Header("Enemy Spawn Limits Settings")]
     [SerializeField] private bool enemyToSpawnLimit;
     [SerializeField] private int enemyToSpawn;
     [SerializeField] private int enemySpawned;
-
 
     // Start is called before the first frame update
     void Start()
@@ -22,29 +22,24 @@ public class EnemySpawner : MonoBehaviour
         StartCoroutine(Spawner());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private IEnumerator Spawner()
     {
         WaitForSeconds wait = new WaitForSeconds(spawnRate);
 
-        while (canSpawn && enemyPrefabs.Length > 0)
+        while (canSpawn && enemies.Count > 0)
         {
             if (enemyToSpawnLimit && enemySpawned >= enemyToSpawn)
             {
-                Debug.Log("DASIUGDIYJASGDIOYGASIOYDGASJHDGJHASGDJASHGDJYASG");
                 yield break;
             }
 
             yield return wait;
             
-            int rand = Random.Range(0, enemyPrefabs.Length);
-            GameObject enemy = enemyPrefabs[rand];
-            Instantiate(enemy, transform.position, Quaternion.identity);
+            int rand = Random.Range(0, enemies.Count);
+            GameObject enemyObject = Instantiate(enemyPrefab, transform.position, Quaternion.identity);
+            enemyObject.GetComponent<SpriteRenderer>().sprite = enemies[rand].entitySprite;
+            Debug.Log(enemies[rand].entitySprite.name);
+            Debug.Log(enemyObject.GetComponent<SpriteRenderer>().sprite.name);
             enemySpawned++;
 
             Debug.Log("Spawned An Enemy");
