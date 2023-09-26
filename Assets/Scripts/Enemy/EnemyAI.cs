@@ -84,7 +84,6 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
-
         // ######## Find target section ########
         if (!targetWait)
         {
@@ -98,8 +97,8 @@ public class EnemyAI : MonoBehaviour
             targetWait = false;
             targetEnd = false;
         }
-        // ######## Shooting section ########
 
+        // ######## Shooting section ########
         if (canShoot)
         {
             if (!shootWait)
@@ -124,7 +123,6 @@ public class EnemyAI : MonoBehaviour
             if (shootEnd && fireEnd)
             {
                 pos1 = new Vector2(target.transform.position.x, target.transform.position.y);
-
                 //Debug.Log("Pos1: " + pos1);
 
                 float len = Mathf.Sqrt(Mathf.Pow(pos1.x - pos0.x, 2.0f) + Mathf.Pow(pos1.y - pos0.y, 2.0f));

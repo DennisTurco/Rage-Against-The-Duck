@@ -486,6 +486,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   droppedItemPrefab: {fileID: 401736280713094273, guid: d1e7691dc0790b649b3c954165253b7d, type: 3}
+  imageTargetTransform: {fileID: 105683740874966777, guid: 2b6d82050c1c1c143b7faff2566cc65c, type: 3}
   bloodList:
   - {fileID: 21300000, guid: ca29d65db7507a04ab0b00301d9a6588, type: 3}
   - {fileID: 21300000, guid: 23069e4251226a540a0a7665d04906dc, type: 3}

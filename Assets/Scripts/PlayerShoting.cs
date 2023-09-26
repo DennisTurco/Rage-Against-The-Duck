@@ -25,7 +25,7 @@ public class PlayerShooting : MonoBehaviour
             else if (Input.GetButton("FireLeft")) Shoot(new Vector2(-1, 0).normalized);
             nextFire = fireRate;
         }
-        if (Input.GetButtonDown("Fire2") && nextFire <= 0 && GameManager.Instance.bombs > 0)
+        if (Input.GetButtonDown("ThrowBomb") && nextFire <= 0 && GameManager.Instance.bombs > 0)
         {
             ThrowBomb();
             nextFire = fireRate;
