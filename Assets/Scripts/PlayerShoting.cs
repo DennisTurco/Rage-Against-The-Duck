@@ -1,10 +1,12 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
 {
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private GameObject bombPrefab;
+    [SerializeField] private GameObject minionPrefab;
     [SerializeField] private float fireRate;
     private float nextFire;
 
@@ -33,6 +35,9 @@ public class PlayerShooting : MonoBehaviour
 
         if (nextFire > 0)
             nextFire -= Time.deltaTime;
+
+        if (GameManager.Instance.minions > 0)
+            GenerateMinion();
     }
 
     private void Shoot(Vector2 shootingDirection)
@@ -52,6 +57,15 @@ public class PlayerShooting : MonoBehaviour
         newBomb.name = "PlayerBomb";
 
         GameManager.Instance.bombs--;
+    }
+
+    private void GenerateMinion()
+    {
+        GameObject newMinion = Instantiate(minionPrefab, transform.position, Quaternion.identity);
+        newMinion.name = "PlayerMinion";
+        newMinion.GetComponent<PlayerMinion>().target = transform.gameObject;
+
+        GameManager.Instance.minions--;
     }
 
 }
