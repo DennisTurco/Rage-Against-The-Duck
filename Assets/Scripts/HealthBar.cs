@@ -14,6 +14,7 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private Sprite emptyHeart;
 
     [SerializeField] private FlickerEffect flashEffect;
+    [SerializeField] private DamageFlickerEffect damageFlashEffect;
 
     private void Start()
     {
@@ -61,10 +62,16 @@ public class HealthBar : MonoBehaviour
 
     public void TakeDamage()
     {
+        if (damageFlashEffect.IsFlashing())
+        {
+            return;
+        }
+
         health--;
 
         // flicker effect
         flashEffect.WhiteFlash();
+        damageFlashEffect.StartFlicker();
 
         if (health <= 0)
         {
