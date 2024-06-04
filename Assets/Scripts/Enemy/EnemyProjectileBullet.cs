@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyProjectileBullet : MonoBehaviour
@@ -36,8 +37,17 @@ public class EnemyProjectileBullet : MonoBehaviour
         {
             Debug.Log(1);
             barComponent.TakeDamage();
+            DestroyProjectile();
         }
-        DestroyProjectile();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.TryGetComponent<PlayerMinion>(out PlayerMinion minion))
+        {
+            minion.TakeDamage(1);
+            DestroyProjectile();
+        }
     }
 
     IEnumerator DeathDelay()
