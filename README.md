@@ -27,7 +27,6 @@ The project adhere to the semantic commit convention.
 
 - [@DennisTurco](https://www.github.com/DennisTurco)
 - [@Toghiri](https://www.github.com/Toghiti)
-- [@Zambodev](https://www.github.com/Zambodev)
 
 
 ## Support
