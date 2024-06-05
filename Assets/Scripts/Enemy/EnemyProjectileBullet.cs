@@ -37,8 +37,8 @@ public class EnemyProjectileBullet : MonoBehaviour
         {
             Debug.Log(1);
             barComponent.TakeDamage();
-            DestroyProjectile();
         }
+        DestroyProjectile();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -5776,7 +5776,7 @@ GameObject:
   - component: {fileID: 361883997}
   - component: {fileID: 361883999}
   - component: {fileID: 361883998}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: MagnetCollider
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -7182,6 +7182,10 @@ PrefabInstance:
     - target: {fileID: 6819185803252854951, guid: 72433410cf1f73848911f9df2bb0e442, type: 3}
       propertyPath: m_Name
       value: Target
+      objectReference: {fileID: 0}
+    - target: {fileID: 6819185803252854951, guid: 72433410cf1f73848911f9df2bb0e442, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12532,7 +12536,7 @@ GameObject:
   - component: {fileID: 977084344}
   - component: {fileID: 977084346}
   - component: {fileID: 977084345}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Particle System Dust
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21003,7 +21007,7 @@ GameObject:
   - component: {fileID: 1256453592}
   - component: {fileID: 1256453591}
   - component: {fileID: 1256453599}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -35474,7 +35478,7 @@ GameObject:
   - component: {fileID: 1964649640}
   - component: {fileID: 1964649642}
   - component: {fileID: 1964649643}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: CollectorCollider
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -35540,7 +35544,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.14364392, y: 0.34564322}
+  m_Offset: {x: -0.18167269, y: 0.52195835}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -35551,7 +35555,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.71271217, y: 0.90124476}
+  m_Size: {x: 1.079171, y: 1.4059899}
   m_EdgeRadius: 0
 --- !u!1001 &1968607049
 PrefabInstance:
@@ -35561,6 +35565,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 211805218123531919, guid: ecaf3d9332b42ee489aae6e9dc48efa1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 762668051687932175, guid: ecaf3d9332b42ee489aae6e9dc48efa1, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -35613,6 +35621,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3510899341134177945, guid: ecaf3d9332b42ee489aae6e9dc48efa1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3566873336981658775, guid: ecaf3d9332b42ee489aae6e9dc48efa1, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -35621,9 +35633,25 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5880374474057477867, guid: ecaf3d9332b42ee489aae6e9dc48efa1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6930945798686416454, guid: ecaf3d9332b42ee489aae6e9dc48efa1, type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6930945798686416454, guid: ecaf3d9332b42ee489aae6e9dc48efa1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7285269275629796739, guid: ecaf3d9332b42ee489aae6e9dc48efa1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8312049201758300087, guid: ecaf3d9332b42ee489aae6e9dc48efa1, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
