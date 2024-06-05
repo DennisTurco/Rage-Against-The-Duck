@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Items : MonoBehaviour, ICollectible
 {
-    [SerializeField] private string ItemName; 
+    [SerializeField] private string ItemName;
 
     private ItemCoin itemCoin;
     private ItemBomb itemBomb;
