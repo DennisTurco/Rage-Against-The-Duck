@@ -4,39 +4,25 @@ using UnityEngine;
 
 public class Spikes : MonoBehaviour
 {
-    // Lista di sprite per la trappola
     [SerializeField] private List<Sprite> sprites;
-
-    // Intervallo di tempo tra il cambio di sprite
     [SerializeField] private float swapinterval = 0.15f;
-
-    // Stato della trappola (attiva o non attiva)
     private bool trapActive;
-
-    // Tempo trascorso dall'ultimo cambio di sprite
     private float timeSinceLastSwap;
-
-    // Indice dello sprite corrente
     private int currentSpriteIndex = 0;
-
-    // Componente SpriteRenderer dell'oggetto
     private SpriteRenderer spriteRenderer;
-
-    // Lista dei collider all'interno del box di collisione della trappola
     private List<Collider2D> collidersInTrap = new List<Collider2D>();
-
-    // Lista temporanea dei collider da rimuovere
     private List<Collider2D> collidersToRemove = new List<Collider2D>();
+    private List<Collider2D> collidersToDamage = new List<Collider2D>();
 
     private void Start()
     {
-        // Inizializza la trappola come non attiva
+        // Initialize the trap as inactive
         trapActive = false;
 
-        // Ottieni il componente SpriteRenderer
+        // Get the SpriteRenderer component
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        // Imposta lo sprite iniziale se la lista degli sprite non è vuota
+        // Set the initial sprite if the sprite list is not empty
         if (sprites.Count > 0)
         {
             spriteRenderer.sprite = sprites[0];
@@ -45,14 +31,14 @@ public class Spikes : MonoBehaviour
 
     private void Update()
     {
-        // Incrementa il tempo trascorso dall'ultimo cambio di sprite
+        // Increment the time elapsed since the last sprite swap
         timeSinceLastSwap += Time.deltaTime;
 
-        // Mantieni lo stato precedente della trappola
+        // Keep track of the previous trap state
         bool wasTrapActive = trapActive;
 
-        // Aggiorna lo stato della trappola in base all'indice dello sprite
-        if (currentSpriteIndex == 2 || currentSpriteIndex == 3 || currentSpriteIndex == 4 || currentSpriteIndex == 5)
+        // Update the trap state based on the sprite index
+        if (currentSpriteIndex >= 2 && currentSpriteIndex <= 5)
         {
             trapActive = true;
         }
@@ -61,31 +47,38 @@ public class Spikes : MonoBehaviour
             trapActive = false;
         }
 
-        // Se la trappola diventa attiva, infliggi danno ai collider all'interno del box
+        // If the trap becomes active, inflict damage to the colliders within the box
         if (trapActive && !wasTrapActive)
         {
             foreach (var collider in collidersInTrap)
             {
-                // Se il collider è null, aggiungilo alla lista dei collider da rimuovere
                 if (collider == null)
                 {
                     collidersToRemove.Add(collider);
-                    continue;
                 }
+                else
+                {
+                    collidersToDamage.Add(collider);
+                }
+            }
 
-                // Infliggi danno se il collider ha un componente HealthBar
+            // Process damage after collecting colliders to avoid modifying the list during iteration
+            foreach (var collider in collidersToDamage)
+            {
                 if (collider.gameObject.TryGetComponent<HealthBar>(out HealthBar barComponent))
                 {
                     barComponent.TakeDamage();
                 }
-                // Infliggi danno se il collider ha un componente EnemyAI
                 else if (collider.gameObject.TryGetComponent<EnemyAI>(out EnemyAI AIbarComponent))
                 {
                     AIbarComponent.TakeDamage(1);
                 }
             }
 
-            // Rimuovi i collider nulli dalla lista dopo l'iterazione
+            // Clear the list of colliders to damage after processing
+            collidersToDamage.Clear();
+
+            // Remove null colliders from the list
             foreach (var collider in collidersToRemove)
             {
                 collidersInTrap.Remove(collider);
@@ -93,7 +86,7 @@ public class Spikes : MonoBehaviour
             collidersToRemove.Clear();
         }
 
-        // Cambia lo sprite se è trascorso l'intervallo di swap
+        // Swap the sprite if the swap interval has passed
         if (timeSinceLastSwap >= swapinterval)
         {
             timeSinceLastSwap = 0f;
@@ -101,43 +94,44 @@ public class Spikes : MonoBehaviour
         }
     }
 
-    // Metodo per cambiare lo sprite della trappola
+    // Method to change the trap sprite
     private void SwapSprite()
     {
         if (sprites.Count > 0)
         {
-            // Aggiorna l'indice dello sprite e imposta il nuovo sprite
+            // Update the sprite index and set the new sprite
             currentSpriteIndex = (currentSpriteIndex + 1) % sprites.Count;
             spriteRenderer.sprite = sprites[currentSpriteIndex];
         }
     }
 
-    // Metodo chiamato quando un oggetto entra nel box di collisione
+    // Method called when an object enters the collision box
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Aggiungi il collider alla lista se non è già presente
+        // Add the collider to the list if it's not already present
         if (!collidersInTrap.Contains(collision))
         {
             collidersInTrap.Add(collision);
         }
 
-        // Infliggi danno immediatamente se la trappola è attiva
-        if (collision.gameObject.TryGetComponent<HealthBar>(out HealthBar barComponent) && trapActive)
+        // Inflict immediate damage if the trap is active
+        if (trapActive)
         {
-            barComponent.TakeDamage();
-        }
-
-        // Infliggi danno all'enemy immediatamente se la trappola è attiva
-        else if (collision.gameObject.TryGetComponent<EnemyAI>(out EnemyAI AIbarComponent) && trapActive)
-        {
-            AIbarComponent.TakeDamage(1);
+            if (collision.gameObject.TryGetComponent<HealthBar>(out HealthBar barComponent))
+            {
+                barComponent.TakeDamage();
+            }
+            else if (collision.gameObject.TryGetComponent<EnemyAI>(out EnemyAI AIbarComponent))
+            {
+                AIbarComponent.TakeDamage(1);
+            }
         }
     }
 
-    // Metodo chiamato quando un oggetto esce dal box di collisione
+    // Method called when an object exits the collision box
     private void OnTriggerExit2D(Collider2D collision)
     {
-        // Rimuovi il collider dalla lista quando esce dal box di collisione
+        // Remove the collider from the list when it exits the collision box
         if (collidersInTrap.Contains(collision))
         {
             collidersInTrap.Remove(collision);

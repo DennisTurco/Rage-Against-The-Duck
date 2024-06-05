@@ -18,10 +18,9 @@ public class LootBag : MonoBehaviour
             }
         }
 
-        // founded a possible loot
+        // found a possible loot
         if (possibleLoot.Count > 0)
         {
-            //LootSpawn droppedItem = possibleLoot[Random.Range(0, possibleLoot.Count)];
             return possibleLoot;
         }
 
@@ -33,20 +32,30 @@ public class LootBag : MonoBehaviour
     {
         List<LootSpawn> droppedItems = GetDroppedItem();
 
-        if (droppedItems.Count == 0) return;
+        if (droppedItems == null || droppedItems.Count == 0) return;
 
         foreach (LootSpawn droppedItem in droppedItems)
         {
-            GameObject lootGameObject = Instantiate(droppedItemPrefab, spawnPosition, Quaternion.identity);
+            // Add a random offset to the spawn position
+            Vector3 randomOffset = new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), 0);
+            Vector3 itemPosition = spawnPosition + randomOffset;
+            GameObject lootGameObject = Instantiate(droppedItemPrefab, itemPosition, Quaternion.identity);
             lootGameObject.GetComponent<SpriteRenderer>().sprite = droppedItem.lootSprite;
 
-            // set custom name to prefab
+            // Set custom name to prefab
             lootGameObject.name = droppedItem.lootName;
 
-            /*float dropVelocity = 300f;
-            Vector2 dropDirection = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
-            lootGameObject.GetComponent<Rigidbody2D>().AddForce(dropDirection * dropVelocity, ForceMode2D.Impulse);*/
+            // Apply initial force to the object to "launch" it
+            Rigidbody2D rb = lootGameObject.GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                Vector2 launchDirection = new Vector2(Random.Range(-1f, 1f), Random.Range(0.5f, 1f)).normalized;
+                float launchForce = Random.Range(2f, 5f);
+                rb.AddForce(launchDirection * launchForce, ForceMode2D.Impulse);
+            }
+
+            // Ensure the object is assigned to the correct layer
+            lootGameObject.layer = LayerMask.NameToLayer("Item");
         }
     }
-
 }

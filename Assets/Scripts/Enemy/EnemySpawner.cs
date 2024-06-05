@@ -42,6 +42,9 @@ public class EnemySpawner : MonoBehaviour
             Debug.Log(enemyObject.GetComponent<SpriteRenderer>().sprite.name);
             enemySpawned++;
 
+            // Ensure the object is assigned to the correct layer
+            enemyObject.layer = LayerMask.NameToLayer("Enemy");
+
             Debug.Log("Spawned An Enemy");
         }
     }
