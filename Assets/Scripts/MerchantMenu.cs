@@ -2,16 +2,15 @@ using UnityEngine;
 
 public class MerchantMenu : MonoBehaviour
 {
-    // Start is called before the first frame update
+
     void Start()
     {
-        // Optionally, you can perform some initialization here if needed
+
     }
 
-    // Update is called once per frame
     void Update()
     {
-        // Optionally, you can perform some updates here if needed
+
     }
 
     public void BombTrade()

@@ -1,37 +1,39 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class Merchant : MonoBehaviour
 {
-    public static bool IsTradeMenuOpen = false;  // Variabile statica per controllare se il trade menu è aperto
+    public static bool IsTradeMenuOpen = false;  // Static variable to control if the trade menu is open
 
-    public DialogManager dialogManager;  // Riferimento al DialogManager
-    public GameObject tradeMenu;  // Riferimento al trade menu
-    private bool playerInRange = false;  // Flag per controllare se il player è nel collider
-    private bool dialogStarted = false;  // Flag per controllare se il dialogo è iniziato
-    private bool tradeMenuOpen = false;  // Flag per controllare se il trade menu è aperto
+    [SerializeField] private DialogManager dialogManager;  // Reference to the DialogManager
+    [SerializeField] private GameObject tradeMenu;  // Reference to the trade menu
+    [SerializeField] private GameObject InteractionMessage; // Reference to the interaction message
+    private bool playerInRange = false;  // Flag to check if the player is in the collider
+    private bool dialogStarted = false;  // Flag to check if the dialog has started
+    private bool tradeMenuOpen = false;  // Flag to check if the trade menu is open
+    private bool interactionMessageOpen = false;
 
     private void Start()
     {
-        // Cerca il DialogManager nella scena se non è assegnato manualmente
+        // Find the DialogManager in the scene if it's not assigned manually
         if (dialogManager == null)
         {
             dialogManager = FindObjectOfType<DialogManager>();
         }
 
-        // Assicurati di iscriverti all'evento di fine dialogo
+        // Make sure to subscribe to the end of dialog event
         if (dialogManager != null)
         {
             dialogManager.OnDialogEnd += OnDialogEnd;
         }
         else
         {
-            Debug.LogError("Riferimento al DialogManager non assegnato in Merchant.");
+            Debug.LogError("Reference to DialogManager not assigned in Merchant.");
         }
     }
 
     private void OnDestroy()
     {
-        // Ricorda di annullare l'iscrizione all'evento quando l'oggetto viene distrutto per evitare memory leaks
+        // Remember to unsubscribe from the event when the object is destroyed to avoid memory leaks
         if (dialogManager != null)
         {
             dialogManager.OnDialogEnd -= OnDialogEnd;
@@ -40,13 +42,25 @@ public class Merchant : MonoBehaviour
 
     private void Update()
     {
-        // Se il player è nel raggio d'azione e preme il tasto E, avvia il dialogo
+        // If the player is in range and presses the E key, start the dialog
         if (playerInRange && Input.GetKeyDown(KeyCode.E) && !dialogStarted && !tradeMenuOpen)
         {
             StartDialog();
         }
 
-        // Controlla se il trade menu è aperto e se viene premuto il tasto Esc, chiudilo
+        if (playerInRange && !interactionMessageOpen && !tradeMenuOpen && !dialogStarted)
+        {
+            InteractionMessage.SetActive(true);
+            interactionMessageOpen = true;
+        }
+
+        if (!playerInRange && interactionMessageOpen)
+        {
+            InteractionMessage.SetActive(false);
+            interactionMessageOpen = false;
+        }
+
+        // Check if the trade menu is open and if the Escape key is pressed, close it
         if (tradeMenuOpen && Input.GetKeyDown(KeyCode.Escape))
         {
             CloseTradeMenu();
@@ -56,11 +70,14 @@ public class Merchant : MonoBehaviour
 
     private void StartDialog()
     {
-        // Esegui il dialogo utilizzando il DialogManager
+        InteractionMessage.SetActive(false);
+        interactionMessageOpen = false;
+
+        // Execute the dialog using the DialogManager
         string[] sentences = new string[] {
-            "Benvenuto amico mio!",
-            "Come stai? Io sono Marciello.",
-            "Guarda cosa vendo o ti accoltello!"
+            "Welcome my friend!",
+            "How are you? I am Marciello.",
+            "See what I sell or I'll stab you!"
         };
         string speakerName = "MARCIELLO";
 
@@ -71,41 +88,41 @@ public class Merchant : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Riferimento al DialogManager non assegnato in Merchant.");
+            Debug.LogError("Reference to DialogManager not assigned in Merchant.");
         }
     }
 
-    // Metodo chiamato quando il dialogo finisce
+    // Method called when the dialog ends
     private void OnDialogEnd()
     {
         dialogStarted = false;
 
-        if (playerInRange)  // Controlla se il giocatore è ancora nell'area del merchant
+        if (playerInRange)  // Check if the player is still in the merchant's area
         {
             Time.timeScale = 0f;
             OpenTradeMenu();
         }
     }
 
-    // Metodo per aprire il trade menu
+    // Method to open the trade menu
     public void OpenTradeMenu()
     {
         if (tradeMenu != null)
         {
             tradeMenu.SetActive(true);
             tradeMenuOpen = true;
-            IsTradeMenuOpen = true;  // Imposta la variabile statica a true
+            IsTradeMenuOpen = true;  // Set the static variable to true
         }
     }
 
-    // Metodo per chiudere il trade menu
+    // Method to close the trade menu
     public void CloseTradeMenu()
     {
         if (tradeMenu != null)
         {
             tradeMenu.SetActive(false);
             tradeMenuOpen = false;
-            IsTradeMenuOpen = false;  // Imposta la variabile statica a false
+            IsTradeMenuOpen = false;  // Set the static variable to false
         }
     }
 
@@ -114,6 +131,7 @@ public class Merchant : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
+            Debug.Log("The player has entered the merchant collision area.");
         }
     }
 
@@ -122,6 +140,7 @@ public class Merchant : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
+            Debug.Log("The player left the merchant collision area.");
         }
     }
 }
