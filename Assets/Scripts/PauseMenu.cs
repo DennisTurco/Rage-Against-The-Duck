@@ -15,6 +15,11 @@ public class PauseMenu : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape) && GameManager.Instance.GameisOver == false)
         {
             Debug.Log("Escape key was pressed");
+            if (Merchant.IsTradeMenuOpen)  // Controlla se il trade menu è aperto
+            {
+                return;  // Non fare nulla se il trade menu è aperto
+            }
+
             if (IsPaused)
             {
                 Resume();

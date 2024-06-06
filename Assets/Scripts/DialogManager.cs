@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class DialogManager : MonoBehaviour
 {
@@ -17,6 +16,8 @@ public class DialogManager : MonoBehaviour
     // Evento per notificare quando il dialogo è terminato
     public event System.Action OnDialogEnd;
 
+    private bool isDialogActive = false; // Flag per verificare se il dialogo è attivo
+
     private void Start()
     {
         sentences = new Queue<string>();
@@ -26,7 +27,7 @@ public class DialogManager : MonoBehaviour
     private void Update()
     {
         // Controlla se il mouse è stato cliccato o se c'è un tocco sullo schermo
-        if (Input.GetMouseButtonDown(0))
+        if (isDialogActive && Input.GetMouseButtonDown(0))
         {
             DisplayNextSentence();
         }
@@ -46,6 +47,7 @@ public class DialogManager : MonoBehaviour
             sentences.Enqueue(sentence);
         }
 
+        isDialogActive = true; // Imposta la flag come attiva
         DisplayNextSentence();
     }
 
@@ -78,6 +80,7 @@ public class DialogManager : MonoBehaviour
     private void EndDialog()
     {
         dialogBox.SetActive(false);  // Nascondi la dialog box
+        isDialogActive = false; // Imposta la flag come inattiva
         OnDialogEnd?.Invoke();  // Notifica che il dialogo è terminato
     }
 }
