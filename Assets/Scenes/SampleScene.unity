@@ -2466,7 +2466,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 146094993}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ddab54cc237eff54d8dba656ce8907f2, type: 3}
+  m_Script: {fileID: 11500000, guid: d1ddc4a7b87b93f44ac237211bf06dc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   coinText: {fileID: 146094995}
@@ -7899,7 +7899,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 535859043}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d708a6602bc2fc45be8709ec3cc4ab3, type: 3}
+  m_Script: {fileID: 11500000, guid: 57b5df9891c259a49bffbd86c29a624d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bombText: {fileID: 535859045}
@@ -20852,6 +20852,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d22b3ed5f0f1c44d9ca2ebbc30278f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
+  hasTarget: 0
+  targetPosition: {x: 0, y: 0, z: 0}
   moveSpeed: 5
 --- !u!114 &1066024173
 MonoBehaviour:
@@ -21225,9 +21228,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   droppedItemPrefab: {fileID: 2047354416297464723, guid: 81ba164704b601c4faa3a65651e4a388, type: 3}
   lootList:
-  - {fileID: 11400000, guid: 0cb584cf82a4ab042ad914c004f1ea93, type: 2}
-  - {fileID: 11400000, guid: 0cb584cf82a4ab042ad914c004f1ea93, type: 2}
-  - {fileID: 11400000, guid: 0cb584cf82a4ab042ad914c004f1ea93, type: 2}
+  - {fileID: 11400000, guid: a898c3daee7f4c44baf5fff04fbc5987, type: 2}
+  - {fileID: 11400000, guid: a898c3daee7f4c44baf5fff04fbc5987, type: 2}
+  - {fileID: 11400000, guid: fd90a7dfe1ffad14c9895b35589023ed, type: 2}
   - {fileID: 11400000, guid: 2f1e3e5918a4ee448bff70eac3e3d67b, type: 2}
 --- !u!1 &1103309091
 GameObject:
@@ -39515,7 +39518,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1964649640}
-  - component: {fileID: 1964649642}
+  - component: {fileID: 1964649644}
   - component: {fileID: 1964649643}
   m_Layer: 8
   m_Name: CollectorCollider
@@ -39539,18 +39542,6 @@ Transform:
   m_Father: {fileID: 1256453590}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1964649642
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1964649639}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c680b0dd4c1a6fe4da96b050b9b854a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &1964649643
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -39596,6 +39587,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.85034096, y: 0.94454896}
   m_EdgeRadius: 0
+--- !u!114 &1964649644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964649639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6f8a07ab1190ce478c3b4c297bc713b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1968607049
 PrefabInstance:
   m_ObjectHideFlags: 0

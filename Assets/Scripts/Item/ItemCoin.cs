@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ItemCoin : MonoBehaviour
 {
-    public static event Action OnCoinCollected;
+    public static event Action UpdateCoinText;
 
     private Rigidbody2D rb;
     private bool hasTarget;
@@ -12,8 +12,14 @@ public class ItemCoin : MonoBehaviour
 
     public void CollectItemCoin()
     {
-        OnCoinCollected?.Invoke();
         GameManager.Instance.coins++;
+        UpdateCoinText?.Invoke();
+    }
+
+    public static void UseItemCoin(int coins)
+    {
+        GameManager.Instance.coins -= coins;
+        UpdateCoinText?.Invoke();
     }
 
     private void Awake()

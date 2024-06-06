@@ -56,7 +56,7 @@ public class PlayerShooting : MonoBehaviour
         GameObject newBomb = Instantiate(bombPrefab, transform.position, Quaternion.identity);
         newBomb.name = "PlayerBomb";
 
-        GameManager.Instance.bombs--;
+        ItemBomb.UseItemBomb();
     }
 
     private void GenerateMinion()
