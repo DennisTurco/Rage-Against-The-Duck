@@ -2,17 +2,6 @@ using UnityEngine;
 
 public class MerchantMenu : MonoBehaviour
 {
-
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-
-    }
-
     public void BombTrade()
     {
         int bombCost = 3;
@@ -21,8 +10,8 @@ public class MerchantMenu : MonoBehaviour
         if (GameManager.Instance.coins >= bombCost)
         {
             // Deduct coins and add a bomb
-            GameManager.Instance.coins -= bombCost;
-            GameManager.Instance.bombs += 1;
+            ItemCoin.UseItemCoin(bombCost);
+            new ItemBomb().CollectItemBomb();
 
             Debug.Log("The player traded 3 coins for a bomb.");
             Debug.Log("Coins left: " + GameManager.Instance.coins);

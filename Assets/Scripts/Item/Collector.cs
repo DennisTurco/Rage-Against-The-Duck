@@ -10,8 +10,8 @@ public class Collector : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // facendo il controllo direttamente sull'interfaccia, mi evito 300 if-else per il controllo sulla collisione di ogni singolo oggetto
         ICollectible collectible = collision.GetComponent<ICollectible>();
-         
         if(collectible != null)
         {
             collectible.Collect();
