@@ -33,10 +33,10 @@ public class EnemyProjectileBullet : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // Player to take damage
-        if (collision.gameObject.TryGetComponent<HealthBar>(out HealthBar barComponent))
+        if (collision.gameObject.TryGetComponent<PlayerHealth>(out PlayerHealth playerHealth))
         {
             Debug.Log(1);
-            barComponent.TakeDamage();
+            playerHealth.TakeDamage();
         }
         DestroyProjectile();
     }

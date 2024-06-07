@@ -37,7 +37,7 @@ public class PlayerProjectileBomb : MonoBehaviour
             foreach (var hitCollider in hitColliders)
             {
                 var enemy = hitCollider.GetComponent<EnemyAI>();
-                var player = hitCollider.GetComponent<HealthBar>();
+                var player = hitCollider.GetComponent<PlayerHealth>();
                 if (enemy)
                 {
                     var closestPoint = hitCollider.ClosestPoint(transform.position);
@@ -48,7 +48,7 @@ public class PlayerProjectileBomb : MonoBehaviour
                     Debug.Log("Bomb damage: " + damagePercent * damage);
                 }
                 else if (player)
-                {
+                { 
                     player.TakeDamage();
                 }
             }

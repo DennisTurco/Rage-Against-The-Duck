@@ -7,7 +7,7 @@ public class ItemHeart : MonoBehaviour
 
     public void CollectItemHeart()
     {
+        //GameManager.Instance.AddHeart();
         OnHeartCollected?.Invoke();
-        GameManager.Instance.AddHeart();
     }
 }

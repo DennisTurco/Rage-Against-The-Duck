@@ -1,88 +1,69 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    [SerializeField] private int health = 100;
-    [SerializeField] private int numOfHearts;
+    [SerializeField] private GameObject heartPrefab;
+    [SerializeField] PlayerHealth playerHealth;
+    private List<HealthHeart> hearts = new List<HealthHeart>();
 
-    [SerializeField] private Image[] hearts;
-    [SerializeField] private Sprite fullHeart;
-    [SerializeField] private Sprite halfHeart;
-    [SerializeField] private Sprite emptyHeart;
+    private void OnEnable()
+    {
+        PlayerHealth.OnPlayerDamage += DrawHearts;
+    }
 
-    [SerializeField] private FlickerEffect flashEffect;
-    [SerializeField] private DamageFlickerEffect damageFlashEffect;
+    private void OnDisable()
+    {
+        PlayerHealth.OnPlayerDamage -= DrawHearts;
+    }
 
     private void Start()
     {
-        GameManager.Instance.SetHearthBarComponent(this);
+        DrawHearts();
     }
 
-    private void Update()
+    public void DrawHearts()
     {
-        if (health > numOfHearts) 
+        // if my health is 8, i have to draw 4 hearts
+
+        ClearHearts();
+
+        // determine how many hearts to make total
+        //based off the max health
+        float maxHealthRemainder = playerHealth.maxHealth % 2;
+        int heartsToMake = (int)((playerHealth.maxHealth / 2) + maxHealthRemainder);
+        for  (int i = 0; i < heartsToMake; ++i)
         {
-            health = numOfHearts;
+            CreateEmptyHeart();
         }
 
-        for (int i = 0; i < hearts.Length; i++)
+        for (int i = 0; i < hearts.Count; ++i)
         {
-            // set a fullHeart or a emptyHeart
-            if (i < health) 
-            {
-                hearts[i].sprite = fullHeart;
-            } else
-            {
-                hearts[i].sprite = emptyHeart;
-            }
-
-            // in this way you can show the number (hearts.Lenght) of hearts visible
-            if (i < numOfHearts)
-            {
-                hearts[i].enabled = true;
-            } else 
-            {
-                hearts[i].enabled = false;
-            }
+            int heartStatusRemainder = (int)Mathf.Clamp(playerHealth.health - (i * 2), 0, 2);
+            hearts[i].SetHeartImage((HeartStatus)heartStatusRemainder);
         }
     }
 
-    public void AddHeart()
+    public void CreateEmptyHeart()
     {
-        if (health == numOfHearts)
-        {
-            numOfHearts++;
-            health = numOfHearts;
-        }
-        else health++;
+        GameObject newHeart = Instantiate(heartPrefab);
+        newHeart.transform.SetParent(transform);
+
+        HealthHeart heartComponent = newHeart.GetComponent<HealthHeart>();
+        heartComponent.SetHeartImage(HeartStatus.Empty);
+        hearts.Add(heartComponent);
     }
 
-    public void TakeDamage()
+    // method that allows to remove all the heart game object under the HealthBar object
+    public void ClearHearts()
     {
-        if (damageFlashEffect.IsFlashing())
+        foreach (Transform t in transform)
         {
-            return;
+            Destroy(t.gameObject);
         }
-
-        health--;
-
-        // flicker effect
-        flashEffect.WhiteFlash();
-        damageFlashEffect.StartFlicker();
-
-        if (health <= 0)
-        {
-            PlayerDied();
-        }
+        hearts = new List<HealthHeart>();
     }
 
-    private void PlayerDied()
-    {
-        hearts[0].sprite = emptyHeart; //TODO: find another way
-        GameManager.Instance.GameOver();
-        gameObject.SetActive(false);
-    }
+
 }
