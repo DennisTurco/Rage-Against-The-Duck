@@ -10,12 +10,12 @@ public class HealthBar : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerHealth.OnPlayerDamage += DrawHearts;
+        PlayerHealth.UpdateHealthHeartBar += DrawHearts;
     }
 
     private void OnDisable()
     {
-        PlayerHealth.OnPlayerDamage -= DrawHearts;
+        PlayerHealth.UpdateHealthHeartBar -= DrawHearts;
     }
 
     private void Start()
@@ -23,10 +23,9 @@ public class HealthBar : MonoBehaviour
         DrawHearts();
     }
 
+    // if my health is 8, i have to draw 4 hearts
     public void DrawHearts()
     {
-        // if my health is 8, i have to draw 4 hearts
-
         ClearHearts();
 
         // determine how many hearts to make total
