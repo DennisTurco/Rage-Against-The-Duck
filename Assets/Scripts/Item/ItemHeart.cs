@@ -3,11 +3,16 @@ using UnityEngine;
 
 public class ItemHeart : MonoBehaviour
 {
+    public static event Action CanCollectHearts;
     public static event Action OnHeartCollected;
 
     public void CollectItemHeart()
     {
         OnHeartCollected?.Invoke();
-        GameManager.Instance.AddHeart();
+    }
+
+    public bool CanCollectHeart()
+    {
+        return Heart.CanCollectHearts();
     }
 }

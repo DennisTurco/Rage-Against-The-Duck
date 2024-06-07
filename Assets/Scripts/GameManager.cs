@@ -61,17 +61,6 @@ public class GameManager : MonoBehaviour
         cameraShake.StartShake(duration, magnitude);
     }
 
-    public void SetHearthBarComponent(HealthBar healthBar)
-    {
-        this.healthBar = healthBar;
-    }
-
-    // add new heart
-    public void AddHeart()
-    {
-        healthBar.AddHeart();
-    }
-
     // ############################# Stats
 
     public void SetMovementsSpeed(float movementSpeed)

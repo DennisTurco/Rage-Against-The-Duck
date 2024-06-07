@@ -65,9 +65,9 @@ public class Spikes : MonoBehaviour
             // Process damage after collecting colliders to avoid modifying the list during iteration
             foreach (var collider in collidersToDamage)
             {
-                if (collider.gameObject.TryGetComponent<HealthBar>(out HealthBar barComponent))
+                if (collider.gameObject.TryGetComponent<PlayerHealth>(out PlayerHealth playerHealth))
                 {
-                    barComponent.TakeDamage();
+                    playerHealth.TakeDamage();
                 }
                 else if (collider.gameObject.TryGetComponent<EnemyAI>(out EnemyAI AIbarComponent))
                 {
@@ -117,9 +117,9 @@ public class Spikes : MonoBehaviour
         // Inflict immediate damage if the trap is active
         if (trapActive)
         {
-            if (collision.gameObject.TryGetComponent<HealthBar>(out HealthBar barComponent))
+            if (collision.gameObject.TryGetComponent<PlayerHealth>(out PlayerHealth playerHealth))
             {
-                barComponent.TakeDamage();
+                playerHealth.TakeDamage();
             }
             else if (collision.gameObject.TryGetComponent<EnemyAI>(out EnemyAI AIbarComponent))
             {
