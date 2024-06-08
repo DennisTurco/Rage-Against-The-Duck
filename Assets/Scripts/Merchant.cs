@@ -6,11 +6,10 @@ public class Merchant : MonoBehaviour
 
     [SerializeField] private DialogManager dialogManager;  // Reference to the DialogManager
     [SerializeField] private GameObject tradeMenu;  // Reference to the trade menu
-    [SerializeField] private GameObject InteractionMessage; // Reference to the interaction message
+    [SerializeField] private IteratableMessage InteractableText;
     private bool playerInRange = false;  // Flag to check if the player is in the collider
     private bool dialogStarted = false;  // Flag to check if the dialog has started
     private bool tradeMenuOpen = false;  // Flag to check if the trade menu is open
-    private bool interactionMessageOpen = false;
 
     private void Start()
     {
@@ -48,16 +47,19 @@ public class Merchant : MonoBehaviour
             StartDialog();
         }
 
-        if (playerInRange && !interactionMessageOpen && !tradeMenuOpen && !dialogStarted)
+        if (InteractableText != null && playerInRange && !InteractableText.interactionMessageOpen && !tradeMenuOpen && !dialogStarted)
         {
-            InteractionMessage.SetActive(true);
-            interactionMessageOpen = true;
+            InteractableText.SetTextVisible();
         }
 
-        if (!playerInRange && interactionMessageOpen)
+        if (InteractableText != null && !playerInRange && InteractableText.interactionMessageOpen)
         {
-            InteractionMessage.SetActive(false);
-            interactionMessageOpen = false;
+            InteractableText.SetTextInvisible();
+        }
+
+        if (InteractableText != null && InteractableText.interactionMessageOpen)
+        {
+            InteractableText.PositionInteractionMessage();
         }
 
         // Check if the trade menu is open and if the Escape key is pressed, close it
@@ -70,8 +72,10 @@ public class Merchant : MonoBehaviour
 
     private void StartDialog()
     {
-        InteractionMessage.SetActive(false);
-        interactionMessageOpen = false;
+        if (InteractableText != null)
+        {
+            InteractableText.SetTextInvisible();
+        }
 
         // Execute the dialog using the DialogManager
         string[] sentences = new string[] {
