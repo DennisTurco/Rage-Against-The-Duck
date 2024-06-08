@@ -38,8 +38,6 @@ public class EnemySpawner : MonoBehaviour
             int rand = Random.Range(0, enemies.Count);
             GameObject enemyObject = Instantiate(enemyPrefab, transform.position, Quaternion.identity);
             enemyObject.GetComponent<SpriteRenderer>().sprite = enemies[rand].entitySprite;
-            Debug.Log(enemies[rand].entitySprite.name);
-            Debug.Log(enemyObject.GetComponent<SpriteRenderer>().sprite.name);
             enemySpawned++;
 
             // Ensure the object is assigned to the correct layer

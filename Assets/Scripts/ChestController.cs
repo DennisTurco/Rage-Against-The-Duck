@@ -2,9 +2,8 @@ using UnityEngine;
 
 public class ChestController : MonoBehaviour
 {
-    [SerializeField] private GameObject InteractionMessage;
+    [SerializeField] private IteratableMessage InteractableText;
     private bool playerInRange = false;
-    private bool interactionMessageOpen = false;
     private bool chestOpened;
 
     private void Start()
@@ -16,37 +15,30 @@ public class ChestController : MonoBehaviour
     {
         if (playerInRange && Input.GetKeyDown(KeyCode.E) && !chestOpened)
         {
-            if (!chestOpened) 
-            {
-                OpenChest();
-                chestOpened = true;
-                InteractionMessage.SetActive(false);
-                interactionMessageOpen = false;
-            }
-            else
-            {
-                Debug.Log("The chest har altready been opened");
-                return;
-            }
-                
+            OpenChest();
         }
 
-        if (playerInRange && !interactionMessageOpen && !chestOpened)
+        if (InteractableText != null && playerInRange && !InteractableText.interactionMessageOpen && !chestOpened)
         {
-            InteractionMessage.SetActive(true);
-            interactionMessageOpen = true;
+            InteractableText.SetTextVisible();
         }
 
-        if (!playerInRange && interactionMessageOpen)
+        if (InteractableText != null && !playerInRange && InteractableText.interactionMessageOpen)
         {
-            InteractionMessage.SetActive(false);
-            interactionMessageOpen = false;
+            InteractableText.SetTextInvisible();
+        }
+
+        if (InteractableText != null && InteractableText.interactionMessageOpen)
+        {
+            InteractableText.PositionInteractionMessage();
         }
     }
 
     private void OpenChest()
     {
-            GetComponent<LootBag>().InstantiateLootSpawn(new Vector3(transform.position.x, transform.position.y - 1, 0));
+        chestOpened = true;
+        GetComponent<LootBag>().InstantiateLootSpawn(new Vector3(transform.position.x, transform.position.y - 1, 0));
+        InteractableText.SetTextInvisible();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
