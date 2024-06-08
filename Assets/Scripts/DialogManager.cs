@@ -27,7 +27,7 @@ public class DialogManager : MonoBehaviour
     private void Update()
     {
         // Controlla se il mouse è stato cliccato o se c'è un tocco sullo schermo
-        if (isDialogActive && Input.GetMouseButtonDown(0))
+        if (isDialogActive && (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.E)))
         {
             DisplayNextSentence();
         }

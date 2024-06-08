@@ -40705,8 +40705,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46bbe462339e1554eb8320c099792f32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InteractionMessage: {fileID: 0}
-  canvas: {fileID: 0}
+  InteractionMessage: {fileID: 2121696113}
+  canvas: {fileID: 1132979612}
   interactionMessageOpen: 0
 --- !u!4 &2027945726 stripped
 Transform:
@@ -41522,7 +41522,7 @@ GameObject:
   - component: {fileID: 2121696116}
   - component: {fileID: 2121696115}
   m_Layer: 0
-  m_Name: InteractionMessage
+  m_Name: IteratableMessage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
