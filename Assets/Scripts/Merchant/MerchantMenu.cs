@@ -116,7 +116,7 @@ public class MerchantMenu : MonoBehaviour
 
         for (int i = 0; i < tradeOptions.Count; i++)
         {
-            texts[i].text = $"trade x {tradeOptions[i].coinCost} coins for x {tradeOptions[i].itemQuantity} {tradeOptions[i].ItemName.ToString()}";
+            texts[i].text = $"{tradeOptions[i].coinCost} Coins for {tradeOptions[i].itemQuantity} {tradeOptions[i].ItemName.ToString()}";
         }
 
         int playerCoins = GameManager.Instance.coins;

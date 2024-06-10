@@ -28,7 +28,7 @@ public class IteratableMessage : MonoBehaviour
     public void PositionInteractionMessage()
     {
         // Adjust the Y offset as needed to position the message above the chest
-        float yOffset = 40f; // Adjust based on UI requirements
+        float yOffset = 33f; // Adjust based on UI requirements
         Vector3 worldPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         Vector3 screenPosition = Camera.main.WorldToScreenPoint(worldPosition);
 
