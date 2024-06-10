@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e09f054637722f24786b2c688ea4514f, type: 3}
   m_Name: ScamTrade
   m_EditorClassIdentifier: 
-  id: 1
   coinCost: 2
   itemQuantity: 1
-  probability: 0
+  probability: 1
   discount: 0
+  limited: 0
+  limitTimesPurchese: 0
   ItemName: 0

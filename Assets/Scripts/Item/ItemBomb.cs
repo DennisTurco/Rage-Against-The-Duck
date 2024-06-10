@@ -11,6 +11,12 @@ public class ItemBomb : MonoBehaviour
         UpdateBombText?.Invoke();
     }
 
+    public static void CollectItemBomb(int bombs)
+    {
+        GameManager.Instance.bombs += bombs;
+        UpdateBombText?.Invoke();
+    }
+
     public static void UseItemBomb()
     {
         GameManager.Instance.bombs--;

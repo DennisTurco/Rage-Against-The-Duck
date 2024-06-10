@@ -1,24 +1,26 @@
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using System.Collections.Generic;
+using System.Linq;
 
 public class MerchantMenu : MonoBehaviour
 {
     [SerializeField] private List<TradeOption> tradeOptions;
     [SerializeField] private List<GameObject> trades;
-    
+
     private List<TextMeshProUGUI> texts;
     private List<Button> tradeButtons;
+    private Dictionary<TradeOption, int> selectedOptions = new Dictionary<TradeOption, int>(); // the second value rappresent the purchaseCount for that option
 
     private void Awake()
     {
         tradeButtons = new List<Button>();
         texts = new List<TextMeshProUGUI>();
 
-        foreach (var trade in trades)
+        for (int i = 0; i < trades.Count; i++)
         {
-            Transform buttonTransform = trade.transform.Find("TradeButton");
+            Transform buttonTransform = trades[i].transform.Find("TradeButton");
             if (buttonTransform != null)
             {
                 Button tradeButton = buttonTransform.GetComponent<Button>();
@@ -28,7 +30,7 @@ public class MerchantMenu : MonoBehaviour
                 }
             }
 
-            Transform textTransform = trade.transform.Find("Description");
+            Transform textTransform = trades[i].transform.Find("Description");
             if (textTransform != null)
             {
                 TextMeshProUGUI text = textTransform.GetComponent<TextMeshProUGUI>();
@@ -39,14 +41,17 @@ public class MerchantMenu : MonoBehaviour
             }
         }
 
-        if (tradeOptions.Count != texts.Count)
+        if (tradeOptions.Count < 3)
         {
-            Debug.LogError("Mismatch between the number of trade options and text components!");
+            Debug.LogError("Not enough trade options to select 3!");
+            return;
         }
 
-        if (tradeOptions.Count != tradeButtons.Count)
+        SelectTradeOptions();
+
+        if (selectedOptions.Count != 3)
         {
-            Debug.LogError("Mismatch between the number of trade options and button components!");
+            Debug.LogError("Failed to select 3 trade options!");
         }
     }
 
@@ -60,71 +65,135 @@ public class MerchantMenu : MonoBehaviour
         Merchant.UpdateTrade -= UpdateTradeButtons;
     }
 
-    public void ExecuteTradeById(int id)
+    private void SelectTradeOptions()
     {
-        TradeOption tradeOption = tradeOptions.Find(option => option.id == id);
-        if (tradeOption != null)
+        selectedOptions.Clear();
+        List<TradeOption> availableOptions = new List<TradeOption>(tradeOptions);
+
+        for (int i = 0; i < 3; i++)
         {
-            ExecuteTrade(tradeOption);
+            TradeOption selectedOption = GetRandomOptionBasedOnProbability(availableOptions);
+            if (selectedOption != null)
+            {
+                Debug.Log($"Selected Trade Option: {selectedOption.itemName} with probability {selectedOption.probability}");
+                selectedOptions.Add(selectedOption, 0); // Inizializza il conteggio degli acquisti a 0
+                availableOptions.Remove(selectedOption);
+            }
         }
+
+        Debug.Log($"Selected Options Count: {selectedOptions.Count}");
+    }
+
+    private TradeOption GetRandomOptionBasedOnProbability(List<TradeOption> options)
+    {
+        float totalProbability = 0f;
+        foreach (TradeOption option in options)
+        {
+            totalProbability += option.probability;
+        }
+
+        float randomPoint = Random.value * totalProbability;
+        Debug.Log($"Random Point: {randomPoint} / Total Probability: {totalProbability}");
+
+        foreach (TradeOption option in options)
+        {
+            if (randomPoint < option.probability)
+            {
+                return option;
+            }
+            else
+            {
+                randomPoint -= option.probability;
+            }
+        }
+
+        return null;
+    }
+
+    public void ExecuteTradeByIndex(int index)
+    {
+        if (index < 0 || index >= selectedOptions.Count)
+        {
+            return;
+        }
+
+        TradeOption tradeOption = selectedOptions.Keys.ElementAt(index);
+        ExecuteTrade(tradeOption);
     }
 
     private void ExecuteTrade(TradeOption tradeOption)
     {
         int playerCoins = GameManager.Instance.coins;
-        if (playerCoins >= tradeOption.coinCost)
+        int effectiveCost = Mathf.RoundToInt(tradeOption.coinCost * (1 - tradeOption.discount)); // Apply discount
+
+        if (selectedOptions.TryGetValue(tradeOption, out int purchaseCount)) // Ottieni il conteggio degli acquisti per l'opzione selezionata
         {
-            ItemCoin.UseItemCoin(tradeOption.coinCost);
-            for (int i = 0; i < tradeOption.itemQuantity; i++)
+            if (tradeOption.limited && purchaseCount >= tradeOption.limitTimesPurchase)
             {
-                switch(tradeOption.ItemName) {
+                Debug.Log("Purchase limit reached for this item.");
+                return;
+            }
+
+            if (playerCoins >= effectiveCost)
+            {
+                ItemCoin.UseItemCoin(effectiveCost);
+
+                switch (tradeOption.itemName)
+                {
                     case ItemName.Coin:
-                        new ItemCoin().CollectItemCoin();
+                        ItemCoin.CollectItemCoin(tradeOption.itemQuantity);
                         break;
                     case ItemName.Bomb:
-                        new ItemBomb().CollectItemBomb();
+                        ItemBomb.CollectItemBomb(tradeOption.itemQuantity);
                         break;
                     case ItemName.Minion:
-                        new ItemMinion().CollectItemMinion();
+                        ItemMinion.CollectItemMinion(tradeOption.itemQuantity);
                         break;
                     case ItemName.FullHeart:
-                        new ItemHeart().CollectItemHeart();
+                        ItemHeart.CollectItemHeart(tradeOption.itemQuantity);
                         break;
                     case ItemName.HalfHeart:
                         break;
                     case ItemName.Key:
                         break;
                     default:
-                        throw new System.Exception("ItemName '" + tradeOption.ItemName.ToString() + "' for ExecuteTrade not valid");
-
+                        throw new System.Exception("ItemName '" + tradeOption.itemName.ToString() + "' for ExecuteTrade not valid");
                 }
+
+                if (tradeOption.limited)
+                {
+                    selectedOptions[tradeOption]++; // Incrementa il conteggio degli acquisti per l'opzione selezionata
+                }
+
+                Debug.Log($"The player traded {effectiveCost} coins for {tradeOption.itemQuantity} items.");
+                Debug.Log("Coins left: " + GameManager.Instance.coins);
+                UpdateTradeButtons();
             }
-            Debug.Log($"The player traded {tradeOption.coinCost} coins for {tradeOption.itemQuantity} items.");
-            Debug.Log("Coins left: " + GameManager.Instance.coins);
-            UpdateTradeButtons();
+            else
+            {
+                Debug.Log("Not enough coins or probability check failed.");
+            }
         }
     }
 
     public void UpdateTradeButtons()
     {
-        // Check if lists are of the same length before proceeding
-        if (tradeOptions.Count != texts.Count || tradeOptions.Count != tradeButtons.Count)
+        if (selectedOptions.Count != texts.Count || selectedOptions.Count != tradeButtons.Count)
         {
             Debug.LogError("Mismatch in list counts, cannot update trade buttons!");
             return;
         }
 
-        for (int i = 0; i < tradeOptions.Count; i++)
+        int i = 0;
+        foreach (var kvp in selectedOptions)
         {
-            texts[i].text = $"{tradeOptions[i].coinCost} Coins for {tradeOptions[i].itemQuantity} {tradeOptions[i].ItemName.ToString()}";
-        }
-
-        int playerCoins = GameManager.Instance.coins;
-        for (int i = 0; i < tradeOptions.Count; i++)
-        {
-            TradeOption option = tradeOptions[i];
-            Button button = tradeButtons[i];
-            UpdateButtonState(option, button, playerCoins);
+            TradeOption option = kvp.Key;
+            int purchaseCount = kvp.Value;
+            int effectiveCost = Mathf.RoundToInt(option.coinCost * (1 - option.discount));
+            string limitText = option.limited ? $" (Limit: {option.limitTimesPurchase - purchaseCount})" : "";
+            texts[i].text = $"{effectiveCost} Coins for {option.itemQuantity} {option.itemName.ToString()}{limitText}";
+            UpdateButtonState(option, tradeButtons[i], GameManager.Instance.coins);
+            i++;
         }
     }
 
@@ -132,16 +201,10 @@ public class MerchantMenu : MonoBehaviour
     {
         if (button != null)
         {
-            if (playerCoins >= option.coinCost)
-            {
-                button.image.color = Color.white;
-                button.interactable = true;
-            }
-            else
-            {
-                button.image.color = Color.gray;
-                button.interactable = false;
-            }
+            int effectiveCost = Mathf.RoundToInt(option.coinCost * (1 - option.discount));
+            bool canPurchase = playerCoins >= effectiveCost && (!option.limited || selectedOptions[option] < option.limitTimesPurchase);
+            button.image.color = canPurchase ? Color.white : Color.gray;
+            button.interactable = canPurchase;
         }
     }
 }

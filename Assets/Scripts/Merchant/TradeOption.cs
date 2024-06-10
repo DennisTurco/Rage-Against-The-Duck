@@ -3,10 +3,17 @@ using UnityEngine;
 [CreateAssetMenu]
 public class TradeOption : ScriptableObject
 {
-    public int id;
     public int coinCost;
     public int itemQuantity;
-    public float probability;   // TODO: set
-    public float discount;      // TODO: set
-    public ItemName ItemName;
+
+    [Range(0f, 1f)]
+    public float probability = 1.0f;   // Default to 100% probability
+
+    [Range(0f, 1f)]
+    public float discount = 0.0f;      // Default to no discount
+
+    public bool limited = false;       // Default to unlimited purchases
+    public int limitTimesPurchase = 1;
+
+    public ItemName itemName;
 }

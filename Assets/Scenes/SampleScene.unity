@@ -7084,7 +7084,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1100507583}
         m_TargetAssemblyTypeName: MerchantMenu, Assembly-CSharp
-        m_MethodName: ExecuteTradeById
+        m_MethodName: ExecuteTradeByIndex
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -21402,9 +21402,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tradeOptions:
+  - {fileID: 11400000, guid: 4ff0d6dcbc17a5d46aa0b16e27b5b596, type: 2}
   - {fileID: 11400000, guid: 1b5bbaf7df6cc114ab80026d35b893c7, type: 2}
-  - {fileID: 11400000, guid: 1f479d8ab2cfa5a42b3b532a0be550ec, type: 2}
   - {fileID: 11400000, guid: 90bb4d9e6d2505448a45fd85dc5891e5, type: 2}
+  - {fileID: 11400000, guid: 1f479d8ab2cfa5a42b3b532a0be550ec, type: 2}
   trades:
   - {fileID: 449828548}
   - {fileID: 80966376}
@@ -21597,9 +21598,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   droppedItemPrefab: {fileID: 2047354416297464723, guid: 81ba164704b601c4faa3a65651e4a388, type: 3}
   lootList:
-  - {fileID: 11400000, guid: a898c3daee7f4c44baf5fff04fbc5987, type: 2}
-  - {fileID: 11400000, guid: a898c3daee7f4c44baf5fff04fbc5987, type: 2}
-  - {fileID: 11400000, guid: fd90a7dfe1ffad14c9895b35589023ed, type: 2}
+  - {fileID: 11400000, guid: 0cb584cf82a4ab042ad914c004f1ea93, type: 2}
+  - {fileID: 11400000, guid: 0cb584cf82a4ab042ad914c004f1ea93, type: 2}
+  - {fileID: 11400000, guid: 0cb584cf82a4ab042ad914c004f1ea93, type: 2}
   - {fileID: 11400000, guid: 2f1e3e5918a4ee448bff70eac3e3d67b, type: 2}
 --- !u!114 &1101043594
 MonoBehaviour:
@@ -25488,7 +25489,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1100507583}
         m_TargetAssemblyTypeName: MerchantMenu, Assembly-CSharp
-        m_MethodName: ExecuteTradeById
+        m_MethodName: ExecuteTradeByIndex
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -26556,7 +26557,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1100507583}
         m_TargetAssemblyTypeName: MerchantMenu, Assembly-CSharp
-        m_MethodName: ExecuteTradeById
+        m_MethodName: ExecuteTradeByIndex
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -41607,7 +41608,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2023862769}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 13.62, y: 9.02, z: -0.052285615}
+  m_LocalPosition: {x: -4.15, y: 9.1, z: -0.052285615}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -42671,13 +42672,13 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 2427
-  m_overrideHtmlColors: 1
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 23
-  m_fontSizeBase: 23
+  m_fontSize: 28
+  m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

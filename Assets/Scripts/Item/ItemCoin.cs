@@ -16,6 +16,12 @@ public class ItemCoin : MonoBehaviour
         UpdateCoinText?.Invoke();
     }
 
+    public static void CollectItemCoin(int coins)
+    {
+        GameManager.Instance.coins += coins;
+        UpdateCoinText?.Invoke();
+    }
+
     public static void UseItemCoin(int coins)
     {
         GameManager.Instance.coins -= coins;
