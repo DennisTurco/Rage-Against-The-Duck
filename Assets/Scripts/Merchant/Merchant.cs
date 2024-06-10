@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Merchant : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class Merchant : MonoBehaviour
     private bool playerInRange = false;  // Flag to check if the player is in the collider
     private bool dialogStarted = false;  // Flag to check if the dialog has started
     private bool tradeMenuOpen = false;  // Flag to check if the trade menu is open
+    public static event Action UpdateTrade;
 
     private void Start()
     {
@@ -105,6 +107,7 @@ public class Merchant : MonoBehaviour
         {
             Time.timeScale = 0f;
             OpenTradeMenu();
+            UpdateTrade?.Invoke();
         }
     }
 
