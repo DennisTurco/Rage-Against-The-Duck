@@ -43,7 +43,7 @@ public class LootBag : MonoBehaviour
             lootGameObject.GetComponent<SpriteRenderer>().sprite = droppedItem.lootSprite;
 
             // Set custom name to prefab
-            lootGameObject.name = droppedItem.lootName;
+            lootGameObject.name = droppedItem.lootName.ToString();
 
             // Apply initial force to the object to "launch" it
             Rigidbody2D rb = lootGameObject.GetComponent<Rigidbody2D>();

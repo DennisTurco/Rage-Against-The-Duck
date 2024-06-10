@@ -5,10 +5,10 @@ using UnityEngine;
 public class LootSpawn : ScriptableObject // ScriptableObject allows to work in the unity editor
 {
     [SerializeField] public Sprite lootSprite;
-    [SerializeField] public string lootName;
+    [SerializeField] public ItemName lootName;
     [SerializeField] public int dropChance;
 
-    public LootSpawn(string lootName, int dropChance)
+    public LootSpawn(ItemName lootName, int dropChance)
     {
         this.lootName = lootName;
         this.dropChance = dropChance;

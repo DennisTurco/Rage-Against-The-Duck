@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e09f054637722f24786b2c688ea4514f, type: 3}
   m_Name: BombTrade
   m_EditorClassIdentifier: 
-  cost: 3
-  quantity: 1
-  discount: 0
-  item: 0
+  id: 0
+  coinCost: 3
+  itemQuantity: 1
+  probability: 0
+  ItemName: 1
+  itemPrefab: {fileID: 2047354416297464723, guid: 81ba164704b601c4faa3a65651e4a388, type: 3}

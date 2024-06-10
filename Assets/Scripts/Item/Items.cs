@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Items : MonoBehaviour, ICollectible
 {
-    [SerializeField] private string ItemName;
+    [SerializeField] private string item;
 
     private ItemCoin itemCoin;
     private ItemBomb itemBomb;
@@ -13,33 +13,33 @@ public class Items : MonoBehaviour, ICollectible
 
     private void Start()
     {
-        ItemName = this.name;
-        if (ItemName.Equals("coin")) itemCoin = gameObject.AddComponent<ItemCoin>();
-        else if (ItemName.Equals("bomb")) itemBomb = gameObject.AddComponent<ItemBomb>();
-        else if (ItemName.Equals("heart")) itemHeart = gameObject.AddComponent<ItemHeart>();
-        else if (ItemName.Equals("minion")) itemMinion = gameObject.AddComponent<ItemMinion>();
+        item = this.name;
+        if (item.Equals(ItemName.Coin.ToString())) itemCoin = gameObject.AddComponent<ItemCoin>();
+        else if (item.Equals(ItemName.Bomb.ToString())) itemBomb = gameObject.AddComponent<ItemBomb>();
+        else if (item.Equals(ItemName.FullHeart.ToString())) itemHeart = gameObject.AddComponent<ItemHeart>();
+        else if (item.Equals(ItemName.Minion.ToString())) itemMinion = gameObject.AddComponent<ItemMinion>();
     }
 
     public void Collect()
     {
-        Debug.Log("Item collected: " + ItemName);
+        Debug.Log("Item collected: " + item);
 
-        if (ItemName.Equals("coin"))
+        if (item.Equals(ItemName.Coin.ToString()))
         {
             itemCoin.CollectItemCoin();
         }
-        else if (ItemName.Equals("bomb"))
+        else if (item.Equals(ItemName.Bomb.ToString()))
         {
             itemBomb.CollectItemBomb();
         }
-        else if (ItemName.Equals("heart"))
+        else if (item.Equals(ItemName.FullHeart.ToString()))
         {
             if (!itemHeart.CanCollectHeart())
                 return;
 
             itemHeart.CollectItemHeart();
         }
-        else if (ItemName.Equals("minion"))
+        else if (item.Equals(ItemName.Minion.ToString()))
         {
             itemMinion.CollectItemMinion();
         }
@@ -48,7 +48,7 @@ public class Items : MonoBehaviour, ICollectible
             throw new ArgumentException("Item doesn't exist");
         }
 
-        GameManager.Instance.ShowFloatingText("+" + 1 + " " + ItemName, 25, Color.yellow, transform.position, Vector3.up * 100, 1.5f);
+        GameManager.Instance.ShowFloatingText("+" + 1 + " " + item, 25, Color.yellow, transform.position, Vector3.up * 100, 1.5f);
         Destroy(gameObject);
     }
 
