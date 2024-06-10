@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b7ce51f790cf9841877b6e9072e8f03, type: 3}
-  m_Name: heart
+  m_Name: healf_heart
   m_EditorClassIdentifier: 
   lootSprite: {fileID: 342860181, guid: c8231f17e47a90a45a74dfe4ac1a3aee, type: 3}
-  lootName: heart
-  dropChance: 5
+  lootName: 4
+  dropChance: 0
