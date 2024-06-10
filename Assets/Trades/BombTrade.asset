@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e09f054637722f24786b2c688ea4514f, type: 3}
   m_Name: BombTrade
   m_EditorClassIdentifier: 
-  cost: 0
-  quantity: 0
+  cost: 3
+  quantity: 1
   discount: 0
-  item: {fileID: 0}
+  item: 0
