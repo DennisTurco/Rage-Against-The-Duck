@@ -7,7 +7,13 @@ public class ItemMinion : MonoBehaviour
 
     public void CollectItemMinion()
     {
-        OnMinionCollected?.Invoke();
         GameManager.Instance.minions++;
+        OnMinionCollected?.Invoke();
+    }
+
+    public static void CollectItemMinion(int minions)
+    {
+        GameManager.Instance.minions += minions;
+        OnMinionCollected?.Invoke();
     }
 }

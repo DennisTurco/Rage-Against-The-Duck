@@ -1,13 +1,13 @@
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using System.Collections.Generic;
 
 public class MerchantMenu : MonoBehaviour
 {
     [SerializeField] private List<TradeOption> tradeOptions;
     [SerializeField] private List<GameObject> trades;
-    
+
     private List<TextMeshProUGUI> texts;
     private List<Button> tradeButtons;
 
@@ -16,9 +16,9 @@ public class MerchantMenu : MonoBehaviour
         tradeButtons = new List<Button>();
         texts = new List<TextMeshProUGUI>();
 
-        foreach (var trade in trades)
+        for (int i = 0; i < trades.Count; i++)
         {
-            Transform buttonTransform = trade.transform.Find("TradeButton");
+            Transform buttonTransform = trades[i].transform.Find("TradeButton");
             if (buttonTransform != null)
             {
                 Button tradeButton = buttonTransform.GetComponent<Button>();
@@ -28,7 +28,7 @@ public class MerchantMenu : MonoBehaviour
                 }
             }
 
-            Transform textTransform = trade.transform.Find("Description");
+            Transform textTransform = trades[i].transform.Find("Description");
             if (textTransform != null)
             {
                 TextMeshProUGUI text = textTransform.GetComponent<TextMeshProUGUI>();
@@ -60,13 +60,15 @@ public class MerchantMenu : MonoBehaviour
         Merchant.UpdateTrade -= UpdateTradeButtons;
     }
 
-    public void ExecuteTradeById(int id)
+    public void ExecuteTradeByIndex(int index)
     {
-        TradeOption tradeOption = tradeOptions.Find(option => option.id == id);
-        if (tradeOption != null)
+        if (index < 0 || index >= tradeOptions.Count)
         {
-            ExecuteTrade(tradeOption);
+            return;
         }
+
+        TradeOption tradeOption = tradeOptions[index];
+        ExecuteTrade(tradeOption);
     }
 
     private void ExecuteTrade(TradeOption tradeOption)
@@ -75,30 +77,28 @@ public class MerchantMenu : MonoBehaviour
         if (playerCoins >= tradeOption.coinCost)
         {
             ItemCoin.UseItemCoin(tradeOption.coinCost);
-            for (int i = 0; i < tradeOption.itemQuantity; i++)
+            switch (tradeOption.ItemName)
             {
-                switch(tradeOption.ItemName) {
-                    case ItemName.Coin:
-                        new ItemCoin().CollectItemCoin();
-                        break;
-                    case ItemName.Bomb:
-                        new ItemBomb().CollectItemBomb();
-                        break;
-                    case ItemName.Minion:
-                        new ItemMinion().CollectItemMinion();
-                        break;
-                    case ItemName.FullHeart:
-                        new ItemHeart().CollectItemHeart();
-                        break;
-                    case ItemName.HalfHeart:
-                        break;
-                    case ItemName.Key:
-                        break;
-                    default:
-                        throw new System.Exception("ItemName '" + tradeOption.ItemName.ToString() + "' for ExecuteTrade not valid");
-
-                }
+                case ItemName.Coin:
+                    ItemCoin.CollectItemCoin(tradeOption.itemQuantity);
+                    break;
+                case ItemName.Bomb:
+                    ItemBomb.CollectItemBomb(tradeOption.itemQuantity);
+                    break;
+                case ItemName.Minion:
+                    ItemMinion.CollectItemMinion(tradeOption.itemQuantity);
+                    break;
+                case ItemName.FullHeart:
+                    ItemHeart.CollectItemHeart(tradeOption.itemQuantity);
+                    break;
+                case ItemName.HalfHeart:
+                    break;
+                case ItemName.Key:
+                    break;
+                default:
+                    throw new System.Exception("ItemName '" + tradeOption.ItemName.ToString() + "' for ExecuteTrade not valid");
             }
+            
             Debug.Log($"The player traded {tradeOption.coinCost} coins for {tradeOption.itemQuantity} items.");
             Debug.Log("Coins left: " + GameManager.Instance.coins);
             UpdateTradeButtons();
