@@ -8,6 +8,8 @@ TagManager:
   - Bullet
   - SpikeTrap
   - Minion
+  - SpawnPoint
+  - Rooms
   layers:
   - Default
   - TransparentFX
