@@ -23192,7 +23192,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 100
-  m_Sprite: {fileID: -705682587, guid: 97c00d358686296458d3d5598dddcb7b, type: 3}
+  m_Sprite: {fileID: 465940455, guid: 52b7f605b7009754696572018302b591, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -23217,12 +23217,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationFrameDelay: 0.1
   destructionAnimationFrames:
-  - {fileID: -705682587, guid: 97c00d358686296458d3d5598dddcb7b, type: 3}
-  - {fileID: 1455862175, guid: 97c00d358686296458d3d5598dddcb7b, type: 3}
-  - {fileID: 905486680, guid: 97c00d358686296458d3d5598dddcb7b, type: 3}
-  - {fileID: -1677739546, guid: 97c00d358686296458d3d5598dddcb7b, type: 3}
-  - {fileID: 1916796111, guid: 97c00d358686296458d3d5598dddcb7b, type: 3}
-  - {fileID: -1942992957, guid: 97c00d358686296458d3d5598dddcb7b, type: 3}
+  - {fileID: 465940455, guid: 52b7f605b7009754696572018302b591, type: 3}
+  - {fileID: -20922212, guid: 52b7f605b7009754696572018302b591, type: 3}
+  - {fileID: 352020507, guid: 52b7f605b7009754696572018302b591, type: 3}
+  - {fileID: 895548788, guid: 52b7f605b7009754696572018302b591, type: 3}
+  - {fileID: -1065109244, guid: 52b7f605b7009754696572018302b591, type: 3}
+  - {fileID: 1283345488, guid: 52b7f605b7009754696572018302b591, type: 3}
   droppedItemPrefab: {fileID: 2047354416297464723, guid: 81ba164704b601c4faa3a65651e4a388, type: 3}
   lootList:
   - {fileID: 11400000, guid: 0cb584cf82a4ab042ad914c004f1ea93, type: 2}
