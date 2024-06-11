@@ -18,7 +18,6 @@ public class MeleeEnemyAI : EnemyAI
 
     protected override void Start()
     {
-        base.Start();
         // init variables
         speed = enemy.speed;
         distance = enemy.distance;
@@ -31,6 +30,8 @@ public class MeleeEnemyAI : EnemyAI
         meleeRange = enemy.meleeRange;
         attackDelay = enemy.attackDelay;
         meleeAttackType = enemy.meleeAttackType;
+
+        base.Start();
 
         // Start the random movement coroutine
         StartCoroutine(RandomMovementRoutine());

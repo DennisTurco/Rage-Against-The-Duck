@@ -21,7 +21,6 @@ public class RangeEnemyAI : EnemyAI
 
     protected override void Start()
     {
-        base.Start();
         // init variables
         speed = enemy.speed;
         bulletSpeed = enemy.bulletSpeed;
@@ -38,6 +37,8 @@ public class RangeEnemyAI : EnemyAI
         trackTimeMax = enemy.trackTimeMax;
         moveTimeMin = enemy.moveTimeMin;
         moveTimeMax = enemy.moveTimeMax;
+
+        base.Start();
     }
 
     protected override void Update()

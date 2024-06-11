@@ -44,8 +44,11 @@ public abstract class EnemyAI : MonoBehaviour
 
         // initialize health
         health = maxHealth;
-        if (healthBar != null) healthBar.UpdateHealthBar(health, maxHealth);
-
+        if (healthBar != null)
+        {
+            Debug.Log($"UpdateHealthBar({health}, {maxHealth})");
+            healthBar.UpdateHealthBar(health, maxHealth);
+        }
         getNearTarget();
     }
 
