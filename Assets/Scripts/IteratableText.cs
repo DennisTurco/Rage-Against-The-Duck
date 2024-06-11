@@ -5,6 +5,7 @@ public class IteratableMessage : MonoBehaviour
 {
     [SerializeField] private GameObject InteractionMessage;
     [SerializeField] private Canvas canvas; // Reference to the Canvas
+    [SerializeField] private float yOffset = 0; 
     public bool interactionMessageOpen = false;
 
     private void Start()
@@ -25,10 +26,9 @@ public class IteratableMessage : MonoBehaviour
         interactionMessageOpen = false;
     }
 
+    // Adjust the Y offset as needed to position the message above the chest
     public void PositionInteractionMessage()
     {
-        // Adjust the Y offset as needed to position the message above the chest
-        float yOffset = 33f; // Adjust based on UI requirements
         Vector3 worldPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         Vector3 screenPosition = Camera.main.WorldToScreenPoint(worldPosition);
 
