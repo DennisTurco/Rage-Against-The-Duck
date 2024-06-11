@@ -18,4 +18,4 @@ MonoBehaviour:
   discount: 0
   limited: 1
   limitTimesPurchase: 1
-  itemName: 0
+  itemName: 2
