@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: minion
   m_EditorClassIdentifier: 
   lootSprite: {fileID: -1973195723, guid: 9cc56fb924378344684c842681ba23b8, type: 3}
-  lootName: 2
+  lootName: 3
   dropChance: 1

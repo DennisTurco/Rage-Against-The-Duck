@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 057328ce6ab01d940b36a0001b98078c, type: 3}
   m_Name: BombJackpot
   m_EditorClassIdentifier: 
-  itemName: 0
-  rewardQuantity: 0
-  itemSprite: {fileID: 0}
-  probability: 0
+  itemName: 2
+  rewardQuantity: 10
+  itemSprite: {fileID: -837971404, guid: 9cc56fb924378344684c842681ba23b8, type: 3}
+  probability: 1
