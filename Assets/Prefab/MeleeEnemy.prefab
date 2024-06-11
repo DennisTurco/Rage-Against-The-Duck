@@ -271,10 +271,10 @@ GameObject:
   - component: {fileID: 6241828811823403851}
   - component: {fileID: 1115717451322555964}
   - component: {fileID: 1685731593959563385}
-  - component: {fileID: -4098895451582125093}
-  - component: {fileID: 3494615659638210743}
+  - component: {fileID: -5435508988907388591}
+  - component: {fileID: -3729487543832274674}
   m_Layer: 6
-  m_Name: Enemy
+  m_Name: MeleeEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -294,7 +294,7 @@ Transform:
   m_Children:
   - {fileID: 6721644214771146899}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &419061158273534789
 SpriteRenderer:
@@ -498,7 +498,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 4f782a584b7910d4b82cffe60d09e48f, type: 3}
   - {fileID: 21300000, guid: e1deb25261161954e972d3925d483c7e, type: 3}
   - {fileID: 21300000, guid: d49c473ab9d29b445b7bba1071d04931, type: 3}
---- !u!114 &-4098895451582125093
+--- !u!114 &-5435508988907388591
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -507,13 +507,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6930945798686416454}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18678d415ae62754f8e788d0f08bc443, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f7a4bcbfdf2559449ee17e02f4823c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 11400000, guid: 074b2fe239115e048980d0a87829673c, type: 2}
   flickerEffect: {fileID: 6241828811823403851}
-  shootingTypeFunctions: {fileID: 3494615659638210743}
---- !u!114 &3494615659638210743
+  enemy: {fileID: 11400000, guid: 0a5751c28f660d647b2a3d4c3846b680, type: 2}
+  meleeTypeFunctions: {fileID: -3729487543832274674}
+--- !u!114 &-3729487543832274674
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -522,7 +522,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6930945798686416454}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2fc897a0c543174d81b7e142f867de2, type: 3}
+  m_Script: {fileID: 11500000, guid: 9206edd4d77d15f40a87a7b121baa821, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7285269275629796739
