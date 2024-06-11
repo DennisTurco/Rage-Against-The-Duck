@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,15 +10,16 @@ public class PauseMenu : MonoBehaviour
 
     public GameObject pMenu;
 
+
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape) && GameManager.Instance.GameisOver == false)
         {
             Debug.Log("Escape key was pressed");
-            if (Merchant.IsTradeMenuOpen)  // Controlla se il trade menu è aperto
+            if (Merchant.IsTradeMenuOpen || Slotty.IsSlottyMenuOpen)
             {
-                return;  // Non fare nulla se il trade menu è aperto
+                return;
             }
 
             if (IsPaused)
@@ -26,6 +28,7 @@ public class PauseMenu : MonoBehaviour
             }
             else
             {
+                Debug.Log("Merchant.IsTradeMenuOpen =" + Merchant.IsTradeMenuOpen + "Slotty.IsSlottyMenuOpen =" + Slotty.IsSlottyMenuOpen);
                 Pause();
             }
         }
