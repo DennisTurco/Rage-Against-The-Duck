@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class Merchant : MonoBehaviour
 {
-    public static bool IsTradeMenuOpen = false;  // Static variable to control if the trade menu is open
-
     [SerializeField] private DialogManager dialogManager;  // Reference to the DialogManager
     [SerializeField] private GameObject tradeMenu;  // Reference to the trade menu
     [SerializeField] private IteratableMessage InteractableText;
@@ -12,6 +10,11 @@ public class Merchant : MonoBehaviour
     private bool dialogStarted = false;  // Flag to check if the dialog has started
     private bool tradeMenuOpen = false;  // Flag to check if the trade menu is open
     public static event Action UpdateTrade;
+
+    private void Awake()
+    {
+        PauseMenu.IsInTradeOrSlottyMenu = false;
+    }
 
     private void Start()
     {
@@ -118,7 +121,7 @@ public class Merchant : MonoBehaviour
         {
             tradeMenu.SetActive(true);
             tradeMenuOpen = true;
-            IsTradeMenuOpen = true;  // Set the static variable to true
+            PauseMenu.IsInTradeOrSlottyMenu = true;  // Set the static variable to true
             Debug.Log("Merchant menu opened.");
         }
     }
@@ -130,8 +133,14 @@ public class Merchant : MonoBehaviour
         {
             tradeMenu.SetActive(false);
             tradeMenuOpen = false;
-            IsTradeMenuOpen = false;  // Set the static variable to false
+            PauseMenu.IsInTradeOrSlottyMenu = false;  // Set the static variable to false
             Debug.Log("Merchant menu closed.");
+
+            PauseMenu pauseMenu = FindObjectOfType<PauseMenu>();
+            if (pauseMenu != null)
+            {
+                pauseMenu.IgnoreNextEscapePress();
+            }
         }
     }
 

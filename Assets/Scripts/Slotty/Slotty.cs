@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Slotty : MonoBehaviour
 {
-    public static bool IsSlottyMenuOpen = false;  // Static variable to control if the slotty menu is open
 
     [SerializeField] private DialogManager dialogManager;  // Reference to the DialogManager
     [SerializeField] private GameObject slottyMenu;  // Reference to the slotty menu
@@ -12,6 +11,10 @@ public class Slotty : MonoBehaviour
     private bool playerInRange = false;  // Flag to check if the player is in the collider
     private bool dialogStarted = false;  // Flag to check if the dialog has started
     private bool slottyMenuOpen = false;  // Flag to check if the slotty menu is open
+    private void Awake()
+    {
+        PauseMenu.IsInTradeOrSlottyMenu = false;
+    }
 
     // Start is called before the first frame update
     private void Start()
@@ -120,7 +123,7 @@ public class Slotty : MonoBehaviour
         {
             slottyMenu.SetActive(true);
             slottyMenuOpen = true;
-            IsSlottyMenuOpen = true;  // Set the static variable to true
+            PauseMenu.IsInTradeOrSlottyMenu = true;  // Set the static variable to true
             Debug.Log("Slotty menu opened.");
         }
     }
@@ -132,8 +135,14 @@ public class Slotty : MonoBehaviour
         {
             slottyMenu.SetActive(false);
             slottyMenuOpen = false;
-            IsSlottyMenuOpen = false;  // Set the static variable to false
+            PauseMenu.IsInTradeOrSlottyMenu = false;  // Set the static variable to false
             Debug.Log("Slotty menu closed.");
+
+            PauseMenu pauseMenu = FindObjectOfType<PauseMenu>();
+            if (pauseMenu != null)
+            {
+                pauseMenu.IgnoreNextEscapePress();
+            }
         }
     }
 

@@ -1,5 +1,6 @@
 public enum ItemName
 {
+    None,
     Coin,
     Bomb,
     Minion,
