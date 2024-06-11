@@ -7,7 +7,7 @@ public class EnemySpawner : MonoBehaviour
     [Header("Enemy Spawn Settings")]
     [SerializeField] private float spawnRate;
     [SerializeField] private GameObject enemyPrefab;
-    [SerializeField] private List<EnemyGeneric> enemies;
+    [SerializeField] private List<BaseEnemy> enemies;
     [SerializeField] private bool canSpawn = true;
 
     [Header("Enemy Spawn Limits Settings")]
