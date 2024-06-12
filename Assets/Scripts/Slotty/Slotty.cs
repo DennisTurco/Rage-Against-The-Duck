@@ -1,21 +1,22 @@
-﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Merchant : MonoBehaviour
+public class Slotty : MonoBehaviour
 {
+
     [SerializeField] private DialogManager dialogManager;  // Reference to the DialogManager
-    [SerializeField] private GameObject tradeMenu;  // Reference to the trade menu
+    [SerializeField] private GameObject slottyMenu;  // Reference to the slotty menu
     [SerializeField] private IteratableMessage InteractableText;
     private bool playerInRange = false;  // Flag to check if the player is in the collider
     private bool dialogStarted = false;  // Flag to check if the dialog has started
-    private bool tradeMenuOpen = false;  // Flag to check if the trade menu is open
-    public static event Action UpdateTrade;
-
+    private bool slottyMenuOpen = false;  // Flag to check if the slotty menu is open
     private void Awake()
     {
         PauseMenu.IsInTradeOrSlottyMenu = false;
     }
 
+    // Start is called before the first frame update
     private void Start()
     {
         // Find the DialogManager in the scene if it's not assigned manually
@@ -31,28 +32,20 @@ public class Merchant : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Reference to DialogManager not assigned in Merchant.");
+            Debug.LogError("Reference to DialogManager not assigned in Slotty.");
         }
     }
 
-    private void OnDestroy()
-    {
-        // Remember to unsubscribe from the event when the object is destroyed to avoid memory leaks
-        if (dialogManager != null)
-        {
-            dialogManager.OnDialogEnd -= OnDialogEnd;
-        }
-    }
-
+    // Update is called once per frame
     private void Update()
     {
         // If the player is in range and presses the E key, start the dialog
-        if (playerInRange && Input.GetKeyDown(KeyCode.E) && !dialogStarted && !tradeMenuOpen)
+        if (playerInRange && Input.GetKeyDown(KeyCode.E) && !dialogStarted && !slottyMenuOpen)
         {
             StartDialog();
         }
 
-        if (InteractableText != null && playerInRange && !InteractableText.interactionMessageOpen && !tradeMenuOpen && !dialogStarted)
+        if (InteractableText != null && playerInRange && !InteractableText.interactionMessageOpen && !slottyMenuOpen && !dialogStarted)
         {
             InteractableText.SetTextVisible();
         }
@@ -67,11 +60,21 @@ public class Merchant : MonoBehaviour
             InteractableText.PositionInteractionMessage();
         }
 
-        // Check if the trade menu is open and if the Escape key is pressed, close it
-        if (tradeMenuOpen && Input.GetKeyDown(KeyCode.Escape))
+        // Check if the slotty menu is open and if the Escape key is pressed, close it
+        if (slottyMenuOpen && Input.GetKeyDown(KeyCode.Escape))
         {
-            CloseTradeMenu();
+            CloseSlottyMenu();
             Time.timeScale = 1f;
+            Debug.Log("Escape key pressed to close Slotty menu.");
+        }
+    }
+
+    private void OnDestroy()
+    {
+        // Remember to unsubscribe from the event when the object is destroyed to avoid memory leaks
+        if (dialogManager != null)
+        {
+            dialogManager.OnDialogEnd -= OnDialogEnd;
         }
     }
 
@@ -84,11 +87,11 @@ public class Merchant : MonoBehaviour
 
         // Execute the dialog using the DialogManager
         string[] sentences = new string[] {
-            "Welcome my friend!",
-            "How are you? I am Marciello.",
-            "See what I sell or I'll stab you!"
+            "Hello there!",
+            "I'm Slotty, the slot machine master.",
+            "Try your luck and see what you win!"
         };
-        string speakerName = "MARCIELLO";
+        string speakerName = "SLOTTY";
 
         if (dialogManager != null)
         {
@@ -97,7 +100,7 @@ public class Merchant : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Reference to DialogManager not assigned in Merchant.");
+            Debug.LogError("Reference to DialogManager not assigned in Slotty.");
         }
     }
 
@@ -109,32 +112,31 @@ public class Merchant : MonoBehaviour
         if (playerInRange)  // Check if the player is still in the merchant's area
         {
             Time.timeScale = 0f;
-            OpenTradeMenu();
-            UpdateTrade?.Invoke();
+            OpenSlottyMenu();
         }
     }
 
-    // Method to open the trade menu
-    public void OpenTradeMenu()
+    // Method to open the slotty menu
+    public void OpenSlottyMenu()
     {
-        if (tradeMenu != null)
+        if (slottyMenu != null)
         {
-            tradeMenu.SetActive(true);
-            tradeMenuOpen = true;
+            slottyMenu.SetActive(true);
+            slottyMenuOpen = true;
             PauseMenu.IsInTradeOrSlottyMenu = true;  // Set the static variable to true
-            Debug.Log("Merchant menu opened.");
+            Debug.Log("Slotty menu opened.");
         }
     }
 
-    // Method to close the trade menu
-    public void CloseTradeMenu()
+    // Method to close the slotty menu
+    public void CloseSlottyMenu()
     {
-        if (tradeMenu != null)
+        if (slottyMenu != null)
         {
-            tradeMenu.SetActive(false);
-            tradeMenuOpen = false;
+            slottyMenu.SetActive(false);
+            slottyMenuOpen = false;
             PauseMenu.IsInTradeOrSlottyMenu = false;  // Set the static variable to false
-            Debug.Log("Merchant menu closed.");
+            Debug.Log("Slotty menu closed.");
 
             PauseMenu pauseMenu = FindObjectOfType<PauseMenu>();
             if (pauseMenu != null)
@@ -149,7 +151,7 @@ public class Merchant : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
-            Debug.Log("The player has entered the merchant collision area.");
+            Debug.Log("The player has entered Slotty collision area.");
         }
     }
 
@@ -158,7 +160,7 @@ public class Merchant : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-            Debug.Log("The player left the merchant collision area.");
+            Debug.Log("The player left Slotty collision area.");
         }
     }
 }

@@ -9,13 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e09f054637722f24786b2c688ea4514f, type: 3}
-  m_Name: BombTrade
+  m_Script: {fileID: 11500000, guid: 057328ce6ab01d940b36a0001b98078c, type: 3}
+  m_Name: BreadJackpot
   m_EditorClassIdentifier: 
-  coinCost: 3
-  itemQuantity: 1
+  itemName: 1
+  rewardQuantity: 25
+  itemSprite: {fileID: 118824085, guid: e4b27e771f530f643b9c991f26a27fb7, type: 3}
   probability: 1
-  discount: 0
-  limited: 1
-  limitTimesPurchase: 1
-  itemName: 2

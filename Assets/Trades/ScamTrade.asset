@@ -17,5 +17,5 @@ MonoBehaviour:
   probability: 1
   discount: 0
   limited: 0
-  limitTimesPurchese: 0
-  ItemName: 0
+  limitTimesPurchase: 1
+  itemName: 1

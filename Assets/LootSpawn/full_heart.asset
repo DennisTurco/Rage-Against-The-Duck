@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: full_heart
   m_EditorClassIdentifier: 
   lootSprite: {fileID: 342860181, guid: c8231f17e47a90a45a74dfe4ac1a3aee, type: 3}
-  lootName: 3
+  lootName: 4
   dropChance: 5

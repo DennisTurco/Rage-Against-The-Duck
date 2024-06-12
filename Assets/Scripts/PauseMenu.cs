@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,27 +7,37 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public static bool IsPaused = false;
+    public static bool IsInTradeOrSlottyMenu = false;
+    private bool ignoreNextEscapePress = false;
 
     public GameObject pMenu;
 
-    // Update is called once per frame
     void Update()
     {
+        if (ignoreNextEscapePress)
+        {
+            ignoreNextEscapePress = false;
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.Escape) && GameManager.Instance.GameisOver == false)
         {
             Debug.Log("Escape key was pressed");
-            if (Merchant.IsTradeMenuOpen)  // Controlla se il trade menu è aperto
+            if (IsInTradeOrSlottyMenu)
             {
-                return;  // Non fare nulla se il trade menu è aperto
-            }
-
-            if (IsPaused)
-            {
-                Resume();
+                return;
             }
             else
             {
-                Pause();
+                if (IsPaused)
+                {
+                    Resume();
+                }
+                else
+                {
+                    Debug.Log("IsInTradeOrSlottyMenu =" + IsInTradeOrSlottyMenu);
+                    Pause();
+                }
             }
         }
     }
@@ -55,5 +66,10 @@ public class PauseMenu : MonoBehaviour
     {
         Debug.Log("Quit button was pressed");
         Application.Quit();
+    }
+
+    public void IgnoreNextEscapePress()
+    {
+        ignoreNextEscapePress = true;
     }
 }
