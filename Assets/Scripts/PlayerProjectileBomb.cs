@@ -38,7 +38,8 @@ public class PlayerProjectileBomb : MonoBehaviour
             {
                 var enemy = hitCollider.GetComponent<EnemyAI>();
                 var player = hitCollider.GetComponent<PlayerHealth>();
-                var friableRock = hitCollider.GetComponent<FriableRock>(); // Aggiunto per rilevare FriableRock
+                var friableRock = hitCollider.GetComponent<FriableRock>();
+                var destructablePot = hitCollider.GetComponent<DestructablePot>();
                 if (enemy)
                 {
                     var closestPoint = hitCollider.ClosestPoint(transform.position);
@@ -55,6 +56,10 @@ public class PlayerProjectileBomb : MonoBehaviour
                 else if (friableRock)
                 {
                     friableRock.DestroyRock();
+                }
+                else if (destructablePot)
+                {
+                    destructablePot.DestroyPot();
                 }
             }
         }

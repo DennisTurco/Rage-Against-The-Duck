@@ -21,9 +21,10 @@ public class PlayerProjectileBullet : MonoBehaviour
     private void Start()
     {
         StartCoroutine(DeathDelay());
-		GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        foreach(GameObject player in players) {
-        	Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject player in players)
+        {
+            Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         }
 
         GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
@@ -41,11 +42,17 @@ public class PlayerProjectileBullet : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // Enemies to take damage
-        if (collision.gameObject.TryGetComponent<EnemyAI>(out EnemyAI playerComponent))
+        if (collision.gameObject.TryGetComponent<EnemyAI>(out EnemyAI enemyComponent))
         {
             float damage = Random.Range(damageMin, damageMax);
             Debug.Log(damage);
-            playerComponent.TakeDamage(damage);
+            enemyComponent.TakeDamage(damage);
+        }
+
+        // Destructable pots to be destroyed
+        if (collision.gameObject.TryGetComponent<DestructablePot>(out DestructablePot destructablePot))
+        {
+            destructablePot.TakeHit();
         }
 
         DestroyProjectile();
