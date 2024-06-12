@@ -9,12 +9,13 @@ public class SlottyMenu : MonoBehaviour
     [SerializeField] private Button spinButton;
     [SerializeField] private List<Image> slotImages; // Gli elementi della slot machine da animare
     [SerializeField] private int spinCost = 10; // Costo di uno spin
-    [SerializeField] private float spinDuration = 6.0f; // Durata totale dell'animazione di spin
-    [SerializeField] private float spinSpeed = 1f; // Velocità di movimento delle immagini in pixel per secondo
+    [SerializeField] private float spinDuration = 7.0f; // Durata totale dell'animazione di spin
+    [SerializeField] private float initialSpinSpeed = 1000f; // Velocità iniziale di movimento delle immagini in pixel per secondo
 
     private bool isSpinning = false;
     private RectTransform[] imageTransforms;
-    private float containerWidth;
+    private float slotWidth;
+    private int centralIndex;
 
     private void Start()
     {
@@ -25,7 +26,8 @@ public class SlottyMenu : MonoBehaviour
         {
             imageTransforms[i] = slotImages[i].GetComponent<RectTransform>();
         }
-        containerWidth = GetComponent<RectTransform>().rect.width;
+        slotWidth = imageTransforms[0].rect.width;
+        centralIndex = slotImages.Count / 2;
     }
 
     private void Update()
@@ -61,7 +63,7 @@ public class SlottyMenu : MonoBehaviour
         UpdateSpinButtonState(); // Aggiorna lo stato del pulsante
 
         float elapsedTime = 0f;
-        float slotWidth = imageTransforms[0].rect.width;
+        float spinSpeed = initialSpinSpeed;
 
         // Inizializza le immagini con ricompense casuali
         for (int i = 0; i < slotImages.Count; i++)
@@ -70,6 +72,8 @@ public class SlottyMenu : MonoBehaviour
             slotImages[i].sprite = GetSpriteForItem(randomReward.itemName);
             imageTransforms[i].anchoredPosition = new Vector2(i * slotWidth, 0);
         }
+
+        SlottyReward finalReward = rewardList[Random.Range(0, rewardList.Count)];
 
         while (elapsedTime < spinDuration)
         {
@@ -83,23 +87,29 @@ public class SlottyMenu : MonoBehaviour
                 if (imageTransforms[i].anchoredPosition.x <= -slotWidth)
                 {
                     imageTransforms[i].anchoredPosition += new Vector2(slotWidth * slotImages.Count, 0);
-                    SlottyReward randomReward = rewardList[Random.Range(0, rewardList.Count)];
+
+                    // Per gli elementi che ritornano a destra, scegli una ricompensa casuale fino alla fine
+                    SlottyReward randomReward = (elapsedTime >= spinDuration - 1.0f) ? finalReward : rewardList[Random.Range(0, rewardList.Count)];
                     slotImages[i].sprite = GetSpriteForItem(randomReward.itemName);
                 }
             }
+
+            // Rallenta gradualmente la velocità di rotazione
+            spinSpeed = Mathf.Lerp(initialSpinSpeed, 0, elapsedTime / spinDuration);
+
             yield return null; // Aspetta il prossimo frame
         }
 
-        // Riposiziona le immagini per essere sicuro che siano nel posto giusto alla fine dell'animazione
+        // Assicurati che l'immagine vincente sia centrata
+        float finalPositionX = -slotWidth * centralIndex;
         for (int i = 0; i < slotImages.Count; i++)
         {
-            imageTransforms[i].anchoredPosition = new Vector2(i * slotWidth, 0);
+            imageTransforms[i].anchoredPosition = new Vector2(finalPositionX + (i * slotWidth), 0);
+            if (i == centralIndex)
+            {
+                slotImages[i].sprite = GetSpriteForItem(finalReward.itemName);
+            }
         }
-
-        // Imposta l'immagine centrale come il risultato finale
-        int centralIndex = slotImages.Count / 2;
-        SlottyReward finalReward = rewardList[Random.Range(0, rewardList.Count)];
-        slotImages[centralIndex].sprite = GetSpriteForItem(finalReward.itemName);
 
         List<SlottyReward> awardedRewards = new List<SlottyReward> { finalReward };
         GivePlayerRewards(awardedRewards);
@@ -122,22 +132,27 @@ public class SlottyMenu : MonoBehaviour
             switch (reward.itemName)
             {
                 case ItemName.Coin:
-                    ItemCoin.CollectItemCoin(reward.rewardQuantity);
+                    Debug.Log("Player has been scammed by Slotty");
                     break;
                 case ItemName.Bomb:
                     ItemBomb.CollectItemBomb(reward.rewardQuantity);
+                    Debug.Log("Player won Slotty BOMB jackpot");
                     break;
                 case ItemName.Minion:
                     ItemMinion.CollectItemMinion(reward.rewardQuantity);
+                    Debug.Log("Player won Slotty MINION jackpot");
                     break;
                 case ItemName.FullHeart:
                     ItemHeart.CollectItemHeart(reward.rewardQuantity);
+                    Debug.Log("Player won Slotty FULL HEART jackpot");
                     break;
                 case ItemName.HalfHeart:
                     // Handle half heart reward here if applicable
+                    Debug.Log("Player won Slotty HALF HEART jackpot");
                     break;
                 case ItemName.Key:
                     // Handle key reward here if applicable
+                    Debug.Log("Player won Slotty KEY jackpot");
                     break;
                 default:
                     Debug.LogError("Reward type not recognized: " + reward.itemName);
