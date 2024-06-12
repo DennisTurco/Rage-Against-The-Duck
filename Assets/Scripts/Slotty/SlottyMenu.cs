@@ -7,10 +7,10 @@ public class SlottyMenu : MonoBehaviour
 {
     [SerializeField] private List<SlottyReward> rewardList;
     [SerializeField] private Button spinButton;
-    [SerializeField] private List<Image> slotImages; // Gli elementi della slot machine da animare
-    [SerializeField] private int spinCost = 10; // Costo di uno spin
-    [SerializeField] private float spinDuration = 7.0f; // Durata totale dell'animazione di spin
-    [SerializeField] private float initialSpinSpeed = 1000f; // Velocità iniziale di movimento delle immagini in pixel per secondo
+    [SerializeField] private List<Image> slotImages; // Slot machine elements to animate
+    [SerializeField] private int spinCost = 10; // Spin cost
+    [SerializeField] private float spinDuration = 7.0f; // Total animation duration
+    [SerializeField] private float initialSpinSpeed = 1000f; // Initial movement speed of images in pixels per second
 
     private bool isSpinning = false;
     private RectTransform[] imageTransforms;
@@ -28,11 +28,12 @@ public class SlottyMenu : MonoBehaviour
         }
         slotWidth = imageTransforms[0].rect.width;
         centralIndex = slotImages.Count / 2;
+        Debug.Log("Slot machine initialized.");
     }
 
     private void Update()
     {
-        // Abilita il pulsante solo se il giocatore ha abbastanza monete e non sta girando
+        // Enable the button only if the player has enough coins and is not spinning
         UpdateSpinButtonState();
     }
 
@@ -48,6 +49,11 @@ public class SlottyMenu : MonoBehaviour
         int playerCoins = GameManager.Instance.coins;
         if (playerCoins >= spinCost)
         {
+            foreach (var image in slotImages)
+            {
+                image.GetComponent<RectTransform>().anchorMin = new Vector2(0.5f, 0.5f); // Ancoraggio minimo
+                image.GetComponent<RectTransform>().anchorMax = new Vector2(0.5f, 0.5f); // Ancoraggio massimo
+            }
             ItemCoin.UseItemCoin(spinCost);
             StartCoroutine(SpinAnimation());
         }
@@ -60,25 +66,27 @@ public class SlottyMenu : MonoBehaviour
     private IEnumerator SpinAnimation()
     {
         isSpinning = true;
-        UpdateSpinButtonState(); // Aggiorna lo stato del pulsante
+        UpdateSpinButtonState(); // Update button state
 
         float elapsedTime = 0f;
         float spinSpeed = initialSpinSpeed;
 
-        // Inizializza le immagini con ricompense casuali
+        // Initialize images with random rewards
         for (int i = 0; i < slotImages.Count; i++)
         {
             SlottyReward randomReward = rewardList[Random.Range(0, rewardList.Count)];
             slotImages[i].sprite = GetSpriteForItem(randomReward.itemName);
-            imageTransforms[i].anchoredPosition = new Vector2(i * slotWidth, 0);
+            imageTransforms[i].anchoredPosition = new Vector2((i - centralIndex) * slotWidth, 0);
+            Debug.Log($"Image {i} initialized with reward: {randomReward.itemName}");
         }
 
         SlottyReward finalReward = rewardList[Random.Range(0, rewardList.Count)];
+        Debug.Log($"Final reward set to: {finalReward.itemName}");
 
         while (elapsedTime < spinDuration)
         {
-            elapsedTime += Time.unscaledDeltaTime; // Utilizza Time.unscaledDeltaTime
-            float moveAmount = spinSpeed * Time.unscaledDeltaTime; // Utilizza Time.unscaledDeltaTime per calcolare il movimento
+            elapsedTime += Time.unscaledDeltaTime; // Use Time.unscaledDeltaTime
+            float moveAmount = spinSpeed * Time.unscaledDeltaTime; // Calculate movement using Time.unscaledDeltaTime
 
             for (int i = 0; i < slotImages.Count; i++)
             {
@@ -88,26 +96,39 @@ public class SlottyMenu : MonoBehaviour
                 {
                     imageTransforms[i].anchoredPosition += new Vector2(slotWidth * slotImages.Count, 0);
 
-                    // Per gli elementi che ritornano a destra, scegli una ricompensa casuale fino alla fine
+                    // For items returning to the right, choose a random reward until the end
                     SlottyReward randomReward = (elapsedTime >= spinDuration - 1.0f) ? finalReward : rewardList[Random.Range(0, rewardList.Count)];
                     slotImages[i].sprite = GetSpriteForItem(randomReward.itemName);
+                    Debug.Log($"Image {i} reinitialized with reward: {randomReward.itemName}");
                 }
             }
 
-            // Rallenta gradualmente la velocità di rotazione
+            // Gradually slow down the rotation speed
             spinSpeed = Mathf.Lerp(initialSpinSpeed, 0, elapsedTime / spinDuration);
 
-            yield return null; // Aspetta il prossimo frame
+            yield return null; // Wait for the next frame
         }
 
-        // Assicurati che l'immagine vincente sia centrata
-        float finalPositionX = -slotWidth * centralIndex;
+        // Smoothly move the winning image to the center
+        float targetPositionX = -slotWidth * centralIndex;
         for (int i = 0; i < slotImages.Count; i++)
         {
-            imageTransforms[i].anchoredPosition = new Vector2(finalPositionX + (i * slotWidth), 0);
+            float currentPositionX = imageTransforms[i].anchoredPosition.x;
+            float newPositionX = Mathf.Lerp(currentPositionX, targetPositionX + (i * slotWidth), 0.5f); // Adjust the interpolation factor as needed
+            imageTransforms[i].anchoredPosition = new Vector2(newPositionX, 0);
             if (i == centralIndex)
             {
                 slotImages[i].sprite = GetSpriteForItem(finalReward.itemName);
+                Debug.Log($"Winning image centered: {finalReward.itemName}");
+                //for (int j = 0 ; j < slotImages.Count; ++j)
+                //{
+                //    if (j == 0 || j == slotImages.Count - 1)
+                //    {
+                //        continue;
+                //    }
+                //    slotImages[j].GetComponent<RectTransform>().anchorMin = new Vector2(0.5f, 0.5f); // Ancoraggio minimo
+                //    slotImages[j].GetComponent<RectTransform>().anchorMax = new Vector2(0.5f, 0.5f); // Ancoraggio massimo
+                //}
             }
         }
 
@@ -115,7 +136,7 @@ public class SlottyMenu : MonoBehaviour
         GivePlayerRewards(awardedRewards);
 
         isSpinning = false;
-        UpdateSpinButtonState(); // Aggiorna lo stato del pulsante
+        UpdateSpinButtonState(); // Update button state
     }
 
     private void GivePlayerRewards(List<SlottyReward> awardedRewards)
@@ -167,7 +188,7 @@ public class SlottyMenu : MonoBehaviour
         {
             if (reward.itemName == itemName)
             {
-                // Assume che gli sprite siano associati ai nomi degli oggetti nella tua logica di gioco
+                // Assume that sprites are associated with item names in your game logic
                 return reward.itemSprite;
             }
         }
