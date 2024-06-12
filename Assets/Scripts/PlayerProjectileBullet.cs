@@ -55,6 +55,11 @@ public class PlayerProjectileBullet : MonoBehaviour
             destructablePot.TakeHit();
         }
 
+        if (collision.gameObject.TryGetComponent<DestructableBox>(out DestructableBox destructableBox))
+        {
+            destructableBox.TakeHit();
+        }
+
         DestroyProjectile();
     }
 

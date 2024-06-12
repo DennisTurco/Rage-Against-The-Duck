@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestructablePot : MonoBehaviour
+public class DestructableBox : MonoBehaviour
 {
     [SerializeField] private int hitsToDestroy = 3;
     [SerializeField] private float animationFrameDelay = 0.15f; // Delay tra i frame dell'animazione
@@ -57,12 +57,12 @@ public class DestructablePot : MonoBehaviour
         }
         else
         {
-            // Distruggi il vaso
-            DestroyPot();
+            // Distruggi la box
+            DestroyBox();
         }
     }
 
-    public void DestroyPot() // Modificato a 'public'
+    public void DestroyBox() // Modificato a 'public'
     {
         if (!isDestroyed)
         {

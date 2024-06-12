@@ -40,6 +40,7 @@ public class PlayerProjectileBomb : MonoBehaviour
                 var player = hitCollider.GetComponent<PlayerHealth>();
                 var friableRock = hitCollider.GetComponent<FriableRock>();
                 var destructablePot = hitCollider.GetComponent<DestructablePot>();
+                var destructableBox = hitCollider.GetComponent<DestructableBox>();
                 if (enemy)
                 {
                     var closestPoint = hitCollider.ClosestPoint(transform.position);
@@ -60,6 +61,10 @@ public class PlayerProjectileBomb : MonoBehaviour
                 else if (destructablePot)
                 {
                     destructablePot.DestroyPot();
+                }
+                else if (destructableBox)
+                {
+                    destructableBox.DestroyBox();
                 }
             }
         }
