@@ -85,10 +85,10 @@ public class Merchant : MonoBehaviour
         // Execute the dialog using the DialogManager
         string[] sentences = new string[] {
             "Welcome my friend!",
-            "How are you? I am Marciello.",
+            "How are you? I am Sergio.",
             "See what I sell or I'll stab you!"
         };
-        string speakerName = "MARCIELLO";
+        string speakerName = "SERGIO";
 
         if (dialogManager != null)
         {
