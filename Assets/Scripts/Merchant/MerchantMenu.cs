@@ -190,7 +190,7 @@ public class MerchantMenu : MonoBehaviour
             TradeOption option = kvp.Key;
             int purchaseCount = kvp.Value;
             int effectiveCost = Mathf.RoundToInt(option.coinCost * (1 - option.discount));
-            string limitText = option.limited ? $" (Limit: {option.limitTimesPurchase - purchaseCount})" : "";
+            string limitText = option.limited ? $" (Max: {option.limitTimesPurchase - purchaseCount})" : "";
             texts[i].text = $"{effectiveCost} Coins for {option.itemQuantity} {option.itemName.ToString()}{limitText}";
             UpdateButtonState(option, tradeButtons[i], GameManager.Instance.coins);
             i++;
