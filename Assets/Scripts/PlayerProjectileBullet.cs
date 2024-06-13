@@ -21,9 +21,10 @@ public class PlayerProjectileBullet : MonoBehaviour
     private void Start()
     {
         StartCoroutine(DeathDelay());
-		GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        foreach(GameObject player in players) {
-        	Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject player in players)
+        {
+            Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         }
 
         GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
@@ -40,12 +41,15 @@ public class PlayerProjectileBullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // Enemies to take damage
-        if (collision.gameObject.TryGetComponent<EnemyAI>(out EnemyAI playerComponent))
+        if (collision.gameObject.TryGetComponent<EnemyAI>(out EnemyAI enemyComponent))
         {
             float damage = Random.Range(damageMin, damageMax);
-            Debug.Log(damage);
-            playerComponent.TakeDamage(damage);
+            enemyComponent.TakeDamage(damage);
+        }
+
+        if (collision.gameObject.TryGetComponent<DestructableObject>(out DestructableObject destructableObject))
+        {
+            destructableObject.TakeHit();
         }
 
         DestroyProjectile();
@@ -60,10 +64,7 @@ public class PlayerProjectileBullet : MonoBehaviour
 
     private void DestroyProjectile()
     {
-        // Instantiate the impact effect if it's assigned
         if (destroyEffect != null) Instantiate(destroyEffect, transform.position, Quaternion.identity);
-
-        // Destroy the bullet GameObject
         Destroy(gameObject);
     }
 }
