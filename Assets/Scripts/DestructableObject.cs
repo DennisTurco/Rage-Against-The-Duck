@@ -5,15 +5,15 @@ using UnityEngine;
 public class DestructableObject : MonoBehaviour
 {
     [SerializeField] private int hitsToDestroy = 3;
-    [SerializeField] private float hitAnimationFrameDelay = 0.1f; // Delay between hit animation frames
-    [SerializeField] private float destructionAnimationFrameDelay = 0.1f; // Delay between destruction animation frames
-    [SerializeField] private Sprite[] hitAnimationFrames; // Frames for hit animation
-    [SerializeField] private Sprite[] destructionAnimationFrames; // Frames for destruction animation
-    [SerializeField] private GameObject droppedItemPrefab; // Prefab for the dropped item
-    [SerializeField] private List<LootSpawn> lootList = new List<LootSpawn>(); // List of possible loot items
-    [SerializeField] private int maxNumberOfDrops = 3; // Maximum number of items to drop
-    [SerializeField] private Collider2D playerCollider; // Collider for player interaction
-    [SerializeField] private Collider2D destructionCollider; // Collider for destruction
+    [SerializeField] private float hitAnimationFrameDelay = 0.15f; // Delay tra i frame dell'animazione del colpo
+    [SerializeField] private float destructionAnimationFrameDelay = 0.15f; // Delay tra i frame dell'animazione di distruzione
+    [SerializeField] private Sprite[] hitAnimationFrames;
+    [SerializeField] private Sprite[] destructionAnimationFrames;
+    [SerializeField] private GameObject droppedItemPrefab;
+    [SerializeField] private List<LootSpawn> lootList = new List<LootSpawn>();
+    [SerializeField] private int maxNumberOfDrops = 3;
+    [SerializeField] private Collider2D playerCollider;
+    [SerializeField] private Collider2D destructionCollider;
 
     private SpriteRenderer spriteRenderer;
     private bool isDestroyed = false;
@@ -26,7 +26,15 @@ public class DestructableObject : MonoBehaviour
         destructionCollider.enabled = true;
     }
 
-    // Method to handle when the object takes a hit
+    private IEnumerator PlayHitAnimation()
+    {
+        foreach (var frame in hitAnimationFrames)
+        {
+            spriteRenderer.sprite = frame;
+            yield return new WaitForSeconds(hitAnimationFrameDelay);
+        }
+    }
+
     public void TakeHit()
     {
         if (isDestroyed) return;
@@ -35,31 +43,14 @@ public class DestructableObject : MonoBehaviour
 
         if (currentHits < hitsToDestroy)
         {
-            // Play hit animation
             StartCoroutine(PlayHitAnimation());
         }
         else
         {
-            // Destroy the object
             DestroyObject();
         }
     }
 
-    // Coroutine to play the hit animation
-    private IEnumerator PlayHitAnimation()
-    {
-        // Play each frame of the hit animation
-        foreach (var frame in hitAnimationFrames)
-        {
-            spriteRenderer.sprite = frame;
-            yield return new WaitForSeconds(hitAnimationFrameDelay);
-        }
-
-        // Keep the last frame of the hit animation for a brief period
-        yield return new WaitForSeconds(hitAnimationFrameDelay);
-    }
-
-    // Method to destroy the object
     public void DestroyObject()
     {
         if (!isDestroyed)
@@ -69,28 +60,20 @@ public class DestructableObject : MonoBehaviour
         }
     }
 
-    // Coroutine to play the destruction animation
     private IEnumerator PlayDestructionAnimation()
     {
-        // Play each frame of the destruction animation
         foreach (var frame in destructionAnimationFrames)
         {
             spriteRenderer.sprite = frame;
             yield return new WaitForSeconds(destructionAnimationFrameDelay);
         }
 
-        // Keep the last frame of the destruction animation
         spriteRenderer.sprite = destructionAnimationFrames[destructionAnimationFrames.Length - 1];
-
-        // Disable the colliders
         playerCollider.enabled = false;
         destructionCollider.enabled = false;
-
-        // Spawn the loot
         InstantiateLootSpawn(transform.position);
     }
 
-    // Method to instantiate the loot items
     private void InstantiateLootSpawn(Vector3 spawnPosition)
     {
         List<LootSpawn> droppedItems = GetDroppedItems();
@@ -99,16 +82,12 @@ public class DestructableObject : MonoBehaviour
 
         foreach (var droppedItem in droppedItems)
         {
-            // Add a random offset to the spawn position
             Vector3 randomOffset = new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), 0);
             Vector3 itemPosition = spawnPosition + randomOffset;
             GameObject lootGameObject = Instantiate(droppedItemPrefab, itemPosition, Quaternion.identity);
             lootGameObject.GetComponent<SpriteRenderer>().sprite = droppedItem.lootSprite;
-
-            // Set the custom name to the prefab
             lootGameObject.name = droppedItem.lootName.ToString();
 
-            // Apply an initial force to the object to "throw" it
             Rigidbody2D rb = lootGameObject.GetComponent<Rigidbody2D>();
             if (rb != null)
             {
@@ -117,25 +96,23 @@ public class DestructableObject : MonoBehaviour
                 rb.AddForce(launchDirection * launchForce, ForceMode2D.Impulse);
             }
 
-            // Ensure the object is assigned to the correct layer
             lootGameObject.layer = LayerMask.NameToLayer("Item");
         }
     }
 
-    // Method to get the items to be dropped
     private List<LootSpawn> GetDroppedItems()
     {
         List<LootSpawn> droppedItems = new List<LootSpawn>();
 
         for (int i = 0; i < maxNumberOfDrops; i++)
         {
-            int random = Random.Range(1, 101); // random between 1 and 100
+            int random = Random.Range(1, 101);
             foreach (LootSpawn item in lootList)
             {
                 if (random <= item.dropChance)
                 {
-                    droppedItems.Add(item); // Changed 'add' to 'Add'
-                    break; // Drop only one item per iteration
+                    droppedItems.Add(item);
+                    break;
                 }
             }
         }

@@ -39,8 +39,7 @@ public class PlayerProjectileBomb : MonoBehaviour
                 var enemy = hitCollider.GetComponent<EnemyAI>();
                 var player = hitCollider.GetComponent<PlayerHealth>();
                 var friableRock = hitCollider.GetComponent<FriableRock>();
-                var destructablePot = hitCollider.GetComponent<DestructablePot>();
-                var destructableBox = hitCollider.GetComponent<DestructableBox>();
+                var destructableObject = hitCollider.GetComponent<DestructableObject>();
                 if (enemy)
                 {
                     var closestPoint = hitCollider.ClosestPoint(transform.position);
@@ -48,7 +47,6 @@ public class PlayerProjectileBomb : MonoBehaviour
 
                     var damagePercent = Mathf.InverseLerp(rangeDamage, 0, distance);
                     enemy.TakeDamage(damagePercent * damage);
-                    Debug.Log("Bomb damage: " + damagePercent * damage);
                 }
                 else if (player)
                 {
@@ -58,13 +56,9 @@ public class PlayerProjectileBomb : MonoBehaviour
                 {
                     friableRock.DestroyRock();
                 }
-                else if (destructablePot)
+                else if (destructableObject)
                 {
-                    destructablePot.DestroyPot();
-                }
-                else if (destructableBox)
-                {
-                    destructableBox.DestroyBox();
+                    destructableObject.DestroyObject();
                 }
             }
         }
@@ -72,15 +66,10 @@ public class PlayerProjectileBomb : MonoBehaviour
         DestroyBomb();
     }
 
-
     private void DestroyBomb()
     {
-        // Instantiate the impact effect if it's assigned
         if (destroyEffect != null) Instantiate(destroyEffect, transform.position, Quaternion.identity);
-
-        // Destroy the bullet GameObject
         Destroy(gameObject);
-
         GameManager.Instance.ShakeCamera(.15f, .4f);
     }
 }

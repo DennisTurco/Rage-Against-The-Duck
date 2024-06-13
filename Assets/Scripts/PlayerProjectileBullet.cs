@@ -41,23 +41,15 @@ public class PlayerProjectileBullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // Enemies to take damage
         if (collision.gameObject.TryGetComponent<EnemyAI>(out EnemyAI enemyComponent))
         {
             float damage = Random.Range(damageMin, damageMax);
-            Debug.Log(damage);
             enemyComponent.TakeDamage(damage);
         }
 
-        // Destructable pots to be destroyed
-        if (collision.gameObject.TryGetComponent<DestructablePot>(out DestructablePot destructablePot))
+        if (collision.gameObject.TryGetComponent<DestructableObject>(out DestructableObject destructableObject))
         {
-            destructablePot.TakeHit();
-        }
-
-        if (collision.gameObject.TryGetComponent<DestructableBox>(out DestructableBox destructableBox))
-        {
-            destructableBox.TakeHit();
+            destructableObject.TakeHit();
         }
 
         DestroyProjectile();
@@ -72,10 +64,7 @@ public class PlayerProjectileBullet : MonoBehaviour
 
     private void DestroyProjectile()
     {
-        // Instantiate the impact effect if it's assigned
         if (destroyEffect != null) Instantiate(destroyEffect, transform.position, Quaternion.identity);
-
-        // Destroy the bullet GameObject
         Destroy(gameObject);
     }
 }
