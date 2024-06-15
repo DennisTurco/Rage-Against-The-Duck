@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class RoomTemplates : MonoBehaviour
 {
-
     public GameObject entryRoom;
     public GameObject[] bottomRooms;
     public GameObject[] topRooms;
@@ -13,41 +12,55 @@ public class RoomTemplates : MonoBehaviour
 
     public GameObject closedRoom;
     public List<GameObject> closedRoomInstance = new List<GameObject>();
-    public List<GameObject> rooms = new List<GameObject>();
+    private List<GameObject> rooms = new List<GameObject>();
     public int roomsSpawned = 0;
-    public int maxRoomsToSpawn = 10;
-    public int minRoomsToSpawn = 5;
+    public int maxRoomsToSpawn = 12;
+    public int minRoomsToSpawn = 8;
 
     // for boss room
-    public float waitTime;
-    private float currentWaitTime;
     private bool spawnedBoss;
     public GameObject boss;
     private GameObject spawnedBossInstance; // boss instance
 
+    private float timeAfterLastRoomSpawned;
+    private float timeLimitRoomSpawned;
+    private bool spawningInProgress;
+
+    private void Start()
+    {
+        spawnedBoss = false;
+        spawningInProgress = false;
+    }
+
     private void Update()
     {
-        if (currentWaitTime <= 0 && !spawnedBoss)
+        if (spawningInProgress && timeAfterLastRoomSpawned >= timeLimitRoomSpawned && !spawnedBoss)
         {
-            for (int i = 0; i < rooms.Count; i++)
+            if (!checkCorrectness())
             {
-                if (i == rooms.Count - 1)
-                {
-                    spawnedBossInstance = Instantiate(boss, rooms[i].transform.position, Quaternion.identity);
-                    spawnedBoss = true;
-                }
+                StartRoomsSpawning();
+            } 
+            else
+            {
+                spawnedBossInstance = Instantiate(boss, rooms[rooms.Count-1].transform.position, Quaternion.identity);
+                spawnedBoss = true;
+                spawningInProgress = false;
             }
         }
-        else
+        else if (spawningInProgress)
         {
-            currentWaitTime -= Time.deltaTime;
+            timeAfterLastRoomSpawned += Time.deltaTime;
         }
+    }
+
+    public bool checkCorrectness()
+    {
+        return roomsSpawned >= minRoomsToSpawn && roomsSpawned <= maxRoomsToSpawn;
     }
 
     public void StartRoomsSpawning()
     {
         ClearRooms();
-        currentWaitTime = waitTime;
         Instantiate(entryRoom, transform.position, entryRoom.transform.rotation);
     }
 
@@ -71,5 +84,17 @@ public class RoomTemplates : MonoBehaviour
             Destroy(spawnedBossInstance);
             spawnedBoss = false;
         }
+    }
+
+    public void AddRoom(GameObject room)
+    {
+        rooms.Add(room);
+        spawningInProgress = true;
+        timeAfterLastRoomSpawned = 0;
+    }
+
+    public void SetTimeLimitRoomSpawned(float time)
+    {
+        timeLimitRoomSpawned = time;
     }
 }
