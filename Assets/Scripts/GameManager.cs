@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     [Header("Inventory")]
     [SerializeField] public int coins;
     [SerializeField] public int bombs;
+    [SerializeField] public int keys;
     [SerializeField] public int minions;
 
     // resources
