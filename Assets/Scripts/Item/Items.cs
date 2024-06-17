@@ -8,6 +8,7 @@ public class Items : MonoBehaviour, ICollectible
 
     private ItemCoin itemCoin;
     private ItemBomb itemBomb;
+    private ItemKey itemKey;
     private ItemHeart itemHeart;
     private ItemMinion itemMinion;
 
@@ -16,6 +17,7 @@ public class Items : MonoBehaviour, ICollectible
         item = this.name;
         if (item.Equals(ItemName.Coin.ToString())) itemCoin = gameObject.AddComponent<ItemCoin>();
         else if (item.Equals(ItemName.Bomb.ToString())) itemBomb = gameObject.AddComponent<ItemBomb>();
+        else if (item.Equals(ItemName.Key.ToString())) itemKey = gameObject.AddComponent<ItemKey>();
         else if (item.Equals(ItemName.FullHeart.ToString())) itemHeart = gameObject.AddComponent<ItemHeart>();
         else if (item.Equals(ItemName.Minion.ToString())) itemMinion = gameObject.AddComponent<ItemMinion>();
     }
@@ -31,6 +33,10 @@ public class Items : MonoBehaviour, ICollectible
         else if (item.Equals(ItemName.Bomb.ToString()))
         {
             itemBomb.CollectItemBomb();
+        }
+        else if (item.Equals(ItemName.Key.ToString()))
+        {
+            itemKey.CollectItemKey();
         }
         else if (item.Equals(ItemName.FullHeart.ToString()))
         {
