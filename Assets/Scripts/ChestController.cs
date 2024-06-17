@@ -3,6 +3,7 @@ using UnityEngine;
 public class ChestController : MonoBehaviour
 {
     [SerializeField] private IteratableMessage InteractableText;
+    [SerializeField] private bool chestLocked = false;
     private bool playerInRange = false;
     private bool chestOpened;
 
@@ -15,7 +16,19 @@ public class ChestController : MonoBehaviour
     {
         if (playerInRange && Input.GetKeyDown(KeyCode.E) && !chestOpened)
         {
-            OpenChest();
+            if (chestLocked && GameManager.Instance.keys > 0)
+            {
+                ItemKey.UseItemKey();
+                OpenChest();
+            }
+            else if (!chestLocked)
+            {
+                OpenChest();
+            }
+            else
+            {
+                Debug.Log("Chest locked, key is required");
+            }
         }
 
         if (InteractableText != null && playerInRange && !InteractableText.interactionMessageOpen && !chestOpened)
