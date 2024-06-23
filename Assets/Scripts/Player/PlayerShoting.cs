@@ -4,20 +4,18 @@ using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
 {
+    [SerializeField] private PlayerStats stats;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private GameObject bombPrefab;
     [SerializeField] private GameObject minionPrefab;
-    [SerializeField] private float fireRate;
     private float nextFire;
 
-    void Start()
+    private void Start()
     {
-        GameManager.Instance.SetAttackRate(fireRate);
-
-        nextFire = fireRate;
+        nextFire = stats.AttackRate;
     }
 
-    void Update()
+    private void Update()
     {
         if ((Input.GetButton("FireUp") || Input.GetButton("FireDown") || Input.GetButton("FireLeft") || Input.GetButton("FireRight")) && nextFire <= 0)
         {
@@ -25,12 +23,12 @@ public class PlayerShooting : MonoBehaviour
             else if (Input.GetButton("FireDown")) Shoot(new Vector2(0, -1).normalized);
             else if (Input.GetButton("FireRight")) Shoot(new Vector2(1, 0).normalized);
             else if (Input.GetButton("FireLeft")) Shoot(new Vector2(-1, 0).normalized);
-            nextFire = fireRate;
+            nextFire = stats.AttackRate;
         }
         if (Input.GetButtonDown("ThrowBomb") && nextFire <= 0 && GameManager.Instance.bombs > 0)
         {
             ThrowBomb();
-            nextFire = fireRate;
+            nextFire = stats.AttackRate;
         }
 
         if (nextFire > 0)
@@ -67,5 +65,4 @@ public class PlayerShooting : MonoBehaviour
 
         GameManager.Instance.minions--;
     }
-
 }

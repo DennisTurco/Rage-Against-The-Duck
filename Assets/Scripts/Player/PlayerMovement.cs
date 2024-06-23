@@ -2,19 +2,18 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private ParticleSystem dust;
+    [SerializeField] private PlayerStats stats;
     private Vector2 moveDirection;
     private Rigidbody2D rb;
-    [SerializeField] private float speed;
-    [SerializeField] private ParticleSystem dust;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        GameManager.Instance.SetMovementsSpeed(speed);
     }
 
     // Is called automatically every graphics frame
-    void Update()
+    private void Update()
     {
         ProcessInputs();
 
@@ -34,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
 
 
     // Swap the player sprite scale to face the movement direction
-    void SwapSprite()
+    private void SwapSprite()
     {
         // Right
         if (moveDirection.x > 0)
@@ -71,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Is called automatically every physics step
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         Move();
     }
@@ -81,6 +80,6 @@ public class PlayerMovement : MonoBehaviour
         // play dust particle effect on move
         if (Input.GetButton("Horizontal") || Input.GetButton("Vertical")) dust.Play();
 
-        rb.MovePosition(rb.position + moveDirection * speed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + moveDirection * stats.MovementSpeed * Time.fixedDeltaTime);
     }
 }

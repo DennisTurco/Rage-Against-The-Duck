@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PlayerProjectileBomb : MonoBehaviour
 {
+    //TODO: maybe move those stats to PlayerStats ??
     [SerializeField] private float speed;
     [SerializeField] private float lifeTime;
     [SerializeField] private float damage;

@@ -3,23 +3,25 @@ using UnityEngine;
 
 public class PlayerProjectileBullet : MonoBehaviour
 {
-    [SerializeField] private float speed;
-    [SerializeField] private float lifeTimeMin;
-    [SerializeField] private float lifeTimeMax;
-    [SerializeField] private float damageMin;
-    [SerializeField] private float damageMax;
-
     [SerializeField] private GameObject destroyEffect;
-
-    private void Awake()
-    {
-        GameManager.Instance.SetAttackDamage(damageMin, damageMax);
-        GameManager.Instance.SetAttackSpeed(speed);
-        GameManager.Instance.SetAttackRange(lifeTimeMin, lifeTimeMax);
-    }
+    private PlayerStats stats;
 
     private void Start()
     {
+        GameObject obj = GameObject.FindWithTag("Player");
+        if (obj == null)
+        {
+            Debug.LogError("Cannot obtain 'Player' tag");
+            return; // Early return to avoid null reference exceptions
+        }
+
+        stats = obj.GetComponent<PlayerStats>();
+        if (stats == null)
+        {
+            Debug.LogError("Cannot obtain 'PlayerStats' component");
+            return; // Early return to avoid null reference exceptions
+        }
+
         StartCoroutine(DeathDelay());
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject player in players)
@@ -36,18 +38,17 @@ public class PlayerProjectileBullet : MonoBehaviour
 
     private void Update()
     {
-        transform.position += transform.right * Time.deltaTime * speed;
+        transform.position += transform.right * Time.deltaTime * stats.AttackSpeed;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.TryGetComponent<EnemyAI>(out EnemyAI enemyComponent))
         {
-            float damage = Random.Range(damageMin, damageMax);
+            float damage = Random.Range(stats.AttackDamageMin, stats.AttackDamageMax);
             enemyComponent.TakeDamage(damage);
         }
-
-        if (collision.gameObject.TryGetComponent<DestructableObject>(out DestructableObject destructableObject))
+        else if (collision.gameObject.TryGetComponent<DestructableObject>(out DestructableObject destructableObject))
         {
             destructableObject.TakeHit();
         }
@@ -55,9 +56,9 @@ public class PlayerProjectileBullet : MonoBehaviour
         DestroyProjectile();
     }
 
-    IEnumerator DeathDelay()
+    private IEnumerator DeathDelay()
     {
-        float lifeTime = Random.Range(lifeTimeMin, lifeTimeMax);
+        float lifeTime = Random.Range(stats.AttackRangeMin, stats.AttackRangeMax);
         yield return new WaitForSeconds(lifeTime);
         DestroyProjectile();
     }
