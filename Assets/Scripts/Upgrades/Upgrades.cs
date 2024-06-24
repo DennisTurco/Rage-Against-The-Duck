@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -9,6 +10,8 @@ public class Upgrades : MonoBehaviour, ICollectible
     [SerializeField] private UpgradeName upgrade;           // upgrade name
     [SerializeField] private List<UpgradeGeneric> upgrades; // whole list of upgrades
     private UpgradeGeneric currentUpgrade;                  // current upgrade selected
+
+    [SerializeField] private Animator collectAnimation;
 
     private void Start()
     {
@@ -80,6 +83,9 @@ public class Upgrades : MonoBehaviour, ICollectible
                 throw new ArgumentException("Upgrade stat doesn't exist");
             }
         }
+
+        // Start the animation
+        collectAnimation.SetTrigger("Collect");
 
         GameManager.Instance.ShowFloatingText($"{upgrade}", 25, Color.green, transform.position, Vector3.up * 100, 1.5f);
         Destroy(gameObject);
