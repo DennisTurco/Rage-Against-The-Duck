@@ -50,6 +50,15 @@ public class MeleeEnemyAI : EnemyAI
         // ######## Move ########
         if (target != null)
         {
+            if (randomDirection.x > 0 && transform.localScale.x < 0)
+            {
+                Flip();
+            }
+            else if (randomDirection.x < 0 && transform.localScale.x > 0)
+            {
+                Flip();
+            }
+
             if (isMovingRandomly)
             {
                 MoveRandomly();

@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public abstract class EnemyAI : MonoBehaviour
@@ -25,6 +26,7 @@ public abstract class EnemyAI : MonoBehaviour
     protected bool targetEnd = false;
     protected bool moveWait = false;
     protected bool moveEnd = false;
+    protected int facingDirection = 1;
 
     protected void Awake()
     {
@@ -54,6 +56,16 @@ public abstract class EnemyAI : MonoBehaviour
 
     protected virtual void Update()
     {
+        Vector2 direction = movePoint - (Vector2)transform.position;
+        if (direction.x > 0 && transform.localScale.x < 0)
+        {
+            Flip();
+        }
+        else if (direction.x < 0 && transform.localScale.x > 0)
+        {
+            Flip();
+        }
+
         // ######## Find target section ########
         if (!targetWait)
         {
@@ -104,15 +116,39 @@ public abstract class EnemyAI : MonoBehaviour
         Vector2 direction = movePoint - (Vector2)transform.position;
         direction.Normalize();
 
-        float dist = Mathf.Abs(Mathf.Sqrt(Mathf.Pow(movePoint.x - transform.position.x, 2.0f) + Mathf.Pow(movePoint.y - transform.position.y, 2.0f)) - distance);
+        float dist = Vector2.Distance(movePoint, transform.position);
 
         if (dist > distance + err)
         {
+            
+
             rb.MovePosition(rb.position + direction * speed * Time.fixedDeltaTime);
         }
         else if (dist < distance - err)
         {
+            if (direction.x > 0 && transform.localScale.x < 0)
+            {
+                Flip();
+            }
+            else if (direction.x < 0 && transform.localScale.x > 0)
+            {
+                Flip();
+            }
+
             rb.MovePosition(rb.position - direction * speed * Time.fixedDeltaTime);
+        }
+    }
+
+
+    // flip sprite on change direction
+    protected void Flip()
+    {
+        facingDirection *= -1;
+        transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+
+        if (healthBar != null)
+        {
+            healthBar.transform.localScale = new Vector3(healthBar.transform.localScale.x * -1, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
         }
     }
 

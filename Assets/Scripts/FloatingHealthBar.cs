@@ -11,9 +11,9 @@ public class FloatingHealthBar : MonoBehaviour
     public void UpdateHealthBar(float currentValue, float maxValue)
     {
         slider.value = currentValue / maxValue;
+        gameObject.SetActive(currentValue < maxValue); // set floating bar active if the enemy is damaged
     }
 
-    // Update is called once per frame
     private void Update()
     {
         if (target != null && camera != null) {
