@@ -45,6 +45,15 @@ public class RangeEnemyAI : EnemyAI
     {
         base.Update();
 
+        if (transform.localScale.x < 0)
+        {
+            Flip();
+        }
+        else if (transform.localScale.x > 0)
+        {
+            Flip();
+        }
+
         // ######## Shooting section ########
         if (canShoot)
         {
