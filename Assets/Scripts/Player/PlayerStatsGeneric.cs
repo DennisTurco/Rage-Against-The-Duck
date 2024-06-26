@@ -7,9 +7,12 @@ public class PlayerStatsGeneric : ScriptableObject
     [SerializeField] public float movementSpeed;
 
     [Header("Projectile Attack Stats")]
-    [SerializeField] public float attackDamageMin, attackDamageMax;
-    [SerializeField] public float attackRangeMin, attackRangeMax;
+    [SerializeField] public float attackDamageMin;
+    [SerializeField] public float attackDamageMax;
+    [SerializeField] public float attackRangeMin;
+    [SerializeField] public float attackRangeMax;
     [SerializeField] public float attackSpeed;
+    [Tooltip("More is low and more the attackRate is good")]
     [SerializeField] public float attackRate;
 
     [Header("Miscellaneous Stats")]

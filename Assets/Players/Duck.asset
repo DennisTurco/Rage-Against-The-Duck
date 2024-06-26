@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Duck
   m_EditorClassIdentifier: 
   movementSpeed: 5
-  attackDamageMin: 0.5
-  attackDamageMax: 1
+  attackDamageMin: 0.3
+  attackDamageMax: 0.6
   attackRangeMin: 1.5
   attackRangeMax: 2
-  attackSpeed: 4.2
-  attackRate: 1
+  attackSpeed: 7.5
+  attackRate: 0.6
   luck: 0
