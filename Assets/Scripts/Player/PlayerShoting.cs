@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -7,8 +8,9 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField] private PlayerStats stats;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private GameObject bombPrefab;
-    [SerializeField] private GameObject minionPrefab;
     private float nextFire;
+
+    public static event Action<GameObject,Vector2> OnPlayerShooting;
 
     private void Start()
     {
@@ -33,9 +35,6 @@ public class PlayerShooting : MonoBehaviour
 
         if (nextFire > 0)
             nextFire -= Time.deltaTime;
-
-        if (GameManager.Instance.minions > 0)
-            GenerateMinion();
     }
 
     private void Shoot(Vector2 shootingDirection)
@@ -47,7 +46,10 @@ public class PlayerShooting : MonoBehaviour
         // Calculate the angle of rotation of the ammunition based on the firing direction
         float angle = Mathf.Atan2(shootingDirection.y, shootingDirection.x) * Mathf.Rad2Deg;
         newBullet.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+
+        OnPlayerShooting?.Invoke(bulletPrefab, shootingDirection);
     }
+
     private void ThrowBomb()
     {
         // Istanzia la munizione nella posizione del player e nella direzione di sparo
@@ -55,14 +57,5 @@ public class PlayerShooting : MonoBehaviour
         newBomb.name = "PlayerBomb";
 
         ItemBomb.UseItemBomb();
-    }
-
-    private void GenerateMinion()
-    {
-        GameObject newMinion = Instantiate(minionPrefab, transform.position, Quaternion.identity);
-        newMinion.name = "PlayerMinion";
-        newMinion.GetComponent<PlayerMinion>().target = transform.gameObject;
-
-        GameManager.Instance.minions--;
     }
 }
