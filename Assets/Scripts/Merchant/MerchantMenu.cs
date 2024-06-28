@@ -147,10 +147,10 @@ public class MerchantMenu : MonoBehaviour
                         ItemBomb.CollectItemBomb(tradeOption.itemQuantity);
                         break;
                     case ItemName.MinionOrbiter:
-                        ItemMinion.CollectItemMinionOrbiter(tradeOption.itemQuantity);
+                        GameManager.Instance.SpawnMinion(ItemName.MinionOrbiter);
                         break;
                     case ItemName.MinionFollower:
-                        ItemMinion.CollectItemMinionFollower(tradeOption.itemQuantity);
+                        GameManager.Instance.SpawnMinion(ItemName.MinionFollower);
                         break;
                     case ItemName.FullHeart:
                         ItemHeart.CollectItemHeart(tradeOption.itemQuantity);

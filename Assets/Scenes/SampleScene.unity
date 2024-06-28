@@ -2993,11 +2993,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 128330737}
   m_CullTransparentMesh: 1
---- !u!1 &139771389 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 694211808454501006, guid: 89f6e89f8cd786f4e80414f0e2a9d535, type: 3}
-  m_PrefabInstance: {fileID: 767843549}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &146094993
 GameObject:
   m_ObjectHideFlags: 0
@@ -7218,7 +7213,6 @@ Transform:
   - {fileID: 1686907978}
   - {fileID: 287983041}
   - {fileID: 82420644}
-  - {fileID: 1929111152}
   m_Father: {fileID: 1066024171}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -14689,79 +14683,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 758000795}
   m_CullTransparentMesh: 1
---- !u!1001 &767843549
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 354994838}
-    m_Modifications:
-    - target: {fileID: 694211808454501006, guid: 89f6e89f8cd786f4e80414f0e2a9d535, type: 3}
-      propertyPath: m_Name
-      value: MinionFollower
-      objectReference: {fileID: 0}
-    - target: {fileID: 2946811752216688941, guid: 89f6e89f8cd786f4e80414f0e2a9d535, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2946811752216688941, guid: 89f6e89f8cd786f4e80414f0e2a9d535, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313683196514339101, guid: 89f6e89f8cd786f4e80414f0e2a9d535, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6505197888344252224, guid: 89f6e89f8cd786f4e80414f0e2a9d535, type: 3}
-      propertyPath: m_RootOrder
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6505197888344252224, guid: 89f6e89f8cd786f4e80414f0e2a9d535, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -3.4178312
-      objectReference: {fileID: 0}
-    - target: {fileID: 6505197888344252224, guid: 89f6e89f8cd786f4e80414f0e2a9d535, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.9415598
-      objectReference: {fileID: 0}
-    - target: {fileID: 6505197888344252224, guid: 89f6e89f8cd786f4e80414f0e2a9d535, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.052285615
-      objectReference: {fileID: 0}
-    - target: {fileID: 6505197888344252224, guid: 89f6e89f8cd786f4e80414f0e2a9d535, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6505197888344252224, guid: 89f6e89f8cd786f4e80414f0e2a9d535, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6505197888344252224, guid: 89f6e89f8cd786f4e80414f0e2a9d535, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6505197888344252224, guid: 89f6e89f8cd786f4e80414f0e2a9d535, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6505197888344252224, guid: 89f6e89f8cd786f4e80414f0e2a9d535, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6505197888344252224, guid: 89f6e89f8cd786f4e80414f0e2a9d535, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6505197888344252224, guid: 89f6e89f8cd786f4e80414f0e2a9d535, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 89f6e89f8cd786f4e80414f0e2a9d535, type: 3}
 --- !u!1 &780227177
 GameObject:
   m_ObjectHideFlags: 0
@@ -15741,6 +15662,8 @@ MonoBehaviour:
   bombs: 0
   keys: 0
   minions: 0
+  minionOrbiter: {fileID: 694211808454501006, guid: dc5690ebb09fcee40bb6da1acb993d89, type: 3}
+  minionFollower: {fileID: 694211808454501006, guid: 89f6e89f8cd786f4e80414f0e2a9d535, type: 3}
   floatingTextManager: {fileID: 535773377}
   cameraShake: {fileID: 519420034}
   GameisOver: 0
@@ -27557,7 +27480,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minionOrbiter: {fileID: 694211808454501006, guid: dc5690ebb09fcee40bb6da1acb993d89, type: 3}
-  minionFollower: {fileID: 139771389}
+  minionFollower: {fileID: 0}
 --- !u!1 &1258730658
 GameObject:
   m_ObjectHideFlags: 0
@@ -34388,11 +34311,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1917832562}
   m_CullTransparentMesh: 1
---- !u!4 &1929111152 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6505197888344252224, guid: 89f6e89f8cd786f4e80414f0e2a9d535, type: 3}
-  m_PrefabInstance: {fileID: 767843549}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1930067010
 GameObject:
   m_ObjectHideFlags: 0

@@ -160,11 +160,11 @@ public class SlottyMenu : MonoBehaviour
                     Debug.Log("Player won Slotty BOMB jackpot");
                     break;
                 case ItemName.MinionOrbiter:
-                    ItemMinion.CollectItemMinionOrbiter(reward.rewardQuantity);
+                    GameManager.Instance.SpawnMinion(ItemName.MinionOrbiter);
                     Debug.Log("Player won Slotty MINION jackpot");
                     break;
                 case ItemName.MinionFollower:
-                    ItemMinion.CollectItemMinionFollower(reward.rewardQuantity);
+                    GameManager.Instance.SpawnMinion(ItemName.MinionFollower);
                     Debug.Log("Player won Slotty MINION jackpot");
                     break;
                 case ItemName.FullHeart:
