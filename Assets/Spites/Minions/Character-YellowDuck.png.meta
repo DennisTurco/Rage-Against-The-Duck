@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bfce978a874854d4fb300b8e1021af88
+guid: 89a6f91a9d669e3438892dc838b251e7
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -162,13 +162,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Collected_0
+      name: Character-YellowDuck_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 32
-        height: 32
+        x: 19
+        y: 399
+        width: 86
+        height: 82
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -176,20 +176,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4c90f1d28bca5bf4788dff1611b1489d
-      internalID: -287320818
+      spriteID: 1f461836a185b85468bc9378e850165c
+      internalID: 1630961751
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Collected_1
+      name: Character-YellowDuck_1
       rect:
         serializedVersion: 2
-        x: 32
-        y: 0
-        width: 32
-        height: 32
+        x: 148
+        y: 399
+        width: 86
+        height: 82
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -197,20 +197,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4cf116ddb22918245afbeef5cee4f6fb
-      internalID: 1639012882
+      spriteID: 982e9ecb2417e6c4e8991b70b73035f0
+      internalID: -1775235590
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Collected_2
+      name: Character-YellowDuck_2
       rect:
         serializedVersion: 2
-        x: 64
-        y: 0
-        width: 32
-        height: 32
+        x: 275
+        y: 398
+        width: 86
+        height: 82
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -218,20 +218,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c39462eec3b7f6c43bccf43f56ba995d
-      internalID: 1636191746
+      spriteID: 32404d36e2c533c4ba3e4e14b413dee5
+      internalID: -492184787
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Collected_3
+      name: Character-YellowDuck_3
       rect:
         serializedVersion: 2
-        x: 96
-        y: 0
-        width: 32
-        height: 32
+        x: 19
+        y: 271
+        width: 86
+        height: 82
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -239,20 +239,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5d86940158ee1bf4683538169edf068b
-      internalID: 1641151667
+      spriteID: dbb1ec42102fb0f4dbbeb6bb287195b6
+      internalID: 17654211
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Collected_4
+      name: Character-YellowDuck_4
       rect:
         serializedVersion: 2
-        x: 128
-        y: 0
-        width: 32
-        height: 32
+        x: 148
+        y: 271
+        width: 86
+        height: 79
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -260,20 +260,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f75bd8abe6f4ac2478ec3745d51d7c37
-      internalID: -2113476165
+      spriteID: d49cf210ac5aad04b80f1bd0722d33f7
+      internalID: 160190715
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Collected_5
+      name: Character-YellowDuck_5
       rect:
         serializedVersion: 2
-        x: 160
-        y: 0
-        width: 32
-        height: 32
+        x: 275
+        y: 271
+        width: 86
+        height: 82
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -281,8 +281,113 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ec2027abcc1897d4c8947b1b69098941
-      internalID: -593250704
+      spriteID: 6c865df87cb7fbd4887ca324526a747f
+      internalID: -2048382788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character-YellowDuck_6
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 141
+        width: 86
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7d4bce9ac9b7624ab3a6a62e8cbe2e3
+      internalID: -2057445952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character-YellowDuck_7
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 142
+        width: 86
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bdfea5da58c37bf4885029dae82c8368
+      internalID: -906840164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character-YellowDuck_8
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 143
+        width: 86
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36371af592b64344ea0d08ed545bda88
+      internalID: 531231581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character-YellowDuck_9
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 15
+        width: 86
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 371b07517353e9645bea0b7d1d608556
+      internalID: -606786304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character-YellowDuck_10
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 15
+        width: 86
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab7bc76ee0d57fb4fa3588e1f1759356
+      internalID: -296223208
       vertices: []
       indices: 
       edges: []
@@ -298,12 +403,17 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Collected_0: -287320818
-      Collected_1: 1639012882
-      Collected_2: 1636191746
-      Collected_3: 1641151667
-      Collected_4: -2113476165
-      Collected_5: -593250704
+      Character-YellowDuck_0: 1630961751
+      Character-YellowDuck_1: -1775235590
+      Character-YellowDuck_10: -296223208
+      Character-YellowDuck_2: -492184787
+      Character-YellowDuck_3: 17654211
+      Character-YellowDuck_4: 160190715
+      Character-YellowDuck_5: -2048382788
+      Character-YellowDuck_6: -2057445952
+      Character-YellowDuck_7: -906840164
+      Character-YellowDuck_8: 531231581
+      Character-YellowDuck_9: -606786304
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

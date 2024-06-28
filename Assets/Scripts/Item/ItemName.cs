@@ -3,7 +3,8 @@ public enum ItemName
     None,
     Coin,
     Bomb,
-    Minion,
+    MinionOrbiter,
+    MinionFollower,
     FullHeart,
     HalfHeart,
     Key
