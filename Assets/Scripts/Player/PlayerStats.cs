@@ -34,6 +34,13 @@ public class PlayerStats : MonoBehaviour
         AttackSpeed = playerStats.attackSpeed;
         AttackRate = playerStats.attackRate;
         Luck = playerStats.luck;
+
+        UpdateMovementSpeed(MovementSpeed);
+        UpdateAttackDamage(AttackDamageMin, AttackDamageMax);
+        UpdateAttackSpeed(AttackSpeed);
+        UpdateAttackRange(AttackRangeMin, AttackDamageMax);
+        UpdateAttackRate(AttackRate);
+        UpdateLuck(Luck);
     }
 
     public void UpdateMovementSpeed(float movementSpeed)

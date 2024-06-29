@@ -289,12 +289,12 @@ Transform:
   m_GameObject: {fileID: 6930945798686416454}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6721644214771146899}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &419061158273534789
 SpriteRenderer:
@@ -419,11 +419,13 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.5, y: 0.6875}
-      - {x: -0.5, y: -0.625}
-      - {x: 0.4375, y: -0.625}
-      - {x: 0.5, y: -0.5625}
-      - {x: 0.5, y: 0.6875}
+    - - {x: -0.25, y: 0.3125}
+      - {x: -0.34375, y: 0.1875}
+      - {x: -0.34375, y: -0.1875}
+      - {x: -0.15625, y: -0.34375}
+      - {x: 0.3125, y: -0.34375}
+      - {x: 0.3125, y: 0.21875}
+      - {x: 0.1875, y: 0.3125}
   m_UseDelaunayMesh: 0
 --- !u!95 &4929914018072377804
 Animator:

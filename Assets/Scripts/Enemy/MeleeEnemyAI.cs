@@ -50,15 +50,6 @@ public class MeleeEnemyAI : EnemyAI
         // ######## Move ########
         if (target != null)
         {
-            if (randomDirection.x > 0 && transform.localScale.x < 0)
-            {
-                Flip();
-            }
-            else if (randomDirection.x < 0 && transform.localScale.x > 0)
-            {
-                Flip();
-            }
-
             if (isMovingRandomly)
             {
                 MoveRandomly();
@@ -95,11 +86,30 @@ public class MeleeEnemyAI : EnemyAI
     private void MoveTowardsPlayer()
     {
         Vector2 direction = (target.transform.position - transform.position).normalized;
+
+        if (direction.x > 0 && transform.localScale.x < 0)
+        {
+            Flip();
+        }
+        else if (direction.x < 0 && transform.localScale.x > 0)
+        {
+            Flip();
+        }
+
         rb.MovePosition(rb.position + direction * speed * Time.fixedDeltaTime);
     }
 
     private void MoveRandomly()
     {
+        if (randomDirection.x > 0 && transform.localScale.x < 0)
+        {
+            Flip();
+        }
+        else if (randomDirection.x < 0 && transform.localScale.x > 0)
+        {
+            Flip();
+        }
+
         rb.MovePosition(rb.position + randomDirection * speed * Time.fixedDeltaTime);
     }
 

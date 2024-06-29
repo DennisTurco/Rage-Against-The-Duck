@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 057328ce6ab01d940b36a0001b98078c, type: 3}
   m_Name: HeartJackpot
   m_EditorClassIdentifier: 
-  itemName: 4
+  itemName: 5
   rewardQuantity: 1
   itemSprite: {fileID: 692756568, guid: e4b27e771f530f643b9c991f26a27fb7, type: 3}
   probability: 0.5
