@@ -22,9 +22,9 @@ TagManager:
   - Player
   - Blood
   - Projectile
-  - 
-  - 
-  - 
+  - FlyingEnemy
+  - SolidObject
+  - Trap
   - 
   - 
   - 

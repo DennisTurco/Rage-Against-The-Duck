@@ -12,7 +12,7 @@ public class DestructableObject : MonoBehaviour
     [SerializeField] private GameObject droppedItemPrefab;
     [SerializeField] private List<LootSpawn> lootList = new List<LootSpawn>();
     [SerializeField] private int maxNumberOfDrops = 3;
-    [SerializeField] private Collider2D playerCollider;
+    [SerializeField] private Collider2D entityCollider;
     [SerializeField] private Collider2D destructionCollider;
 
     private SpriteRenderer spriteRenderer;
@@ -22,7 +22,7 @@ public class DestructableObject : MonoBehaviour
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        playerCollider.enabled = true;
+        entityCollider.enabled = true;
         destructionCollider.enabled = true;
     }
 
@@ -69,7 +69,7 @@ public class DestructableObject : MonoBehaviour
         }
 
         spriteRenderer.sprite = destructionAnimationFrames[destructionAnimationFrames.Length - 1];
-        playerCollider.enabled = false;
+        entityCollider.enabled = false;
         destructionCollider.enabled = false;
         InstantiateLootSpawn(transform.position);
     }
