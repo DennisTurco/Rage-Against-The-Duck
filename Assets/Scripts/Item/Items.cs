@@ -1,23 +1,34 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Items : MonoBehaviour, ICollectible
 {
     [SerializeField] private string item;
+    [SerializeField] private float levitationAmplitude = 0.1f; // Ampiezza del movimento
+    [SerializeField] private float levitationFrequency = 0.2f; // Frequenza del movimento
+    private Vector3 startPosition;
 
     private ItemCoin itemCoin;
     private ItemBomb itemBomb;
     private ItemKey itemKey;
     private ItemHeart itemHeart;
-
+    
     private void Start()
     {
+        startPosition = transform.position;
+
         item = this.name;
         if (item.Equals(ItemName.Coin.ToString())) itemCoin = gameObject.AddComponent<ItemCoin>();
         else if (item.Equals(ItemName.Bomb.ToString())) itemBomb = gameObject.AddComponent<ItemBomb>();
         else if (item.Equals(ItemName.Key.ToString())) itemKey = gameObject.AddComponent<ItemKey>();
         else if (item.Equals(ItemName.FullHeart.ToString())) itemHeart = gameObject.AddComponent<ItemHeart>();
+
+    }
+
+    private void FixedUpdate()
+    {
+        float newY = startPosition.y + Mathf.PingPong(Time.time * levitationFrequency, levitationAmplitude) - (levitationAmplitude / 2);
+        transform.position = new Vector3(startPosition.x, newY, startPosition.z);
     }
 
     public void Collect()
@@ -59,5 +70,4 @@ public class Items : MonoBehaviour, ICollectible
         GameManager.Instance.ShowFloatingText("+" + 1 + " " + item, 25, Color.yellow, transform.position, Vector3.up * 100, 1.5f);
         Destroy(gameObject);
     }
-
 }
