@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Sergio : MonoBehaviour
+public class GenericAnimation : MonoBehaviour
 {
     [SerializeField] private Sprite[] animationFrames; // I frame dell'animazione
     [SerializeField] private float animationFrameDelay = 0.15f; // Delay tra i frame dell'animazione
