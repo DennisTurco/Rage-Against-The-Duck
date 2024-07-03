@@ -18,7 +18,7 @@ public class PlayerProjectileBullet : MonoBehaviour
         stats = obj.GetComponent<PlayerStats>();
         if (stats == null)
         {
-            Debug.LogError("Cannot obtain 'PlayerStats' component");
+            Debug.LogError("Cannot obtain 'PlayerStats' component on " + obj.name);
             return; // Early return to avoid null reference exceptions
         }
 
@@ -26,19 +26,30 @@ public class PlayerProjectileBullet : MonoBehaviour
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject player in players)
         {
-            Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+            Collider2D playerCollider = player.GetComponent<Collider2D>();
+            if (playerCollider != null)
+            {
+                Physics2D.IgnoreCollision(playerCollider, GetComponent<Collider2D>());
+            }
         }
 
         GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
         foreach (GameObject bullet in bullets)
         {
-            Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+            Collider2D bulletCollider = bullet.GetComponent<Collider2D>();
+            if (bulletCollider != null)
+            {
+                Physics2D.IgnoreCollision(bulletCollider, GetComponent<Collider2D>());
+            }
         }
     }
 
     private void Update()
     {
-        transform.position += transform.right * Time.deltaTime * stats.AttackSpeed;
+        if (stats != null)
+        {
+            transform.position += transform.right * Time.deltaTime * stats.AttackSpeed;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
