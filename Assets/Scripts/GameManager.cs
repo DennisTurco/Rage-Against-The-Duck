@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public GameObject minionFollower;
     [SerializeField] private FloatingTextManager floatingTextManager;
     [SerializeField] private CameraShake cameraShake;
+    public string playerType = null;
 
     // states
     [Header("States")]
@@ -27,6 +28,9 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+
+        if (playerType != null) { Debug.Log("playerType = " + playerType); }
+        else { Debug.Log("playerType = null"); }
     }
 
     private void Start()
@@ -59,7 +63,7 @@ public class GameManager : MonoBehaviour
     {
         UIManager _ui = GetComponent<UIManager>();
         if (_ui != null)
-        { 
+        {
             _ui.ToggleDeathPanel();
         }
         GameisOver = true;

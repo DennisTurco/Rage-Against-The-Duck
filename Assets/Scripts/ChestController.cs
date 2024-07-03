@@ -31,19 +31,13 @@ public class ChestController : MonoBehaviour
             }
         }
 
-        if (InteractableText != null && playerInRange && !InteractableText.interactionMessageOpen && !chestOpened)
+        if (InteractableText != null && playerInRange && !chestOpened)
         {
             InteractableText.SetTextVisible();
         }
-
-        if (InteractableText != null && !playerInRange && InteractableText.interactionMessageOpen)
+        else if (InteractableText != null && !playerInRange && InteractableText.interactionMessageOpen)
         {
             InteractableText.SetTextInvisible();
-        }
-
-        if (InteractableText != null && InteractableText.interactionMessageOpen)
-        {
-            InteractableText.PositionInteractionMessage();
         }
     }
 

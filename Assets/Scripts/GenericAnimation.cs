@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class GenericAnimation : MonoBehaviour
 {
-    [SerializeField] private Sprite[] animationFrames; // I frame dell'animazione
-    [SerializeField] private float animationFrameDelay = 0.15f; // Delay tra i frame dell'animazione
+    [SerializeField] private Sprite[] animationFrames;
+    [SerializeField] private float animationFrameDelay = 0.15f;
 
     private SpriteRenderer spriteRenderer;
     private int currentFrame = 0;

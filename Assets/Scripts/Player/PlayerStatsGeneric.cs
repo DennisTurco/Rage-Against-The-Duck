@@ -4,6 +4,7 @@
 public class PlayerStatsGeneric : ScriptableObject
 {
     [Header("Movement Stats")]
+    [SerializeField] public string statsPlayerName;
     [SerializeField] public float movementSpeed;
 
     [Header("Projectile Attack Stats")]

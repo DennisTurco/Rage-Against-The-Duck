@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
@@ -38,39 +34,63 @@ public class PlayerStats : MonoBehaviour
         UpdateMovementSpeed(MovementSpeed);
         UpdateAttackDamage(AttackDamageMin, AttackDamageMax);
         UpdateAttackSpeed(AttackSpeed);
-        UpdateAttackRange(AttackRangeMin, AttackDamageMax);
+        UpdateAttackRange(AttackRangeMin, AttackRangeMax);
         UpdateAttackRate(AttackRate);
         UpdateLuck(Luck);
     }
+
+    //public void CopyFrom(PlayerStats other)
+    //{
+    //    MovementSpeed = other.MovementSpeed;
+    //    AttackDamageMin = other.AttackDamageMin;
+    //    AttackDamageMax = other.AttackDamageMax;
+    //    AttackRangeMin = other.AttackRangeMin;
+    //    AttackRangeMax = other.AttackRangeMax;
+    //    AttackSpeed = other.AttackSpeed;
+    //    AttackRate = other.AttackRate;
+    //    Luck = other.Luck;
+
+    //    UpdateMovementSpeed(MovementSpeed);
+    //    UpdateAttackDamage(AttackDamageMin, AttackDamageMax);
+    //    UpdateAttackSpeed(AttackSpeed);
+    //    UpdateAttackRange(AttackRangeMin, AttackRangeMax);
+    //    UpdateAttackRate(AttackRate);
+    //    UpdateLuck(Luck);
+    //}
+
 
     public void UpdateMovementSpeed(float movementSpeed)
     {
         MovementSpeed = movementSpeed;
         textStatMovementSpeed.SetText(MovementSpeed);
     }
+
     public void UpdateAttackDamage(float attackDamageMin, float attackDamageMax)
     {
         AttackDamageMin = attackDamageMin;
         AttackDamageMax = attackDamageMax;
         textStatAttackDamage.SetText(AttackDamageMin, AttackDamageMax);
-
     }
+
     public void UpdateAttackSpeed(float attackSpeed)
     {
         AttackSpeed = attackSpeed;
         textStatAttackSpeed.SetText(AttackSpeed);
     }
+
     public void UpdateAttackRange(float attackRangeMin, float attackRangeMax)
     {
         AttackRangeMin = attackRangeMin;
         AttackRangeMax = attackRangeMax;
         textStatAttackRange.SetText(AttackRangeMin, AttackRangeMax);
     }
+
     public void UpdateAttackRate(float attackRate)
     {
         AttackRate = attackRate;
         textStatAttackRate.SetText(AttackRate);
     }
+
     public void UpdateLuck(float luck)
     {
         Luck = luck;

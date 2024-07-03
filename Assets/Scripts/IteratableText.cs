@@ -4,7 +4,7 @@ using UnityEngine;
 public class IteratableMessage : MonoBehaviour
 {
     [SerializeField] private GameObject InteractionMessage;
-    [SerializeField] private Canvas canvas; // Reference to the Canvas
+    [SerializeField] private Canvas canvas;
     [SerializeField] private float yOffset = 0; 
     public bool interactionMessageOpen = false;
 
