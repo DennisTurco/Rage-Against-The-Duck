@@ -10,7 +10,7 @@ public class PlayerModelCard : MonoBehaviour
     {
         if (playerStats != null)
         {
-            playerNameText.text = playerStats.statsPlayerName;
+            playerNameText.text = playerStats.playerName;
 
             playerStatsText.text = GetPlayerStatsText(playerStats);
         }
@@ -26,7 +26,7 @@ public class PlayerModelCard : MonoBehaviour
                $"Attack Damage: {stats.attackDamageMin} - {stats.attackDamageMax}\n" +
                $"Attack Range: {stats.attackRangeMin} - {stats.attackRangeMax}\n" +
                $"Attack Speed: {stats.attackSpeed}\n" +
-               $"Attack Rate: {stats.attackRate}\n" +
+               $"Attack Delay: {stats.attackRate}\n" +
                $"Luck: {stats.luck}";
     }
 }

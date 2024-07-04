@@ -12,12 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19aa4e9e090ce9742a82a686d23240f4, type: 3}
   m_Name: DuckPlayerStats
   m_EditorClassIdentifier: 
-  statsPlayerName: Duck
-  movementSpeed: 1
+  playerType: 1
+  playerName: Duck
+  playerDescription: It's a simple Duck
+  movementSpeed: 3.5
   attackDamageMin: 0.5
   attackDamageMax: 1
-  attackRangeMin: 0.5
-  attackRangeMax: 1
-  attackSpeed: 1.5
-  attackRate: 1
-  luck: 0.2
+  attackRangeMin: 3
+  attackRangeMax: 5
+  attackSpeed: 5.5
+  attackRate: 0.8
+  luck: 0

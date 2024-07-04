@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19aa4e9e090ce9742a82a686d23240f4, type: 3}
   m_Name: CatPlayerStats
   m_EditorClassIdentifier: 
-  statsPlayerName: Cat
+  playerType: 3
+  playerName: Cat
+  playerDescription: It's a simple cat
   movementSpeed: 1.4
   attackDamageMin: 0.7
   attackDamageMax: 1.2
