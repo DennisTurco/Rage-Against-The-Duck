@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log($"GAME MANAGER: {playerStats}");
+
         Instance = this;
 
         DontDestroyOnLoad(this.gameObject);
@@ -36,6 +38,8 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         GameisOver = false;
+
+
     }
 
     // floating text on pick up items

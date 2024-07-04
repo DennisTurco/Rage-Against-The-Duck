@@ -20,9 +20,18 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private TextStatAttackRate textStatAttackRate;
     //[SerializeField] private TextStatLuck textStatLuck;
 
-    private void Awake()
+    private void Start()
     {
-        GameManager.Instance.playerStats = this;
+        // if globalStats != null it means the player has chosen the player and so I have to get them, otherwise the player is choosing the player inside the lobby
+        var globalStats = GameManager.Instance.playerStats;
+        if (globalStats != null)
+        {
+            playerStats = globalStats.playerStats;
+        }
+        else
+        {
+            GameManager.Instance.playerStats = this;
+        }
 
         MovementSpeed = playerStats.movementSpeed;
         AttackDamageMin = playerStats.attackDamageMin;
