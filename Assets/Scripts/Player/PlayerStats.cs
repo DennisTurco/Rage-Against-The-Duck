@@ -22,6 +22,8 @@ public class PlayerStats : MonoBehaviour
 
     private void Awake()
     {
+        GameManager.Instance.playerStats = this;
+
         MovementSpeed = playerStats.movementSpeed;
         AttackDamageMin = playerStats.attackDamageMin;
         AttackDamageMax = playerStats.attackDamageMax;

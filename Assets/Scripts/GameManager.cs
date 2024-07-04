@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public GameObject minionFollower;
     [SerializeField] private FloatingTextManager floatingTextManager;
     [SerializeField] private CameraShake cameraShake;
-    public string playerType = null;
+    public PlayerStats playerStats; // player statistics --> I use this object to propagate stats across scenes
 
     // states
     [Header("States")]
@@ -29,8 +29,7 @@ public class GameManager : MonoBehaviour
     {
         Instance = this;
 
-        if (playerType != null) { Debug.Log("playerType = " + playerType); }
-        else { Debug.Log("playerType = null"); }
+        DontDestroyOnLoad(this.gameObject);
     }
 
     private void Start()
@@ -68,7 +67,6 @@ public class GameManager : MonoBehaviour
         }
         GameisOver = true;
     }
-
 
     public void SpawnMinion(ItemName minionName)
     {

@@ -3,8 +3,12 @@
 [CreateAssetMenu]
 public class PlayerStatsGeneric : ScriptableObject
 {
+    [Header("Who am I?")]
+    [SerializeField] public PlayerType playerType;
+    [SerializeField] public string playerName;
+    [SerializeField] public string playerDescription;
+
     [Header("Movement Stats")]
-    [SerializeField] public string statsPlayerName;
     [SerializeField] public float movementSpeed;
 
     [Header("Projectile Attack Stats")]

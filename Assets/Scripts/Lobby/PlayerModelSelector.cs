@@ -58,10 +58,7 @@ public class PlayerModelSelector : MonoBehaviour
             if (currentStats != null)
             {
                 PlayerStats newStats = newPlayerModelObject.GetComponent<PlayerStats>();
-                if (newStats == null)
-                {
-                    newStats = newPlayerModelObject.AddComponent<PlayerStats>();
-                }
+                GameManager.Instance.playerStats = newStats;
             }
             else
             {
@@ -75,22 +72,18 @@ public class PlayerModelSelector : MonoBehaviour
                 newPlayerModelObject.SetActive(true);
             }
 
-            GameManager.Instance.playerType = newPlayerStats.statsPlayerName;
-
             SmoothCameraFollow cameraFollow = Camera.main.GetComponent<SmoothCameraFollow>();
             if (cameraFollow != null)
             {
                 cameraFollow.SetTarget(newPlayerModelObject.transform);
             }
 
-            Debug.Log("Player model changed to: " + newPlayerStats.statsPlayerName);
+            Debug.Log("Player model changed to: " + newPlayerStats.playerName);
         }
         else
         {
             Debug.LogError("Player GameObject not found or newPlayerModelObject not assigned!");
         }
-
-        Debug.Log("playerType = " + GameManager.Instance.playerType);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -98,7 +91,7 @@ public class PlayerModelSelector : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
-            Debug.Log($"Player entered the range of {newPlayerStats.statsPlayerName}.");
+            Debug.Log($"Player entered the range of {newPlayerStats.playerName}.");
         }
     }
 
@@ -107,7 +100,7 @@ public class PlayerModelSelector : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-            Debug.Log($"Player exited the range of {newPlayerStats.statsPlayerName}.");
+            Debug.Log($"Player exited the range of {newPlayerStats.playerName}.");
         }
     }
 }
