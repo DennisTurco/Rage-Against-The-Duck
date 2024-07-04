@@ -1,3 +1,4 @@
+using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 
 public class PlayerModelSelector : MonoBehaviour
@@ -97,7 +98,7 @@ public class PlayerModelSelector : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
-            Debug.Log("Player entered the range of model switcher.");
+            Debug.Log($"Player entered the range of {newPlayerStats.statsPlayerName}.");
         }
     }
 
@@ -106,7 +107,7 @@ public class PlayerModelSelector : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-            Debug.Log("Player exited the range of model switcher.");
+            Debug.Log($"Player exited the range of {newPlayerStats.statsPlayerName}.");
         }
     }
 }
