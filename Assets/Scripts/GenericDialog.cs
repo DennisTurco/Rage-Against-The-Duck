@@ -14,7 +14,7 @@ public class GenericDialog : MonoBehaviour
     {
         if (sentences.Length > 0)
         {
-            sentences[0] = "Default first sentence. Modify this in the script.";
+            sentences[0] = "Default first sentence. Don't modify.";
         }
 
         if (dialogManager == null)
@@ -94,7 +94,7 @@ public class GenericDialog : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
-            Debug.Log("The player has entered the NPC collision area.");
+            Debug.Log($"(GenericDialog) The player has entered the {speakerName} collision area.");
         }
     }
 
@@ -103,7 +103,7 @@ public class GenericDialog : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-            Debug.Log("The player left the NPC collision area.");
+            Debug.Log($"(GenericDialog) The player left the {speakerName} collision area.");
         }
     }
 }

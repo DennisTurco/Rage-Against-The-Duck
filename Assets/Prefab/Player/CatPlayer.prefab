@@ -4844,7 +4844,7 @@ GameObject:
   - component: {fileID: 8948317176758214897}
   - component: {fileID: 7918680200098905865}
   - component: {fileID: 3663993664457138444}
-  - component: {fileID: 7739252859359035170}
+  - component: {fileID: -1882216354053732431}
   - component: {fileID: 7795007604166027334}
   - component: {fileID: 5099307426844366354}
   m_Layer: 8
@@ -4939,11 +4939,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerStatsData:
     playerStats: {fileID: 11400000, guid: 596662db85f71e14eae56427d3c5c645, type: 2}
-  textStatMovementSpeed: {fileID: 0}
-  textStatAttackDamage: {fileID: 0}
-  textStatAttackSpeed: {fileID: 0}
-  textStatAttackRange: {fileID: 0}
-  textStatAttackRate: {fileID: 0}
 --- !u!114 &1189539150000043705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5019,7 +5014,7 @@ MonoBehaviour:
   stats: {fileID: 2872422841887479070}
   bulletPrefab: {fileID: 3281302208205954006, guid: ec95652038c0dd64aa804a6ff7c92131, type: 3}
   bombPrefab: {fileID: 9105111704107428658, guid: cbca4ba9f8fecd545a0cbe6cc7c1ad51, type: 3}
---- !u!114 &7739252859359035170
+--- !u!114 &-1882216354053732431
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5028,14 +5023,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1584937270564681050}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d0f17ff74bae094983e7c2b11925989, type: 3}
+  m_Script: {fileID: 11500000, guid: 97dc151b9a505a74b81a2476737dc12a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationFrames:
+  idleFrames:
   - {fileID: -473998992, guid: 23995da9d2940f84ab14f8475eefcd7d, type: 3}
   - {fileID: -634207588, guid: 23995da9d2940f84ab14f8475eefcd7d, type: 3}
   - {fileID: -902426338, guid: 23995da9d2940f84ab14f8475eefcd7d, type: 3}
-  animationFrameDelay: 0.25
+  walkFrames:
+  - {fileID: 1697813873, guid: b18161b974577654ea088dd1d1ccd5a9, type: 3}
+  - {fileID: 1151454086, guid: b18161b974577654ea088dd1d1ccd5a9, type: 3}
+  - {fileID: 1783227051, guid: b18161b974577654ea088dd1d1ccd5a9, type: 3}
+  - {fileID: -239085950, guid: b18161b974577654ea088dd1d1ccd5a9, type: 3}
+  idleFrameDelay: 0.25
+  walkFrameDelay: 0.15
 --- !u!60 &7795007604166027334
 PolygonCollider2D:
   m_ObjectHideFlags: 0

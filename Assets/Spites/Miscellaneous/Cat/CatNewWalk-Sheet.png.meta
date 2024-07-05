@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7e80933a034899242a5a747655155f48
+guid: b18161b974577654ea088dd1d1ccd5a9
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 64
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SergioIdle_0
+      name: CatNewWalk-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 64
-        height: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +124,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e71615b2c241c094285f22c13c2a169c
-      internalID: 285104259
+      spriteID: f6795c891d987ba40ae8a0fd3949afed
+      internalID: 1697813873
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SergioIdle_1
+      name: CatNewWalk-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 310426e5cd2f39145962a39b4f92e514
+      internalID: 1151454086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CatNewWalk-Sheet_2
       rect:
         serializedVersion: 2
         x: 64
         y: 0
-        width: 64
-        height: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,20 +166,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2e078dbd60b468141b50de3bcb3f0d7e
-      internalID: -260927515
+      spriteID: b9c793800751e6b49a803d9396127a39
+      internalID: 1783227051
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SergioIdle_2
+      name: CatNewWalk-Sheet_3
       rect:
         serializedVersion: 2
-        x: 128
+        x: 96
         y: 0
-        width: 64
-        height: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,29 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5f60a975b0f99f747bfeeb1edf198bd2
-      internalID: -39703492
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SergioIdle_3
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3296f8e566b3a224b89d6a52833cab00
-      internalID: 1417998422
+      spriteID: 861341d0005d8fb44805442debc86723
+      internalID: -239085950
       vertices: []
       indices: 
       edges: []
@@ -204,10 +204,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      SergioIdle_0: 285104259
-      SergioIdle_1: -260927515
-      SergioIdle_2: -39703492
-      SergioIdle_3: 1417998422
+      CatNewWalk-Sheet_0: 1697813873
+      CatNewWalk-Sheet_1: 1151454086
+      CatNewWalk-Sheet_2: 1783227051
+      CatNewWalk-Sheet_3: -239085950
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

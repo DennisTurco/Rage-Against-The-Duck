@@ -5124,12 +5124,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 101
-  m_Sprite: {fileID: 285104259, guid: 7e80933a034899242a5a747655155f48, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1d5509098e494404899fa7744391870c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.16, y: 0.28}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -5149,11 +5149,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerStatsData:
     playerStats: {fileID: 11400000, guid: 5674049728a1d2a468e55a628c4a8926, type: 2}
-  textStatMovementSpeed: {fileID: 0}
-  textStatAttackDamage: {fileID: 0}
-  textStatAttackSpeed: {fileID: 0}
-  textStatAttackRange: {fileID: 0}
-  textStatAttackRate: {fileID: 0}
 --- !u!114 &7589420528527767643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5266,7 +5261,7 @@ PolygonCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1, y: 1}
-    newSize: {x: 0.16, y: 0.28}
+    newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -5301,10 +5296,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationFrames:
-  - {fileID: 285104259, guid: 7e80933a034899242a5a747655155f48, type: 3}
-  - {fileID: -260927515, guid: 7e80933a034899242a5a747655155f48, type: 3}
-  - {fileID: -39703492, guid: 7e80933a034899242a5a747655155f48, type: 3}
-  - {fileID: 1417998422, guid: 7e80933a034899242a5a747655155f48, type: 3}
+  - {fileID: 983918896, guid: 53acb14cdd3009344a92ad0a26d19651, type: 3}
+  - {fileID: -2113013614, guid: 53acb14cdd3009344a92ad0a26d19651, type: 3}
+  - {fileID: 732471834, guid: 53acb14cdd3009344a92ad0a26d19651, type: 3}
+  - {fileID: 1385362867, guid: 53acb14cdd3009344a92ad0a26d19651, type: 3}
   animationFrameDelay: 0.15
 --- !u!50 &29326358477235825
 Rigidbody2D:
