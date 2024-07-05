@@ -26,21 +26,16 @@ public class PlayerModelSelector : MonoBehaviour
 
         if (interactableText != null)
         {
-            if (playerInRange && !interactableText.interactionMessageOpen)
+            if (playerInRange)
             {
                 interactableText.SetTextVisible();
                 statsCard.SetActive(true);
                 playerModelCard.SetPlayerModelCard(newPlayerStats);
             }
-            if (!playerInRange && interactableText.interactionMessageOpen)
+            else if (!playerInRange && interactableText.interactionMessageOpen)
             {
                 interactableText.SetTextInvisible();
                 statsCard.SetActive(false);
-            }
-
-            if (interactableText.interactionMessageOpen)
-            {
-                interactableText.PositionInteractionMessage();
             }
         }
     }
@@ -58,7 +53,7 @@ public class PlayerModelSelector : MonoBehaviour
             if (currentStats != null)
             {
                 PlayerStats newStats = newPlayerModelObject.GetComponent<PlayerStats>();
-                GameManager.Instance.playerStats = newStats;
+                GameManager.Instance.gameData.playerStats = newStats.playerStatsData;
             }
             else
             {

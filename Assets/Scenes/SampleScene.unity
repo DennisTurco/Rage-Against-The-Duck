@@ -9062,7 +9062,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: -10}
   smoothTime: 0.25
-  target: {fileID: 1256453590}
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15664,7 +15663,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &804327433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15681,11 +15680,16 @@ MonoBehaviour:
   bombs: 0
   keys: 0
   minions: 0
+  gameData: {fileID: 11400000, guid: eade95e038addeb46b3f35fa6627bdd6, type: 2}
   minionOrbiter: {fileID: 694211808454501006, guid: dc5690ebb09fcee40bb6da1acb993d89, type: 3}
   minionFollower: {fileID: 694211808454501006, guid: 89f6e89f8cd786f4e80414f0e2a9d535, type: 3}
   floatingTextManager: {fileID: 535773377}
   cameraShake: {fileID: 519420034}
-  playerStats: {fileID: 0}
+  textStatMovementSpeed: {fileID: 1860111808}
+  textStatAttackDamage: {fileID: 1250965186}
+  textStatAttackSpeed: {fileID: 601462956}
+  textStatAttackRange: {fileID: 1618844790}
+  textStatAttackRate: {fileID: 584392212}
   GameisOver: 0
 --- !u!4 &804327434
 Transform:
@@ -27283,12 +27287,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16083ce425e10ea4d84bfaad09b683ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats: {fileID: 11400000, guid: 64aafcde73fc6964486aa3ba4fec257b, type: 2}
-  textStatMovementSpeed: {fileID: 1860111808}
-  textStatAttackDamage: {fileID: 1250965186}
-  textStatAttackSpeed: {fileID: 601462956}
-  textStatAttackRange: {fileID: 1618844790}
-  textStatAttackRate: {fileID: 584392212}
+  playerStatsData:
+    playerStats: {fileID: 0}
 --- !u!60 &1256453604
 PolygonCollider2D:
   m_ObjectHideFlags: 0

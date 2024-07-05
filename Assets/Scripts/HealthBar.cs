@@ -20,6 +20,13 @@ public class HealthBar : MonoBehaviour
 
     private void Start()
     {
+        StartCoroutine(InitializeAfterPlayerInitialized());
+    }
+
+    private IEnumerator InitializeAfterPlayerInitialized()
+    {
+        yield return new WaitUntil(() => GameManager.Instance != null && GameManager.Instance.isInitialized && GameManager.Instance.playerInitialized);
+        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
         DrawHearts();
     }
 

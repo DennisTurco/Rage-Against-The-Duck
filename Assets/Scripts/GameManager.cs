@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    public bool isInitialized = false;
+    public bool playerInitialized = false;
 
     // inventory
     [Header("Inventory")]
@@ -15,11 +17,19 @@ public class GameManager : MonoBehaviour
 
     // resources
     [Header("Resources")]
+    [SerializeField] public GameData gameData; // I use this object to propagate data across scenes
     [SerializeField] public GameObject minionOrbiter;
     [SerializeField] public GameObject minionFollower;
     [SerializeField] private FloatingTextManager floatingTextManager;
     [SerializeField] private CameraShake cameraShake;
-    public PlayerStats playerStats; // player statistics --> I use this object to propagate stats across scenes
+
+    // stats - UI
+    [SerializeField] public TextStatMovementSpeed textStatMovementSpeed;
+    [SerializeField] public TextStatAttackDamage textStatAttackDamage;
+    [SerializeField] public TextStatAttackSpeed textStatAttackSpeed;
+    [SerializeField] public TextStatAttackRange textStatAttackRange;
+    [SerializeField] public TextStatAttackRate textStatAttackRate;
+    //[SerializeField] public TextStatLuck textStatLuck;
 
     // states
     [Header("States")]
@@ -27,19 +37,22 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log($"GAME MANAGER: {playerStats}");
-
-        Instance = this;
-
-        DontDestroyOnLoad(this.gameObject);
+        Initialize();
     }
 
     private void Start()
     {
         Time.timeScale = 1f;
         GameisOver = false;
+    }
 
-
+    public void Initialize()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        isInitialized = true;
     }
 
     // floating text on pick up items

@@ -80,6 +80,6 @@ public class PlayerMovement : MonoBehaviour
         // play dust particle effect on move
         if (Input.GetButton("Horizontal") || Input.GetButton("Vertical")) dust.Play();
 
-        rb.MovePosition(rb.position + moveDirection * stats.MovementSpeed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + moveDirection * stats.playerStatsData.MovementSpeed * Time.fixedDeltaTime);
     }
 }

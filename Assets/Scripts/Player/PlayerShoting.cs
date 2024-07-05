@@ -14,7 +14,7 @@ public class PlayerShooting : MonoBehaviour
 
     private void Start()
     {
-        nextFire = stats.AttackRate;
+        nextFire = stats.playerStatsData.AttackRate;
     }
 
     private void Update()
@@ -25,12 +25,12 @@ public class PlayerShooting : MonoBehaviour
             else if (Input.GetButton("FireDown")) Shoot(new Vector2(0, -1).normalized);
             else if (Input.GetButton("FireRight")) Shoot(new Vector2(1, 0).normalized);
             else if (Input.GetButton("FireLeft")) Shoot(new Vector2(-1, 0).normalized);
-            nextFire = stats.AttackRate;
+            nextFire = stats.playerStatsData.AttackRate;
         }
         if (Input.GetButtonDown("ThrowBomb") && nextFire <= 0 && GameManager.Instance.bombs > 0)
         {
             ThrowBomb();
-            nextFire = stats.AttackRate;
+            nextFire = stats.playerStatsData.AttackRate;
         }
 
         if (nextFire > 0)

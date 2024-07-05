@@ -123,7 +123,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4841881910145489296
 Transform:
   m_ObjectHideFlags: 0
@@ -5073,12 +5073,12 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4242281927752567830}
+  - {fileID: 9169903517703084778}
   - {fileID: 4841881910145489296}
   - {fileID: 2735364218057880358}
   - {fileID: 5957407507391955938}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6094879464243391429
 SpriteRenderer:
@@ -5144,7 +5144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16083ce425e10ea4d84bfaad09b683ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats: {fileID: 11400000, guid: 64aafcde73fc6964486aa3ba4fec257b, type: 2}
+  playerStatsData:
+    playerStats: {fileID: 11400000, guid: 64aafcde73fc6964486aa3ba4fec257b, type: 2}
   textStatMovementSpeed: {fileID: 0}
   textStatAttackDamage: {fileID: 0}
   textStatAttackSpeed: {fileID: 0}
@@ -5377,7 +5378,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72433410cf1f73848911f9df2bb0e442, type: 3}
---- !u!4 &4242281927752567830 stripped
+--- !u!4 &9169903517703084778 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3988328127201984104, guid: 72433410cf1f73848911f9df2bb0e442, type: 3}
   m_PrefabInstance: {fileID: 5195863034632774786}

@@ -4871,7 +4871,7 @@ Transform:
   - {fileID: 9118242606675604820}
   - {fileID: 5037797559936948690}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1436407583410839036
 SpriteRenderer:
@@ -4937,7 +4937,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16083ce425e10ea4d84bfaad09b683ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats: {fileID: 11400000, guid: 596662db85f71e14eae56427d3c5c645, type: 2}
+  playerStatsData:
+    playerStats: {fileID: 11400000, guid: 596662db85f71e14eae56427d3c5c645, type: 2}
   textStatMovementSpeed: {fileID: 0}
   textStatAttackDamage: {fileID: 0}
   textStatAttackSpeed: {fileID: 0}
@@ -5132,7 +5133,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3320759060329355068
 Transform:
   m_ObjectHideFlags: 0

@@ -3,108 +3,83 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    [SerializeField] public PlayerStatsGeneric playerStats;
-    public float MovementSpeed { get; set; }
-    public float AttackDamageMin { get; set; }
-    public float AttackDamageMax { get; set; }
-    public float AttackRangeMin { get; set; }
-    public float AttackRangeMax { get; set; }
-    public float AttackSpeed { get; set; }
-    public float AttackRate { get; set; }
-    public float Luck { get; set; }
-
-    [SerializeField] private TextStatMovementSpeed textStatMovementSpeed;
-    [SerializeField] private TextStatAttackDamage textStatAttackDamage;
-    [SerializeField] private TextStatAttackSpeed textStatAttackSpeed;
-    [SerializeField] private TextStatAttackRange textStatAttackRange;
-    [SerializeField] private TextStatAttackRate textStatAttackRate;
-    //[SerializeField] private TextStatLuck textStatLuck;
-
+    public PlayerStatsData playerStatsData;
+    private TextStatMovementSpeed textStatMovementSpeed;
+    private TextStatAttackDamage textStatAttackDamage;
+    private TextStatAttackSpeed textStatAttackSpeed;
+    private TextStatAttackRange textStatAttackRange;
+    private TextStatAttackRate textStatAttackRate;
+    //private TextStatLuck textStatLuck;
     private void Start()
     {
         // if globalStats != null it means the player has chosen the player and so I have to get them, otherwise the player is choosing the player inside the lobby
-        var globalStats = GameManager.Instance.playerStats;
+        var globalStats = GameManager.Instance.gameData.playerStats;
         if (globalStats != null)
         {
-            playerStats = globalStats.playerStats;
+            playerStatsData = globalStats;
         }
         else
         {
-            GameManager.Instance.playerStats = this;
+            GameManager.Instance.gameData.playerStats = this.playerStatsData;
         }
+        playerStatsData.MovementSpeed = playerStatsData.playerStats.movementSpeed;
+        playerStatsData.AttackDamageMin = playerStatsData.playerStats.attackDamageMin;
+        playerStatsData.AttackDamageMax = playerStatsData.playerStats.attackDamageMax;
+        playerStatsData.AttackRangeMin = playerStatsData.playerStats.attackRangeMin;
+        playerStatsData.AttackRangeMax = playerStatsData.playerStats.attackRangeMax;
+        playerStatsData.AttackSpeed = playerStatsData.playerStats.attackSpeed;
+        playerStatsData.AttackRate = playerStatsData.playerStats.attackRate;
+        playerStatsData.Luck = playerStatsData.playerStats.luck;
 
-        MovementSpeed = playerStats.movementSpeed;
-        AttackDamageMin = playerStats.attackDamageMin;
-        AttackDamageMax = playerStats.attackDamageMax;
-        AttackRangeMin = playerStats.attackRangeMin;
-        AttackRangeMax = playerStats.attackRangeMax;
-        AttackSpeed = playerStats.attackSpeed;
-        AttackRate = playerStats.attackRate;
-        Luck = playerStats.luck;
-
-        UpdateMovementSpeed(MovementSpeed);
-        UpdateAttackDamage(AttackDamageMin, AttackDamageMax);
-        UpdateAttackSpeed(AttackSpeed);
-        UpdateAttackRange(AttackRangeMin, AttackRangeMax);
-        UpdateAttackRate(AttackRate);
-        UpdateLuck(Luck);
+        textStatMovementSpeed = GameManager.Instance.textStatMovementSpeed;
+        textStatAttackDamage = GameManager.Instance.textStatAttackDamage;
+        textStatAttackSpeed = GameManager.Instance.textStatAttackSpeed;
+        textStatAttackRange = GameManager.Instance.textStatAttackRange;
+        textStatAttackRate = GameManager.Instance.textStatAttackRate;
+        
+        UpdateMovementSpeed(playerStatsData.MovementSpeed);
+        UpdateAttackDamage(playerStatsData.AttackDamageMin, playerStatsData.AttackDamageMax);
+        UpdateAttackSpeed(playerStatsData.AttackSpeed);
+        UpdateAttackRange(playerStatsData.AttackRangeMin, playerStatsData.AttackRangeMax);
+        UpdateAttackRate(playerStatsData.AttackRate);
+        UpdateLuck(playerStatsData.Luck);
     }
-
-    //public void CopyFrom(PlayerStats other)
-    //{
-    //    MovementSpeed = other.MovementSpeed;
-    //    AttackDamageMin = other.AttackDamageMin;
-    //    AttackDamageMax = other.AttackDamageMax;
-    //    AttackRangeMin = other.AttackRangeMin;
-    //    AttackRangeMax = other.AttackRangeMax;
-    //    AttackSpeed = other.AttackSpeed;
-    //    AttackRate = other.AttackRate;
-    //    Luck = other.Luck;
-
-    //    UpdateMovementSpeed(MovementSpeed);
-    //    UpdateAttackDamage(AttackDamageMin, AttackDamageMax);
-    //    UpdateAttackSpeed(AttackSpeed);
-    //    UpdateAttackRange(AttackRangeMin, AttackRangeMax);
-    //    UpdateAttackRate(AttackRate);
-    //    UpdateLuck(Luck);
-    //}
-
 
     public void UpdateMovementSpeed(float movementSpeed)
     {
-        MovementSpeed = movementSpeed;
-        textStatMovementSpeed.SetText(MovementSpeed);
+        playerStatsData.MovementSpeed = movementSpeed;
+        textStatMovementSpeed.SetText(playerStatsData.MovementSpeed);
     }
 
     public void UpdateAttackDamage(float attackDamageMin, float attackDamageMax)
     {
-        AttackDamageMin = attackDamageMin;
-        AttackDamageMax = attackDamageMax;
-        textStatAttackDamage.SetText(AttackDamageMin, AttackDamageMax);
+        playerStatsData.AttackDamageMin = attackDamageMin;
+        playerStatsData.AttackDamageMax = attackDamageMax;
+        textStatAttackDamage.SetText(playerStatsData.AttackDamageMin, playerStatsData.AttackDamageMax);
     }
 
     public void UpdateAttackSpeed(float attackSpeed)
     {
-        AttackSpeed = attackSpeed;
-        textStatAttackSpeed.SetText(AttackSpeed);
+        playerStatsData.AttackSpeed = attackSpeed;
+        textStatAttackSpeed.SetText(playerStatsData.AttackSpeed);
     }
 
     public void UpdateAttackRange(float attackRangeMin, float attackRangeMax)
     {
-        AttackRangeMin = attackRangeMin;
-        AttackRangeMax = attackRangeMax;
-        textStatAttackRange.SetText(AttackRangeMin, AttackRangeMax);
+        playerStatsData.AttackRangeMin = attackRangeMin;
+        playerStatsData.AttackRangeMax = attackRangeMax;
+        textStatAttackRange.SetText(playerStatsData.AttackRangeMin, playerStatsData.AttackRangeMax);
     }
 
     public void UpdateAttackRate(float attackRate)
     {
-        AttackRate = attackRate;
-        textStatAttackRate.SetText(AttackRate);
+        playerStatsData.AttackRate = attackRate;
+        textStatAttackRate.SetText(playerStatsData.AttackRate);
     }
 
     public void UpdateLuck(float luck)
     {
-        Luck = luck;
+        playerStatsData.Luck = luck;
         //TODO: add
     }
 }

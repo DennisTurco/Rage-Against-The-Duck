@@ -51,6 +51,14 @@ public abstract class EnemyAI : MonoBehaviour
             Debug.Log($"UpdateHealthBar({health}, {maxHealth})");
             healthBar.UpdateHealthBar(health, maxHealth);
         }
+
+        StartCoroutine(InitializeAfterPlayerInitialized());
+    }
+
+    private IEnumerator InitializeAfterPlayerInitialized()
+    {
+        yield return new WaitUntil(() => GameManager.Instance != null && GameManager.Instance.isInitialized && GameManager.Instance.playerInitialized);
+
         getNearTarget();
     }
 
