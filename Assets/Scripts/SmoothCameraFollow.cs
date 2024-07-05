@@ -8,8 +8,18 @@ public class SmoothCameraFollow : MonoBehaviour
     public float smoothTime = 0.25f;
 
     private Vector3 velocity = Vector3.zero;
+    private Transform target; // player to follow
 
-    [SerializeField] private Transform target;
+    private void Start()
+    {
+        StartCoroutine(InitializeAfterPlayerInitialized());
+    }
+
+    private IEnumerator InitializeAfterPlayerInitialized()
+    {
+        yield return new WaitUntil(() => GameManager.Instance != null && GameManager.Instance.isInitialized && GameManager.Instance.playerInitialized);
+        target = GameObject.FindGameObjectWithTag("Player").transform;
+    }
 
     void Update()
     {

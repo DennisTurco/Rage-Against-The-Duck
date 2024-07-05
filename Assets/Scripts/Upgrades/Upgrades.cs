@@ -79,27 +79,27 @@ public class Upgrades : MonoBehaviour, ICollectible
         {
             if (up.statisticName == StatisticName.MovementSpeed)
             {
-                stats.UpdateMovementSpeed(stats.MovementSpeed + up.upgradeValue);
+                stats.UpdateMovementSpeed(stats.playerStatsData.MovementSpeed + up.upgradeValue);
             }
             else if (up.statisticName == StatisticName.AttackDamage)
             {
-                stats.UpdateAttackDamage(stats.AttackDamageMin + up.upgradeValue, stats.AttackDamageMax + up.upgradeValue);
+                stats.UpdateAttackDamage(stats.playerStatsData.AttackDamageMin + up.upgradeValue, stats.playerStatsData.AttackDamageMax + up.upgradeValue);
             }
             else if (up.statisticName == StatisticName.AttackSpeed)
             {
-                stats.UpdateAttackSpeed(stats.AttackSpeed + up.upgradeValue);
+                stats.UpdateAttackSpeed(stats.playerStatsData.AttackSpeed + up.upgradeValue);
             }
             else if (up.statisticName == StatisticName.AttackRange)
             {
-                stats.UpdateAttackRange(stats.AttackRangeMin + up.upgradeValue, stats.AttackRangeMax + up.upgradeValue);
+                stats.UpdateAttackRange(stats.playerStatsData.AttackRangeMin + up.upgradeValue, stats.playerStatsData.AttackRangeMax + up.upgradeValue);
             }
             else if (up.statisticName == StatisticName.AttackRate)
             {
-                stats.UpdateAttackRate(stats.AttackRate + up.upgradeValue);
+                stats.UpdateAttackRate(stats.playerStatsData.AttackRate + up.upgradeValue);
             }
             else if (up.statisticName == StatisticName.Luck)
             {
-                stats.UpdateLuck(stats.Luck + up.upgradeValue);
+                stats.UpdateLuck(stats.playerStatsData.Luck + up.upgradeValue);
             }
             else
             {

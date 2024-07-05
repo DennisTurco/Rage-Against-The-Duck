@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class PlayerProjectileBullet : MonoBehaviour
 {
@@ -48,7 +49,7 @@ public class PlayerProjectileBullet : MonoBehaviour
     {
         if (stats != null)
         {
-            transform.position += transform.right * Time.deltaTime * stats.AttackSpeed;
+            transform.position += transform.right * Time.deltaTime * stats.playerStatsData.AttackSpeed;
         }
     }
 
@@ -56,7 +57,7 @@ public class PlayerProjectileBullet : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent<EnemyAI>(out EnemyAI enemyComponent))
         {
-            float damage = Random.Range(stats.AttackDamageMin, stats.AttackDamageMax);
+            float damage = Random.Range(stats.playerStatsData.AttackDamageMin, stats.playerStatsData.AttackDamageMax);
             enemyComponent.TakeDamage(damage);
         }
         else if (collision.gameObject.TryGetComponent<DestructableObject>(out DestructableObject destructableObject))
@@ -69,7 +70,7 @@ public class PlayerProjectileBullet : MonoBehaviour
 
     private IEnumerator DeathDelay()
     {
-        float lifeTime = Random.Range(stats.AttackRangeMin, stats.AttackRangeMax);
+        float lifeTime = Random.Range(stats.playerStatsData.AttackRangeMin, stats.playerStatsData.AttackRangeMax);
         yield return new WaitForSeconds(lifeTime);
         DestroyProjectile();
     }
