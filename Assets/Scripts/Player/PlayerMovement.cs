@@ -82,4 +82,9 @@ public class PlayerMovement : MonoBehaviour
 
         rb.MovePosition(rb.position + moveDirection * stats.playerStatsData.MovementSpeed * Time.fixedDeltaTime);
     }
+
+    public bool IsMoving()
+    {
+        return moveDirection.sqrMagnitude > 0;
+    }
 }
