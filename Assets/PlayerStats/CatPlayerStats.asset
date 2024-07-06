@@ -13,13 +13,12 @@ MonoBehaviour:
   m_Name: CatPlayerStats
   m_EditorClassIdentifier: 
   playerType: 3
-  playerName: Cat
-  playerDescription: It's a simple cat
-  movementSpeed: 1.4
+  playerDescription: It's a simple cat, but very cute and fast
+  movementSpeed: 4.2
   attackDamageMin: 0.7
-  attackDamageMax: 1.2
-  attackRangeMin: 0.7
-  attackRangeMax: 1.2
-  attackSpeed: 1
-  attackRate: 1
-  luck: 0
+  attackDamageMax: 1.1
+  attackRangeMin: 0.8
+  attackRangeMax: 1.1
+  attackSpeed: 6
+  attackRate: 0.6
+  luck: 0.1

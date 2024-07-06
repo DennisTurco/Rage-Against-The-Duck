@@ -13,13 +13,12 @@ MonoBehaviour:
   m_Name: DuckPlayerStats
   m_EditorClassIdentifier: 
   playerType: 1
-  playerName: Duck
-  playerDescription: It's a simple Duck
-  movementSpeed: 3.5
+  playerDescription: It's a simple Duck that doesn't swim
+  movementSpeed: 3.9
   attackDamageMin: 0.5
   attackDamageMax: 1
-  attackRangeMin: 3
-  attackRangeMax: 5
+  attackRangeMin: 1
+  attackRangeMax: 1.4
   attackSpeed: 5.5
-  attackRate: 0.8
-  luck: 0
+  attackRate: 0.9
+  luck: 0.3

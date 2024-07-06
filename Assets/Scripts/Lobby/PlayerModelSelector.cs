@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerModelSelector : MonoBehaviour
 {
-    [SerializeField] private GameObject newPlayerModelPrefab; // Prefab del nuovo player
+    [SerializeField] private GameObject newPlayerModelPrefab;
     [SerializeField] private PlayerStatsGeneric newPlayerStats;
     private bool playerInRange = false;
 
@@ -47,7 +47,6 @@ public class PlayerModelSelector : MonoBehaviour
         {
             Vector3 currentPlayerPosition = currentPlayerObject.transform.position;
 
-            // Spawna il nuovo player
             GameObject newPlayerObject = Instantiate(newPlayerModelPrefab, currentPlayerPosition, Quaternion.identity);
 
             PlayerStats newStats = newPlayerObject.GetComponent<PlayerStats>();
@@ -60,14 +59,12 @@ public class PlayerModelSelector : MonoBehaviour
                 Debug.LogError("New player does not have PlayerStats component");
             }
 
-            // Imposta la nuova telecamera sul nuovo player
             SmoothCameraFollow cameraFollow = Camera.main.GetComponent<SmoothCameraFollow>();
             if (cameraFollow != null)
             {
                 cameraFollow.SetTarget(newPlayerObject.transform);
             }
 
-            // Rimuove il player corrente dalla scena
             Destroy(currentPlayerObject);
 
             Debug.Log("Player model changed to: " + newPlayerStats.playerType.ToString());

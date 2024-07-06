@@ -13,13 +13,12 @@ MonoBehaviour:
   m_Name: SergioPlayerStats
   m_EditorClassIdentifier: 
   playerType: 2
-  playerName: Sergio
-  playerDescription: It's a simple Sergio
-  movementSpeed: 4.5
-  attackDamageMin: 0.6
-  attackDamageMax: 1.1
-  attackRangeMin: 0.6
-  attackRangeMax: 1.1
-  attackSpeed: 3
-  attackRate: 1
+  playerDescription: It's Sergio, it's a God, It's super adorable
+  movementSpeed: 3.2
+  attackDamageMin: 0.8
+  attackDamageMax: 1.3
+  attackRangeMin: 1
+  attackRangeMax: 1.4
+  attackSpeed: 4.2
+  attackRate: 1.2
   luck: 0.5
