@@ -5,7 +5,8 @@ public class PlayerStatsGeneric : ScriptableObject
 {
     [Header("Who am I?")]
     [SerializeField] public PlayerType playerType;
-    [SerializeField] public string playerName;
+
+    [TextArea]
     [SerializeField] public string playerDescription;
 
     [Header("Movement Stats")]

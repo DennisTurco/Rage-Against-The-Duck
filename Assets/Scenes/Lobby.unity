@@ -919,7 +919,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 124473775}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.54, y: -12.73, z: -0.052285615}
+  m_LocalPosition: {x: -3.54, y: -12.82, z: -0.052285615}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1560,37 +1560,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 157596952}
   m_CullTransparentMesh: 1
---- !u!1 &158457850
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 158457851}
-  m_Layer: 0
-  m_Name: SwanSelction
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &158457851
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 158457850}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1228710186}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &191882032
 GameObject:
   m_ObjectHideFlags: 0
@@ -16984,7 +16953,6 @@ Transform:
   m_Children:
   - {fileID: 1709207931}
   - {fileID: 444433948}
-  - {fileID: 158457851}
   - {fileID: 1783051101}
   m_Father: {fileID: 354994838}
   m_RootOrder: -1
@@ -20417,7 +20385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69b637ad0259c7c4c9191e248a0ff6d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newPlayerModelObject: {fileID: 0}
+  newPlayerModelPrefab: {fileID: 1584937270564681050, guid: 9d7f87a9faeb1d646a566f08c2164955, type: 3}
   newPlayerStats: {fileID: 11400000, guid: 596662db85f71e14eae56427d3c5c645, type: 2}
   interactableText: {fileID: 1685742408}
   statsCard: {fileID: 143339629}
@@ -22416,7 +22384,7 @@ GameObject:
   - component: {fileID: 1898713163}
   - component: {fileID: 1898713162}
   m_Layer: 0
-  m_Name: Pedestal 4
+  m_Name: Pedestal 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22430,7 +22398,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1898713160}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -20.539, y: -12.834001, z: -0.052285615}
+  m_LocalPosition: {x: -20.539, y: -12.82, z: -0.052285615}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -94588,7 +94556,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2093195598}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.4799986, y: -12.309999, z: 0}
+  m_LocalPosition: {x: -3.554, y: -12.403, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -94761,7 +94729,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69b637ad0259c7c4c9191e248a0ff6d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newPlayerModelObject: {fileID: 0}
+  newPlayerModelPrefab: {fileID: 9170845982523168313, guid: 1db8166a117859c4eaea8ca140ce3d9b, type: 3}
   newPlayerStats: {fileID: 11400000, guid: 64aafcde73fc6964486aa3ba4fec257b, type: 2}
   interactableText: {fileID: 2093195604}
   statsCard: {fileID: 143339629}
@@ -95007,7 +94975,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69b637ad0259c7c4c9191e248a0ff6d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newPlayerModelObject: {fileID: 0}
+  newPlayerModelPrefab: {fileID: 6875934624045904820, guid: 7abbb1384b33b934cb30be4aa3271026, type: 3}
   newPlayerStats: {fileID: 11400000, guid: 5674049728a1d2a468e55a628c4a8926, type: 2}
   interactableText: {fileID: 2105315919}
   statsCard: {fileID: 143339629}

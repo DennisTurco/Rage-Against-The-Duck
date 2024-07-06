@@ -10,7 +10,7 @@ public class PlayerModelCard : MonoBehaviour
     {
         if (playerStats != null)
         {
-            playerNameText.text = playerStats.playerName;
+            playerNameText.text = playerStats.playerType.ToString();
 
             playerStatsText.text = GetPlayerStatsText(playerStats);
         }

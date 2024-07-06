@@ -1,9 +1,8 @@
-using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 
 public class PlayerModelSelector : MonoBehaviour
 {
-    [SerializeField] private GameObject newPlayerModelObject;
+    [SerializeField] private GameObject newPlayerModelPrefab; // Prefab del nuovo player
     [SerializeField] private PlayerStatsGeneric newPlayerStats;
     private bool playerInRange = false;
 
@@ -44,36 +43,34 @@ public class PlayerModelSelector : MonoBehaviour
     {
         GameObject currentPlayerObject = GameObject.FindGameObjectWithTag("Player");
 
-        if (currentPlayerObject != null && newPlayerModelObject != null)
+        if (currentPlayerObject != null && newPlayerModelPrefab != null)
         {
             Vector3 currentPlayerPosition = currentPlayerObject.transform.position;
-            newPlayerModelObject.transform.position = currentPlayerPosition;
 
-            PlayerStats currentStats = currentPlayerObject.GetComponent<PlayerStats>();
-            if (currentStats != null)
+            // Spawna il nuovo player
+            GameObject newPlayerObject = Instantiate(newPlayerModelPrefab, currentPlayerPosition, Quaternion.identity);
+
+            PlayerStats newStats = newPlayerObject.GetComponent<PlayerStats>();
+            if (newStats != null)
             {
-                PlayerStats newStats = newPlayerModelObject.GetComponent<PlayerStats>();
                 GameManager.Instance.gameData.playerStats = newStats.playerStatsData;
             }
             else
             {
-                Debug.LogError("Current player does not have PlayerStats component");
+                Debug.LogError("New player does not have PlayerStats component");
             }
 
-            currentPlayerObject.SetActive(false);
-
-            if (!newPlayerModelObject.activeSelf)
-            {
-                newPlayerModelObject.SetActive(true);
-            }
-
+            // Imposta la nuova telecamera sul nuovo player
             SmoothCameraFollow cameraFollow = Camera.main.GetComponent<SmoothCameraFollow>();
             if (cameraFollow != null)
             {
-                cameraFollow.SetTarget(newPlayerModelObject.transform);
+                cameraFollow.SetTarget(newPlayerObject.transform);
             }
 
-            Debug.Log("Player model changed to: " + newPlayerStats.playerName);
+            // Rimuove il player corrente dalla scena
+            Destroy(currentPlayerObject);
+
+            Debug.Log("Player model changed to: " + newPlayerStats.playerType.ToString());
         }
         else
         {
@@ -86,7 +83,7 @@ public class PlayerModelSelector : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
-            Debug.Log($"Player entered the range of {newPlayerStats.playerName}.");
+            Debug.Log($"Player entered the range of {newPlayerStats.playerType}.");
         }
     }
 
@@ -95,7 +92,7 @@ public class PlayerModelSelector : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-            Debug.Log($"Player exited the range of {newPlayerStats.playerName}.");
+            Debug.Log($"Player exited the range of {newPlayerStats.playerType}.");
         }
     }
 }
