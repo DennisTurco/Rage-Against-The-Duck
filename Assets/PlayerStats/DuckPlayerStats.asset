@@ -21,4 +21,5 @@ MonoBehaviour:
   attackRangeMax: 1.4
   attackSpeed: 5.5
   attackRate: 0.9
+  health: 4
   luck: 0.3

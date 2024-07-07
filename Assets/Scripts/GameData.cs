@@ -23,10 +23,21 @@ public class GameData : ScriptableObject
     public int bombs;
     public int keys;
 
+    [Header("Player Values")]
+    public int currentHealth;
+    public int maxHealth;
+
     [Header("Minions")]
     public List<ItemName> minions;
 
-    public void ReloadPlayerStats()
+    public void ReloadGameDataValues()
+    {
+        ReloadPlayerStats();
+        ReloadPlayerInventory();
+        ReloadPlayerHealth();
+    }
+
+    private void ReloadPlayerStats()
     {
         movementSpeed = playerStats.playerStats.movementSpeed;
         attackDamageMin = playerStats.playerStats.attackDamageMin;
@@ -36,5 +47,18 @@ public class GameData : ScriptableObject
         attackSpeed = playerStats.playerStats.attackSpeed;
         attackRate = playerStats.playerStats.attackRate;
         luck = playerStats.playerStats.luck;
+    }
+
+    private void ReloadPlayerInventory()
+    {
+        coins = 0;
+        bombs = 0;
+        minions = new List<ItemName>();
+    }
+
+    private void ReloadPlayerHealth()
+    {
+        maxHealth = playerStats.playerStats.health;
+        currentHealth = maxHealth;
     }
 }

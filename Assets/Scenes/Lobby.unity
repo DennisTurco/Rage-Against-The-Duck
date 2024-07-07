@@ -13192,75 +13192,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 758000795}
   m_CullTransparentMesh: 1
---- !u!1001 &767259319
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2601894406618956509, guid: 959b5bf0e29ebfe43ac7395de1c285b2, type: 3}
-      propertyPath: m_RootOrder
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 2601894406618956509, guid: 959b5bf0e29ebfe43ac7395de1c285b2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -4.411145
-      objectReference: {fileID: 0}
-    - target: {fileID: 2601894406618956509, guid: 959b5bf0e29ebfe43ac7395de1c285b2, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.117112994
-      objectReference: {fileID: 0}
-    - target: {fileID: 2601894406618956509, guid: 959b5bf0e29ebfe43ac7395de1c285b2, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.052285615
-      objectReference: {fileID: 0}
-    - target: {fileID: 2601894406618956509, guid: 959b5bf0e29ebfe43ac7395de1c285b2, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2601894406618956509, guid: 959b5bf0e29ebfe43ac7395de1c285b2, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2601894406618956509, guid: 959b5bf0e29ebfe43ac7395de1c285b2, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2601894406618956509, guid: 959b5bf0e29ebfe43ac7395de1c285b2, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2601894406618956509, guid: 959b5bf0e29ebfe43ac7395de1c285b2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2601894406618956509, guid: 959b5bf0e29ebfe43ac7395de1c285b2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2601894406618956509, guid: 959b5bf0e29ebfe43ac7395de1c285b2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3021638279968679018, guid: 959b5bf0e29ebfe43ac7395de1c285b2, type: 3}
-      propertyPath: canvas
-      value: 
-      objectReference: {fileID: 873539376}
-    - target: {fileID: 3021638279968679018, guid: 959b5bf0e29ebfe43ac7395de1c285b2, type: 3}
-      propertyPath: InteractionMessage
-      value: 
-      objectReference: {fileID: 2121696113}
-    - target: {fileID: 6968734213685037619, guid: 959b5bf0e29ebfe43ac7395de1c285b2, type: 3}
-      propertyPath: m_Name
-      value: Chest
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 959b5bf0e29ebfe43ac7395de1c285b2, type: 3}
 --- !u!1 &778789282
 GameObject:
   m_ObjectHideFlags: 0
@@ -13604,10 +13535,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isInitialized: 0
   playerInitialized: 0
+  gameDataInitialized: 0
   coins: 0
   bombs: 0
   keys: 0
   minions: 
+  health: 0
+  maxHealth: 0
   gameData: {fileID: 11400000, guid: eade95e038addeb46b3f35fa6627bdd6, type: 2}
   minionOrbiter: {fileID: 694211808454501006, guid: dc5690ebb09fcee40bb6da1acb993d89, type: 3}
   minionFollower: {fileID: 694211808454501006, guid: 89f6e89f8cd786f4e80414f0e2a9d535, type: 3}
@@ -14251,11 +14185,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 844261099}
   m_CullTransparentMesh: 1
---- !u!223 &873539376 stripped
-Canvas:
-  m_CorrespondingSourceObject: {fileID: 1620441295505840893, guid: ecaf3d9332b42ee489aae6e9dc48efa1, type: 3}
-  m_PrefabInstance: {fileID: 349447989}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &919956953
 GameObject:
   m_ObjectHideFlags: 0
@@ -17710,7 +17639,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heartPrefab: {fileID: 7207247797613912344, guid: 525a4544897de0245aa114aa6a904aeb, type: 3}
-  playerHealth: {fileID: 0}
 --- !u!1 &1323057262
 GameObject:
   m_ObjectHideFlags: 0
@@ -22939,7 +22867,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1930067011
 RectTransform:
   m_ObjectHideFlags: 0

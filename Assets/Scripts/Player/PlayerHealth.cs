@@ -7,7 +7,8 @@ public class PlayerHealth : MonoBehaviour
 
     [SerializeField] private FlickerEffect flashEffect;
     [SerializeField] private DamageFlickerEffect damageFlashEffect;
-    public float health, maxHealth;
+    public int Health { get; set; }
+    public int MaxHealth { get; set; }
 
     private void OnEnable()
     {
@@ -23,7 +24,8 @@ public class PlayerHealth : MonoBehaviour
 
     private void Start()
     {
-        health = maxHealth;
+        MaxHealth = GameManager.Instance.maxHealth;
+        Health = GameManager.Instance.health;
     }
 
     public void TakeDamage()
@@ -33,14 +35,15 @@ public class PlayerHealth : MonoBehaviour
             return;
         }
 
-        health--;
+        Health--;
+        GameManager.Instance.health = Health;
         UpdateHealthHeartBar?.Invoke();
 
         // flicker effect
         flashEffect.WhiteFlash();
         damageFlashEffect.StartFlicker();
 
-        if (health <= 0)
+        if (Health <= 0)
         {
             PlayerDied();
         }
@@ -48,13 +51,15 @@ public class PlayerHealth : MonoBehaviour
 
     public void IncrementHealth()
     {
-        health++;
+        Health++;
+        GameManager.Instance.health = Health;
         UpdateHealthHeartBar?.Invoke();
     }
 
     public void IncrementMaxHealth()
     {
-        maxHealth++;
+        MaxHealth++;
+        GameManager.Instance.health = MaxHealth;
         UpdateHealthHeartBar?.Invoke();
     }
 
@@ -66,7 +71,7 @@ public class PlayerHealth : MonoBehaviour
 
     private bool CanCollectHearts()
     {
-        return health < maxHealth;
+        return Health < MaxHealth;
     }
 }
 

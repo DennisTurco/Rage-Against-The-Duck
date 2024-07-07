@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] public int bombs;
     [SerializeField] public int keys;
     [SerializeField] public List<ItemName> minions = new List<ItemName>();
+    [SerializeField] public int health;
+    [SerializeField] public int maxHealth;
 
     // resources
     [Header("Resources")]
@@ -82,6 +84,8 @@ public class GameManager : MonoBehaviour
         gameData.playerStats.AttackRate = gameData.attackRate;
         gameData.playerStats.AttackSpeed = gameData.attackSpeed;
         gameData.playerStats.Luck = gameData.luck;
+        health = gameData.currentHealth;
+        maxHealth = gameData.maxHealth;
 
         gameDataInitialized = true;
 
@@ -101,17 +105,15 @@ public class GameManager : MonoBehaviour
         gameData.attackRate = gameData.playerStats.AttackRate;
         gameData.attackSpeed = gameData.playerStats.AttackSpeed;
         gameData.luck = gameData.playerStats.Luck;
+        gameData.currentHealth = health;
+        gameData.maxHealth = maxHealth;
 
         Debug.Log("The game data has been successfully saved (I hope).");
     }
 
     public void ClearGameData()
     {
-        gameData.coins = 0;
-        gameData.bombs = 0;
-        gameData.keys = 0;
-        gameData.minions = new List<ItemName>();
-        gameData.ReloadPlayerStats();
+        gameData.ReloadGameDataValues();
 
         Debug.Log("The game data has been successfully restored (I hope).");
     }
