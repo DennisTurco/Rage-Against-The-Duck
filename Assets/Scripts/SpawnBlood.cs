@@ -9,10 +9,7 @@ public class SpawnBlood : MonoBehaviour
 
     private Sprite GetBloodSprite()
     {
-        int random = Random.Range(0, bloodList.Count);
-
-        Debug.Log(random);
-        
+        int random = Random.Range(0, bloodList.Count);        
         return bloodList[random];
     }
 

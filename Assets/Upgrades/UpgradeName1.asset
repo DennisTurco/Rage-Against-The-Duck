@@ -19,5 +19,5 @@ MonoBehaviour:
   - statisticName: 0
     upgradeValue: 0.4
   - statisticName: 4
-    upgradeValue: 1
+    upgradeValue: 5
   dropChance: 100

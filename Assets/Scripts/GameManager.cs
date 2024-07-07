@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -76,6 +75,13 @@ public class GameManager : MonoBehaviour
         bombs = gameData.bombs;
         keys = gameData.keys;
         minions = gameData.minions;
+        gameData.playerStats.MovementSpeed = gameData.movementSpeed;
+        gameData.playerStats.AttackDamageMin = gameData.attackDamageMin;
+        gameData.playerStats.AttackRangeMin = gameData.attackRangeMin;
+        gameData.playerStats.AttackRangeMax = gameData.attackRangeMax;
+        gameData.playerStats.AttackRate = gameData.attackRate;
+        gameData.playerStats.AttackSpeed = gameData.attackSpeed;
+        gameData.playerStats.Luck = gameData.luck;
 
         gameDataInitialized = true;
 
@@ -88,6 +94,13 @@ public class GameManager : MonoBehaviour
         gameData.bombs = bombs;
         gameData.keys = keys;
         gameData.minions = minions;
+        gameData.movementSpeed = gameData.playerStats.MovementSpeed;
+        gameData.attackDamageMin = gameData.playerStats.AttackDamageMin;
+        gameData.attackRangeMin = gameData.playerStats.AttackDamageMax;
+        gameData.attackRangeMax = gameData.playerStats.AttackRangeMax;
+        gameData.attackRate = gameData.playerStats.AttackRate;
+        gameData.attackSpeed = gameData.playerStats.AttackSpeed;
+        gameData.luck = gameData.playerStats.Luck;
 
         Debug.Log("The game data has been successfully saved (I hope).");
     }
@@ -98,10 +111,10 @@ public class GameManager : MonoBehaviour
         gameData.bombs = 0;
         gameData.keys = 0;
         gameData.minions = new List<ItemName>();
+        gameData.ReloadPlayerStats();
 
         Debug.Log("The game data has been successfully restored (I hope).");
     }
-
 
     //Gameover panel
     public void GameOver()

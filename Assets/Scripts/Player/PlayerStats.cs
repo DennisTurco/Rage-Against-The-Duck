@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
@@ -10,26 +11,30 @@ public class PlayerStats : MonoBehaviour
     private TextStatAttackRange textStatAttackRange;
     private TextStatAttackRate textStatAttackRate;
     //private TextStatLuck textStatLuck;
+
     private void Start()
     {
+        StartCoroutine(InitializeAfterGameData());
+
         // if globalStats != null it means the player has chosen the player and so I have to get them, otherwise the player is choosing the player inside the lobby
-        var globalStats = GameManager.Instance.gameData.playerStats;
-        if (globalStats != null)
+        var gameData = GameManager.Instance.gameData;
+        if (gameData.playerStats != null)
         {
-            playerStatsData = globalStats;
+            playerStatsData = gameData.playerStats;
         }
         else
         {
             GameManager.Instance.gameData.playerStats = this.playerStatsData;
         }
-        playerStatsData.MovementSpeed = playerStatsData.playerStats.movementSpeed;
-        playerStatsData.AttackDamageMin = playerStatsData.playerStats.attackDamageMin;
-        playerStatsData.AttackDamageMax = playerStatsData.playerStats.attackDamageMax;
-        playerStatsData.AttackRangeMin = playerStatsData.playerStats.attackRangeMin;
-        playerStatsData.AttackRangeMax = playerStatsData.playerStats.attackRangeMax;
-        playerStatsData.AttackSpeed = playerStatsData.playerStats.attackSpeed;
-        playerStatsData.AttackRate = playerStatsData.playerStats.attackRate;
-        playerStatsData.Luck = playerStatsData.playerStats.luck;
+
+        playerStatsData.MovementSpeed = gameData.movementSpeed;
+        playerStatsData.AttackDamageMin = gameData.attackDamageMin;
+        playerStatsData.AttackDamageMax = gameData.attackDamageMax;
+        playerStatsData.AttackRangeMin = gameData.attackRangeMin;
+        playerStatsData.AttackRangeMax = gameData.attackRangeMax;
+        playerStatsData.AttackSpeed = gameData.attackSpeed;
+        playerStatsData.AttackRate = gameData.attackRate;
+        playerStatsData.Luck = gameData.luck;
 
         textStatMovementSpeed = GameManager.Instance.textStatMovementSpeed;
         textStatAttackDamage = GameManager.Instance.textStatAttackDamage;
@@ -43,6 +48,11 @@ public class PlayerStats : MonoBehaviour
         UpdateAttackRange(playerStatsData.AttackRangeMin, playerStatsData.AttackRangeMax);
         UpdateAttackRate(playerStatsData.AttackRate);
         UpdateLuck(playerStatsData.Luck);
+    }
+
+    private IEnumerator InitializeAfterGameData()
+    {
+        yield return new WaitUntil(() => GameManager.Instance != null && GameManager.Instance.isInitialized && GameManager.Instance.gameDataInitialized);
     }
 
     public void UpdateMovementSpeed(float movementSpeed)

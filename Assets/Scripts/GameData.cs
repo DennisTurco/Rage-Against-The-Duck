@@ -5,14 +5,36 @@ using UnityEngine;
 public class GameData : ScriptableObject
 {
     [Header("Player")]
-    [SerializeField] public PlayerType playerType = PlayerType.Duck; // last player selected
-    [SerializeField] public PlayerStatsData playerStats;
+    public PlayerType playerType; // last player selected
+    public PlayerStatsData playerStats;
+
+    [Header("Player Stats")]
+    public float movementSpeed;
+    public float attackDamageMin;
+    public float attackDamageMax;
+    public float attackSpeed;
+    public float attackRangeMin;
+    public float attackRangeMax;
+    public float attackRate;
+    public float luck;
 
     [Header("Inventory")]
-    [SerializeField] public int coins;
-    [SerializeField] public int bombs;
-    [SerializeField] public int keys;
+    public int coins;
+    public int bombs;
+    public int keys;
 
     [Header("Minions")]
-    [SerializeField] public List<ItemName> minions;
+    public List<ItemName> minions;
+
+    public void ReloadPlayerStats()
+    {
+        movementSpeed = playerStats.playerStats.movementSpeed;
+        attackDamageMin = playerStats.playerStats.attackDamageMin;
+        attackDamageMax = playerStats.playerStats.attackDamageMax;
+        attackRangeMin = playerStats.playerStats.attackRangeMin;
+        attackRangeMax = playerStats.playerStats.attackRangeMax;
+        attackSpeed = playerStats.playerStats.attackSpeed;
+        attackRate = playerStats.playerStats.attackRate;
+        luck = playerStats.playerStats.luck;
+    }
 }

@@ -35,7 +35,6 @@ public class EnemyProjectileBullet : MonoBehaviour
         // Player to take damage
         if (collision.gameObject.TryGetComponent<PlayerHealth>(out PlayerHealth playerHealth))
         {
-            Debug.Log(1);
             playerHealth.TakeDamage();
         }
         DestroyProjectile();
