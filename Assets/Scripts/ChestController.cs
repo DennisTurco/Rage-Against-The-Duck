@@ -53,7 +53,6 @@ public class ChestController : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
-            Debug.Log("The player has entered the chest collision Area");
         }
     }
 
@@ -62,7 +61,6 @@ public class ChestController : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-            Debug.Log("The player left the chest collision Area");
         }
     }
 }

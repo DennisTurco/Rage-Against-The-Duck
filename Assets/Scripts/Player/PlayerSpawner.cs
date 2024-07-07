@@ -2,21 +2,30 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class PlayerSpawner : MonoBehaviour
 {
     [SerializeField] public List<PlayerObject> playerObjects;
+    [SerializeField] public bool firstSpawn = false;
 
     void Start()
     {
         StartCoroutine(InitializeAfterGamaManager());   
+
+        if (firstSpawn)
+        {
+            GameManager.Instance.ClearGameData();
+        }
+
+        GameManager.Instance.LoadGameData();
+
+        SpawnPlayer();
+        SpawnPlayerMinions();
     }
 
     private IEnumerator InitializeAfterGamaManager()
     {
         yield return new WaitUntil(() => GameManager.Instance != null && GameManager.Instance.isInitialized);
-        SpawnPlayer();
     }
 
     private void SpawnPlayer()
@@ -46,8 +55,11 @@ public class PlayerSpawner : MonoBehaviour
         Debug.LogError($"Error on spawning player: {playerToSpawn}");
     }
 
+    private void SpawnPlayerMinions()
+    {
+        GameManager.Instance.SpawnMinions();
+    }
 }
-
 
 [Serializable]
 public class PlayerObject

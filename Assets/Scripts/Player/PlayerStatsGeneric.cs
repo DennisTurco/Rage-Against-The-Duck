@@ -18,10 +18,10 @@ public class PlayerStatsGeneric : ScriptableObject
     [SerializeField] public float attackRangeMin;
     [SerializeField] public float attackRangeMax;
     [SerializeField] public float attackSpeed;
-    [Tooltip("More is low and more the attackRate is good")]
+    [Tooltip("More is low and more the attackRate is good (attack delay)")]
     [SerializeField] public float attackRate;
 
     [Header("Miscellaneous Stats")]
-    //[SerializeField] public int health;
+    [SerializeField] public int health;
     [SerializeField] public float luck;
 }

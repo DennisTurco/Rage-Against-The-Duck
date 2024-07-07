@@ -5,7 +5,7 @@ using UnityEngine;
 public class HealthBar : MonoBehaviour
 {
     [SerializeField] private GameObject heartPrefab;
-    [SerializeField] PlayerHealth playerHealth;
+    private PlayerHealth playerHealth;
     private List<HealthHeart> hearts = new List<HealthHeart>();
 
     private void OnEnable()
@@ -20,12 +20,14 @@ public class HealthBar : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(InitializeAfterPlayerInitialized());
+        StartCoroutine(InitializeAfterPlayerAndGameDataInitialized());
     }
 
-    private IEnumerator InitializeAfterPlayerInitialized()
+    private IEnumerator InitializeAfterPlayerAndGameDataInitialized()
     {
-        yield return new WaitUntil(() => GameManager.Instance != null && GameManager.Instance.isInitialized && GameManager.Instance.playerInitialized);
+        yield return new WaitUntil(() => GameManager.Instance != null && GameManager.Instance.isInitialized && GameManager.Instance.playerInitialized && GameManager.Instance.gameDataInitialized);
+
+
         playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
         DrawHearts();
     }
@@ -37,8 +39,8 @@ public class HealthBar : MonoBehaviour
 
         // determine how many hearts to make total
         //based off the max health
-        float maxHealthRemainder = playerHealth.maxHealth % 2;
-        int heartsToMake = (int)((playerHealth.maxHealth / 2) + maxHealthRemainder);
+        float maxHealthRemainder = playerHealth.MaxHealth % 2;
+        int heartsToMake = (int)((playerHealth.MaxHealth / 2) + maxHealthRemainder);
         for  (int i = 0; i < heartsToMake; ++i)
         {
             CreateEmptyHeart();
@@ -46,7 +48,7 @@ public class HealthBar : MonoBehaviour
 
         for (int i = 0; i < hearts.Count; ++i)
         {
-            int heartStatusRemainder = (int)Mathf.Clamp(playerHealth.health - (i * 2), 0, 2);
+            int heartStatusRemainder = (int)Mathf.Clamp(playerHealth.Health - (i * 2), 0, 2);
             hearts[i].SetHeartImage((HeartStatus)heartStatusRemainder);
         }
     }

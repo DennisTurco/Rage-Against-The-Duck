@@ -94,7 +94,7 @@ public class GenericDialog : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
-            Debug.Log($"(GenericDialog) The player has entered the {speakerName} collision area.");
+            //Debug.Log($"(GenericDialog) The player has entered the {speakerName} collision area.");
         }
     }
 
@@ -103,7 +103,7 @@ public class GenericDialog : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-            Debug.Log($"(GenericDialog) The player left the {speakerName} collision area.");
+            //Debug.Log($"(GenericDialog) The player left the {speakerName} collision area.");
         }
     }
 }

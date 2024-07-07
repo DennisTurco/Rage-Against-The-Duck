@@ -19,6 +19,7 @@ public class StartPlatform : MonoBehaviour
     { 
         if (gameScene != null)
         {
+            GameManager.Instance.SaveGameData();
             SceneManager.LoadScene(gameScene.name);
         }
         else
@@ -32,7 +33,6 @@ public class StartPlatform : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
-            Debug.Log("The player has entered the start platform area.");
         }
     }
 
@@ -41,7 +41,6 @@ public class StartPlatform : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-            Debug.Log("The player left the start platform area.");
         }
     }
 }

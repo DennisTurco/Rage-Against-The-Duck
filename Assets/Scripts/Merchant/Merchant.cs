@@ -149,7 +149,6 @@ public class Merchant : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
-            Debug.Log("The player has entered the merchant collision area.");
         }
     }
 
@@ -158,7 +157,6 @@ public class Merchant : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-            Debug.Log("The player left the merchant collision area.");
         }
     }
 }

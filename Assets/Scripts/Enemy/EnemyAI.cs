@@ -48,7 +48,7 @@ public abstract class EnemyAI : MonoBehaviour
         health = maxHealth;
         if (healthBar != null)
         {
-            Debug.Log($"UpdateHealthBar({health}, {maxHealth})");
+            //Debug.Log($"UpdateHealthBar({health}, {maxHealth})");
             healthBar.UpdateHealthBar(health, maxHealth);
         }
 
@@ -178,7 +178,6 @@ public abstract class EnemyAI : MonoBehaviour
     public void TakeDamage(float damageAmount)
     {
         health -= damageAmount;
-        // Debug.Log("ENEMY HEALTH: " + health);
 
         if (healthBar != null)
         {
