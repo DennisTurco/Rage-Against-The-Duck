@@ -42,8 +42,11 @@ public class Upgrades : MonoBehaviour, ICollectible
             throw new Exception("Upgrade is null");
         }
 
-        upgradeNameText = upgradeTitle.transform.Find("UpgradeName").GetComponent<TextMeshProUGUI>();
-        upgradeDescriptionText = upgradeTitle.transform.Find("UpgradeDescription").GetComponent<TextMeshProUGUI>();
+        if (upgradeNameText != null && upgradeDescriptionText != null)
+        {
+            upgradeNameText = upgradeTitle.transform.Find("UpgradeName").GetComponent<TextMeshProUGUI>();
+            upgradeDescriptionText = upgradeTitle.transform.Find("UpgradeDescription").GetComponent<TextMeshProUGUI>();
+        }
     }
 
     private void Update()
@@ -110,7 +113,8 @@ public class Upgrades : MonoBehaviour, ICollectible
         isCollected = true;
 
         // Start the animation
-        collectAnimation.SetTrigger("Collect");
+        if (collectAnimation != null)
+            collectAnimation.SetTrigger("Collect");
 
         UpdateTextUpgradeTitle(currentUpgrade.upgradeName.ToString(), currentUpgrade.upgradeDescription);
 
@@ -147,8 +151,11 @@ public class Upgrades : MonoBehaviour, ICollectible
             upgradeDescriptionText.text = description;
         }
 
-        upgradeTitle.gameObject.SetActive(true);
-        StartCoroutine(HideTextUpgradeTitleAfterDelay());
+        if (upgradeTitle != null)
+        {
+            upgradeTitle.gameObject.SetActive(true);
+            StartCoroutine(HideTextUpgradeTitleAfterDelay());
+        }
     }
 
     private IEnumerator HideTextUpgradeTitleAfterDelay()

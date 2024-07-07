@@ -1,19 +1,20 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public bool isInitialized = false;
     public bool playerInitialized = false;
+    public bool gameDataInitialized = false;
 
     // inventory
     [Header("Inventory")]
     [SerializeField] public int coins;
     [SerializeField] public int bombs;
     [SerializeField] public int keys;
-    [SerializeField] public int minions;
+    [SerializeField] public List<ItemName> minions = new List<ItemName>();
 
     // resources
     [Header("Resources")]
@@ -69,10 +70,38 @@ public class GameManager : MonoBehaviour
 
     // #############################
 
+    public void LoadGameData()
+    {
+        coins = gameData.coins;
+        bombs = gameData.bombs;
+        keys = gameData.keys;
+        minions = gameData.minions;
 
-    // Save state
-    public void SaveState() { }
-    public void LoadState(LoadSceneMode mode) { }
+        gameDataInitialized = true;
+
+        Debug.Log("The game data has been successfully loaded (I hope).");
+    }
+
+    public void SaveGameData()
+    {
+        gameData.coins = coins;
+        gameData.bombs = bombs;
+        gameData.keys = keys;
+        gameData.minions = minions;
+
+        Debug.Log("The game data has been successfully saved (I hope).");
+    }
+
+    public void ClearGameData()
+    {
+        gameData.coins = 0;
+        gameData.bombs = 0;
+        gameData.keys = 0;
+        gameData.minions = new List<ItemName>();
+
+        Debug.Log("The game data has been successfully restored (I hope).");
+    }
+
 
     //Gameover panel
     public void GameOver()
@@ -87,14 +116,13 @@ public class GameManager : MonoBehaviour
 
     public void SpawnMinion(ItemName minionName)
     {
+        Debug.Log($"Spawning minion: {minionName}");
+
         if (minionOrbiter == null)
             Debug.LogError("Minion Orbiter prefab is not assigned in the Inspector!");
 
         if (minionFollower == null)
             Debug.LogError("Minion Follower prefab is not assigned in the Inspector!");
-
-        if (minionOrbiter == null || minionFollower == null)
-            throw new Exception("One or more minion prefabs are null");
 
         switch (minionName)
         {
@@ -107,6 +135,18 @@ public class GameManager : MonoBehaviour
             default:
                 Debug.LogError($"Minion name '{minionName}' doesn't exist");
                 break;
+        }
+
+        minions.Add(minionName);
+    }
+
+    public void SpawnMinions()
+    {
+        List<ItemName> minionsCopy = new List<ItemName>(minions); // copy of the minions list (to avoid the error: InvalidOperationException: Collection was modified; enumeration operation may not execute.)
+
+        foreach (var minion in minionsCopy)
+        {
+            SpawnMinion(minion);
         }
     }
 }
