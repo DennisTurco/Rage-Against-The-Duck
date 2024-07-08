@@ -80,7 +80,6 @@ public class PlayerModelSelector : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
-            Debug.Log($"Player entered the range of {newPlayerStats.playerType}.");
         }
     }
 
@@ -89,7 +88,6 @@ public class PlayerModelSelector : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-            Debug.Log($"Player exited the range of {newPlayerStats.playerType}.");
         }
     }
 }
