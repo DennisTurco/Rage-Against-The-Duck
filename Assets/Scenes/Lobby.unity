@@ -14300,10 +14300,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isInitialized: 0
   playerInitialized: 0
+  gameDataInitialized: 0
   coins: 0
   bombs: 0
   keys: 0
-  minions: 0
+  minions: 
+  health: 0
+  maxHealth: 0
   gameData: {fileID: 11400000, guid: eade95e038addeb46b3f35fa6627bdd6, type: 2}
   minionOrbiter: {fileID: 694211808454501006, guid: dc5690ebb09fcee40bb6da1acb993d89, type: 3}
   minionFollower: {fileID: 694211808454501006, guid: 89f6e89f8cd786f4e80414f0e2a9d535, type: 3}
@@ -18199,6 +18202,7 @@ MonoBehaviour:
     playerType: 2
   - playerObject: {fileID: 1584937270564681050, guid: 9d7f87a9faeb1d646a566f08c2164955, type: 3}
     playerType: 3
+  firstSpawn: 1
 --- !u!1 &1195533787
 GameObject:
   m_ObjectHideFlags: 0
@@ -19020,7 +19024,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heartPrefab: {fileID: 7207247797613912344, guid: 525a4544897de0245aa114aa6a904aeb, type: 3}
-  playerHealth: {fileID: 0}
 --- !u!1 &1323057262
 GameObject:
   m_ObjectHideFlags: 0

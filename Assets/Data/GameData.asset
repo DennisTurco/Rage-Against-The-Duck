@@ -12,5 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ff5dacec87c1094a8c1faaf24843fc4, type: 3}
   m_Name: GameData
   m_EditorClassIdentifier: 
+  playerType: 1
   playerStats:
     playerStats: {fileID: 11400000, guid: 64aafcde73fc6964486aa3ba4fec257b, type: 2}
+  movementSpeed: 3.9
+  attackDamageMin: 0.5
+  attackDamageMax: 1
+  attackSpeed: 5.5
+  attackRangeMin: 1
+  attackRangeMax: 1.4
+  attackRate: 0.9
+  luck: 0.3
+  coins: 0
+  bombs: 0
+  keys: 0
+  currentHealth: 4
+  maxHealth: 4
+  minions: 
