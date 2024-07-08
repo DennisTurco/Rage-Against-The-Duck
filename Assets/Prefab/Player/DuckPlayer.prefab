@@ -5146,11 +5146,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerStatsData:
     playerStats: {fileID: 11400000, guid: 64aafcde73fc6964486aa3ba4fec257b, type: 2}
-  textStatMovementSpeed: {fileID: 0}
-  textStatAttackDamage: {fileID: 0}
-  textStatAttackSpeed: {fileID: 0}
-  textStatAttackRange: {fileID: 0}
-  textStatAttackRate: {fileID: 0}
 --- !u!114 &5682845009725031103
 MonoBehaviour:
   m_ObjectHideFlags: 0

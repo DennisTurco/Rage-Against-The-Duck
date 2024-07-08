@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SergioPlayerStats
   m_EditorClassIdentifier: 
   playerType: 2
+  playerImage: {fileID: -817052786, guid: bbcbfbd158e76e347ae8129e726c11d3, type: 3}
   playerDescription: It's Sergio, it's a God, It's super adorable
   movementSpeed: 3.2
   attackDamageMin: 0.8

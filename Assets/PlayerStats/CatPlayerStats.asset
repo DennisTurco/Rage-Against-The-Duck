@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: CatPlayerStats
   m_EditorClassIdentifier: 
   playerType: 3
+  playerImage: {fileID: 1401638061, guid: bbcbfbd158e76e347ae8129e726c11d3, type: 3}
   playerDescription: It's a simple cat, but very cute and fast
   movementSpeed: 4.2
   attackDamageMin: 0.7
