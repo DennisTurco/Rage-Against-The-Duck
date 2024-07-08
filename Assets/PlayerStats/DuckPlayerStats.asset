@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DuckPlayerStats
   m_EditorClassIdentifier: 
   playerType: 1
-  playerImage: {fileID: 21300000, guid: 196dcca6adc145145a5eef3c26e710ca, type: 3}
+  playerImage: {fileID: 108084506, guid: bbcbfbd158e76e347ae8129e726c11d3, type: 3}
   playerDescription: It's a simple Duck that doesn't swim
   movementSpeed: 3.9
   attackDamageMin: 0.5
