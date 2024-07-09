@@ -8,12 +8,10 @@ public class EnemyAIShootingTypeFunctions : MonoBehaviour
         GameObject newBullet = Instantiate(bulletPrefab, new Vector3(transform.position.x, transform.position.y, 0.0f), Quaternion.identity);
         newBullet.name = "EnemyBullet";
 
-
         // Calcola l'angolo di rotazione della munizione basato sulla direzione di sparo
         Vector2 direction = pos - new Vector2(transform.position.x, transform.position.y);
         direction.Normalize();
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        //Debug.Log(angle);
         newBullet.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
@@ -90,6 +88,53 @@ public class EnemyAIShootingTypeFunctions : MonoBehaviour
                 newBullet.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
             }
 
+        }
+    }
+
+    public void ShotgunShooting(GameObject bulletPrefab, Vector2 pos)
+    {
+        int numBullets = 3;
+        float spreadAngle = 15f; // Angolo di separazione tra i proiettili
+
+        // Calcola la direzione principale di sparo
+        Vector2 direction = pos - new Vector2(transform.position.x, transform.position.y);
+        direction.Normalize();
+        float baseAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        float startAngle = baseAngle - spreadAngle * (numBullets - 1) / 2;
+
+        for (int i = 0; i < numBullets; ++i)
+        {
+            // Istanzia la munizione nella posizione del firePoint
+            GameObject newBullet = Instantiate(bulletPrefab, new Vector3(transform.position.x, transform.position.y, 0.0f), Quaternion.identity);
+            newBullet.name = "EnemyBullet";
+
+            // Calcola l'angolo di rotazione della munizione
+            float angle = startAngle + spreadAngle * i;
+            newBullet.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        }
+    }
+
+    public void RandomShotgunShooting(GameObject bulletPrefab, Vector2 pos)
+    {
+        // Numero di proiettili random tra 2 e 3
+        int numBullets = Random.Range(2, 4);
+        float spreadAngle = 15f; // Angolo di separazione tra i proiettili
+
+        // Calcola la direzione principale di sparo
+        Vector2 direction = pos - new Vector2(transform.position.x, transform.position.y);
+        direction.Normalize();
+        float baseAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        float startAngle = baseAngle - spreadAngle * (numBullets - 1) / 2;
+
+        for (int i = 0; i < numBullets; ++i)
+        {
+            // Istanzia la munizione nella posizione del firePoint
+            GameObject newBullet = Instantiate(bulletPrefab, new Vector3(transform.position.x, transform.position.y, 0.0f), Quaternion.identity);
+            newBullet.name = "EnemyBullet";
+
+            // Calcola l'angolo di rotazione della munizione con un offset randomico
+            float angle = startAngle + spreadAngle * i + Random.Range(-spreadAngle / 2, spreadAngle / 2);
+            newBullet.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
         }
     }
 }

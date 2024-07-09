@@ -130,6 +130,12 @@ public class RangeEnemyAI : EnemyAI
             case ShootingType.DiagonalShooting:
                 shootingTypeFunctions.DiagonalShooting(enemy.bulletPrefab);
                 break;
+            case ShootingType.ShotgunShooting:
+                shootingTypeFunctions.ShotgunShooting(enemy.bulletPrefab, p3);
+                break;
+            case ShootingType.RandomShotgunShooting:
+                shootingTypeFunctions.RandomShotgunShooting(enemy.bulletPrefab, p3);
+                break;
         }
     }
 
