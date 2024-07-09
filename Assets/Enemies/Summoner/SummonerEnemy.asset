@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0287c41d0b3e0b149a074addd7533b6f, type: 3}
+  m_Name: SummonerEnemy
+  m_EditorClassIdentifier: 
+  entitySprite: {fileID: 0}
+  deathEffect: {fileID: 3281302208205954006, guid: 632a5953d8946274ebe763830b110bdc, type: 3}
+  speed: 1.5
+  distance: 15
+  healthBar: {fileID: 0}
+  maxHealth: 5
+  health: 5
+  targetTimeMin: 0
+  targetTimeMax: 0
+  trackTimeMin: 0
+  trackTimeMax: 0
+  moveTimeMin: 3
+  moveTimeMax: 10
+  notes: 
+  meleeMinionPrefab: {fileID: 6930945798686416454, guid: 9efeafaeb5aaf5c45b93c9d16e1a01e3, type: 3}
+  rangeMinionPrefab: {fileID: 6930945798686416454, guid: a3192a539c6c16e42a5b3c875cf95fd8, type: 3}
+  summonInterval: 10
+  numberOfMeleeMinions: 2
+  numberOfRangeMinions: 1
+  numberOfMinionsOnDeath: 2
+  canShoot: 1
+  shootingType: 0
+  bulletPrefab: {fileID: 3281302208205954006, guid: 743fbc3adfed54d42a8a605617b7559b, type: 3}
+  shootTimeMin: 5
+  shootTimeMax: 10
+  desiredDistance: 5

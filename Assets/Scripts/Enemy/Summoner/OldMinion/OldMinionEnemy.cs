@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Enemies/Minion Enemy")]
+[CreateAssetMenu(menuName = "Enemies/Old Minion Enemy")]
 public class MinionEnemy : BaseEnemy
 {
     [Header("Melee Attack Settings")]

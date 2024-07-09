@@ -274,7 +274,7 @@ GameObject:
   - component: {fileID: 973221166229973111}
   - component: {fileID: -500015834590867545}
   m_Layer: 6
-  m_Name: MinionEnemy
+  m_Name: OldMinionEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

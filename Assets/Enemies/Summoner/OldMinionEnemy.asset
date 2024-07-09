@@ -10,28 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cb23a39ad104b96488d2a35ca18a3073, type: 3}
-  m_Name: MinionEnemy
+  m_Name: OldMinionEnemy
   m_EditorClassIdentifier: 
   entitySprite: {fileID: -1620240672, guid: 9cc56fb924378344684c842681ba23b8, type: 3}
   deathEffect: {fileID: 3281302208205954006, guid: 632a5953d8946274ebe763830b110bdc, type: 3}
   speed: 3
   distance: 2
   healthBar: {fileID: 0}
-  maxHealth: 2
-  health: 2
+  maxHealth: 1
+  health: 1
   targetTimeMin: 5
   targetTimeMax: 10
-  trackTimeMin: 5
-  trackTimeMax: 10
-  moveTimeMin: 2
-  moveTimeMax: 4
+  trackTimeMin: 1
+  trackTimeMax: 3
+  moveTimeMin: 3
+  moveTimeMax: 10
   notes: 
   meleeRange: 1
-  attackDelay: 3
+  attackDelay: 5
   canShoot: 1
   bulletPrefab: {fileID: 3281302208205954006, guid: 743fbc3adfed54d42a8a605617b7559b, type: 3}
   shootingType: 0
   shootTimeMin: 2
   shootTimeMax: 3
-  meleeAttackDuration: 5
-  shootingDuration: 5
+  meleeAttackDuration: 10
+  shootingDuration: 10
