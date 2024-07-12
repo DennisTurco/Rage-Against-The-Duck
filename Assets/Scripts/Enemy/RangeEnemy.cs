@@ -24,5 +24,7 @@ public enum ShootingType
 {
     SimpleShooting,
     DiagonalShooting,
-    FourAxisShooting
+    FourAxisShooting,
+    ShotgunShooting,
+    RandomShotgunShooting
 };
