@@ -39,10 +39,10 @@ public class RoomTemplates : MonoBehaviour
             if (!checkCorrectness())
             {
                 StartRoomsSpawning();
-            } 
+            }
             else
             {
-                spawnedBossInstance = Instantiate(boss, rooms[rooms.Count-1].transform.position, Quaternion.identity);
+                spawnedBossInstance = Instantiate(boss, rooms[rooms.Count - 1].transform.position, Quaternion.identity); // boss room
                 spawnedBoss = true;
                 spawningInProgress = false;
             }
@@ -61,7 +61,7 @@ public class RoomTemplates : MonoBehaviour
     public void StartRoomsSpawning()
     {
         ClearRooms();
-        Instantiate(entryRoom, transform.position, entryRoom.transform.rotation);
+        Instantiate(entryRoom, transform.position, entryRoom.transform.rotation); // entry room
     }
 
     public void ClearRooms()
