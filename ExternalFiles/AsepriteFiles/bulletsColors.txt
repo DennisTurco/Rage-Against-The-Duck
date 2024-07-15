@@ -1,0 +1,6 @@
+#e9f62a (yellow) -> #e81d1d (red) (colore base)
+#e5f218 (yellow) -> #cf1b15 (red) (tra scuro e base)
+#dae70a (yellow) -> #b01712 (red) (scuro)
+#efff56 (yellow) -> #eb4545 (red) (chiaro)
+#f3ff40 (yellow) -> #e92b2b (red) (tra base e chiaro)
+#f2ff76 (yellow) -> #eb4545 (red) (chiarissimo)
