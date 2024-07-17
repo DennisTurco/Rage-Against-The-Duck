@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Animations;
 
 public class RoomSpawner : MonoBehaviour {
 
@@ -17,8 +15,8 @@ public class RoomSpawner : MonoBehaviour {
 	private int rand;
 	public bool spawned = false;
 
-	public float waitTime = 2f;
-	public float spawnTimeInterval = 0.1f;
+	public float waitTime = 1f;
+	public float spawnTimeInterval = 0.05f;
 
     void Start(){
 		Destroy(gameObject, waitTime);
@@ -87,7 +85,7 @@ public class RoomSpawner : MonoBehaviour {
 		}
 	}
 
-
+    // this function allow to calculate the distance between the center and the exit door of the targetRoom 
     private Vector3 CalculateSpawnPositionOfTheRoom(GameObject targetObject, int doorRequired)
     {
 		List<RoomSpawner> kids = targetObject.GetComponentsInChildren<RoomSpawner>().ToList();
@@ -97,7 +95,6 @@ public class RoomSpawner : MonoBehaviour {
             if (kid.openingDirection == doorRequired)
             {
 				room = kid;
-                Debug.Log($"{targetObject.transform.position} - {room.transform.position} for opening direction: {openingDirection}");
                 return targetObject.transform.position - room.transform.position;
             }
         }
@@ -110,8 +107,8 @@ public class RoomSpawner : MonoBehaviour {
 			if(other.GetComponent<RoomSpawner>().spawned == false && spawned == false){
 				templates.closedRoomInstance.Add(Instantiate(templates.closedRoom, transform.position, Quaternion.identity));
 				Destroy(gameObject);
-			} 
-			spawned = true;
-		}
-	}
+			}
+            spawned = true;
+        }
+    }
 }

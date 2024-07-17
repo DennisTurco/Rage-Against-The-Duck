@@ -7,6 +7,7 @@ public class PlayerSpawner : MonoBehaviour
 {
     [SerializeField] public List<PlayerObject> playerObjects;
     [SerializeField] public bool firstSpawn = false;
+    [SerializeField] public bool automaticSpawn = true;
 
     void Start()
     {
@@ -19,13 +20,22 @@ public class PlayerSpawner : MonoBehaviour
 
         GameManager.Instance.LoadGameData();
 
-        SpawnPlayer();
-        SpawnPlayerMinions();
+        if (automaticSpawn)
+        {
+            SpawnEverything();
+        }
+        
     }
 
     private IEnumerator InitializeAfterGamaManager()
     {
         yield return new WaitUntil(() => GameManager.Instance != null && GameManager.Instance.isInitialized);
+    }
+
+    public void SpawnEverything()
+    {
+        SpawnPlayer();
+        SpawnPlayerMinions();
     }
 
     private void SpawnPlayer()
@@ -48,6 +58,7 @@ public class PlayerSpawner : MonoBehaviour
             {
                 Instantiate(player.playerObject, transform.position, Quaternion.identity);
                 GameManager.Instance.playerInitialized = true;
+                Debug.Log($"Player {player.playerType} spawned correctly");
                 return;
             }
         }

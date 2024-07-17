@@ -10,6 +10,7 @@ TagManager:
   - Minion
   - SpawnPoint
   - Rooms
+  - Walls
   layers:
   - Default
   - TransparentFX

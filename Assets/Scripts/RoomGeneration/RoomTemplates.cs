@@ -21,6 +21,7 @@ public class RoomTemplates : MonoBehaviour
     private bool spawnedBoss;
     public GameObject boss;
     private GameObject spawnedBossInstance; // boss instance
+    private GameObject entryRoomInstance;    // entry room instance
 
     private float timeAfterLastRoomSpawned;
     private float timeLimitRoomSpawned;
@@ -42,9 +43,10 @@ public class RoomTemplates : MonoBehaviour
             }
             else
             {
-                spawnedBossInstance = Instantiate(boss, rooms[rooms.Count - 1].transform.position, Quaternion.identity); // boss room
-                spawnedBoss = true;
+                SpawnBossRoom();
                 spawningInProgress = false;
+                SpawnPlayer();
+                return;
             }
         }
         else if (spawningInProgress)
@@ -61,7 +63,7 @@ public class RoomTemplates : MonoBehaviour
     public void StartRoomsSpawning()
     {
         ClearRooms();
-        Instantiate(entryRoom, transform.position, entryRoom.transform.rotation); // entry room
+        entryRoomInstance = Instantiate(entryRoom, transform.position, entryRoom.transform.rotation); // entry room
     }
 
     public void ClearRooms()
@@ -96,5 +98,19 @@ public class RoomTemplates : MonoBehaviour
     public void SetTimeLimitRoomSpawned(float time)
     {
         timeLimitRoomSpawned = time;
+    }
+
+    private void SpawnBossRoom()
+    {
+        spawnedBossInstance = Instantiate(boss, rooms[rooms.Count - 1].transform.position, Quaternion.identity); // boss room
+        spawnedBoss = true;
+    }
+    private void SpawnPlayer()
+    {
+        var playerSpawner = entryRoomInstance.GetComponentInChildren<PlayerSpawner>();
+        if (playerSpawner != null)
+        {
+            playerSpawner.SpawnEverything();
+        }
     }
 }

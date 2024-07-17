@@ -813,6 +813,7 @@ Transform:
   m_Children:
   - {fileID: 6798811263327591653}
   - {fileID: 8720007217012168968}
+  - {fileID: 8178854710776846060}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1192,6 +1193,59 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1 &7564526915556491133
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8178854710776846060}
+  - component: {fileID: 6406303689358661008}
+  m_Layer: 0
+  m_Name: PlayerSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8178854710776846060
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7564526915556491133}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.01, y: -0.01, z: -0.0051171714}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3815864973257672864}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6406303689358661008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7564526915556491133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bef0d77b22dd8e847b7dff0b224f9f30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerObjects:
+  - playerObject: {fileID: 9170845982523168313, guid: 1db8166a117859c4eaea8ca140ce3d9b, type: 3}
+    playerType: 1
+  - playerObject: {fileID: 6875934624045904820, guid: 7abbb1384b33b934cb30be4aa3271026, type: 3}
+    playerType: 2
+  - playerObject: {fileID: 1584937270564681050, guid: 9d7f87a9faeb1d646a566f08c2164955, type: 3}
+    playerType: 3
+  firstSpawn: 0
+  automaticSpawn: 0
 --- !u!1 &7831437489610883811
 GameObject:
   m_ObjectHideFlags: 0
@@ -1287,7 +1341,7 @@ GameObject:
   - component: {fileID: 6798811263327591653}
   m_Layer: 0
   m_Name: Walls
-  m_TagString: Untagged
+  m_TagString: Walls
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
