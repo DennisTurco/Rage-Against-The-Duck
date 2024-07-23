@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class RoomTemplates : MonoBehaviour
@@ -37,15 +38,17 @@ public class RoomTemplates : MonoBehaviour
     {
         if (spawningInProgress && timeAfterLastRoomSpawned >= timeLimitRoomSpawned && !spawnedBoss)
         {
-            if (!checkCorrectness())
+            if (!checkCorrectness() || !CheckDoorsCorrectness())
             {
+                Debug.Log("Rooms spawn starting...");
                 StartRoomsSpawning();
             }
             else
             {
                 SpawnBossRoom();
                 spawningInProgress = false;
-                SpawnPlayer();
+                if (!GameManager.Instance.playerInitialized)
+                    SpawnPlayer();
                 return;
             }
         }
@@ -59,6 +62,42 @@ public class RoomTemplates : MonoBehaviour
     {
         return roomsSpawned >= minRoomsToSpawn && roomsSpawned <= maxRoomsToSpawn;
     }
+
+    public bool CheckDoorsCorrectness()
+    {
+        foreach (var room in rooms)
+        {
+            RoomSpawner[] spawnPoints = room.GetComponentsInChildren<RoomSpawner>();
+
+            foreach (var item in spawnPoints)
+            {
+                Collider2D itemCollider = item.GetComponent<Collider2D>();
+
+                if (itemCollider == null)
+                {
+                    Debug.LogError("Missing Collider on " + item.gameObject.name);
+                    continue;
+                }
+
+                Collider2D[] hitColliders = Physics2D.OverlapBoxAll(
+                    itemCollider.bounds.center,
+                    itemCollider.bounds.size,
+                    0 
+                );
+
+                foreach (var hitCollider in hitColliders)
+                {
+                    if (hitCollider.gameObject != hitCollider.CompareTag("SpawnPoint"))
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+
 
     public void StartRoomsSpawning()
     {
