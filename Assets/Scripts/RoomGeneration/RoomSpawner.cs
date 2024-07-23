@@ -15,8 +15,8 @@ public class RoomSpawner : MonoBehaviour {
 	private int rand;
 	public bool spawned = false;
 
-	public float waitTime = 1f;
-	public float spawnTimeInterval = 0.05f;
+	public float waitTime = 2f;
+	public float spawnTimeInterval = 0.01f;
 
     void Start(){
 		Destroy(gameObject, waitTime);
@@ -29,12 +29,10 @@ public class RoomSpawner : MonoBehaviour {
 
 		if(spawned == false){
 			bool terminalRoom = false;
-			if (templates.roomsSpawned >= templates.maxRoomsToSpawn-1)
+			if (templates.roomsSpawned >= templates.maxRoomsToSpawn-3)
 			{
 				terminalRoom = true;
 			}
-
-			var position = transform.position;
 
             if (openingDirection == 1){
 				// Need to spawn a room with a BOTTOM door.
@@ -45,7 +43,7 @@ public class RoomSpawner : MonoBehaviour {
 
 				var room = templates.bottomRooms[rand];
                 var offset = CalculateSpawnPositionOfTheRoom(room, 2);
-                Instantiate(room, position + offset, room.transform.rotation);
+                Instantiate(room, transform.position + offset, room.transform.rotation);
 			} 
 			else if(openingDirection == 2){
                 // Need to spawn a room with a TOP door.
@@ -56,7 +54,7 @@ public class RoomSpawner : MonoBehaviour {
 
 				var room = templates.topRooms[rand];
                 var offset = CalculateSpawnPositionOfTheRoom(room, 1);
-                Instantiate(room, position + offset, room.transform.rotation);
+                Instantiate(room, transform.position + offset, room.transform.rotation);
 			} 
 			else if(openingDirection == 3){
                 // Need to spawn a room with a LEFT door.
@@ -67,7 +65,7 @@ public class RoomSpawner : MonoBehaviour {
 
 				var room = templates.leftRooms[rand];
                 var offset = CalculateSpawnPositionOfTheRoom(room, 4);
-                Instantiate(room, position + offset, room.transform.rotation);
+                Instantiate(room, transform.position + offset, room.transform.rotation);
 			} 
 			else if(openingDirection == 4){
                 // Need to spawn a room with a RIGHT door.
@@ -78,11 +76,10 @@ public class RoomSpawner : MonoBehaviour {
 
 				var room = templates.rightRooms[rand];
                 var offset = CalculateSpawnPositionOfTheRoom(room, 3);
-                Instantiate(room, position + offset, room.transform.rotation);
+                Instantiate(room, transform.position + offset, room.transform.rotation);
 			}
-			spawned = true;
-			templates.roomsSpawned++;
-		}
+            templates.roomsSpawned++;
+        }
 	}
 
     // this function allow to calculate the distance between the center and the exit door of the targetRoom 
@@ -102,12 +99,8 @@ public class RoomSpawner : MonoBehaviour {
 		return Vector3.zero;
     }
 
-    void OnTriggerEnter2D(Collider2D other){
+    private void OnTriggerEnter2D(Collider2D other){
 		if(other.CompareTag("SpawnPoint")){
-			if(other.GetComponent<RoomSpawner>().spawned == false && spawned == false){
-				templates.closedRoomInstance.Add(Instantiate(templates.closedRoom, transform.position, Quaternion.identity));
-				Destroy(gameObject);
-			}
             spawned = true;
         }
     }
