@@ -1,4 +1,37 @@
-# Unity Project
+# Rage Against The Duck
+
+## Game Description
+
+**Rage Against the Duck** is a chaotic, nonsensical roguelite shooter inspired by the fast-paced, room-based action of The Binding of Isaac. You play as an unhinged duck on a bizarre quest for revenge, survival, and… bread.
+
+### Gameplay
+
+Dive into grid-based movement and directional shooting as you fight through relentless waves of enemies. Between combat arenas, procedurally generated side-rooms offer surprises, loot, and danger in equal measure. Hurl consumables, collect quirky items, and adapt your build on the fly as you push deeper into each level.
+
+Clear all waves in the main room to open a portal that leads you to the next stage. But choose wisely:
+At the end of every level, you can either return to the lobby, ending your current run but safely banking the bread you collected, or venture onward, risking everything for better rewards. Die, and you lose your entire inventory, only the bread you saved back in the lobby persists. The game autosaves every time you head back.
+
+### Plot
+
+The story of Rage Against the Duck is as ridiculous as it is gritty:
+
+1. A hapless duck is flushed down a toilet and must claw its way back to the surface through sewer tunnels in search of a lake.
+2. A full-blown war erupts between ducks and other animals—like chickens—because why not?
+3. Mocked for being the only duck that can’t swim, our protagonist snaps. Unhinged and furious, it embarks on a violent rampage to prove itself and take revenge on every creature that ever laughed at it.
+
+## Screenshots and videos
+
+### Videos
+
+| ![video](./docs/videos/lobby.gif) | ![video](./docs/videos/summoner.gif) |
+| ------------------------ | ------------------------ |
+| ![video](./docs/videos/upgrade.gif) | ![video](./docs/videos/random-generation.gif) |
+
+### Some assets
+
+| ![gif](./docs/gifs/snail.gif) | ![gif](./docs/gifs/mushroom.gif) |
+| ------------------------ | ------------------------ |
+| ![gif](./docs/gifs/cat.gif) |  |
 
 
 ## Commit Description

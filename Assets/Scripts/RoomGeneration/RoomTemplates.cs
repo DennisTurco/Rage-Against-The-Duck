@@ -21,7 +21,7 @@ public class RoomTemplates : MonoBehaviour
     // for boss room
     private bool spawnedBoss;
     public GameObject boss;
-    private GameObject spawnedBossInstance; // boss instance
+    private GameObject spawnedBossInstance;  // boss instance
     private GameObject entryRoomInstance;    // entry room instance
 
     private float timeAfterLastRoomSpawned;
