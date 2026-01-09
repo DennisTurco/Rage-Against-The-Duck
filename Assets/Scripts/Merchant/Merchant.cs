@@ -21,7 +21,7 @@ public class Merchant : MonoBehaviour
         // Find the DialogManager in the scene if it's not assigned manually
         if (dialogManager == null)
         {
-            dialogManager = FindObjectOfType<DialogManager>();
+            dialogManager = FindFirstObjectByType<DialogManager>();
         }
 
         // Make sure to subscribe to the end of dialog event
@@ -136,7 +136,7 @@ public class Merchant : MonoBehaviour
             PauseMenu.IsInTradeOrSlottyMenu = false;  // Set the static variable to false
             Debug.Log("Merchant menu closed.");
 
-            PauseMenu pauseMenu = FindObjectOfType<PauseMenu>();
+            PauseMenu pauseMenu = FindFirstObjectByType<PauseMenu>();
             if (pauseMenu != null)
             {
                 pauseMenu.IgnoreNextEscapePress();

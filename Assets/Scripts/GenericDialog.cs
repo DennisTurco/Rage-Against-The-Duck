@@ -19,7 +19,7 @@ public class GenericDialog : MonoBehaviour
 
         if (dialogManager == null)
         {
-            dialogManager = FindObjectOfType<DialogManager>();
+            dialogManager = FindFirstObjectByType<DialogManager>();
         }
 
         if (dialogManager != null)
