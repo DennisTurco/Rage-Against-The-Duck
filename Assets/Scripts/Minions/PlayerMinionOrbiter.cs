@@ -8,7 +8,7 @@ public class PlayerMinionOrbiter : PlayerMinion
     protected override void Start()
     {
         base.Start();
-        rb.isKinematic = true; // no physics
+        rb.bodyType = RigidbodyType2D.Kinematic; // no physics
     }
 
     protected override void FollowBehavior()

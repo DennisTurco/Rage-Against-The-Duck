@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Slotty : MonoBehaviour
 {
-
     [SerializeField] private DialogManager dialogManager;  // Reference to the DialogManager
     [SerializeField] private GameObject slottyMenu;  // Reference to the slotty menu
     [SerializeField] private IteratableMessage InteractableText;
@@ -22,7 +19,7 @@ public class Slotty : MonoBehaviour
         // Find the DialogManager in the scene if it's not assigned manually
         if (dialogManager == null)
         {
-            dialogManager = FindObjectOfType<DialogManager>();
+            dialogManager = FindFirstObjectByType<DialogManager>();
         }
 
         // Make sure to subscribe to the end of dialog event
@@ -138,7 +135,7 @@ public class Slotty : MonoBehaviour
             PauseMenu.IsInTradeOrSlottyMenu = false;  // Set the static variable to false
             Debug.Log("Slotty menu closed.");
 
-            PauseMenu pauseMenu = FindObjectOfType<PauseMenu>();
+            PauseMenu pauseMenu = FindFirstObjectByType<PauseMenu>();
             if (pauseMenu != null)
             {
                 pauseMenu.IgnoreNextEscapePress();
