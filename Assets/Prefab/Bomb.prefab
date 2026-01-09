@@ -312,3 +312,14 @@ MonoBehaviour:
   damage: 3
   rangeDamage: 2
   destroyEffect: {fileID: 3281302208205954006, guid: a7b920b0d7a9f6447b6ac5863523e539, type: 3}
+  explosionFrames:
+  - {fileID: -1009477777, guid: de7cdec7f8e775e4d8284c4e37a5fcef, type: 3}
+  - {fileID: 33741663, guid: de7cdec7f8e775e4d8284c4e37a5fcef, type: 3}
+  - {fileID: 1582191042, guid: de7cdec7f8e775e4d8284c4e37a5fcef, type: 3}
+  - {fileID: -474438252, guid: de7cdec7f8e775e4d8284c4e37a5fcef, type: 3}
+  - {fileID: -2136688884, guid: de7cdec7f8e775e4d8284c4e37a5fcef, type: 3}
+  - {fileID: -1263921314, guid: de7cdec7f8e775e4d8284c4e37a5fcef, type: 3}
+  - {fileID: -1016805197, guid: de7cdec7f8e775e4d8284c4e37a5fcef, type: 3}
+  - {fileID: 359732407, guid: de7cdec7f8e775e4d8284c4e37a5fcef, type: 3}
+  explosionFrameDelay: 0.1
+  explosionScale: {x: 2, y: 2, z: 1}

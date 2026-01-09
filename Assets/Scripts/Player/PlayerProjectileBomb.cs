@@ -3,13 +3,20 @@ using UnityEngine;
 
 public class PlayerProjectileBomb : MonoBehaviour
 {
-    //TODO: maybe move those stats to PlayerStats ??
+    [Header("Bomb Settings")]
     [SerializeField] private float speed;
     [SerializeField] private float lifeTime;
     [SerializeField] private float damage;
     [SerializeField] private float rangeDamage;
 
+    [Header("Explosion Animation Settings")]
     [SerializeField] private GameObject destroyEffect;
+    [SerializeField] private Sprite[] explosionFrames;
+    [SerializeField] private float explosionFrameDelay = 0.15f;
+    [SerializeField] private Vector3 explosionScale = new Vector3(1, 1, 1);
+
+    private SpriteRenderer spriteRenderer;
+    private Coroutine explosionCoroutine;
 
     private void Start()
     {
@@ -64,6 +71,29 @@ public class PlayerProjectileBomb : MonoBehaviour
             }
         }
 
+        if (explosionFrames != null && explosionFrames.Length > 0)
+        {
+            spriteRenderer = GetComponent<SpriteRenderer>();
+            if (spriteRenderer == null)
+            {
+                spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
+            }
+            transform.localScale = explosionScale;
+            explosionCoroutine = StartCoroutine(PlayExplosionAnimation());
+        }
+        else
+        {
+            DestroyBomb();
+        }
+    }
+
+    private IEnumerator PlayExplosionAnimation()
+    {
+        for (int i = 0; i < explosionFrames.Length; i++)
+        {
+            spriteRenderer.sprite = explosionFrames[i];
+            yield return new WaitForSeconds(explosionFrameDelay);
+        }
         DestroyBomb();
     }
 
