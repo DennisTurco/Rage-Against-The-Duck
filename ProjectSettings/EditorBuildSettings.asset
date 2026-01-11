@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/TestScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
@@ -14,4 +14,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Lobby.unity
     guid: a3b6a312d51a71e4faf0a9f015c9fed6
+  - enabled: 1
+    path: Assets/Scenes/RandomRoomsGenerator.unity
+    guid: cef596fcd216291478dd8c66832552d5
+  - enabled: 1
+    path: Assets/Scenes/Loading.unity
+    guid: 9e58f6d8a3eab2848ac68085d72329ab
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0
