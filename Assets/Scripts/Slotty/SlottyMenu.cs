@@ -144,24 +144,36 @@ public class SlottyMenu : MonoBehaviour
         {
             switch (reward.itemName)
             {
+                case ItemName.None:
+                    Debug.Log("Player recived reward 'none' from Slotty");
+                    break;
                 case ItemName.Coin:
-                    Debug.Log("Player has been scammed by Slotty");
+                    Debug.Log("Player recived reward 'coin' from Slotty");
+                    ItemCoin.CollectItemCoin(reward.rewardQuantity);
                     break;
                 case ItemName.Bomb:
+                    Debug.Log("Player recived reward 'bomb' from Slotty");
                     ItemBomb.CollectItemBomb(reward.rewardQuantity);
                     break;
                 case ItemName.MinionOrbiter:
+                    Debug.Log("Player recived reward 'minion' from Slotty");
                     GameManager.Instance.SpawnMinion(ItemName.MinionOrbiter);
                     break;
                 case ItemName.MinionFollower:
+                    Debug.Log("Player recived reward 'minion' from Slotty");
                     GameManager.Instance.SpawnMinion(ItemName.MinionFollower);
                     break;
                 case ItemName.FullHeart:
+                    Debug.Log("Player recived reward 'fullheart' from Slotty");
                     ItemHeart.CollectItemHeart(reward.rewardQuantity);
                     break;
                 case ItemName.HalfHeart:
+                    Debug.Log("Player recived reward 'helfheart' from Slotty");
+                    ItemHeart.CollectItemHeart(reward.rewardQuantity);
                     break;
                 case ItemName.Key:
+                    Debug.Log("Player recived reward 'key' from Slotty");
+                    ItemKey.CollectItemKey(reward.rewardQuantity);
                     break;
                 default:
                     Debug.LogError("Reward type not recognized: " + reward.itemName);

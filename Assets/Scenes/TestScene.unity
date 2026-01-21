@@ -30472,7 +30472,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1464897219
 RectTransform:
   m_ObjectHideFlags: 0
@@ -30550,9 +30550,12 @@ MonoBehaviour:
   rewardList:
   - {fileID: 11400000, guid: dbdd031a796c82c45ab508ab27acf143, type: 2}
   - {fileID: 11400000, guid: 8bcf122a64aa6e84d9e573cff5096108, type: 2}
+  - {fileID: 11400000, guid: 7b7432870a9461143836781f6340bc91, type: 2}
+  - {fileID: 11400000, guid: ae5494c0f4bae2b4bbda2bb2c3b9386c, type: 2}
+  - {fileID: 11400000, guid: 59530f55fc5ac3d42a4e97c113883bb1, type: 2}
+  - {fileID: 11400000, guid: d9e82032288666b48b9e8e67ec53395f, type: 2}
   - {fileID: 11400000, guid: cfa95f1fc918ba44690812a74d7eba5a, type: 2}
   - {fileID: 11400000, guid: 4b71b06554a74774c8bff368eb3c2ab5, type: 2}
-  - {fileID: 11400000, guid: 59530f55fc5ac3d42a4e97c113883bb1, type: 2}
   spinButton: {fileID: 1260645568}
   slotImages:
   - {fileID: 1727583597}

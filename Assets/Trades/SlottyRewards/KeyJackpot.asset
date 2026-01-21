@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 057328ce6ab01d940b36a0001b98078c, type: 3}
-  m_Name: MinionJackpot
+  m_Name: KeyJackpot
   m_EditorClassIdentifier: 
-  itemName: 3
+  itemName: 7
   rewardQuantity: 1
-  itemSprite: {fileID: 1630961751, guid: 89a6f91a9d669e3438892dc838b251e7, type: 3}
-  probability: 1
+  itemSprite: {fileID: 21300000, guid: dfb41e7c533a8624ca913c3ae8eb42fc, type: 3}
+  probability: 0.5

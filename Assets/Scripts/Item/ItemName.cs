@@ -7,5 +7,6 @@ public enum ItemName
     MinionFollower,
     FullHeart,
     HalfHeart,
-    Key
+    Key,
+    Bread
 }
