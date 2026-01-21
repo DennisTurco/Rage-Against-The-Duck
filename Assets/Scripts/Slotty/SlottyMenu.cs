@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class SlottyMenu : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class SlottyMenu : MonoBehaviour
     [SerializeField] private float spinDuration = 7.0f;
     [SerializeField] private float slotSpacing = 20f;
     [SerializeField] private float initialSpinSpeed = 1000f;
-
+    [SerializeField] private TMP_Text spinPriceText;
     [SerializeField] private RectTransform viewport;
 
     private float halfViewport;
@@ -48,6 +49,7 @@ public class SlottyMenu : MonoBehaviour
         centerX = slotsParent.InverseTransformPoint(worldCenter).x;
 
         ApplyPositions(0f);
+        UpdateSpinPriceText();
     }
 
     private void Update()
@@ -58,6 +60,7 @@ public class SlottyMenu : MonoBehaviour
     private void UpdateSpinButtonState()
     {
         spinButton.interactable = !isSpinning && GameManager.Instance.coins >= spinCost;
+        //UpdateSpinPriceText();   if spinCost can change after a bet
     }
 
     private void SpinSlotMachine()
@@ -201,6 +204,11 @@ public class SlottyMenu : MonoBehaviour
                 new Vector2(cx + (i - centralIndex) * step + offsetX, 0f);
     }
 
+    private void UpdateSpinPriceText()
+    {
+        if (spinPriceText != null)
+            spinPriceText.text = spinCost + " coins";
+    }
 
 
     private void ShiftLeft(List<SlottyReward> strip)

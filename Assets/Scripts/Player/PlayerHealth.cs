@@ -13,12 +13,14 @@ public class PlayerHealth : MonoBehaviour
     private void OnEnable()
     {
         Heart.CanCollectHearts += CanCollectHearts;
+        HalfHeart.CanCollectHearts += CanCollectHearts;
         ItemHeart.OnHeartCollected += IncrementHealth;
     }
 
     public void OnDisable()
     {
         Heart.CanCollectHearts -= CanCollectHearts;
+        HalfHeart.CanCollectHearts -= CanCollectHearts;
         ItemHeart.OnHeartCollected -= IncrementHealth;
     }
 
@@ -76,6 +78,10 @@ public class PlayerHealth : MonoBehaviour
 }
 
 public static class Heart
+{
+    public static Func<bool> CanCollectHearts;
+}
+public static class HalfHeart
 {
     public static Func<bool> CanCollectHearts;
 }
