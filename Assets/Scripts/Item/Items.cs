@@ -12,6 +12,8 @@ public class Items : MonoBehaviour, ICollectible
     private ItemBomb itemBomb;
     private ItemKey itemKey;
     private ItemHeart itemHeart;
+    private ItemHalfHeart itemHalfHeart;
+    private ItemBread itemBread;
     
     private void Start()
     {
@@ -22,6 +24,8 @@ public class Items : MonoBehaviour, ICollectible
         else if (item.Equals(ItemName.Bomb.ToString())) itemBomb = gameObject.AddComponent<ItemBomb>();
         else if (item.Equals(ItemName.Key.ToString())) itemKey = gameObject.AddComponent<ItemKey>();
         else if (item.Equals(ItemName.FullHeart.ToString())) itemHeart = gameObject.AddComponent<ItemHeart>();
+        else if (item.Equals(ItemName.HalfHeart.ToString())) itemHalfHeart = gameObject.AddComponent<ItemHalfHeart>();
+        else if (item.Equals(ItemName.Bread.ToString())) itemBread = gameObject.AddComponent<ItemBread>();
 
     }
 
@@ -50,6 +54,13 @@ public class Items : MonoBehaviour, ICollectible
         else if (item.Equals(ItemName.FullHeart.ToString()))
         {
             if (!itemHeart.CanCollectHeart())
+                return;
+
+            itemHeart.CollectItemHeart();
+        }
+        else if (item.Equals(ItemName.HalfHeart.ToString()))
+        {
+            if (!itemHalfHeart.CanCollectHeart())
                 return;
 
             itemHeart.CollectItemHeart();

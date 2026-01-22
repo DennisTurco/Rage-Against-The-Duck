@@ -48,11 +48,12 @@ public class PlayerProjectileBomb : MonoBehaviour
                 var player = hitCollider.GetComponent<PlayerHealth>();
                 var friableRock = hitCollider.GetComponent<FriableRock>();
                 var destructableObject = hitCollider.GetComponent<DestructableObject>();
+                var bombObj = hitCollider.GetComponent<BombDestructableObject>();
+
                 if (enemy)
                 {
                     var closestPoint = hitCollider.ClosestPoint(transform.position);
                     var distance = Vector3.Distance(closestPoint, transform.position);
-
                     var damagePercent = Mathf.InverseLerp(rangeDamage, 0, distance);
                     enemy.TakeDamage(damagePercent * damage);
                 }
@@ -63,6 +64,10 @@ public class PlayerProjectileBomb : MonoBehaviour
                 else if (friableRock)
                 {
                     friableRock.DestroyRock();
+                }
+                else if (bombObj)
+                {
+                    bombObj.TakeBombHit();
                 }
                 else if (destructableObject)
                 {

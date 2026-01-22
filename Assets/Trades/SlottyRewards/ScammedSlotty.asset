@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: 0
   rewardQuantity: 0
-  itemSprite: {fileID: 1998221249, guid: e4b27e771f530f643b9c991f26a27fb7, type: 3}
+  itemSprite: {fileID: 21300000, guid: 63032ceb03a91aa45b298107c11ab007, type: 3}
   probability: 1

@@ -2,15 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class SlottyMenu : MonoBehaviour
 {
     [SerializeField] private List<SlottyReward> rewardList;
     [SerializeField] private Button spinButton;
-    [SerializeField] private List<Image> slotImages; // Slot machine elements to animate
-    [SerializeField] private int spinCost = 10; // Spin cost
-    [SerializeField] private float spinDuration = 7.0f; // Total animation duration
-    [SerializeField] private float initialSpinSpeed = 1000f; // Initial movement speed of images in pixels per second
+    [SerializeField] private List<Image> slotImages;
+    [SerializeField] private int spinCost = 10;
+    [SerializeField] private float spinDuration = 7.0f;
+    [SerializeField] private float slotSpacing = 20f;
+    [SerializeField] private float initialSpinSpeed = 1000f;
+    [SerializeField] private TMP_Text spinPriceText;
+    [SerializeField] private RectTransform viewport;
+    [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioClip slotTick;
+    [SerializeField] private AudioClip slotStart;
+    [SerializeField] private AudioClip slotStop;
+    [SerializeField] private Vector2 tickPitchRange = new Vector2(0.9f, 1.2f);
+
+    private float halfViewport;
+    private float wrapLeft;
+    private float wrapRight;
+    private float centerX;
 
     private bool isSpinning = false;
     private RectTransform[] imageTransforms;
@@ -21,163 +35,157 @@ public class SlottyMenu : MonoBehaviour
     {
         spinButton.onClick.AddListener(SpinSlotMachine);
         UpdateSpinButtonState();
+
         imageTransforms = new RectTransform[slotImages.Count];
         for (int i = 0; i < slotImages.Count; i++)
         {
             imageTransforms[i] = slotImages[i].GetComponent<RectTransform>();
+            imageTransforms[i].anchorMin = imageTransforms[i].anchorMax = new Vector2(0.5f, 0.5f);
+            imageTransforms[i].pivot = new Vector2(0.5f, 0.5f);
         }
+
         slotWidth = imageTransforms[0].rect.width;
         centralIndex = slotImages.Count / 2;
-        Debug.Log("Slot machine initialized.");
+
+        RectTransform slotsParent = imageTransforms[0].parent as RectTransform;
+        Vector3[] w = new Vector3[4];
+        viewport.GetWorldCorners(w);
+        Vector3 worldCenter = (w[0] + w[2]) * 0.5f;
+        centerX = slotsParent.InverseTransformPoint(worldCenter).x;
+
+        ApplyPositions(0f);
+        UpdateSpinPriceText();
     }
 
     private void Update()
     {
-        // Enable the button only if the player has enough coins and is not spinning
         UpdateSpinButtonState();
     }
 
     private void UpdateSpinButtonState()
     {
         spinButton.interactable = !isSpinning && GameManager.Instance.coins >= spinCost;
+        //UpdateSpinPriceText();   if spinCost can change after a bet
     }
 
     private void SpinSlotMachine()
     {
         if (isSpinning) return;
+        if (GameManager.Instance.coins < spinCost) return;
 
-        int playerCoins = GameManager.Instance.coins;
-        if (playerCoins >= spinCost)
-        {
-            foreach (var image in slotImages)
-            {
-                image.GetComponent<RectTransform>().anchorMin = new Vector2(0.5f, 0.5f); // Ancoraggio minimo
-                image.GetComponent<RectTransform>().anchorMax = new Vector2(0.5f, 0.5f); // Ancoraggio massimo
-            }
-            ItemCoin.UseItemCoin(spinCost);
-            StartCoroutine(SpinAnimation());
-        }
-        else
-        {
-            Debug.Log("Not enough coins to spin.");
-        }
+        ItemCoin.UseItemCoin(spinCost);
+        StartCoroutine(SpinAnimation());
     }
 
     private IEnumerator SpinAnimation()
     {
         isSpinning = true;
-        UpdateSpinButtonState(); // Update button state
+        UpdateSpinButtonState();
+        if (sfxSource != null && slotStart != null)
+            sfxSource.PlayOneShot(slotStart);
 
-        float elapsedTime = 0f;
-        float spinSpeed = initialSpinSpeed;
-
-        // Initialize images with random rewards
+        List<SlottyReward> strip = new List<SlottyReward>(slotImages.Count);
         for (int i = 0; i < slotImages.Count; i++)
         {
-            SlottyReward randomReward = rewardList[Random.Range(0, rewardList.Count)];
-            slotImages[i].sprite = GetSpriteForItem(randomReward.itemName);
-            imageTransforms[i].anchoredPosition = new Vector2((i - centralIndex) * slotWidth, 0);
-            Debug.Log($"Image {i} initialized with reward: {randomReward.itemName}");
+            var r = rewardList[Random.Range(0, rewardList.Count)];
+            strip.Add(r);
+            slotImages[i].sprite = GetSpriteForItem(r.itemName);
         }
 
-        SlottyReward finalReward = rewardList[Random.Range(0, rewardList.Count)];
-        Debug.Log($"Final reward set to: {finalReward.itemName}");
+        float offsetX = 0f;
+        ApplyPositions(offsetX);
 
-        while (elapsedTime < spinDuration)
+        float t = 0f;
+        while (t < spinDuration)
         {
-            elapsedTime += Time.unscaledDeltaTime; // Use Time.unscaledDeltaTime
-            float moveAmount = spinSpeed * Time.unscaledDeltaTime; // Calculate movement using Time.unscaledDeltaTime
+            t += Time.unscaledDeltaTime;
+            float k = Mathf.Clamp01(t / spinDuration);
+            float speed = Mathf.Lerp(initialSpinSpeed, 0f, k * k);
 
-            for (int i = 0; i < slotImages.Count; i++)
+            offsetX -= speed * Time.unscaledDeltaTime;
+
+            float step = slotWidth + slotSpacing;
+            while (offsetX <= -step)
             {
-                imageTransforms[i].anchoredPosition -= new Vector2(moveAmount, 0);
+                offsetX += step;
 
-                if (imageTransforms[i].anchoredPosition.x <= -slotWidth)
-                {
-                    imageTransforms[i].anchoredPosition += new Vector2(slotWidth * slotImages.Count, 0);
+                ShiftLeft(strip);
+                strip[strip.Count - 1] = rewardList[Random.Range(0, rewardList.Count)];
 
-                    // For items returning to the right, choose a random reward until the end
-                    SlottyReward randomReward = (elapsedTime >= spinDuration - 1.0f) ? finalReward : rewardList[Random.Range(0, rewardList.Count)];
-                    slotImages[i].sprite = GetSpriteForItem(randomReward.itemName);
-                    Debug.Log($"Image {i} reinitialized with reward: {randomReward.itemName}");
-                }
+                for (int i = 0; i < slotImages.Count; i++)
+                    slotImages[i].sprite = GetSpriteForItem(strip[i].itemName);
+
+                PlayTick(k);
             }
 
-            // Gradually slow down the rotation speed
-            spinSpeed = Mathf.Lerp(initialSpinSpeed, 0, elapsedTime / spinDuration);
-
-            yield return null; // Wait for the next frame
+            ApplyPositions(offsetX);
+            yield return null;
         }
 
-        // Smoothly move the winning image to the center
-        float targetPositionX = -slotWidth * centralIndex;
-        for (int i = 0; i < slotImages.Count; i++)
+        float snapT = 0f;
+        float snapDur = 0.35f;
+        float startOffset = offsetX;
+
+        while (snapT < snapDur)
         {
-            float currentPositionX = imageTransforms[i].anchoredPosition.x;
-            float newPositionX = Mathf.Lerp(currentPositionX, targetPositionX + (i * slotWidth), 0.5f); // Adjust the interpolation factor as needed
-            imageTransforms[i].anchoredPosition = new Vector2(newPositionX, 0);
-            if (i == centralIndex)
-            {
-                slotImages[i].sprite = GetSpriteForItem(finalReward.itemName);
-                Debug.Log($"Winning image centered: {finalReward.itemName}");
-                //for (int j = 0 ; j < slotImages.Count; ++j)
-                //{
-                //    if (j == 0 || j == slotImages.Count - 1)
-                //    {
-                //        continue;
-                //    }
-                //    slotImages[j].GetComponent<RectTransform>().anchorMin = new Vector2(0.5f, 0.5f); // Ancoraggio minimo
-                //    slotImages[j].GetComponent<RectTransform>().anchorMax = new Vector2(0.5f, 0.5f); // Ancoraggio massimo
-                //}
-            }
+            snapT += Time.unscaledDeltaTime;
+            float u = Mathf.Clamp01(snapT / snapDur);
+            float ease = 1f - Mathf.Pow(1f - u, 3f);
+
+            offsetX = Mathf.Lerp(startOffset, 0f, ease);
+            ApplyPositions(offsetX);
+
+            yield return null;
         }
 
-        List<SlottyReward> awardedRewards = new List<SlottyReward> { finalReward };
-        GivePlayerRewards(awardedRewards);
+        ApplyPositions(0f);
 
+        SlottyReward finalReward = strip[centralIndex];
+        GivePlayerRewards(new List<SlottyReward> { finalReward });
+        if (sfxSource != null && slotStop != null)
+            sfxSource.PlayOneShot(slotStop);
         isSpinning = false;
-        UpdateSpinButtonState(); // Update button state
+        UpdateSpinButtonState();
     }
 
     private void GivePlayerRewards(List<SlottyReward> awardedRewards)
     {
-        if (awardedRewards == null || awardedRewards.Count == 0)
-        {
-            Debug.Log("No rewards to give.");
-            return;
-        }
+        if (awardedRewards == null || awardedRewards.Count == 0) return;
 
         foreach (var reward in awardedRewards)
         {
-            Debug.Log($"Awarding reward: {reward.itemName} x {reward.rewardQuantity}");
             switch (reward.itemName)
             {
+                case ItemName.None:
+                    Debug.Log("Player recived reward 'none' from Slotty");
+                    break;
                 case ItemName.Coin:
-                    Debug.Log("Player has been scammed by Slotty");
+                    Debug.Log("Player recived reward 'coin' from Slotty");
+                    ItemCoin.CollectItemCoin(reward.rewardQuantity);
                     break;
                 case ItemName.Bomb:
+                    Debug.Log("Player recived reward 'bomb' from Slotty");
                     ItemBomb.CollectItemBomb(reward.rewardQuantity);
-                    Debug.Log("Player won Slotty BOMB jackpot");
                     break;
                 case ItemName.MinionOrbiter:
+                    Debug.Log("Player recived reward 'minion' from Slotty");
                     GameManager.Instance.SpawnMinion(ItemName.MinionOrbiter);
-                    Debug.Log("Player won Slotty MINION jackpot");
                     break;
                 case ItemName.MinionFollower:
+                    Debug.Log("Player recived reward 'minion' from Slotty");
                     GameManager.Instance.SpawnMinion(ItemName.MinionFollower);
-                    Debug.Log("Player won Slotty MINION jackpot");
                     break;
                 case ItemName.FullHeart:
+                    Debug.Log("Player recived reward 'fullheart' from Slotty");
                     ItemHeart.CollectItemHeart(reward.rewardQuantity);
-                    Debug.Log("Player won Slotty FULL HEART jackpot");
                     break;
                 case ItemName.HalfHeart:
-                    // Handle half heart reward here if applicable
-                    Debug.Log("Player won Slotty HALF HEART jackpot");
+                    Debug.Log("Player recived reward 'helfheart' from Slotty");
+                    ItemHeart.CollectItemHeart(reward.rewardQuantity);
                     break;
                 case ItemName.Key:
-                    // Handle key reward here if applicable
-                    Debug.Log("Player won Slotty KEY jackpot");
+                    Debug.Log("Player recived reward 'key' from Slotty");
+                    ItemKey.CollectItemKey(reward.rewardQuantity);
                     break;
                 default:
                     Debug.LogError("Reward type not recognized: " + reward.itemName);
@@ -189,14 +197,39 @@ public class SlottyMenu : MonoBehaviour
     private Sprite GetSpriteForItem(ItemName itemName)
     {
         foreach (var reward in rewardList)
-        {
             if (reward.itemName == itemName)
-            {
-                // Assume that sprites are associated with item names in your game logic
                 return reward.itemSprite;
-            }
-        }
+
         Debug.LogError("Sprite not found for item: " + itemName);
         return null;
+    }
+    private void ApplyPositions(float offsetX)
+    {
+        float cx = centerX;
+        float step = slotWidth + slotSpacing;
+
+        for (int i = 0; i < imageTransforms.Length; i++)
+            imageTransforms[i].anchoredPosition =
+                new Vector2(cx + (i - centralIndex) * step + offsetX, 0f);
+    }
+
+    private void UpdateSpinPriceText()
+    {
+        if (spinPriceText != null)
+            spinPriceText.text = spinCost + " coins";
+    }
+
+
+    private void ShiftLeft(List<SlottyReward> strip)
+    {
+        var first = strip[0];
+        strip.RemoveAt(0);
+        strip.Add(first);
+    }
+    private void PlayTick(float speed01)
+    {
+        if (sfxSource == null || slotTick == null) return;
+        sfxSource.pitch = Mathf.Lerp(tickPitchRange.y, tickPitchRange.x, speed01);
+        sfxSource.PlayOneShot(slotTick);
     }
 }

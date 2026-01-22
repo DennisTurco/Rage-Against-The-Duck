@@ -158,6 +158,7 @@ public class MerchantMenu : MonoBehaviour
                     case ItemName.HalfHeart:
                         break;
                     case ItemName.Key:
+                        ItemKey.CollectItemKey(tradeOption.itemQuantity);
                         break;
                     default:
                         throw new System.Exception("ItemName '" + tradeOption.itemName.ToString() + "' for ExecuteTrade not valid");

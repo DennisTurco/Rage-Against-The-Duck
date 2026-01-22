@@ -22,6 +22,7 @@ public class GameData : ScriptableObject
     public int coins;
     public int bombs;
     public int keys;
+    public int bread;
 
     [Header("Player Values")]
     public int currentHealth;
@@ -53,6 +54,7 @@ public class GameData : ScriptableObject
     {
         coins = 0;
         bombs = 0;
+        bread = 0;
         minions = new List<ItemName>();
     }
 
