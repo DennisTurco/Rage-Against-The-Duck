@@ -64,16 +64,16 @@ public class SlottyMenu : MonoBehaviour
 
     private void UpdateSpinButtonState()
     {
-        spinButton.interactable = !isSpinning && GameManager.Instance.coins >= spinCost;
+        spinButton.interactable = !isSpinning && GameManager.Instance.bread >= spinCost;
         //UpdateSpinPriceText();   if spinCost can change after a bet
     }
 
     private void SpinSlotMachine()
     {
         if (isSpinning) return;
-        if (GameManager.Instance.coins < spinCost) return;
+        if (GameManager.Instance.bread < spinCost) return;
 
-        ItemCoin.UseItemCoin(spinCost);
+        ItemBread.UseItemBread(spinCost);
         StartCoroutine(SpinAnimation());
     }
 
@@ -159,9 +159,9 @@ public class SlottyMenu : MonoBehaviour
                 case ItemName.None:
                     Debug.Log("Player recived reward 'none' from Slotty");
                     break;
-                case ItemName.Coin:
-                    Debug.Log("Player recived reward 'coin' from Slotty");
-                    ItemCoin.CollectItemCoin(reward.rewardQuantity);
+                case ItemName.Bread:
+                    Debug.Log("Player recived reward 'Bread' from Slotty");
+                    ItemBread.CollectItemBread(reward.rewardQuantity);
                     break;
                 case ItemName.Bomb:
                     Debug.Log("Player recived reward 'bomb' from Slotty");
@@ -216,7 +216,7 @@ public class SlottyMenu : MonoBehaviour
     private void UpdateSpinPriceText()
     {
         if (spinPriceText != null)
-            spinPriceText.text = spinCost + " coins";
+            spinPriceText.text = spinCost + " bread\nx spin";
     }
 
 

@@ -15,6 +15,7 @@ public class BombDestructableObject : MonoBehaviour
     [SerializeField] private int maxNumberOfDrops = 3;
 
     [SerializeField] private Collider2D entityCollider;
+    [SerializeField] private Collider2D additionalCollider;
     [SerializeField] private Collider2D destructionCollider;
 
     private SpriteRenderer spriteRenderer;
@@ -26,6 +27,7 @@ public class BombDestructableObject : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (entityCollider != null) entityCollider.enabled = true;
         if (destructionCollider != null) destructionCollider.enabled = true;
+        if (additionalCollider != null) additionalCollider.enabled = true;
     }
 
     public void TakeBombHit(int amount = 1)
@@ -61,11 +63,12 @@ public class BombDestructableObject : MonoBehaviour
             spriteRenderer.sprite = destructionAnimationFrames[destructionAnimationFrames.Length - 1];
         }
 
-        if (entityCollider != null) entityCollider.enabled = false;
+        if (entityCollider != null) entityCollider.enabled = false; // comment line to enable collision with the debris on the ground
+        if (additionalCollider != null) additionalCollider.enabled = false;
         if (destructionCollider != null) destructionCollider.enabled = false;
 
         InstantiateLootSpawn(transform.position);
-        Destroy(gameObject);
+        //Destroy(gameObject); // comment line to leave debris on the ground
     }
 
     private void InstantiateLootSpawn(Vector3 spawnPosition)

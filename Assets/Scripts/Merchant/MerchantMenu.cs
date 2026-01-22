@@ -123,8 +123,8 @@ public class MerchantMenu : MonoBehaviour
 
     private void ExecuteTrade(TradeOption tradeOption)
     {
-        int playerCoins = GameManager.Instance.coins;
-        int effectiveCost = Mathf.RoundToInt(tradeOption.coinCost * (1 - tradeOption.discount)); // Apply discount
+        int playerBread = GameManager.Instance.bread;
+        int effectiveCost = Mathf.RoundToInt(tradeOption.breadCost * (1 - tradeOption.discount)); // Apply discount
 
         if (selectedOptions.TryGetValue(tradeOption, out int purchaseCount)) // Ottieni il conteggio degli acquisti per l'opzione selezionata
         {
@@ -134,14 +134,14 @@ public class MerchantMenu : MonoBehaviour
                 return;
             }
 
-            if (playerCoins >= effectiveCost)
+            if (playerBread >= effectiveCost)
             {
-                ItemCoin.UseItemCoin(effectiveCost);
+                ItemBread.UseItemBread(effectiveCost);
 
                 switch (tradeOption.itemName)
                 {
-                    case ItemName.Coin:
-                        ItemCoin.CollectItemCoin(tradeOption.itemQuantity);
+                    case ItemName.Bread:
+                        ItemBread.CollectItemBread(tradeOption.itemQuantity);
                         break;
                     case ItemName.Bomb:
                         ItemBomb.CollectItemBomb(tradeOption.itemQuantity);
@@ -169,13 +169,13 @@ public class MerchantMenu : MonoBehaviour
                     selectedOptions[tradeOption]++; // Incrementa il conteggio degli acquisti per l'opzione selezionata
                 }
 
-                Debug.Log($"The player traded {effectiveCost} coins for {tradeOption.itemQuantity} items.");
-                Debug.Log("Coins left: " + GameManager.Instance.coins);
+                Debug.Log($"The player traded {effectiveCost} bread for {tradeOption.itemQuantity} items.");
+                Debug.Log("Bread left: " + GameManager.Instance.bread);
                 UpdateTradeButtons();
             }
             else
             {
-                Debug.Log("Not enough coins or probability check failed.");
+                Debug.Log("Not enough bread or probability check failed.");
             }
         }
     }
@@ -193,20 +193,20 @@ public class MerchantMenu : MonoBehaviour
         {
             TradeOption option = kvp.Key;
             int purchaseCount = kvp.Value;
-            int effectiveCost = Mathf.RoundToInt(option.coinCost * (1 - option.discount));
+            int effectiveCost = Mathf.RoundToInt(option.breadCost * (1 - option.discount));
             string limitText = option.limited ? $" (Max: {option.limitTimesPurchase - purchaseCount})" : "";
-            texts[i].text = $"{effectiveCost} Coins for {option.itemQuantity} {option.itemName.ToString()}{limitText}";
-            UpdateButtonState(option, tradeButtons[i], GameManager.Instance.coins);
+            texts[i].text = $"{effectiveCost} bread for {option.itemQuantity} {option.itemName.ToString()}{limitText}";
+            UpdateButtonState(option, tradeButtons[i], GameManager.Instance.bread);
             i++;
         }
     }
 
-    private void UpdateButtonState(TradeOption option, Button button, int playerCoins)
+    private void UpdateButtonState(TradeOption option, Button button, int playerBread)
     {
         if (button != null)
         {
-            int effectiveCost = Mathf.RoundToInt(option.coinCost * (1 - option.discount));
-            bool canPurchase = playerCoins >= effectiveCost && (!option.limited || selectedOptions[option] < option.limitTimesPurchase);
+            int effectiveCost = Mathf.RoundToInt(option.breadCost * (1 - option.discount));
+            bool canPurchase = playerBread >= effectiveCost && (!option.limited || selectedOptions[option] < option.limitTimesPurchase);
             button.image.color = canPurchase ? Color.white : Color.gray;
             button.interactable = canPurchase;
         }

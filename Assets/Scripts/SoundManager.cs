@@ -6,7 +6,7 @@ public class SoundManager : MonoBehaviour
 
     [SerializeField] private AudioSource musicSound;
     [SerializeField] private AudioSource buttonSound;
-    [SerializeField] private AudioSource coinSound;
+    [SerializeField] private AudioSource breadSound;
     [SerializeField] private AudioSource takeDamageSound;
     [SerializeField] private AudioSource heartSound;
     [SerializeField] private AudioSource deathSound;
@@ -52,10 +52,10 @@ public class SoundManager : MonoBehaviour
         if (volumePlaying == 1)
             buttonSound.PlayOneShot(buttonSound.clip);
     }
-    public void PlayCoinSound()
+    public void PlayBreadSound()
     {
         if (volumePlaying == 1)
-            coinSound.PlayOneShot(coinSound.clip);
+            breadSound.PlayOneShot(breadSound.clip);
     }
     public void PlayTakeDamageSound()
     {

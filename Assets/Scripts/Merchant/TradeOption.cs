@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu]
 public class TradeOption : ScriptableObject
 {
-    public int coinCost;
+    public int breadCost;
     public int itemQuantity;
 
     [Range(0f, 1f)]
