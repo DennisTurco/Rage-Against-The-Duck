@@ -15,6 +15,11 @@ public class SlottyMenu : MonoBehaviour
     [SerializeField] private float initialSpinSpeed = 1000f;
     [SerializeField] private TMP_Text spinPriceText;
     [SerializeField] private RectTransform viewport;
+    [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioClip slotTick;
+    [SerializeField] private AudioClip slotStart;
+    [SerializeField] private AudioClip slotStop;
+    [SerializeField] private Vector2 tickPitchRange = new Vector2(0.9f, 1.2f);
 
     private float halfViewport;
     private float wrapLeft;
@@ -76,6 +81,8 @@ public class SlottyMenu : MonoBehaviour
     {
         isSpinning = true;
         UpdateSpinButtonState();
+        if (sfxSource != null && slotStart != null)
+            sfxSource.PlayOneShot(slotStart);
 
         List<SlottyReward> strip = new List<SlottyReward>(slotImages.Count);
         for (int i = 0; i < slotImages.Count; i++)
@@ -99,16 +106,17 @@ public class SlottyMenu : MonoBehaviour
 
             float step = slotWidth + slotSpacing;
             while (offsetX <= -step)
-
             {
                 offsetX += step;
+
                 ShiftLeft(strip);
                 strip[strip.Count - 1] = rewardList[Random.Range(0, rewardList.Count)];
 
                 for (int i = 0; i < slotImages.Count; i++)
                     slotImages[i].sprite = GetSpriteForItem(strip[i].itemName);
-            }
 
+                PlayTick(k);
+            }
 
             ApplyPositions(offsetX);
             yield return null;
@@ -134,7 +142,8 @@ public class SlottyMenu : MonoBehaviour
 
         SlottyReward finalReward = strip[centralIndex];
         GivePlayerRewards(new List<SlottyReward> { finalReward });
-
+        if (sfxSource != null && slotStop != null)
+            sfxSource.PlayOneShot(slotStop);
         isSpinning = false;
         UpdateSpinButtonState();
     }
@@ -216,5 +225,11 @@ public class SlottyMenu : MonoBehaviour
         var first = strip[0];
         strip.RemoveAt(0);
         strip.Add(first);
+    }
+    private void PlayTick(float speed01)
+    {
+        if (sfxSource == null || slotTick == null) return;
+        sfxSource.pitch = Mathf.Lerp(tickPitchRange.y, tickPitchRange.x, speed01);
+        sfxSource.PlayOneShot(slotTick);
     }
 }
