@@ -65,7 +65,7 @@ public class BombDestructableObject : MonoBehaviour
         if (destructionCollider != null) destructionCollider.enabled = false;
 
         InstantiateLootSpawn(transform.position);
-        Destroy(gameObject);
+        Destroy(gameObject); // comment line to leave debris on the ground
     }
 
     private void InstantiateLootSpawn(Vector3 spawnPosition)

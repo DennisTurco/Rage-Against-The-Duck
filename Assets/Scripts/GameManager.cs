@@ -10,10 +10,9 @@ public class GameManager : MonoBehaviour
 
     // inventory
     [Header("Inventory")]
-    [SerializeField] public int coins;
+    [SerializeField] public int bread;
     [SerializeField] public int bombs;
     [SerializeField] public int keys;
-    [SerializeField] public int bread;
     [SerializeField] public List<ItemName> minions = new List<ItemName>();
     [SerializeField] public int health;
     [SerializeField] public int maxHealth;
@@ -74,10 +73,9 @@ public class GameManager : MonoBehaviour
 
     public void LoadGameData()
     {
-        coins = gameData.coins;
+        bread = gameData.bread;
         bombs = gameData.bombs;
         keys = gameData.keys;
-        bread = gameData.bread;
         minions = gameData.minions;
         gameData.playerStats.MovementSpeed = gameData.movementSpeed;
         gameData.playerStats.AttackDamageMin = gameData.attackDamageMin;
@@ -96,10 +94,9 @@ public class GameManager : MonoBehaviour
 
     public void SaveGameData()
     {
-        gameData.coins = coins;
+        gameData.bread = bread;
         gameData.bombs = bombs;
         gameData.keys = keys;
-        gameData.bread = bread;
         gameData.minions = minions;
         gameData.movementSpeed = gameData.playerStats.MovementSpeed;
         gameData.attackDamageMin = gameData.playerStats.AttackDamageMin;

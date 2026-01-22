@@ -1,12 +1,11 @@
 public enum ItemName
 {
     None,
-    Coin,
+    Bread,
     Bomb,
     MinionOrbiter,
     MinionFollower,
     FullHeart,
     HalfHeart,
-    Key,
-    Bread
+    Key
 }

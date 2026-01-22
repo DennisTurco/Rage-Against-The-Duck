@@ -3092,7 +3092,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0.40000153, y: 1.0999985}
   m_SizeDelta: {x: 0, y: -0.0000038146973}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &129814770
@@ -3115,7 +3115,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 10 coins
+  m_text: '10 bread
+
+    x spin'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3f0aee3ce61607747953cc7dc4a92515, type: 2}
   m_sharedMaterial: {fileID: 3505653681143683014, guid: 3f0aee3ce61607747953cc7dc4a92515, type: 2}
@@ -3142,7 +3144,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 47
+  m_fontSize: 42.65
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3345,7 +3347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1ddc4a7b87b93f44ac237211bf06dc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinText: {fileID: 146094995}
+  breadText: {fileID: 146094995}
 --- !u!1 &157596952
 GameObject:
   m_ObjectHideFlags: 0
@@ -7850,8 +7852,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0000085831, y: 247}
-  m_SizeDelta: {x: 1217.9749, y: 176.2852}
+  m_AnchoredPosition: {x: -17.4933, y: 247}
+  m_SizeDelta: {x: 1182.988, y: 176.2852}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &405494273
 MonoBehaviour:
@@ -7900,7 +7902,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 73.5
+  m_fontSize: 71.4
   m_fontSizeBase: 78.87
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -16851,10 +16853,9 @@ MonoBehaviour:
   isInitialized: 0
   playerInitialized: 0
   gameDataInitialized: 0
-  coins: 0
+  bread: 0
   bombs: 0
   keys: 0
-  bread: 0
   minions: 
   health: 0
   maxHealth: 0
@@ -30764,7 +30765,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rewardList:
   - {fileID: 11400000, guid: dbdd031a796c82c45ab508ab27acf143, type: 2}
-  - {fileID: 11400000, guid: 8bcf122a64aa6e84d9e573cff5096108, type: 2}
   - {fileID: 11400000, guid: 7b7432870a9461143836781f6340bc91, type: 2}
   - {fileID: 11400000, guid: ae5494c0f4bae2b4bbda2bb2c3b9386c, type: 2}
   - {fileID: 11400000, guid: 59530f55fc5ac3d42a4e97c113883bb1, type: 2}
@@ -34597,7 +34597,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -23.567}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 227.6, y: 130.3}
+  m_AnchoredPosition: {x: 235.1, y: 119.5}
   m_SizeDelta: {x: 155.7352, y: 81.968}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1813119986
@@ -34650,8 +34650,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75233af90972a274cb211ad95bb25729, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GenericScaleAnimation
-  speed: 2
-  amount: 0.15
+  speed: 2.7
+  amount: 0.075
   useUnscaledTime: 1
 --- !u!1 &1815399623
 GameObject:
@@ -49072,7 +49072,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicSound: {fileID: 0}
   buttonSound: {fileID: 0}
-  coinSound: {fileID: 0}
+  breadSound: {fileID: 0}
   takeDamageSound: {fileID: 0}
   heartSound: {fileID: 0}
   deathSound: {fileID: 0}

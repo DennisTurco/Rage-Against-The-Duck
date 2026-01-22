@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: BreadJackpot
   m_EditorClassIdentifier: 
   itemName: 1
-  rewardQuantity: 25
+  rewardQuantity: 5
   itemSprite: {fileID: 21300000, guid: 99a5f96211a409948810b3b3999f3b5a, type: 3}
   probability: 1

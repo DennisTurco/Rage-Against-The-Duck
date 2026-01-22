@@ -8,24 +8,22 @@ public class Items : MonoBehaviour, ICollectible
     [SerializeField] private float levitationFrequency = 0.2f; // Frequenza del movimento
     private Vector3 startPosition;
 
-    private ItemCoin itemCoin;
+    private ItemBread itemBread;
     private ItemBomb itemBomb;
     private ItemKey itemKey;
     private ItemHeart itemHeart;
     private ItemHalfHeart itemHalfHeart;
-    private ItemBread itemBread;
     
     private void Start()
     {
         startPosition = transform.position;
 
         item = this.name;
-        if (item.Equals(ItemName.Coin.ToString())) itemCoin = gameObject.AddComponent<ItemCoin>();
+        if (item.Equals(ItemName.Bread.ToString())) itemBread = gameObject.AddComponent<ItemBread>();
         else if (item.Equals(ItemName.Bomb.ToString())) itemBomb = gameObject.AddComponent<ItemBomb>();
         else if (item.Equals(ItemName.Key.ToString())) itemKey = gameObject.AddComponent<ItemKey>();
         else if (item.Equals(ItemName.FullHeart.ToString())) itemHeart = gameObject.AddComponent<ItemHeart>();
         else if (item.Equals(ItemName.HalfHeart.ToString())) itemHalfHeart = gameObject.AddComponent<ItemHalfHeart>();
-        else if (item.Equals(ItemName.Bread.ToString())) itemBread = gameObject.AddComponent<ItemBread>();
 
     }
 
@@ -39,9 +37,9 @@ public class Items : MonoBehaviour, ICollectible
     {
         Debug.Log("Item collected: " + item);
 
-        if (item.Equals(ItemName.Coin.ToString()))
+        if (item.Equals(ItemName.Bread.ToString()))
         {
-            itemCoin.CollectItemCoin();
+            itemBread.CollectItemBread();
         }
         else if (item.Equals(ItemName.Bomb.ToString()))
         {

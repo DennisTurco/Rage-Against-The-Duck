@@ -6,9 +6,9 @@ public class Magnet : MonoBehaviour
 {
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.TryGetComponent<ItemCoin>(out ItemCoin coin))
+        if (collision.gameObject.TryGetComponent<ItemBread>(out ItemBread bread))
         {
-            coin.SetTarget(transform.parent.position);
+            bread.SetTarget(transform.parent.position);
         }
     }
 }
