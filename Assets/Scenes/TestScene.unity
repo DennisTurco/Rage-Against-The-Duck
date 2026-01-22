@@ -33564,19 +33564,21 @@ MonoBehaviour:
   idleAnimation: {fileID: 1686907988}
   destructionAnimationFrameDelay: 0.15
   destructionAnimationFrames:
-  - {fileID: -1009477777, guid: de7cdec7f8e775e4d8284c4e37a5fcef, type: 3}
-  - {fileID: 33741663, guid: de7cdec7f8e775e4d8284c4e37a5fcef, type: 3}
-  - {fileID: 1582191042, guid: de7cdec7f8e775e4d8284c4e37a5fcef, type: 3}
-  - {fileID: -474438252, guid: de7cdec7f8e775e4d8284c4e37a5fcef, type: 3}
-  - {fileID: -2136688884, guid: de7cdec7f8e775e4d8284c4e37a5fcef, type: 3}
-  - {fileID: -1263921314, guid: de7cdec7f8e775e4d8284c4e37a5fcef, type: 3}
-  - {fileID: -1016805197, guid: de7cdec7f8e775e4d8284c4e37a5fcef, type: 3}
-  - {fileID: 359732407, guid: de7cdec7f8e775e4d8284c4e37a5fcef, type: 3}
+  - {fileID: -18200798, guid: f2272558c8a990741b2cc1c77c7c72a7, type: 3}
+  - {fileID: 1494851674, guid: f2272558c8a990741b2cc1c77c7c72a7, type: 3}
+  - {fileID: 1493153887, guid: f2272558c8a990741b2cc1c77c7c72a7, type: 3}
+  - {fileID: -355431482, guid: f2272558c8a990741b2cc1c77c7c72a7, type: 3}
+  - {fileID: 1193736487, guid: f2272558c8a990741b2cc1c77c7c72a7, type: 3}
+  - {fileID: -577284874, guid: f2272558c8a990741b2cc1c77c7c72a7, type: 3}
+  - {fileID: 1107684513, guid: f2272558c8a990741b2cc1c77c7c72a7, type: 3}
+  - {fileID: 1526011710, guid: f2272558c8a990741b2cc1c77c7c72a7, type: 3}
+  - {fileID: 2016079413, guid: f2272558c8a990741b2cc1c77c7c72a7, type: 3}
   droppedItemPrefab: {fileID: 2047354416297464723, guid: 81ba164704b601c4faa3a65651e4a388, type: 3}
   lootList:
   - {fileID: 11400000, guid: 39d5cd6f159d31e44804fe03adf63179, type: 2}
   maxNumberOfDrops: 1
   entityCollider: {fileID: 1686907984}
+  additionalCollider: {fileID: 1686907981}
   destructionCollider: {fileID: 1686907990}
 --- !u!58 &1686907990
 CircleCollider2D:
