@@ -74,6 +74,7 @@ public class PauseMenu : MonoBehaviour
     {
         ignoreNextEscapePress = true;
     }
+
     public void OpenSettings()
     {
         if (settingsMenu != null)

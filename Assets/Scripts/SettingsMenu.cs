@@ -1,3 +1,4 @@
+
 using UnityEngine;
 
 public class SettingsMenu : MonoBehaviour
@@ -26,13 +27,19 @@ public class SettingsMenu : MonoBehaviour
 
         if (Input.GetKeyDown(toggleKey))
         {
+            
+            if (PauseMenu.IsInTradeOrSlottyMenu) return;
+
             if (isOpen) Close();
             else
             {
-                if (pauseMenu != null && PauseMenu.IsPaused) OpenFromPause();
-                else OpenFromGameOrTitle();
+                if (pauseMenu != null && PauseMenu.IsPaused)
+                    OpenFromPause();
+                else
+                    OpenFromGameOrTitle();
             }
         }
+
 
         if (isOpen && Input.GetKeyDown(KeyCode.Escape))
             Close();
