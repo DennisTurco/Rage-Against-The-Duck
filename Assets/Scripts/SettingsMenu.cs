@@ -1,30 +1,93 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SettingsMenu : MonoBehaviour
 {
-    public GameObject SMenu;
+    [SerializeField] private GameObject SMenu;
+    [SerializeField] private PauseMenu pauseMenu;   // optional
 
-    public bool isOptionPanelActive = false;
+    [SerializeField] private KeyCode toggleKey = KeyCode.O;
+    [SerializeField] private bool pauseTimeWhenOpenedFromGame = true;
 
-    // Update is called once per frame
-    void Update()
+    private bool isOpen;
+    private bool pausedByMe;
+    private bool wasPausedBeforeOpen;
+
+    private void Awake()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            Debug.Log("P key was pressed");
-            isOptionPanelActive = true;
+        if (SMenu != null) SMenu.SetActive(false);
+        isOpen = false;
+        pausedByMe = false;
+    }
 
-            if (isOptionPanelActive)
-            {
-                isOptionPanelActive = false;
-                SMenu.SetActive(false);
-            }
+    private void Update()
+    {
+
+        if (GameManager.Instance != null && GameManager.Instance.GameisOver) return;
+
+        if (Input.GetKeyDown(toggleKey))
+        {
+            if (isOpen) Close();
             else
             {
-                SMenu.SetActive(true);
+                if (pauseMenu != null && PauseMenu.IsPaused) OpenFromPause();
+                else OpenFromGameOrTitle();
             }
         }
+
+        if (isOpen && Input.GetKeyDown(KeyCode.Escape))
+            Close();
+    }
+
+    public void OpenFromPause()
+    {
+        wasPausedBeforeOpen = true;
+        pausedByMe = false;
+        OpenInternal();
+        pauseMenu?.IgnoreNextEscapePress();
+    }
+
+
+    public void OpenFromGameOrTitle()
+    {
+        wasPausedBeforeOpen = (Time.timeScale == 0f) || PauseMenu.IsPaused;
+
+        pausedByMe = pauseTimeWhenOpenedFromGame && !wasPausedBeforeOpen;
+        if (pausedByMe)
+        {
+            Time.timeScale = 0f;
+            PauseMenu.IsPaused = true;
+        }
+
+        OpenInternal();
+        pauseMenu?.IgnoreNextEscapePress();
+    }
+
+
+    public void Close()
+    {
+        isOpen = false;
+        if (SMenu != null) SMenu.SetActive(false);
+
+        PauseMenu.IsInTradeOrSlottyMenu = false;
+
+        if (pausedByMe && !wasPausedBeforeOpen)
+        {
+            Time.timeScale = 1f;
+            PauseMenu.IsPaused = false;
+        }
+
+        pausedByMe = false;
+        wasPausedBeforeOpen = false;
+
+        pauseMenu?.IgnoreNextEscapePress();
+    }
+
+
+    private void OpenInternal()
+    {
+        isOpen = true;
+        if (SMenu != null) SMenu.SetActive(true);
+        if (SMenu != null) SMenu.transform.SetAsLastSibling();
+        PauseMenu.IsInTradeOrSlottyMenu = true;
     }
 }
