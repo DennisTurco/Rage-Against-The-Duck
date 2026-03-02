@@ -5,6 +5,7 @@ public class SettingsMenu : MonoBehaviour
 {
     [SerializeField] private GameObject SMenu;
     [SerializeField] private PauseMenu pauseMenu;   // optional
+    [SerializeField] private KeybindsReadOnlyUI keybindsUI; // optional
 
     [SerializeField] private KeyCode toggleKey = KeyCode.O;
     [SerializeField] private bool pauseTimeWhenOpenedFromGame = true;
@@ -19,7 +20,6 @@ public class SettingsMenu : MonoBehaviour
         isOpen = false;
         pausedByMe = false;
     }
-
     private void Update()
     {
 
@@ -93,8 +93,16 @@ public class SettingsMenu : MonoBehaviour
     private void OpenInternal()
     {
         isOpen = true;
-        if (SMenu != null) SMenu.SetActive(true);
-        if (SMenu != null) SMenu.transform.SetAsLastSibling();
+
+        if (SMenu != null)
+        {
+            SMenu.SetActive(true);
+            SMenu.transform.SetAsLastSibling();
+        }
+
         PauseMenu.IsInTradeOrSlottyMenu = true;
+        if (keybindsUI != null)
+            keybindsUI.Rebuild();
     }
+
 }
