@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
 public class KeybindsReadOnlyUI : MonoBehaviour
 {
@@ -11,18 +10,20 @@ public class KeybindsReadOnlyUI : MonoBehaviour
     {
         public string actionName;
         public KeyCode key;
+        [TextArea(1, 2)]
+        public string manualText;
     }
 
     [Header("UI")]
     [SerializeField] private RectTransform contentRoot;
     [SerializeField] private KeybindRowUI rowPrefab;
-    [SerializeField] private ScrollRect scrollRect; // AGGIUNGI riferimento alla ScrollRect
+    [SerializeField] private ScrollRect scrollRect;
 
-    [Header("Bindings (read-only)")]
+    [Header("Bindings (not interactable)")]
     [SerializeField] private List<BindingRow> bindings = new();
 
     [Header("Scroll Settings")]
-    [SerializeField] private float scrollSensitivity = 20f; // Aumenta per scroll più veloce
+    [SerializeField] private float scrollSensitivity = 20f;
 
     private readonly List<GameObject> spawned = new();
 
@@ -40,14 +41,9 @@ public class KeybindsReadOnlyUI : MonoBehaviour
 
         if (scrollRect != null)
         {
-            // Disabilita movimento orizzontale
             scrollRect.horizontal = false;
             scrollRect.vertical = true;
-
-            // Aumenta sensibilità scroll
             scrollRect.scrollSensitivity = scrollSensitivity;
-
-            // DISABILITA pan/drag
             scrollRect.movementType = ScrollRect.MovementType.Clamped;
             scrollRect.inertia = false;
         }
@@ -75,9 +71,12 @@ public class KeybindsReadOnlyUI : MonoBehaviour
             var ui = go.GetComponent<KeybindRowUI>();
             if (ui != null)
             {
-                var key = bindings[i].key;
-                var keyLabel = (key == KeyCode.Escape) ? "ESC" : key.ToString();
-                ui.Set(bindings[i].actionName, keyLabel);
+                // USA manualText se presente, altrimenti KeyCode
+                string displayText = string.IsNullOrEmpty(bindings[i].manualText)
+                    ? bindings[i].key.ToString()
+                    : bindings[i].manualText;
+
+                ui.Set(bindings[i].actionName, displayText);
             }
         }
 
