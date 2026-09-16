@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class EnemyAIMeleeTypeFunctions : MonoBehaviour
 {
-    public void SimpleMelee(GameObject target, float meleeRange)
+    public bool SimpleMelee(GameObject target, float meleeRange)
     {
-        // Verifica se il bersaglio è abbastanza vicino per essere attaccato
+        // Verifica se il bersaglio ï¿½ abbastanza vicino per essere attaccato
         float distanceToTarget = Vector2.Distance(transform.position, target.transform.position);
 
         if (distanceToTarget <= meleeRange)
@@ -15,6 +15,10 @@ public class EnemyAIMeleeTypeFunctions : MonoBehaviour
             {
                 playerHealth.TakeDamage();
             }
+
+            return true;
         }
+
+        return false;
     }
 }

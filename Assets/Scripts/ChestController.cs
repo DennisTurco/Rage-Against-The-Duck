@@ -27,7 +27,7 @@ public class ChestController : MonoBehaviour
             }
             else
             {
-                GameManager.Instance.ShowFloatingText("Chest locked, key is required", 20, Color.red, transform.position, Vector3.up * 100, 1.5f);
+                GameManager.Instance.ShowFloatingText("Chest locked, key is required", 20, Color.red, 1.5f);
             }
         }
 

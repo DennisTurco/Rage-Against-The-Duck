@@ -45,15 +45,6 @@ public class RangeEnemyAI : EnemyAI
     {
         base.Update();
 
-        if (transform.localScale.x < 0)
-        {
-            Flip();
-        }
-        else if (transform.localScale.x > 0)
-        {
-            Flip();
-        }
-
         // ######## Shooting section ########
         if (canShoot)
         {
@@ -142,7 +133,10 @@ public class RangeEnemyAI : EnemyAI
     protected override void Die()
     {
         if (enemy.deathEffect != null) Instantiate(enemy.deathEffect, transform.position, Quaternion.identity);
-        GetComponent<SpawnBlood>().InstantiateBloodObject(transform.position);
+        if (TryGetComponent<SpawnBlood>(out SpawnBlood spawnBlood))
+        {
+            spawnBlood.InstantiateBloodObject(transform.position);
+        }
 
         base.Die();
     }

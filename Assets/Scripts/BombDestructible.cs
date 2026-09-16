@@ -42,6 +42,7 @@ public class BombDestructableObject : MonoBehaviour
     public void DestroyObject()
     {
         if (isDestroyed) return;
+
         isDestroyed = true;
 
         if (idleAnimation != null)

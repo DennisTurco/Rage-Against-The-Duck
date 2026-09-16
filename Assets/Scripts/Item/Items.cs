@@ -76,7 +76,7 @@ public class Items : MonoBehaviour, ICollectible
             throw new ArgumentException("Item doesn't exist");
         }
 
-        GameManager.Instance.ShowFloatingText("+" + 1 + " " + item, 25, Color.yellow, transform.position, Vector3.up * 100, 1.5f);
+        GameManager.Instance.ShowFloatingText("+" + 1 + " " + item, 25, Color.yellow, 1.5f);
         Destroy(gameObject);
     }
 }

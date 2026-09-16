@@ -78,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
     private void Move()
     {
         // play dust particle effect on move
-        if (Input.GetButton("Horizontal") || Input.GetButton("Vertical")) dust.Play();
+        if (IsMoving()) dust.Play();
 
         rb.MovePosition(rb.position + moveDirection * stats.playerStatsData.MovementSpeed * Time.fixedDeltaTime);
     }

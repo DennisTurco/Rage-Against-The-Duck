@@ -17,6 +17,7 @@ public class PlayerProjectileBomb : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
     private Coroutine explosionCoroutine;
+    private bool hasExploded = false;
 
     private void Start()
     {
@@ -39,6 +40,9 @@ public class PlayerProjectileBomb : MonoBehaviour
 
     private void StartExplosion()
     {
+        if (hasExploded) return;
+        hasExploded = true;
+
         if (rangeDamage > 0)
         {
             var hitColliders = Physics2D.OverlapCircleAll(transform.position, rangeDamage);

@@ -6,10 +6,11 @@ public class StartPlatform : MonoBehaviour
     [SerializeField] private string sceneName;
     [SerializeField] private string sceneTitle;
     private bool playerInRange = false;
+    private bool gameStarted = false;
 
     private void Update()
     {
-        if (playerInRange && Input.GetKeyDown(KeyCode.E))
+        if (playerInRange && !gameStarted && Input.GetKeyDown(KeyCode.E))
         {
             StartGame();
         }
@@ -17,6 +18,7 @@ public class StartPlatform : MonoBehaviour
 
     private void StartGame()
     {
+        gameStarted = true;
         GameManager.Instance.SaveGameData();
         levelLoader.LoadLevel(sceneName, sceneTitle);
     }
