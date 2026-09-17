@@ -1,10 +1,10 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemyAIMeleeTypeFunctions : MonoBehaviour
 {
     public bool SimpleMelee(GameObject target, float meleeRange)
     {
-        // Verifica se il bersaglio � abbastanza vicino per essere attaccato
+        // Verifica se il bersaglio e' abbastanza vicino per essere attaccato
         float distanceToTarget = Vector2.Distance(transform.position, target.transform.position);
 
         if (distanceToTarget <= meleeRange)

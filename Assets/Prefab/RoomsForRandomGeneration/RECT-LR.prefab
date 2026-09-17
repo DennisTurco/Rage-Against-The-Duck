@@ -287,6 +287,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4308900632172778}
   - component: {fileID: 114649445130249852}
+  - component: {fileID: 867975406079593}
   m_Layer: 0
   m_Name: RECT-LR
   m_TagString: Untagged
@@ -1453,3 +1454,24 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
+--- !u!114 &867975406079593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1982205314345556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be1595fbf4614d258c13689224d2126d, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  enemyPrefabs:
+  - {fileID: 6930945798686416454, guid: ecaf3d9332b42ee489aae6e9dc48efa1, type: 3}
+  - {fileID: 6930945798686416454, guid: 04b614ac82d2fb843991b668bc77c0df, type: 3}
+  minEnemies: 2
+  maxEnemies: 4
+  enemySpawnRadius: 3
+  doorBlockerPrefab: {fileID: 1586528034238900, guid: 71addd1db0904154d960002486bf6a2b, type: 3}
+  roomTriggerSize: {x: 12.5, y: 6}
+  roomTriggerOffset: {x: 0, y: 0}

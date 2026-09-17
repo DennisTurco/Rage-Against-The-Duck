@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public abstract class EnemyAI : MonoBehaviour
@@ -121,7 +121,7 @@ public abstract class EnemyAI : MonoBehaviour
 
         if (dist > distance + err)
         {
-            
+        
 
             rb.MovePosition(rb.position + direction * speed * Time.fixedDeltaTime);
         }

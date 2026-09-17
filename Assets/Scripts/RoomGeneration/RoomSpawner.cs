@@ -18,6 +18,9 @@ public class RoomSpawner : MonoBehaviour {
 	public float waitTime = 2f;
 	public float spawnTimeInterval = 0.01f;
 
+	[Tooltip("How much two adjacent rooms should overlap (in world units) so their border walls merge into one instead of sitting side by side as a double wall.")]
+	public float wallOverlap = 1f;
+
     void Start(){
 		Destroy(gameObject, waitTime);
 		templates = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
@@ -92,7 +95,16 @@ public class RoomSpawner : MonoBehaviour {
             if (kid.openingDirection == doorRequired)
             {
 				room = kid;
-                return targetObject.transform.position - room.transform.position;
+				Vector3 offset = targetObject.transform.position - room.transform.position;
+
+				// Pull the new room a bit closer along the connecting axis so its border wall
+				// overlaps this room's wall instead of the two sitting flush side by side.
+				if (offset.sqrMagnitude > 0f)
+				{
+					offset -= offset.normalized * wallOverlap;
+				}
+
+				return offset;
             }
         }
 

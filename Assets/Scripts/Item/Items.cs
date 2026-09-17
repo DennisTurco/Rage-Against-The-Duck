@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 
 public class Items : MonoBehaviour, ICollectible
@@ -13,7 +13,7 @@ public class Items : MonoBehaviour, ICollectible
     private ItemKey itemKey;
     private ItemHeart itemHeart;
     private ItemHalfHeart itemHalfHeart;
-    
+
     private void Start()
     {
         startPosition = transform.position;

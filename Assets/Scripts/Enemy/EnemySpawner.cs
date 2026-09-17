@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -34,7 +34,7 @@ public class EnemySpawner : MonoBehaviour
             }
 
             yield return wait;
-            
+        
             int rand = Random.Range(0, enemies.Count);
             GameObject enemyObject = Instantiate(enemyPrefab, transform.position, Quaternion.identity);
             enemyObject.GetComponent<SpriteRenderer>().sprite = enemies[rand].entitySprite;

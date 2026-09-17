@@ -32,6 +32,10 @@ public class RoomTemplates : MonoBehaviour
     {
         spawnedBoss = false;
         spawningInProgress = false;
+
+        // In the real game the level has to generate itself as soon as the scene loads -
+        // no manual "Spawn" button click should be required to start playing.
+        StartRoomsSpawning();
     }
 
     private void Update()

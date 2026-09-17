@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 // Generic scale pulse (works for any UI/GameObject)
 public class GenericScaleAnimation : MonoBehaviour
