@@ -61,6 +61,15 @@ public class SlottyMenu : MonoBehaviour
     {
         UpdateSpinButtonState();
     }
+    private void OnEnable()
+    {
+        PauseMenu.IsInTradeOrSlottyMenu = true;
+    }
+
+    private void OnDisable()
+    {
+        PauseMenu.IsInTradeOrSlottyMenu = false;
+    }
 
     private void UpdateSpinButtonState()
     {

@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
+    [SerializeField] private SettingsMenu settingsMenu;
+
     public static bool IsPaused = false;
     public static bool IsInTradeOrSlottyMenu = false;
     private bool ignoreNextEscapePress = false;
@@ -71,5 +73,11 @@ public class PauseMenu : MonoBehaviour
     public void IgnoreNextEscapePress()
     {
         ignoreNextEscapePress = true;
+    }
+
+    public void OpenSettings()
+    {
+        if (settingsMenu != null)
+            settingsMenu.OpenFromPause();
     }
 }
