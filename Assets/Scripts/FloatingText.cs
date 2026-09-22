@@ -1,12 +1,14 @@
-using UnityEngine.UI;
+﻿using UnityEngine.UI;
 using UnityEngine;
 
 public class FloatingText
 {
+    private const float FadeOutTime = 0.3f;
+
     public bool active;
     public GameObject go;
+    public RectTransform rect;
     public Text txt;
-    public Vector3 motion;
     public float duration;
     public float lastShown;
 
@@ -25,10 +27,22 @@ public class FloatingText
 
     public void UpdateFloatingText()
     {
-        if(!active) return;
+        if (!active) return;
 
-        if (Time.time - lastShown > duration) Hide(); // the duration has to be long enough
+        float elapsed = Time.time - lastShown;
+        if (elapsed > duration)
+        {
+            Hide();
+            return;
+        }
 
-        go.transform.position += motion * Time.deltaTime;
+        // Fade out over the last bit of its life instead of disappearing abruptly.
+        float remaining = duration - elapsed;
+        if (remaining < FadeOutTime)
+        {
+            Color color = txt.color;
+            color.a = remaining / FadeOutTime;
+            txt.color = color;
+        }
     }
 }

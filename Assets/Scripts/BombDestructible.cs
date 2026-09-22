@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -42,6 +42,7 @@ public class BombDestructableObject : MonoBehaviour
     public void DestroyObject()
     {
         if (isDestroyed) return;
+
         isDestroyed = true;
 
         if (idleAnimation != null)

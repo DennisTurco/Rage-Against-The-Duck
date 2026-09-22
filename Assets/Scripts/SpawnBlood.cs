@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnBlood : MonoBehaviour
@@ -16,10 +16,10 @@ public class SpawnBlood : MonoBehaviour
     public void InstantiateBloodObject(Vector3 spawnPosition)
     {
         Sprite sprite = GetBloodSprite();
-        
+    
         GameObject selected = Instantiate(droppedItemPrefab, spawnPosition, Quaternion.identity);
         if (spawnParent != null) selected.transform.parent = spawnParent;
-        
+    
         selected.GetComponent<SpriteRenderer>().sprite = sprite;
     }
 

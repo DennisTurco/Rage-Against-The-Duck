@@ -41,7 +41,7 @@ public class PlayerStats : MonoBehaviour
         textStatAttackSpeed = GameManager.Instance.textStatAttackSpeed;
         textStatAttackRange = GameManager.Instance.textStatAttackRange;
         textStatAttackRate = GameManager.Instance.textStatAttackRate;
-        
+    
         UpdateMovementSpeed(playerStatsData.MovementSpeed);
         UpdateAttackDamage(playerStatsData.AttackDamageMin, playerStatsData.AttackDamageMax);
         UpdateAttackSpeed(playerStatsData.AttackSpeed);

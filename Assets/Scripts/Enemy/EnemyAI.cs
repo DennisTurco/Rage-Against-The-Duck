@@ -1,5 +1,4 @@
-using System.Collections;
-using UnityEditor.Tilemaps;
+﻿using System.Collections;
 using UnityEngine;
 
 public abstract class EnemyAI : MonoBehaviour
@@ -30,19 +29,13 @@ public abstract class EnemyAI : MonoBehaviour
 
     protected void Awake()
     {
-        try
-        {
-            healthBar = GetComponentInChildren<FloatingHealthBar>();
-        }
-        catch (UnassignedReferenceException exception)
-        {
-            Debug.Log(exception.Message);
-        }
+        healthBar = GetComponentInChildren<FloatingHealthBar>();
     }
 
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        movePoint = transform.position;
 
         // initialize health
         health = maxHealth;
@@ -128,7 +121,7 @@ public abstract class EnemyAI : MonoBehaviour
 
         if (dist > distance + err)
         {
-            
+        
 
             rb.MovePosition(rb.position + direction * speed * Time.fixedDeltaTime);
         }
@@ -185,7 +178,10 @@ public abstract class EnemyAI : MonoBehaviour
         }
 
         // flicker effect
-        flickerEffect.RedFlash();
+        if (flickerEffect != null)
+        {
+            flickerEffect.RedFlash();
+        }
 
         if (health <= 0)
         {
@@ -195,7 +191,10 @@ public abstract class EnemyAI : MonoBehaviour
 
     protected virtual void Die()
     {
-        GetComponent<LootBag>().InstantiateLootSpawn(transform.position);
+        if (TryGetComponent<LootBag>(out LootBag lootBag))
+        {
+            lootBag.InstantiateLootSpawn(transform.position);
+        }
 
         // Instantiate the death effect if it's assigned
         Destroy(gameObject);

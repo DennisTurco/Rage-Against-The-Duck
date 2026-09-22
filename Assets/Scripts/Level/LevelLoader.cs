@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -20,6 +20,7 @@ public class LevelLoader : MonoBehaviour
 
     private AsyncOperation loadOperation;
     private bool readyToContinue = false;
+    private bool isLoading = false;
 
     private void Start()
     {
@@ -28,6 +29,10 @@ public class LevelLoader : MonoBehaviour
 
     public void LoadLevel(string sceneName, string sceneTitle)
     {
+        if (isLoading)
+            return;
+
+        isLoading = true;
         loadingCanvas.gameObject.SetActive(true);
         loadingText.text = "Loading";
         titleText.text = sceneTitle;

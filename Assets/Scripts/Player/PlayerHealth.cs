@@ -61,7 +61,7 @@ public class PlayerHealth : MonoBehaviour
     public void IncrementMaxHealth()
     {
         MaxHealth++;
-        GameManager.Instance.health = MaxHealth;
+        GameManager.Instance.maxHealth = MaxHealth;
         UpdateHealthHeartBar?.Invoke();
     }
 

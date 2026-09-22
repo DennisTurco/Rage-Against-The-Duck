@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 // CreateAssetMenu allows to create new LootSpawn object into unity editor: right click -> LootSpawn
 [CreateAssetMenu]

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using UnityEngine;
 
@@ -13,7 +13,7 @@ public class FlickerEffect : MonoBehaviour
 
     // The SpriteRenderer that should flash.
     private SpriteRenderer spriteRenderer;
-    
+
     // The material that was in use, when the script started.
     private Material originalMaterial;
 

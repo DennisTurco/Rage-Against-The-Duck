@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -55,12 +55,16 @@ public class GameManager : MonoBehaviour
             Instance = this;
         }
         isInitialized = true;
+
+        // Projectiles (bullets/bombs) shouldn't push collectible items (bread, hearts, keys, ...)
+        // around when they pass through them, so make the two layers ignore each other.
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Projectile"), LayerMask.NameToLayer("Item"), true);
     }
 
     // floating text on pick up items
-    public void ShowFloatingText(string message, int fontSize, Color color, Vector3 position, Vector3 motion, float duration)
+    public void ShowFloatingText(string message, int fontSize, Color color, float duration)
     {
-        floatingTextManager.Show(message, fontSize, color, position, motion, duration);
+        floatingTextManager.Show(message, fontSize, color, duration);
     }
 
     // shake camera

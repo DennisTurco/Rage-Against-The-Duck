@@ -65,15 +65,21 @@ public class MeleeEnemyAI : EnemyAI
     {
         if (target != null)
         {
+            bool didAttack = false;
             switch (meleeAttackType)
             {
                 case MeleeType.SimpleMelee:
-                    meleeTypeFunctions.SimpleMelee(target, meleeRange/*, enemy.attackEffectPrefab*/);
+                    didAttack = meleeTypeFunctions.SimpleMelee(target, meleeRange/*, enemy.attackEffectPrefab*/);
                     break;
             }
 
-            canAttack = false;
-            StartCoroutine(AttackCooldown());
+            // Only start the cooldown if the target was actually in range, so the enemy
+            // doesn't waste its attack window swinging at air.
+            if (didAttack)
+            {
+                canAttack = false;
+                StartCoroutine(AttackCooldown());
+            }
         }
     }
 
@@ -129,7 +135,10 @@ public class MeleeEnemyAI : EnemyAI
     protected override void Die()
     {
         if (enemy.deathEffect != null) Instantiate(enemy.deathEffect, transform.position, Quaternion.identity);
-        GetComponent<SpawnBlood>().InstantiateBloodObject(transform.position);
+        if (TryGetComponent<SpawnBlood>(out SpawnBlood spawnBlood))
+        {
+            spawnBlood.InstantiateBloodObject(transform.position);
+        }
 
         base.Die();
     }
